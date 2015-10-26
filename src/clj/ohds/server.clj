@@ -17,6 +17,8 @@
 (defroutes routes
   (resources "/")
   (resources "/react" {:root "react"})
+  (GET "/api/v1/" [] "<h1>Oh Hai</h1>")
+  (GET "/api/v1/login" [] "<h1>Login..</h1>")
   (GET "/*" req (page)))
 
 (def http-handler

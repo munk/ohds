@@ -1,20 +1,30 @@
 (ns ohds.service.client
   (:require [org.httpkit.client :as http]
             [clojure.data.json :as json]
-            [crypto.password.bcrypt :as password]))
+            [crypto.password.bcrypt :as password]
+            [clojure.edn :as edn]))
+
+(def config (edn/read-string (slurp "application.edn")))
+(def apihost (:apihost config))
+(def apiuser (:apiuser config))
+(def apipass (:apipass config))
+
+(def fieldworkers-bulk-url
+  (str
+   apihost
+   "/fieldWorkers/bulk.json"))
 
 (defn- get-fieldworkers
   []
-  (json/read-str
-   (:body @(http/get
-            "http://localhost:8080/fieldWorkers/bulk.json"
-            {:basic-auth ["user" "password"]}))
-   :key-fn keyword))
+  (-> @(http/get fieldworkers-bulk-url {:basic-auth [apiuser apipass]})
+      (:body)
+      (json/read-str :key-fn keyword)))
 
 (defn- find-fieldworker
   [username fieldworkers]
-  (println fieldworkers)
-  (first (filter #(= (:fieldWorkerId %) username) fieldworkers)))
+  (->> fieldworkers
+       (filter #(= (:fieldWorkerId %) username))
+       (first)))
 
 (defn login [username password]
   (let [fieldworker (find-fieldworker username (get-fieldworkers))

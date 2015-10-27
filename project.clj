@@ -20,6 +20,7 @@
                  [org.clojure/tools.nrepl "0.2.11"]
                  [org.clojure/data.json "0.2.6"]
                  [http-kit.fake "0.2.1"]
+                 [crypto-password "0.1.3"]
                  [prismatic/schema "1.0.2"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]

@@ -16,7 +16,11 @@
                  [enlive "1.1.6"]
                  [org.omcljs/om "0.8.8"]
                  [environ "1.0.0"]
-                 [http-kit "2.1.18"]]
+                 [http-kit "2.1.18"]
+                 [org.clojure/tools.nrepl "0.2.11"]
+                 [org.clojure/data.json "0.2.6"]
+                 [http-kit.fake "0.2.1"]
+                 [prismatic/schema "1.0.2"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-environ "1.0.0"]]

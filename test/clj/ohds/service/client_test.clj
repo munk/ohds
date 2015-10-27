@@ -1,4 +1,5 @@
 (ns ohds.service.client-test
+  (:use org.httpkit.fake)
   (:require
    [ohds.service.client :as client]
    [clojure.test :refer :all]))
@@ -16,4 +17,17 @@
 
 (deftest client-login
   (is (= true
-         (client/login "fieldworker" "password"))))
+         (with-fake-http
+           ["http://localhost:8080/fieldWorkers/bulk.json"
+            "[{\"fieldWorkerId\": \"fieldworker\"} {\"fieldWorkerId\": \"fooworker\"}]"]           
+           (client/login "fieldworker" "password"))))
+  (is (= true
+         (with-fake-http
+           ["http://localhost:8080/fieldWorkers/bulk.json"
+            "[{\"fieldWorkerId\": \"fieldworker\"} {\"fieldWorkerId\": \"fooworker\"}]"]           
+           (client/login "fieldworker" "password")))))
+
+
+
+
+

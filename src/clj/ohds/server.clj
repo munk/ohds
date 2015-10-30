@@ -20,7 +20,7 @@
   (resources "/react" {:root "react"})
   (GET "/api/v1/login" [] (str (login/login "fieldworker" "password")))
   (GET "/*" req (page)))
-  
+
 (def http-handler
   (if is-dev?
     (reload/wrap-reload (wrap-defaults #'routes api-defaults))

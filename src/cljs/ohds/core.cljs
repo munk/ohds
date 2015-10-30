@@ -6,12 +6,21 @@
 
 (defonce app-state (atom {:text "Hello Chestnut!"}))
 
+(defn do-login []
+  (println "Logging in"))
+
 (defn main []
   (om/root
     (fn [app owner]
       (reify
         om/IRender
         (render [_]
-          (dom/h1 nil (:text app)))))
+          (dom/div
+           nil
+           "Username: "
+           (dom/input #js {:type "text"})
+           "Password: "
+           (dom/input #js {:type "password"})
+           (dom/button #js {:onClick do-login} "Login")))))
     app-state
     {:target (. js/document (getElementById "app"))}))

@@ -1,14 +1,15 @@
 (ns ohds.server
   (:require [clojure.java.io :as io]
             [ohds.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
-            [compojure.core :refer [GET defroutes]]
+            [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [resources]]
             [net.cgrand.enlive-html :refer [deftemplate]]
             [net.cgrand.reload :refer [auto-reload]]
             [ring.middleware.reload :as reload]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [environ.core :refer [env]]
-            [ring.adapter.jetty :refer [run-jetty]])
+            [ring.adapter.jetty :refer [run-jetty]]
+            [ohds.service.login :as login])
   (:gen-class))
 
 (deftemplate page (io/resource "index.html") []
@@ -17,8 +18,9 @@
 (defroutes routes
   (resources "/")
   (resources "/react" {:root "react"})
+  (GET "/api/v1/login" [] (str (login/login "fieldworker" "password")))
   (GET "/*" req (page)))
-
+  
 (def http-handler
   (if is-dev?
     (reload/wrap-reload (wrap-defaults #'routes api-defaults))

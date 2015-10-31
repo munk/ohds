@@ -18,7 +18,10 @@
 (defroutes routes
   (resources "/")
   (resources "/react" {:root "react"})
-  (GET "/api/v1/login" [] (str (login/login "fieldworker" "password")))
+  (POST "/api/v1/login" req
+        (str req (login/login
+                  (get (:form-params req) "username")
+                  (get (:form-params req) "password"))))
   (GET "/*" req (page)))
 
 (def http-handler

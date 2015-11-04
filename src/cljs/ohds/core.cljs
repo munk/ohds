@@ -16,19 +16,37 @@
                                       {:form-params {:username username
                                                      :password password}}))]))))
 
+(defn text-input
+  [labelname ref]
+  (dom/div nil
+   (dom/label nil labelname)
+   (dom/input #js {:type "text" :ref ref})))
+
+(defn password-input
+  [labelname ref]
+  (dom/div nil
+   (dom/label nil labelname)
+   (dom/input #js {:type "password" :ref ref})))
+
+(defn submit-button [label onclick]
+  (dom/div nil
+   (dom/button #js {:onClick onclick} "Login")))
+
+(defn login-form [app owner]
+  (reify
+      om/IRender
+    (render [_]
+      (dom/div nil
+               (text-input "Username: " "username")
+               (password-input "Password: " "password")
+               (submit-button "Login"
+                              (fn [] (do-login app owner)))))))
+
+
+
 (defn main []
   (om/root
-    (fn [app owner]
-      (reify
-        om/IRender
-        (render [_]
-          (dom/div
-           nil
-           "Username: "
-           (dom/input #js {:type "text" :ref "username"})
-           "Password: "
-           (dom/input #js {:type "password" :ref "password"})
-           (dom/button #js {:onClick (fn []
-                                       (do-login app owner))} "Login")))))
+   (fn [app owner]
+     (login-form app owner))
     app-state
     {:target (. js/document (getElementById "app"))}))

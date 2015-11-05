@@ -19,9 +19,9 @@
   (resources "/")
   (resources "/react" {:root "react"})
   (POST "/api/v1/login" req
-        (str req (login/login
-                  (get (:form-params req) "username")
-                  (get (:form-params req) "password"))))
+        (str (login/login
+              (get (:form-params req) "username")
+              (get (:form-params req) "password"))))
   (GET "/*" req (page)))
 
 (def http-handler

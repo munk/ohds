@@ -7,14 +7,7 @@
 
 (enable-console-print!)
 
-(defonce app-state (atom {:text "Hello Chestnut!"}))
-
-(defn do-login [app owner]
-  (let [username (.-value (om/get-node owner "username"))
-        password (.-value (om/get-node owner "password"))]
-    (go (let [response (<! (http/post "http://localhost:10555/api/v1/login"
-                                      {:form-params {:username username
-                                                     :password password}}))]))))
+(defonce app-state (atom {}))
 
 (defn text-input
   [labelname ref]
@@ -32,15 +25,41 @@
   (dom/div nil
    (dom/button #js {:onClick onclick} "Login")))
 
-(defn login-form [app owner]
+(defn location-form [app owner]
   (reify
       om/IRender
     (render [_]
       (dom/div nil
-               (text-input "Username: " "username")
-               (password-input "Password: " "password")
-               (submit-button "Login"
-                              (fn [] (do-login app owner)))))))
+               (text-input "Parent Location" "parentLocation")
+               (text-input "Name" "name")
+               (text-input "Type" "type")))))
+
+(defn do-login [app owner]
+  (let [username (.-value (om/get-node owner "username"))
+        password (.-value (om/get-node owner "password"))]
+    (go (let [response (<! (http/post "http://localhost:10555/api/v1/login"
+                                      {:form-params {:username username
+                                                     :password password}}))
+              success (= "true" (:body response))]          
+          (println success)
+          (om/root
+           (fn [app owner]
+             (location-form app owner))
+           app-state
+           {:target (. js/document (getElementById "app"))}
+           )))))
+
+(defn login-form [app owner]
+  (reify
+      om/IRender
+    (render [_]
+      (dom/div
+       nil
+       (text-input "Username: " "username")
+       (password-input "Password: " "password")
+       (submit-button "Login" (fn [] (do-login app owner)))))))
+
+
 
 
 

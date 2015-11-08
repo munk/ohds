@@ -2,12 +2,7 @@
   (:require [org.httpkit.client :as http]
             [clojure.data.json :as json]
             [crypto.password.bcrypt :as password]
-            [clojure.edn :as edn]))
-
-(def config (edn/read-string (slurp "application.edn")))
-(def apihost (:apihost config))
-(def apiuser (:apiuser config))
-(def apipass (:apipass config))
+            [ohds.serivce.api-config :refer [apihost apiuser apipass]]))
 
 (def fieldworkers-bulk-url
   (str

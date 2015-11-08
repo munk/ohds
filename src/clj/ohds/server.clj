@@ -22,6 +22,11 @@
         (str (login/login
               (get (:form-params req) "username")
               (get (:form-params req) "password"))))
+  (POST "/api/v1/location" req
+        "implementme")
+  (GET "/api/v1/locationHierarchy" req
+       "implementme")
+  
   (GET "/*" req (page)))
 
 (def http-handler

@@ -22,4 +22,3 @@
            ["http://localhost:8080/fieldWorkers/bulk.json"
             mock-fieldworker-response]           
            (client/login "fieldworker" "password")))))
-

@@ -26,4 +26,4 @@
          (with-fake-http
            ["http://localhost:8080/locationHierarchies/bulk.json"
             mock-location-hierarchy-response]
-           (client/get-all-location-hierarchies)))))
+           (client/get-all)))))

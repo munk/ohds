@@ -6,7 +6,8 @@
 (def location-hierarchies-bulk-url
   (str apihost "/locationHierarchies/bulk.json"))
 
-(defn get-all-location-hierarchies []
+(defn get-all []
   (-> @(http/get location-hierarchies-bulk-url {:basic-auth [apiuser apipass]})
       (:body)
       (json/read-str :key-fn keyword)))
+

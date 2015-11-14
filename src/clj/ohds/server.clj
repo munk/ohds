@@ -9,7 +9,10 @@
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [environ.core :refer [env]]
             [ring.adapter.jetty :refer [run-jetty]]
-            [ohds.service.login :as login])
+            [clojure.data.json :as json]
+            [ohds.service.login :as login]
+            [ohds.service.location-hierarchy :as hier]
+            [ohds.service.location :as loc])
   (:gen-class))
 
 (deftemplate page (io/resource "index.html") []
@@ -22,10 +25,12 @@
         (str (login/login
               (get (:form-params req) "username")
               (get (:form-params req) "password"))))
-  (POST "/api/v1/location" req
-        "implementme")
   (GET "/api/v1/locationHierarchy" req
-       "implementme")
+       (json/write-str (hier/get-all)))
+  
+  (POST "/api/v1/locations" req
+        (str (loc/create-location req nil nil)))
+
   
   (GET "/*" req (page)))
 

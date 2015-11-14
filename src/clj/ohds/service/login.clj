@@ -2,7 +2,7 @@
   (:require [org.httpkit.client :as http]
             [clojure.data.json :as json]
             [crypto.password.bcrypt :as password]
-            [ohds.serivce.api-config :refer [apihost apiuser apipass]]))
+            [ohds.service.api-config :refer [apihost apiuser apipass]]))
 
 (def fieldworkers-bulk-url
   (str

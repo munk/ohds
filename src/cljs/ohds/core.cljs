@@ -21,6 +21,7 @@
 
 (def json-reader (t/reader :json))
 
+
 (defn do-login [username password]  
   (go (let [result (<! (http/post
                       "/api/v1/login"
@@ -33,7 +34,7 @@
 
 
 (defn root-component []
-  (println @app-state)
+  ;(println @app-state)  
   [:div {:class "container"}
    [:div {:class "row"} [c/top]]
    [:div {:style {:padding "20px"}}]
@@ -41,10 +42,9 @@
     (case (:page @app-state)
       :login [p/login-page do-login app-state]
       :bad-login [p/bad-login do-login app-state]
-      :location [p/location-page [:option "parent1"]])]])
+      :location [p/location-page @app-state])]])
 
 (defn main []
-  (println "In Main")
   (reagent/render-component [root-component]
                             (.getElementById js/document "app")))
 

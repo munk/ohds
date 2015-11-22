@@ -15,6 +15,11 @@
             [ohds.service.location :as loc])
   (:gen-class))
 
+(defrecord Location
+    [name
+     extId
+     type])
+
 (deftemplate page (io/resource "index.html") []
   [:body] (if is-dev? inject-devmode-html identity))
 
@@ -36,7 +41,14 @@
        (json/write-str (hier/get-all)))
   
   (POST "/api/v1/locations" req
-        (str (loc/create-location req nil nil)))
+        (let [params (:params req)
+              collected-by (:fieldworker-id params)
+              parent (:parent params)
+              name (:name params)
+              ext-id (:ext-id params)
+              type (:type params)
+              location (Location. name ext-id type)]          
+          (str (loc/create-location collected-by parent location))))
   
   (GET "/*" req (page)))
 

@@ -31,6 +31,21 @@
           401 (swap! app-state assoc :page :bad-login :fieldworker-id nil)
           200 (swap! app-state assoc :page :location :fieldworker-id body)))))
 
+(defn location! [loc-id name parent fw-id loctype]  
+  (go (let [result (->> {:form-params
+                         {:fieldworker-id fw-id
+                          :parent parent
+                          :name name
+                          :ext-id loc-id
+                          :type loctype}}
+                        (http/post "/api/v1/locations")
+                        <!)
+            {status :status body :body} result]
+        (println result body)
+        (case status
+          200 (swap! app-state assoc :location-id body :page :individual)))
+      (println @app-state)))
+
 (defn location-hierarchy [as a]
   (go (let [result (->> (http/get "/api/v1/locationHierarchy")
                         (<!)
@@ -50,7 +65,8 @@
     (case (:page @app-state)
       :login [p/login-page login! app-state]
       :bad-login [p/bad-login login! app-state]
-      :location [p/location-page @app-state location-hierarchy println])]])
+      :location [p/location-page @app-state location-hierarchy location!]
+      :individual [:div "Individual"])]])
 
 (defn main []
   (reagent/render-component [root-component]

@@ -29,8 +29,8 @@
   {:pre [(not (nil? (:fieldworker-id app-state)))]}
 
   (let [location-id (atom "External ID")
-        name (atom "Name")
-        loctype (atom "URB")
+        name (atom nil)
+        loctype (atom "RURAL")
         parents (atom nil)
         parent (atom nil)
         fw-id (:fieldworker-id app-state)]
@@ -43,8 +43,8 @@
        [c/text-input name "name"]
        [c/text-input location-id "external ID"]
        [c/select "Type" loctype
-        [:option {:value "RUR" :key "RUR"} "Rural"]
-        [:option {:value "URB" :key "URB"} "Urban"]]
+        [:option {:value "RURAL" :key "RURAL"} "Rural"]
+        [:option {:value "URBAN" :key "URBAN"} "Urban"]]
        [c/padded-submit "Submit"
         (fn [] (submit @location-id @name @parent fw-id @loctype))]])))
 

@@ -4,7 +4,7 @@
             [reagent.core :as reagent :refer [atom]]
             [ohds.components :as c]))
 
-(deftest example-passing-test
+(deftest hamburger-menu-test
   (let [h (c/hamburger)]
     (is (= (get h 0) :button))
     (is (= (first (get h 2)) :span))

@@ -24,7 +24,6 @@
   (swap! app-state assoc :page :location)
   (println "Logging in" username password @app-state))
 
-
 (defn login-page []
   (let [username (atom "Username")
         password (atom "Password")]
@@ -51,7 +50,7 @@
    [:div {:style {:padding "20px"}}]
    [:div 
     (case (:page @app-state)
-      :login [login-page]
+      :login [p/login-page do-login app-state]
       :location [location-page])]])
 
 (defn main []

@@ -15,15 +15,9 @@
     (fn []
       [:div {:class "form-signin"}
        [:h2 {:class "form-signin-heading"} "Please log in"]
-       [:div
-        [:label {:for "username"} "Username"] [c/atom-input username "username"]]
-       [:div
-        [:label {:for "password"} "Password"] [c/atom-input-password password "password"]]
-       [:div {:class "checkbox"}]
-       [:div
-        [:button {:class "btn btn-lg btn-primary btn-block" :type "submit"
-                  :on-click (fn [] (login! username password))}
-         "Login"]]])))
+       [c/text-input username "username"]
+       [c/password-input password "password"]
+       [c/padded-submit (fn [] (login! username password)) "Login"]])))
 
 (defn bad-login [login! app-state]
   [:div

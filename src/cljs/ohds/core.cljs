@@ -10,8 +10,8 @@
 (enable-console-print!)
 
 (def app-state (atom
-                {:page :location
-                 :fieldworker-id "a5ba318f-1353-4d1e-a3d3-beb9d936c915"
+                {:page :login
+                 :fieldworker-id nil;"a5ba318f-1353-4d1e-a3d3-beb9d936c915"
                  :location-id nil;"53f9eb9f-2903-409b-b0c4-4f555cc9583a"
                  }))
 

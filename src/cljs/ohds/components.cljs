@@ -57,13 +57,21 @@
     ]])
 
 
-(defn input [a id lbl f]
+(defn input [a id f]
   [:div
-   [:label {:for id} lbl]
+   [:label {:for id} (clojure.string/capitalize id)]
    [f a id]])
 
-(defn text-input [a id lbl]
-  [input a id lbl atom-input])
+(defn text-input [a id]
+  [input a id atom-input])
 
-(defn password-input [a id lbl]
-  [input a id lbl atom-input-password])
+(defn password-input [a id]
+  [input a id atom-input-password])
+
+(defn padded-submit [on-click name]
+  [:div
+   [:div {:class "checkbox"}]
+   [:button {:class "btn btn-lg btn-primary btn-block"
+             :type "submit"
+             :on-click on-click}
+    name]])

@@ -51,7 +51,7 @@
     [:div {:class "navbar-header"}
      [c/hamburger]
      [:span {:class "navbar-brand"} "OpenHDS"]]
-    [nav-bar]
+    [c/nav-bar]
     ]])
 
 (defn login-page []

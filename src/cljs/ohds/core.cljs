@@ -22,9 +22,9 @@
 
 (defn do-login [username password]
   (swap! app-state assoc :page :location)
-  (go (let [result (http/post
-                    "/api/v1/login"
-                    {:form-params {:username username :password password}})]
+  (go (let [result (<! (http/post
+                      "/api/v1/login"
+                      {:form-params {:username username :password password}}))]
         (println result)))
   (println "Logging in" username password @app-state))
 

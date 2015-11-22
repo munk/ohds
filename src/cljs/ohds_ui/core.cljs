@@ -5,7 +5,7 @@
               [accountant.core :as accountant]))
 
 
-(defonce app-state (atom {}))
+(defonce app-state (atom {:page :login}))
 
 (enable-console-print!)
 

@@ -23,19 +23,6 @@
   (swap! app-state assoc :page :location)
   (println "Logging in" username password @app-state))
 
-(defn atom-input [value id]
-  [:input {:type "text"
-           :value @value
-           :id id
-           :class "form-control"
-           :on-change #(reset! value (-> % .-target .-value))}])
-
-(defn atom-input-password [value id]
-  [:input {:type "password"
-           :value @value
-           :id id
-           :class "form-control"
-           :on-change #(reset! value (-> % .-target .-value))}])
 
 (defn login-page []
   (let [username (atom "Username")

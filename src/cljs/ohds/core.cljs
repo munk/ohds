@@ -37,14 +37,6 @@
            :class "form-control"
            :on-change #(reset! value (-> % .-target .-value))}])
 
-(defn nav-bar []
-  [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
-   [:ul {:class "nav navbar-nav"}
-    [:li
-     [:a {:href "#"} "Home"]]
-    [:li
-     [:a {:href "#"} "Logout"]]]])
-
 (defn top []
   [:nav {:class "navbar navbar-inverse navbar-fixed-top"}
    [:div {:class "container"}

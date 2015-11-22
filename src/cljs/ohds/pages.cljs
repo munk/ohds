@@ -38,19 +38,29 @@
 (defn location-page [app-state]
   (let [location-id (atom "External ID")
         name (atom "Name")
-        parents (atom nil)]
+        parents (atom nil)
+        loctype (atom "URB")
+        parent (atom nil)]
     (go (let [result (<! (http/get
                           "/api/v1/locationHierarchy"
                           {:as :clojure}))
-              body (t/read json-reader (:body result))]
-          (reset! parents (map c/location-hierarchy-option body))))
+              body (t/read json-reader (:body result))
+              parents' (map c/location-hierarchy-option body)]
+          (reset! parents parents')
+          (reset! parent (first parents'))))
     (fn []
       [:div [:h2 "Location Page"]
        [:div
-        [:label "Parent Location"] [:select "Location Hierarchy" @parents]]
+        [:label "Parent Location"]
+        [:select  @parents]]
        [:div [:label "Name"] [c/atom-input name]]
        [:div [:label "External ID"] [c/atom-input location-id]]
-       [:div [:label "Type"] [:select
+       [:div [:label "Type"] [:select {:on-change #(reset! loctype (-> % .-target .-value))}
                               [:option {:value "RUR"} "Rural"]
                               [:option {:value "URB"} "Urban"]]]
-       [:div [:a {:href "/individual"} "go to individual page"]]])))
+       [:div @loctype]
+       [:div @parent]
+       [:div
+        [:button {:class "btn btn-lg btn-primary btn-block" :type "submit"
+                  :on-click (fn [])}
+         "Submit"]]])))

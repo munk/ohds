@@ -1,5 +1,7 @@
 (ns ohds.pages
-  (:require [ohds.components :as c]))
+  (:require
+   [reagent.core :refer [atom]]
+   [ohds.components :as c]))
 
 (defn login-page [do-login app-state]
   (let [username (atom "Username")
@@ -16,4 +18,7 @@
        [:div
         [:button {:class "btn btn-lg btn-primary btn-block" :type "submit"
                   :on-click (fn [] (do-login username password))}
-         "Login"]]])))
+         "Login"]]
+       [:div @username]
+       [:div @password]]
+      )))

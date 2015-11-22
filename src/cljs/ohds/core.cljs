@@ -50,7 +50,7 @@
     (case (:page @app-state)
       :login [p/login-page login! app-state]
       :bad-login [p/bad-login login! app-state]
-      :location [p/location-page @app-state location-hierarchy])]])
+      :location [p/location-page @app-state location-hierarchy println])]])
 
 (defn main []
   (reagent/render-component [root-component]

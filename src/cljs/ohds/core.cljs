@@ -22,7 +22,7 @@
 (def json-reader (t/reader :json))
 
 
-(defn login [username password]  
+(defn login! [username password]  
   (go (let [result (<! (http/post
                       "/api/v1/login"
                       {:form-params {:username @username :password @password}}))
@@ -40,8 +40,8 @@
    [:div {:style {:padding "20px"}}]
    [:div 
     (case (:page @app-state)
-      :login [p/login-page login app-state]
-      :bad-login [p/bad-login login app-state]
+      :login [p/login-page login! app-state]
+      :bad-login [p/bad-login login! app-state]
       :location [p/location-page @app-state])]])
 
 (defn main []

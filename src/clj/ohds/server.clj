@@ -30,7 +30,6 @@
   
   (POST "/api/v1/locations" req
         (str (loc/create-location req nil nil)))
-
   
   (GET "/*" req (page)))
 

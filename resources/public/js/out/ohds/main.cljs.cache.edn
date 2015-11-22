@@ -1,0 +1,2 @@
+;; Analyzed by ClojureScript 0.0-3058
+{:name ohds.main, :doc nil, :excludes #{}, :use-macros nil, :require-macros {figwheel figwheel.client, figwheel.client figwheel.client}, :uses {put! cljs.core.async}, :requires {core ohds.core, ohds.core ohds.core, figwheel figwheel.client, figwheel.client figwheel.client, cljs.core.async cljs.core.async, weasel weasel.repl, weasel.repl weasel.repl}, :imports nil, :cljs.analyzer/constants {:seen #{:verbose :print :jsload-callback :repl :websocket-url :console}, :order [:websocket-url :jsload-callback :verbose :print :repl :console]}}

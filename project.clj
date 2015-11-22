@@ -8,11 +8,11 @@
 
   :test-paths ["test/clj"]
 
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [[org.clojure/clojure "1.7.0"]
+                 [instaparse "1.4.1"]
                  [org.clojure/clojurescript "0.0-3058" :scope "provided"]
                  [org.clojure/tools.nrepl "0.2.11"]
                  [org.clojure/data.json "0.2.6"]
-                 [org.omcljs/om "0.8.8"]
 
                  [http-kit "2.1.18"]
                  [http-kit.fake "0.2.1"]
@@ -26,10 +26,15 @@
                  [enlive "1.1.6"]
                  [environ "1.0.0"]
                  [prismatic/schema "1.0.2"]
+
+                 [reagent "0.5.1"]
+                 [reagent-forms "0.5.13"]
+                 [reagent-utils "0.1.5"]
                  [com.cognitect/transit-cljs "0.8.225"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]
-            [lein-environ "1.0.0"]]
+            [lein-environ "1.0.0"]
+            [lein-ring "0.9.7"]]
 
   :min-lein-version "2.5.0"
 
@@ -44,6 +49,7 @@
                                         :pretty-print  true}}}}
 
   :profiles {:dev {:source-paths ["env/dev/clj"]
+                   :hooks [leiningen.cljsbuild]
                    :test-paths ["test/clj"]
 
                    :dependencies [[figwheel "0.2.5"]

@@ -1,0 +1,306 @@
+Figwheel: focusing on build-ids (app)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.139 seconds.[0m
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  /ohds/components.js
+notifying browser that file changed:  /ohds/forms.js
+notifying browser that file changed:  /ohds/core.js
+notifying browser that file changed:  /ohds/main.js
+Figwheel: focusing on build-ids (app)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/cljs/ohds/components.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__2941.invoke (compiler.clj:1130)
+    cljs.compiler$compile_file.invoke (compiler.clj:1101)
+    cljs.compiler$compile_root.invoke (compiler.clj:1160)
+    cljs.closure$compile_dir.invoke (closure.clj:357)
+    cljs.closure$eval3290$fn__3291.invoke (closure.clj:397)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    cljs.closure$eval3303$fn__3304.invoke (closure.clj:411)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:18)
+    clojure.core$map$fn__4553.invoke (core.clj:2622)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$apply.invoke (core.clj:630)
+    clojure.core$mapcat.doInvoke (core.clj:2660)
+    clojure.lang.RestFn.invoke (RestFn.java:423)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:18)
+    cljs.closure$build.invoke (closure.clj:1393)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:150)
+    figwheel_sidecar.auto_builder$default_build_options$fn__21428.invoke (auto_builder.clj:65)
+    figwheel_sidecar.auto_builder$warning$fn__21425.invoke (auto_builder.clj:61)
+    clojurescript_build.auto$time_build$fn__21238.invoke (auto.clj:55)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$error$fn__21247.invoke (auto.clj:71)
+    clojurescript_build.auto$before$fn__21241.invoke (auto.clj:60)
+    clojurescript_build.auto$make_conditional_builder$fn__21259.invoke (auto.clj:103)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/cljs/ohds/components.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__2941.invoke (compiler.clj:1130)
+    cljs.compiler$compile_file.invoke (compiler.clj:1101)
+    cljs.compiler$compile_root.invoke (compiler.clj:1160)
+    cljs.closure$compile_dir.invoke (closure.clj:357)
+    cljs.closure$eval3290$fn__3291.invoke (closure.clj:397)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    cljs.closure$eval3303$fn__3304.invoke (closure.clj:411)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:18)
+    clojure.core$map$fn__4553.invoke (core.clj:2622)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$apply.invoke (core.clj:630)
+    clojure.core$mapcat.doInvoke (core.clj:2660)
+    clojure.lang.RestFn.invoke (RestFn.java:423)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:18)
+    cljs.closure$build.invoke (closure.clj:1393)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:150)
+    figwheel_sidecar.auto_builder$default_build_options$fn__21428.invoke (auto_builder.clj:65)
+    figwheel_sidecar.auto_builder$warning$fn__21425.invoke (auto_builder.clj:61)
+    clojurescript_build.auto$time_build$fn__21238.invoke (auto.clj:55)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$error$fn__21247.invoke (auto.clj:71)
+    clojurescript_build.auto$before$fn__21241.invoke (auto.clj:60)
+    clojurescript_build.auto$make_conditional_builder$fn__21259.invoke (auto.clj:103)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/cljs/ohds/components.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__2941.invoke (compiler.clj:1130)
+    cljs.compiler$compile_file.invoke (compiler.clj:1101)
+    cljs.compiler$compile_root.invoke (compiler.clj:1160)
+    cljs.closure$compile_dir.invoke (closure.clj:357)
+    cljs.closure$eval3290$fn__3291.invoke (closure.clj:397)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    cljs.closure$eval3303$fn__3304.invoke (closure.clj:411)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:18)
+    clojure.core$map$fn__4553.invoke (core.clj:2622)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$apply.invoke (core.clj:630)
+    clojure.core$mapcat.doInvoke (core.clj:2660)
+    clojure.lang.RestFn.invoke (RestFn.java:423)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:18)
+    cljs.closure$build.invoke (closure.clj:1393)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:150)
+    figwheel_sidecar.auto_builder$default_build_options$fn__21428.invoke (auto_builder.clj:65)
+    figwheel_sidecar.auto_builder$warning$fn__21425.invoke (auto_builder.clj:61)
+    clojurescript_build.auto$time_build$fn__21238.invoke (auto.clj:55)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$error$fn__21247.invoke (auto.clj:71)
+    clojurescript_build.auto$before$fn__21241.invoke (auto.clj:60)
+    clojurescript_build.auto$make_conditional_builder$fn__21259.invoke (auto.clj:103)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/cljs/ohds/components.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__2941.invoke (compiler.clj:1130)
+    cljs.compiler$compile_file.invoke (compiler.clj:1101)
+    cljs.compiler$compile_root.invoke (compiler.clj:1160)
+    cljs.closure$compile_dir.invoke (closure.clj:357)
+    cljs.closure$eval3290$fn__3291.invoke (closure.clj:397)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    cljs.closure$eval3303$fn__3304.invoke (closure.clj:411)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:18)
+    clojure.core$map$fn__4553.invoke (core.clj:2622)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$apply.invoke (core.clj:630)
+    clojure.core$mapcat.doInvoke (core.clj:2660)
+    clojure.lang.RestFn.invoke (RestFn.java:423)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:18)
+    cljs.closure$build.invoke (closure.clj:1393)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:150)
+    figwheel_sidecar.auto_builder$default_build_options$fn__21428.invoke (auto_builder.clj:65)
+    figwheel_sidecar.auto_builder$warning$fn__21425.invoke (auto_builder.clj:61)
+    clojurescript_build.auto$time_build$fn__21238.invoke (auto.clj:55)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$error$fn__21247.invoke (auto.clj:71)
+    clojurescript_build.auto$before$fn__21241.invoke (auto.clj:60)
+    clojurescript_build.auto$make_conditional_builder$fn__21259.invoke (auto.clj:103)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/cljs/ohds/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__2941.invoke (compiler.clj:1130)
+    cljs.compiler$compile_file.invoke (compiler.clj:1101)
+    cljs.compiler$compile_root.invoke (compiler.clj:1160)
+    cljs.closure$compile_dir.invoke (closure.clj:357)
+    cljs.closure$eval3290$fn__3291.invoke (closure.clj:397)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    cljs.closure$eval3303$fn__3304.invoke (closure.clj:411)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:18)
+    clojure.core$map$fn__4553.invoke (core.clj:2622)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$apply.invoke (core.clj:630)
+    clojure.core$mapcat.doInvoke (core.clj:2660)
+    clojure.lang.RestFn.invoke (RestFn.java:423)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:18)
+    cljs.closure$build.invoke (closure.clj:1393)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:150)
+    figwheel_sidecar.auto_builder$default_build_options$fn__21428.invoke (auto_builder.clj:65)
+    figwheel_sidecar.auto_builder$warning$fn__21425.invoke (auto_builder.clj:61)
+    clojurescript_build.auto$time_build$fn__21238.invoke (auto.clj:55)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$error$fn__21247.invoke (auto.clj:71)
+    clojurescript_build.auto$before$fn__21241.invoke (auto.clj:60)
+    clojurescript_build.auto$make_conditional_builder$fn__21259.invoke (auto.clj:103)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/cljs/ohds/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__2941.invoke (compiler.clj:1130)
+    cljs.compiler$compile_file.invoke (compiler.clj:1101)
+    cljs.compiler$compile_root.invoke (compiler.clj:1160)
+    cljs.closure$compile_dir.invoke (closure.clj:357)
+    cljs.closure$eval3290$fn__3291.invoke (closure.clj:397)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    cljs.closure$eval3303$fn__3304.invoke (closure.clj:411)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:18)
+    clojure.core$map$fn__4553.invoke (core.clj:2622)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$apply.invoke (core.clj:630)
+    clojure.core$mapcat.doInvoke (core.clj:2660)
+    clojure.lang.RestFn.invoke (RestFn.java:423)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:18)
+    cljs.closure$build.invoke (closure.clj:1393)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:150)
+    figwheel_sidecar.auto_builder$default_build_options$fn__21428.invoke (auto_builder.clj:65)
+    figwheel_sidecar.auto_builder$warning$fn__21425.invoke (auto_builder.clj:61)
+    clojurescript_build.auto$time_build$fn__21238.invoke (auto.clj:55)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$error$fn__21247.invoke (auto.clj:71)
+    clojurescript_build.auto$before$fn__21241.invoke (auto.clj:60)
+    clojurescript_build.auto$make_conditional_builder$fn__21259.invoke (auto.clj:103)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/cljs/ohds/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__2941.invoke (compiler.clj:1130)
+    cljs.compiler$compile_file.invoke (compiler.clj:1101)
+    cljs.compiler$compile_root.invoke (compiler.clj:1160)
+    cljs.closure$compile_dir.invoke (closure.clj:357)
+    cljs.closure$eval3290$fn__3291.invoke (closure.clj:397)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    cljs.closure$eval3303$fn__3304.invoke (closure.clj:411)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:18)
+    clojure.core$map$fn__4553.invoke (core.clj:2622)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$apply.invoke (core.clj:630)
+    clojure.core$mapcat.doInvoke (core.clj:2660)
+    clojure.lang.RestFn.invoke (RestFn.java:423)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:18)
+    cljs.closure$build.invoke (closure.clj:1393)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:150)
+    figwheel_sidecar.auto_builder$default_build_options$fn__21428.invoke (auto_builder.clj:65)
+    figwheel_sidecar.auto_builder$warning$fn__21425.invoke (auto_builder.clj:61)
+    clojurescript_build.auto$time_build$fn__21238.invoke (auto.clj:55)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$error$fn__21247.invoke (auto.clj:71)
+    clojurescript_build.auto$before$fn__21241.invoke (auto.clj:60)
+    clojurescript_build.auto$make_conditional_builder$fn__21259.invoke (auto.clj:103)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/cljs/ohds/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__2941.invoke (compiler.clj:1130)
+    cljs.compiler$compile_file.invoke (compiler.clj:1101)
+    cljs.compiler$compile_root.invoke (compiler.clj:1160)
+    cljs.closure$compile_dir.invoke (closure.clj:357)
+    cljs.closure$eval3290$fn__3291.invoke (closure.clj:397)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    cljs.closure$eval3303$fn__3304.invoke (closure.clj:411)
+    cljs.closure$eval3243$fn__3244$G__3234__3251.invoke (closure.clj:305)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:18)
+    clojure.core$map$fn__4553.invoke (core.clj:2622)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$apply.invoke (core.clj:630)
+    clojure.core$mapcat.doInvoke (core.clj:2660)
+    clojure.lang.RestFn.invoke (RestFn.java:423)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:18)
+    cljs.closure$build.invoke (closure.clj:1393)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:150)
+    figwheel_sidecar.auto_builder$default_build_options$fn__21428.invoke (auto_builder.clj:65)
+    figwheel_sidecar.auto_builder$warning$fn__21425.invoke (auto_builder.clj:61)
+    clojurescript_build.auto$time_build$fn__21238.invoke (auto.clj:55)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$after$fn__21244.invoke (auto.clj:64)
+    clojurescript_build.auto$error$fn__21247.invoke (auto.clj:71)
+    clojurescript_build.auto$before$fn__21241.invoke (auto.clj:60)
+    clojurescript_build.auto$make_conditional_builder$fn__21259.invoke (auto.clj:103)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.core/location-form at line 55 src/cljs/ohds/core.cljs
+WARNING: Use of undeclared Var ohds.core/login-form at line 61 src/cljs/ohds/core.cljs
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.724 seconds.[0m
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  /ohds/core.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.core/location-form at line 54 src/cljs/ohds/core.cljs
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.232 seconds.[0m
+notifying browser that file changed:  /ohds/core.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.227 seconds.[0m
+notifying browser that file changed:  /ohds/core.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.2 seconds.[0m
+notifying browser that file changed:  /ohds/core.js
+Figwheel: focusing on build-ids (app)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.138 seconds.[0m
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  /ohds/main.js
+notifying browser that file changed:  /ohds/components.js
+notifying browser that file changed:  /ohds/forms.js
+notifying browser that file changed:  /ohds/core.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.172 seconds.[0m
+notifying browser that file changed:  /ohds/main.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.141 seconds.[0m
+notifying browser that file changed:  /ohds/main.js

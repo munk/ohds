@@ -25,7 +25,9 @@
   (let [fieldworker (find-fieldworker username (get-fieldworkers))
         expected-username (:fieldWorkerId fieldworker)
         expected-password (:passwordHash fieldworker)]
-    (and
-     (not (nil? expected-username))
-     (= username expected-username)
-     (password/check password expected-password))))
+    (if (and
+          (not (nil? expected-username))
+          (= username expected-username)
+          (password/check password expected-password))
+      (:uuid fieldworker)
+      false)))

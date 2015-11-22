@@ -66,7 +66,7 @@
       :login [p/login-page login! app-state]
       :bad-login [p/bad-login login! app-state]
       :location [p/location-page @app-state location-hierarchy location!]
-      :individual [:div "Individual"])]])
+      :individual [p/individual-page])]])
 
 (defn main []
   (reagent/render-component [root-component]

@@ -4,7 +4,8 @@
             [cljs.core.async :refer [<!]]
             [cognitect.transit :as t]
             [reagent.core :as reagent :refer [atom]]
-            [ohds.components :as c]))
+            [ohds.components :as c]
+            [ohds.pages :as p]))
 
 (enable-console-print!)
 

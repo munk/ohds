@@ -99,7 +99,7 @@
 ;; Routes
 
 (secretary/defroute "/" []
-  (session/put! :current-page #'home-page))
+  (session/put! :current-page #'login-page))
 
 (secretary/defroute "/about" []
   (session/put! :current-page #'about-page))

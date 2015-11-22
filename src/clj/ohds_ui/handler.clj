@@ -22,7 +22,10 @@
      [:meta {:charset "utf-8"}]
      [:meta {:name "viewport"
              :content "width=device-width, initial-scale=1"}]
-     (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
+     (include-css (if (env :dev) "css/site.css" "css/site.min.css"))
+     (include-css "css/bootstrap.min.css")
+     (include-js "js/jquery-1.11.3.min.js")
+     (include-js "js/bootstrap.min.js")]   
     [:body
      mount-target
      (include-js "js/app.js")]]))
@@ -38,6 +41,10 @@
 
 (defroutes routes
   (GET "/" [] loading-page)
+  (GET "/login" [] loading-page)
+  (GET "/location" [] loading-page)
+  (GET "/individual" [] loading-page)
+  (GET "/relationship" [] loading-page)
   (GET "/about" [] loading-page)
   (GET "/cards" [] cards-page)
   (resources "/")

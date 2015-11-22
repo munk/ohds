@@ -26,3 +26,16 @@
   [:div
    [:h4 {:style {:color "red"}} "Invalid Username or Passoword"]
    [login-page do-login app-state]])
+
+
+(defn location-page []
+  (let [location-id (atom "External ID")
+        name (atom "Name")]
+    (fn []
+      [:div [:h2 "Location Page"]
+       [:div
+        [:label "Parent Location"] [:select "Location Hierarchy"]]
+       [:div [:label "Name"] [c/atom-input name]]
+       [:div [:label "External ID"] [c/atom-input location-id]]
+       [:div [:label "Type"] [:select [:option {:value "foo"} "Stuff"] "Type"]]
+       [:div [:a {:href "/individual"} "go to individual page"]]])))

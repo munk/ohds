@@ -69,7 +69,7 @@
         password (atom "Password")]
     (swap! app-state assoc :fieldworker-id nil :location-id nil :individual-id nil)
     (fn []
-      [:div {:class "container"}
+      [:div 
        [:div 
         [:div
          [:h2 {:class "form-signin-heading"} "Please log in"]
@@ -87,11 +87,13 @@
   [:div "locations"])
 
 (defn root-component []
-  [top]
-  [:div
-   (case (:page @app-state)
-     :login [login-page]
-     :location [location-page])])
+  [:div {:class "container"}
+   [:div {:class "row"} [top]]
+   [:div {:style {:padding "20px"}}]
+   [:div 
+    (case (:page @app-state)
+      :login [login-page]
+      :location [location-page])]])
 
 (defn main []
   (println "In Main")

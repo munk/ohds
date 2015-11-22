@@ -36,11 +36,13 @@
     options))
 
 (defn location-page [app-state]
+  {:pre [(not (nil? (:fieldworker-id app-state)))]}
   (let [location-id (atom "External ID")
         name (atom "Name")
         parents (atom nil)
         loctype (atom "URB")
-        parent (atom nil)]
+        parent (atom nil)
+        fw-id (:fieldworker-id app-state)]
     (go (let [result (<! (http/get
                           "/api/v1/locationHierarchy"
                           {:as :clojure}))
@@ -62,5 +64,5 @@
        [:div @parent]
        [:div
         [:button {:class "btn btn-lg btn-primary btn-block" :type "submit"
-                  :on-click (fn [])}
+                  :on-click (fn [] (println location-id))}
          "Submit"]]])))

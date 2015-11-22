@@ -20,16 +20,15 @@
 
 (def json-reader (t/reader :json))
 
-(defn do-login [username password]
-  (swap! app-state assoc :page :location)
+(defn do-login [username password]  
   (go (let [result (<! (http/post
                       "/api/v1/login"
                       {:form-params {:username @username :password @password}}))
             status (:status result)
             body (:body result)]
         (case status
-          401 (println "invalid login")
-          200 (println "valid login")))))
+          401 (swap! app-state assoc :page :bad-login)
+          200 (swap! app-state assoc :page :location)))))
 
 
 (defn location-page []
@@ -42,6 +41,7 @@
    [:div 
     (case (:page @app-state)
       :login [p/login-page do-login app-state]
+      :bad-login [p/bad-login do-login app-state]
       :location [location-page])]])
 
 (defn main []

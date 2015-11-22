@@ -18,7 +18,11 @@
        [:div
         [:button {:class "btn btn-lg btn-primary btn-block" :type "submit"
                   :on-click (fn [] (do-login username password))}
-         "Login"]]
-       [:div @username]
-       [:div @password]]
-      )))
+         "Login"]]])))
+
+
+(defn bad-login [do-login app-state]
+  (println "bad login")
+  [:div
+   [:h4 {:style {:color "red"}} "Invalid Username or Passoword"]
+   [login-page do-login app-state]])

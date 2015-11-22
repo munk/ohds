@@ -17,41 +17,34 @@
        [:h2 {:class "form-signin-heading"} "Please log in"]
        [c/text-input username "username"]
        [c/password-input password "password"]
-       [c/padded-submit (fn [] (login! username password)) "Login"]])))
+       [c/padded-submit "Login"
+        (fn [] (login! username password))]])))
 
 (defn bad-login [login! app-state]
   [:div
    [:h4 {:style {:color "red"}} "Invalid Username or Passoword"]
    [login-page login! app-state]])
 
-(defn location-page [app-state]
+(defn location-page [app-state location-hierarchy]
   {:pre [(not (nil? (:fieldworker-id app-state)))]}
+
   (let [location-id (atom "External ID")
         name (atom "Name")
-        parents (atom nil)
         loctype (atom "URB")
+        parents (atom nil)
         parent (atom nil)
         fw-id (:fieldworker-id app-state)]
-    (go (let [result (<! (http/get
-                          "/api/v1/locationHierarchy"
-                          {:as :clojure}))
-              body (t/read json-reader (:body result))
-              parents' (map c/location-hierarchy-option body)]
-          (reset! parents parents')
-          (reset! parent (first parents'))))
+
+    (location-hierarchy parents parent)
+    
     (fn []
       [:div [:h2 "Location Page"]
-       [:div
-        [:label "Parent Location"]
-        [:select  {:on-change #(reset! parent (-> % .-target .-value))} @parents]]
-       [:div [:label "Name"] [c/atom-input name]]
-       [:div [:label "External ID"] [c/atom-input location-id]]
-       [:div [:label "Type"] [:select {:on-change #(reset! loctype (-> % .-target .-value))}
-                              [:option {:value "RUR"} "Rural"]
-                              [:option {:value "URB"} "Urban"]]]
-       [:div @loctype]
-       [:div @parent]
-       [:div
-        [:button {:class "btn btn-lg btn-primary btn-block" :type "submit"
-                  :on-click (fn [] (println @location-id @name @parent fw-id @loctype))}
-         "Submit"]]])))
+       [c/select "Parent Location" parent @parents]
+       [c/text-input name "name"]
+       [c/text-input location-id "external ID"]
+       [c/select "Type" loctype
+        [:option {:value "RUR" :key "RUR"} "Rural"]
+        [:option {:value "URB" :key "URB"} "Urban"]]
+       [c/padded-submit "Submit"
+        (fn [] (println @location-id @name @parent fw-id @loctype))]])))
+

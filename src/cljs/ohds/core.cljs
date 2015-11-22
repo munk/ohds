@@ -10,8 +10,8 @@
 (enable-console-print!)
 
 (def app-state (atom
-                {:page :login
-                 :fieldworker-id nil;"a5ba318f-1353-4d1e-a3d3-beb9d936c915"
+                {:page :location
+                 :fieldworker-id "a5ba318f-1353-4d1e-a3d3-beb9d936c915"
                  :location-id nil;"53f9eb9f-2903-409b-b0c4-4f555cc9583a"
                  }))
 
@@ -23,16 +23,24 @@
 
 
 (defn login! [username password]  
-  (go (let [result (<! (http/post
-                      "/api/v1/login"
-                      {:form-params {:username @username :password @password}}))
-            status (:status result)
-            body (:body result)]
+  (go (let [result (->> {:form-params {:username @username :password @password}}
+                        (http/post "/api/v1/login")
+                        <!)
+            {status :status body :body} result]
         (case status
           401 (swap! app-state assoc :page :bad-login :fieldworker-id nil)
           200 (swap! app-state assoc :page :location :fieldworker-id body)))))
 
+(defn location-hierarchy [as a]
+  (go (let [result (->> (http/get "/api/v1/locationHierarchy")
+                        (<!)
+                        (:body)
+                        (t/read json-reader)
+                        (map c/location-hierarchy-option))]
+        (reset! as result)
+        (reset! a (first result)))))
 
+        
 (defn root-component []
   ;(println @app-state)  
   [:div {:class "container"}
@@ -42,7 +50,7 @@
     (case (:page @app-state)
       :login [p/login-page login! app-state]
       :bad-login [p/bad-login login! app-state]
-      :location [p/location-page @app-state])]])
+      :location [p/location-page @app-state location-hierarchy])]])
 
 (defn main []
   (reagent/render-component [root-component]

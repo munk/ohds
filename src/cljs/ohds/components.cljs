@@ -68,10 +68,16 @@
 (defn password-input [a id]
   [input a id atom-input-password])
 
-(defn padded-submit [on-click name]
+(defn padded-submit [n on-click]
   [:div
    [:div {:class "checkbox"}]
    [:button {:class "btn btn-lg btn-primary btn-block"
              :type "submit"
              :on-click on-click}
-    name]])
+    n]])
+
+(defn select [lbl a & options]
+  [:div
+   [:label lbl]
+   [:select {:on-change #(reset! a (-> % .-target .-value))}
+    options]])

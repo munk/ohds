@@ -50,5 +50,7 @@
         [:label "Parent Location"] [:select "Location Hierarchy" @parents]]
        [:div [:label "Name"] [c/atom-input name]]
        [:div [:label "External ID"] [c/atom-input location-id]]
-       [:div [:label "Type"] [:select [:option {:value "foo"} "Stuff"] "Type"]]
+       [:div [:label "Type"] [:select
+                              [:option {:value "RUR"} "Rural"]
+                              [:option {:value "URB"} "Urban"]]]
        [:div [:a {:href "/individual"} "go to individual page"]]])))

@@ -70,7 +70,7 @@
 
 (defn root-component []
   [:div {:class "container"}
-   [:div {:class "row"} [top]]
+   [:div {:class "row"} [c/top]]
    [:div {:style {:padding "20px"}}]
    [:div 
     (case (:page @app-state)

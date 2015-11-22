@@ -42,7 +42,7 @@
     (case (:page @app-state)
       :login [p/login-page do-login app-state]
       :bad-login [p/bad-login do-login app-state]
-      :location [location-page])]])
+      :location [p/location-page])]])
 
 (defn main []
   (println "In Main")

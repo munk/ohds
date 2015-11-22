@@ -10,9 +10,10 @@
 (enable-console-print!)
 
 (def app-state (atom
-                {:page :login
+                {:page :location
                  :fieldworker-id "a5ba318f-1353-4d1e-a3d3-beb9d936c915"
-                 :location-id "53f9eb9f-2903-409b-b0c4-4f555cc9583a"}))
+                 :location-id nil;"53f9eb9f-2903-409b-b0c4-4f555cc9583a"
+                 }))
 
 (def login-url "/api/v1/login")
 (def loc-hiera-url "/api/v1/locationHierarchy")
@@ -40,7 +41,7 @@
     (case (:page @app-state)
       :login [p/login-page do-login app-state]
       :bad-login [p/bad-login do-login app-state]
-      :location [p/location-page])]])
+      :location [p/location-page [:option "parent1"]])]])
 
 (defn main []
   (println "In Main")

@@ -14,6 +14,9 @@
            :class "form-control"
            :on-change #(reset! value (-> % .-target .-value))}])
 
+(defn location-hierarchy-option [field]
+  [:option {:value (:uuid field)} (:name field)])
+
 (defn hamburger []
   [:button {:type "button"
             :class "navbar-toggle collapsed"

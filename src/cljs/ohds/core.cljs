@@ -31,9 +31,6 @@
           200 (swap! app-state assoc :page :location)))))
 
 
-(defn location-page []
-  [:div "locations"])
-
 (defn root-component []
   [:div {:class "container"}
    [:div {:class "row"} [c/top]]

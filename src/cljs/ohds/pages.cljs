@@ -22,7 +22,6 @@
 
 
 (defn bad-login [do-login app-state]
-  (println "bad login")
   [:div
    [:h4 {:style {:color "red"}} "Invalid Username or Passoword"]
    [login-page do-login app-state]])

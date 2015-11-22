@@ -29,8 +29,8 @@
           (if (nil? result)
             {:status 401
              :headers {}
-             :body "Bad username or password"})
-          (str result)))
+             :body "Bad username or password"}
+            (str result))))
   
   (GET "/api/v1/locationHierarchy" req
        (json/write-str (hier/get-all)))

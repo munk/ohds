@@ -20,9 +20,12 @@
                                            (client/login "fieldworker" "password"))
         fooworker-result (with-fake-http [url mock-fieldworker-response]
                            (client/login "fooworker" "password"))
-        bad-result  (with-fake-http [url mock-fieldworker-response]
-                      (client/login "bad" "login"))]
+        bad-username  (with-fake-http [url mock-fieldworker-response]
+                        (client/login "bad" "login"))
+        bad-password  (with-fake-http [url mock-fieldworker-response]
+                        (client/login "fieldworker" "login"))]
     (is (= "123-abc-123" fieldworker-result))
     (is (= "123-abc-456" fooworker-result))
-    (is (nil? bad-result))))
+    (is (nil? bad-username))
+    (is (nil? bad-password))))
 

@@ -25,9 +25,11 @@
   (go (let [result (<! (http/post
                       "/api/v1/login"
                       {:form-params {:username @username :password @password}}))
+            status (:status result)
             body (:body result)]
-        (println result (= ""  body))))
-  (println "Logging in" username password @app-state))
+        (case status
+          401 (println "invalid login")
+          200 (println "valid login")))))
 
 
 (defn location-page []

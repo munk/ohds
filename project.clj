@@ -50,7 +50,7 @@
 
   :profiles {:dev {:source-paths ["env/dev/clj"]
                    :hooks [leiningen.cljsbuild]
-                   :test-paths ["test/clj"]
+                   :test-paths ["test/clj" "test/cljs"]
 
                    :dependencies [[figwheel "0.2.5"]
                                   [figwheel-sidecar "0.2.5"]

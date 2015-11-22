@@ -7,10 +7,10 @@
 
 (enable-console-print!)
 
-(defonce app-state (atom
-                    {:page :login
-                     :fieldworker-id "a5ba318f-1353-4d1e-a3d3-beb9d936c915"
-                     :location-id "53f9eb9f-2903-409b-b0c4-4f555cc9583a"}))
+(def app-state (atom
+                {:page :login
+                 :fieldworker-id "a5ba318f-1353-4d1e-a3d3-beb9d936c915"
+                 :location-id "53f9eb9f-2903-409b-b0c4-4f555cc9583a"}))
 
 (def login-url "/api/v1/login")
 (def loc-hiera-url "/api/v1/locationHierarchy")
@@ -20,7 +20,7 @@
 
 (defn do-login [username password]
   (swap! app-state assoc :page :location)
-  (println "Logging in" username password))
+  (println "Logging in" username password @app-state))
 
 (defn atom-input [value id]
   [:input {:type "text"
@@ -69,9 +69,9 @@
         password (atom "Password")]
     (swap! app-state assoc :fieldworker-id nil :location-id nil :individual-id nil)
     (fn []
-      [:div {:class "container"}
+      [:div 
        [:div 
-        [:form {:class "form-signin"}
+        [:div
          [:h2 {:class "form-signin-heading"} "Please log in"]
          [:div
           [:label {:for "username"} "Username"] [atom-input username "username"]]
@@ -80,13 +80,20 @@
          [:div {:class "checkbox"}]
          [:div
           [:button {:class "btn btn-lg btn-primary btn-block" :type "submit"
-                   } "Login"]]]]])))
+                    :on-click (fn [] (do-login username password))}
+           "Login"]]]]])))
+
+(defn location-page []
+  [:div "locations"])
 
 (defn root-component []
-  [top]
-  [:div
-   (case (:page @app-state)
-     :login [login-page])])
+  [:div {:class "container"}
+   [:div {:class "row"} [top]]
+   [:div {:style {:padding "20px"}}]
+   [:div 
+    (case (:page @app-state)
+      :login [login-page]
+      :location [location-page])]])
 
 (defn main []
   (println "In Main")

@@ -1,0 +1,14 @@
+// Compiled by ClojureScript 0.0-3058 {}
+goog.provide('ohds.component_test');
+goog.require('cljs.core');
+goog.require('cljs.test');
+goog.require('reagent.core');
+goog.require('ohds.components');
+ohds.component_test.example_passing_test = (function ohds$component_test$example_passing_test(){
+return cljs.test.test_var.call(null,ohds$component_test$example_passing_test.cljs$lang$var);
+});
+ohds.component_test.example_passing_test.cljs$lang$test = (function (){
+return null;
+});
+
+ohds.component_test.example_passing_test.cljs$lang$var = new cljs.core.Var(function(){return ohds.component_test.example_passing_test;},new cljs.core.Symbol("ohds.component-test","example-passing-test","ohds.component-test/example-passing-test",-1769210692,null),cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"file","file",-1269645878),new cljs.core.Keyword(null,"end-column","end-column",1425389514),new cljs.core.Keyword(null,"column","column",2078222095),new cljs.core.Keyword(null,"line","line",212345235),new cljs.core.Keyword(null,"end-line","end-line",1837326455),new cljs.core.Keyword(null,"arglists","arglists",1661989754),new cljs.core.Keyword(null,"doc","doc",1913296891),new cljs.core.Keyword(null,"test","test",577538877)],[new cljs.core.Symbol(null,"ohds.component-test","ohds.component-test",-40454299,null),new cljs.core.Symbol(null,"example-passing-test","example-passing-test",594018964,null),"/Users/jdowns/ohds/test/cljs/ohds/component-test.cljs",30,10,7,7,cljs.core.List.EMPTY,null,(cljs.core.truth_(ohds.component_test.example_passing_test)?ohds.component_test.example_passing_test.cljs$lang$test:null)]));

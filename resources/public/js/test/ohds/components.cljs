@@ -1,5 +1,19 @@
 (ns ohds.components)
 
+(defn atom-input [value id]
+  [:input {:type "text"
+           :value @value
+           :id id
+           :class "form-control"
+           :on-change #(reset! value (-> % .-target .-value))}])
+
+(defn atom-input-password [value id]
+  [:input {:type "password"
+           :value @value
+           :id id
+           :class "form-control"
+           :on-change #(reset! value (-> % .-target .-value))}])
+
 (defn hamburger []
   [:button {:type "button"
             :class "navbar-toggle collapsed"

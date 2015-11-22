@@ -6,7 +6,9 @@
 
 (enable-console-print!)
 
-(defonce app-state (atom {:page :login}))
+(defonce app-state (atom {:current-fieldworker nil
+                          :current-location nil
+                          :current-individual nil}))
 
 ;; -------------------------
 ;; Business Rules

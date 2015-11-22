@@ -30,11 +30,6 @@
    [:h4 {:style {:color "red"}} "Invalid Username or Passoword"]
    [login-page login! app-state]])
 
-(defn get-location-hierarchy-options []
-  (let [options (atom nil)]
-
-    options))
-
 (defn location-page [app-state]
   {:pre [(not (nil? (:fieldworker-id app-state)))]}
   (let [location-id (atom "External ID")
@@ -54,7 +49,7 @@
       [:div [:h2 "Location Page"]
        [:div
         [:label "Parent Location"]
-        [:select  @parents]]
+        [:select  {:on-change #(reset! parent (-> % .-target .-value))} @parents]]
        [:div [:label "Name"] [c/atom-input name]]
        [:div [:label "External ID"] [c/atom-input location-id]]
        [:div [:label "Type"] [:select {:on-change #(reset! loctype (-> % .-target .-value))}
@@ -64,5 +59,5 @@
        [:div @parent]
        [:div
         [:button {:class "btn btn-lg btn-primary btn-block" :type "submit"
-                  :on-click (fn [] (println location-id))}
+                  :on-click (fn [] (println @location-id @name @parent fw-id @loctype))}
          "Submit"]]])))

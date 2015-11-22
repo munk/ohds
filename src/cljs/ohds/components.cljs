@@ -8,6 +8,7 @@
            :class "form-control"
            :on-change #(reset! value (-> % .-target .-value))}])
 
+
 (defn atom-input-password [value id]
   [:input {:type "password"
            :value @value
@@ -15,12 +16,15 @@
            :class "form-control"
            :on-change #(reset! value (-> % .-target .-value))}])
 
+
 (defn location-hierarchy-option [field]
   [:option {:value (get field "uuid") :key (get field "uuid")} (get field "name")])
+
 
 (defn location-hierarchy-select [hierarchy]
   (println hierarchy)
   (map location-hierarchy-option hierarchy))
+
 
 (defn hamburger []
   [:button {:type "button"
@@ -33,6 +37,7 @@
    [:span {:class "icon-bar"}]
    [:span {:class "icon-bar"}]])
 
+
 (defn nav-bar []
   [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
    [:ul {:class "nav navbar-nav"}
@@ -40,6 +45,7 @@
      [:a {:href "#"} "Home"]]
     [:li
      [:a {:href "#"} "Logout"]]]])
+
 
 (defn top []
   [:nav {:class "navbar navbar-inverse navbar-fixed-top"}
@@ -49,3 +55,15 @@
      [:span {:class "navbar-brand"} "OpenHDS"]]
     [nav-bar]
     ]])
+
+
+(defn input [a id lbl f]
+  [:div
+   [:label {:for id} lbl]
+   [f a id]])
+
+(defn text-input [a id lbl]
+  [input a id lbl atom-input])
+
+(defn password-input [a id lbl]
+  [input a id lbl atom-input-password])

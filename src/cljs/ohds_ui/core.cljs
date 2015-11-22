@@ -4,11 +4,9 @@
               [secretary.core :as secretary :include-macros true]
               [accountant.core :as accountant]))
 
-
-(defonce app-state (atom {:page :login}))
-
 (enable-console-print!)
 
+(defonce app-state (atom {:page :login}))
 
 ;; -------------------------
 ;; Business Rules
@@ -94,7 +92,7 @@
   [:div [:hs "out migration page"]])
 
 (defn current-page []
-  (js/console.log @app-state)
+  (println (session/get :current-page))
   [:div [(session/get :current-page)]])
 
 ;; -------------------------
@@ -135,7 +133,8 @@
 ;; Initialize app
 
 (defn mount-root []
-  (reagent/render [current-page] (.getElementById js/document "app")))
+  (reagent/render [current-page]
+                  (.getElementById js/document "app")))
 
 (defn init! []
   (accountant/configure-navigation!)

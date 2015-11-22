@@ -8,7 +8,7 @@
 
 (def json-reader (t/reader :json))
 
-(defn login-page [do-login app-state]
+(defn login-page [login app-state]
   (let [username (atom "Username")
         password (atom "Password")]
     (swap! app-state assoc :fieldworker-id nil :location-id nil :individual-id nil)
@@ -22,7 +22,7 @@
        [:div {:class "checkbox"}]
        [:div
         [:button {:class "btn btn-lg btn-primary btn-block" :type "submit"
-                  :on-click (fn [] (do-login username password))}
+                  :on-click (fn [] (login username password))}
          "Login"]]])))
 
 (defn bad-login [do-login app-state]

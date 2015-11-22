@@ -9,13 +9,13 @@
    apihost
    "/fieldWorkers/bulk.json"))
 
-(defn- get-fieldworkers
+(defn get-fieldworkers
   []
   (-> @(http/get fieldworkers-bulk-url {:basic-auth [apiuser apipass]})
       (:body)
       (json/read-str :key-fn keyword)))
 
-(defn- find-fieldworker
+(defn find-fieldworker
   [username fieldworkers]
   (->> fieldworkers
        (filter #(= (:fieldWorkerId %) username))
@@ -30,4 +30,4 @@
           (= username expected-username)
           (password/check password expected-password))
       (:uuid fieldworker)
-      false)))
+      nil)))

@@ -24,8 +24,9 @@
   (swap! app-state assoc :page :location)
   (go (let [result (<! (http/post
                       "/api/v1/login"
-                      {:form-params {:username username :password password}}))]
-        (println result)))
+                      {:form-params {:username @username :password @password}}))
+            body (:body result)]
+        (println result (= ""  body))))
   (println "Logging in" username password @app-state))
 
 

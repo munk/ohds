@@ -22,9 +22,16 @@
   (resources "/")
   (resources "/react" {:root "react"})
   (POST "/api/v1/login" req
-        (str (login/login
-              (get (:form-params req) "username")
-              (get (:form-params req) "password"))))
+        (let [params (:form-params req)
+              username (get params "username")
+              password (get params "password")
+              result (login/login username password)]
+          (if (nil? result)
+            {:status 401
+             :headers {}
+             :body "Bad username or password"})
+          (str result)))
+  
   (GET "/api/v1/locationHierarchy" req
        (json/write-str (hier/get-all)))
   

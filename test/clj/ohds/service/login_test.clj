@@ -18,8 +18,11 @@
 (deftest client-login
   (let [fieldworker-result (with-fake-http [url mock-fieldworker-response]
                                            (client/login "fieldworker" "password"))
-        fooworker-result  (with-fake-http [url mock-fieldworker-response]
-                                          (client/login "fooworker" "password"))]
+        fooworker-result (with-fake-http [url mock-fieldworker-response]
+                           (client/login "fooworker" "password"))
+        bad-result  (with-fake-http [url mock-fieldworker-response]
+                      (client/login "bad" "login"))]
     (is (= "123-abc-123" fieldworker-result))
-    (is (= "123-abc-456" fooworker-result))))
+    (is (= "123-abc-456" fooworker-result))
+    (is (nil? bad-result))))
 

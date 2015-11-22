@@ -18,3 +18,12 @@
      [:a {:href "#"} "Home"]]
     [:li
      [:a {:href "#"} "Logout"]]]])
+
+(defn top []
+  [:nav {:class "navbar navbar-inverse navbar-fixed-top"}
+   [:div {:class "container"}
+    [:div {:class "navbar-header"}
+     [hamburger]
+     [:span {:class "navbar-brand"} "OpenHDS"]]
+    [nav-bar]
+    ]])

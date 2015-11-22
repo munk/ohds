@@ -10,3 +10,11 @@
    [:span {:class "icon-bar"}]
    [:span {:class "icon-bar"}]
    [:span {:class "icon-bar"}]])
+
+(defn nav-bar []
+  [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
+   [:ul {:class "nav navbar-nav"}
+    [:li
+     [:a {:href "#"} "Home"]]
+    [:li
+     [:a {:href "#"} "Logout"]]]])

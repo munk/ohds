@@ -46,7 +46,7 @@ throw (new Error([cljs.core.str("Assert failed: "),cljs.core.str(cljs.core.pr_st
 return React.createElement(type,props,child);
 });
 var reagent$core$create_element__4 = (function() { 
-var G__16047__delegate = function (type,props,child,children){
+var G__16048__delegate = function (type,props,child,children){
 if(!(cljs.core.map_QMARK_.call(null,props))){
 } else {
 throw (new Error([cljs.core.str("Assert failed: "),cljs.core.str(cljs.core.pr_str.call(null,cljs.core.list(new cljs.core.Symbol(null,"not","not",1044554643,null),cljs.core.list(new cljs.core.Symbol(null,"map?","map?",-1780568534,null),new cljs.core.Symbol(null,"props","props",2093813254,null)))))].join('')));
@@ -54,26 +54,26 @@ throw (new Error([cljs.core.str("Assert failed: "),cljs.core.str(cljs.core.pr_st
 
 return cljs.core.apply.call(null,React.createElement,type,props,child,children);
 };
-var G__16047 = function (type,props,child,var_args){
+var G__16048 = function (type,props,child,var_args){
 var children = null;
 if (arguments.length > 3) {
-var G__16048__i = 0, G__16048__a = new Array(arguments.length -  3);
-while (G__16048__i < G__16048__a.length) {G__16048__a[G__16048__i] = arguments[G__16048__i + 3]; ++G__16048__i;}
-  children = new cljs.core.IndexedSeq(G__16048__a,0);
+var G__16049__i = 0, G__16049__a = new Array(arguments.length -  3);
+while (G__16049__i < G__16049__a.length) {G__16049__a[G__16049__i] = arguments[G__16049__i + 3]; ++G__16049__i;}
+  children = new cljs.core.IndexedSeq(G__16049__a,0);
 } 
-return G__16047__delegate.call(this,type,props,child,children);};
-G__16047.cljs$lang$maxFixedArity = 3;
-G__16047.cljs$lang$applyTo = (function (arglist__16049){
-var type = cljs.core.first(arglist__16049);
-arglist__16049 = cljs.core.next(arglist__16049);
-var props = cljs.core.first(arglist__16049);
-arglist__16049 = cljs.core.next(arglist__16049);
-var child = cljs.core.first(arglist__16049);
-var children = cljs.core.rest(arglist__16049);
-return G__16047__delegate(type,props,child,children);
+return G__16048__delegate.call(this,type,props,child,children);};
+G__16048.cljs$lang$maxFixedArity = 3;
+G__16048.cljs$lang$applyTo = (function (arglist__16050){
+var type = cljs.core.first(arglist__16050);
+arglist__16050 = cljs.core.next(arglist__16050);
+var props = cljs.core.first(arglist__16050);
+arglist__16050 = cljs.core.next(arglist__16050);
+var child = cljs.core.first(arglist__16050);
+var children = cljs.core.rest(arglist__16050);
+return G__16048__delegate(type,props,child,children);
 });
-G__16047.cljs$core$IFn$_invoke$arity$variadic = G__16047__delegate;
-return G__16047;
+G__16048.cljs$core$IFn$_invoke$arity$variadic = G__16048__delegate;
+return G__16048;
 })()
 ;
 reagent$core$create_element = function(type,props,child,var_args){
@@ -86,13 +86,13 @@ return reagent$core$create_element__2.call(this,type,props);
 case 3:
 return reagent$core$create_element__3.call(this,type,props,child);
 default:
-var G__16050 = null;
+var G__16051 = null;
 if (arguments.length > 3) {
-var G__16051__i = 0, G__16051__a = new Array(arguments.length -  3);
-while (G__16051__i < G__16051__a.length) {G__16051__a[G__16051__i] = arguments[G__16051__i + 3]; ++G__16051__i;}
-G__16050 = new cljs.core.IndexedSeq(G__16051__a,0);
+var G__16052__i = 0, G__16052__a = new Array(arguments.length -  3);
+while (G__16052__i < G__16052__a.length) {G__16052__a[G__16052__i] = arguments[G__16052__i + 3]; ++G__16052__i;}
+G__16051 = new cljs.core.IndexedSeq(G__16052__a,0);
 }
-return reagent$core$create_element__4.cljs$core$IFn$_invoke$arity$variadic(type,props,child, G__16050);
+return reagent$core$create_element__4.cljs$core$IFn$_invoke$arity$variadic(type,props,child, G__16051);
 }
 throw(new Error('Invalid arity: ' + arguments.length));
 };
@@ -179,11 +179,11 @@ return reagent.impl.util.unmount_component_at_node.call(null,container);
  * Turns a component into an HTML string.
  */
 reagent.core.render_to_string = (function reagent$core$render_to_string(component){
-var _STAR_non_reactive_STAR_16053 = reagent.impl.component._STAR_non_reactive_STAR_;
+var _STAR_non_reactive_STAR_16054 = reagent.impl.component._STAR_non_reactive_STAR_;
 reagent.impl.component._STAR_non_reactive_STAR_ = true;
 
 try{return (React["renderToString"])(reagent.core.as_element.call(null,component));
-}finally {reagent.impl.component._STAR_non_reactive_STAR_ = _STAR_non_reactive_STAR_16053;
+}finally {reagent.impl.component._STAR_non_reactive_STAR_ = _STAR_non_reactive_STAR_16054;
 }});
 reagent.core.as_component = reagent.core.as_element;
 reagent.core.render_component = reagent.core.render;
@@ -192,11 +192,11 @@ reagent.core.render_component_to_string = reagent.core.render_to_string;
  * Turns a component into an HTML string, without data-react-id attributes, etc.
  */
 reagent.core.render_to_static_markup = (function reagent$core$render_to_static_markup(component){
-var _STAR_non_reactive_STAR_16055 = reagent.impl.component._STAR_non_reactive_STAR_;
+var _STAR_non_reactive_STAR_16056 = reagent.impl.component._STAR_non_reactive_STAR_;
 reagent.impl.component._STAR_non_reactive_STAR_ = true;
 
 try{return (React["renderToStaticMarkup"])(reagent.core.as_element.call(null,component));
-}finally {reagent.impl.component._STAR_non_reactive_STAR_ = _STAR_non_reactive_STAR_16055;
+}finally {reagent.impl.component._STAR_non_reactive_STAR_ = _STAR_non_reactive_STAR_16056;
 }});
 /**
  * Force re-rendering of all mounted Reagent components. This is
@@ -391,25 +391,25 @@ var reagent$core$atom__1 = (function (x){
 return reagent.ratom.atom.call(null,x);
 });
 var reagent$core$atom__2 = (function() { 
-var G__16056__delegate = function (x,rest){
+var G__16057__delegate = function (x,rest){
 return cljs.core.apply.call(null,reagent.ratom.atom,x,rest);
 };
-var G__16056 = function (x,var_args){
+var G__16057 = function (x,var_args){
 var rest = null;
 if (arguments.length > 1) {
-var G__16057__i = 0, G__16057__a = new Array(arguments.length -  1);
-while (G__16057__i < G__16057__a.length) {G__16057__a[G__16057__i] = arguments[G__16057__i + 1]; ++G__16057__i;}
-  rest = new cljs.core.IndexedSeq(G__16057__a,0);
+var G__16058__i = 0, G__16058__a = new Array(arguments.length -  1);
+while (G__16058__i < G__16058__a.length) {G__16058__a[G__16058__i] = arguments[G__16058__i + 1]; ++G__16058__i;}
+  rest = new cljs.core.IndexedSeq(G__16058__a,0);
 } 
-return G__16056__delegate.call(this,x,rest);};
-G__16056.cljs$lang$maxFixedArity = 1;
-G__16056.cljs$lang$applyTo = (function (arglist__16058){
-var x = cljs.core.first(arglist__16058);
-var rest = cljs.core.rest(arglist__16058);
-return G__16056__delegate(x,rest);
+return G__16057__delegate.call(this,x,rest);};
+G__16057.cljs$lang$maxFixedArity = 1;
+G__16057.cljs$lang$applyTo = (function (arglist__16059){
+var x = cljs.core.first(arglist__16059);
+var rest = cljs.core.rest(arglist__16059);
+return G__16057__delegate(x,rest);
 });
-G__16056.cljs$core$IFn$_invoke$arity$variadic = G__16056__delegate;
-return G__16056;
+G__16057.cljs$core$IFn$_invoke$arity$variadic = G__16057__delegate;
+return G__16057;
 })()
 ;
 reagent$core$atom = function(x,var_args){
@@ -418,13 +418,13 @@ switch(arguments.length){
 case 1:
 return reagent$core$atom__1.call(this,x);
 default:
-var G__16059 = null;
+var G__16060 = null;
 if (arguments.length > 1) {
-var G__16060__i = 0, G__16060__a = new Array(arguments.length -  1);
-while (G__16060__i < G__16060__a.length) {G__16060__a[G__16060__i] = arguments[G__16060__i + 1]; ++G__16060__i;}
-G__16059 = new cljs.core.IndexedSeq(G__16060__a,0);
+var G__16061__i = 0, G__16061__a = new Array(arguments.length -  1);
+while (G__16061__i < G__16061__a.length) {G__16061__a[G__16061__i] = arguments[G__16061__i + 1]; ++G__16061__i;}
+G__16060 = new cljs.core.IndexedSeq(G__16061__a,0);
 }
-return reagent$core$atom__2.cljs$core$IFn$_invoke$arity$variadic(x, G__16059);
+return reagent$core$atom__2.cljs$core$IFn$_invoke$arity$variadic(x, G__16060);
 }
 throw(new Error('Invalid arity: ' + arguments.length));
 };
@@ -465,17 +465,17 @@ return reagent.ratom.make_wrapper.call(null,value,reset_fn,args);
 var reagent$core$wrap = function (value,reset_fn,var_args){
 var args = null;
 if (arguments.length > 2) {
-var G__16061__i = 0, G__16061__a = new Array(arguments.length -  2);
-while (G__16061__i < G__16061__a.length) {G__16061__a[G__16061__i] = arguments[G__16061__i + 2]; ++G__16061__i;}
-  args = new cljs.core.IndexedSeq(G__16061__a,0);
+var G__16062__i = 0, G__16062__a = new Array(arguments.length -  2);
+while (G__16062__i < G__16062__a.length) {G__16062__a[G__16062__i] = arguments[G__16062__i + 2]; ++G__16062__i;}
+  args = new cljs.core.IndexedSeq(G__16062__a,0);
 } 
 return reagent$core$wrap__delegate.call(this,value,reset_fn,args);};
 reagent$core$wrap.cljs$lang$maxFixedArity = 2;
-reagent$core$wrap.cljs$lang$applyTo = (function (arglist__16062){
-var value = cljs.core.first(arglist__16062);
-arglist__16062 = cljs.core.next(arglist__16062);
-var reset_fn = cljs.core.first(arglist__16062);
-var args = cljs.core.rest(arglist__16062);
+reagent$core$wrap.cljs$lang$applyTo = (function (arglist__16063){
+var value = cljs.core.first(arglist__16063);
+arglist__16063 = cljs.core.next(arglist__16063);
+var reset_fn = cljs.core.first(arglist__16063);
+var args = cljs.core.rest(arglist__16063);
 return reagent$core$wrap__delegate(value,reset_fn,args);
 });
 reagent$core$wrap.cljs$core$IFn$_invoke$arity$variadic = reagent$core$wrap__delegate;
@@ -529,15 +529,15 @@ return (new reagent.impl.util.partial_ifn(f,args,null));
 var reagent$core$partial = function (f,var_args){
 var args = null;
 if (arguments.length > 1) {
-var G__16063__i = 0, G__16063__a = new Array(arguments.length -  1);
-while (G__16063__i < G__16063__a.length) {G__16063__a[G__16063__i] = arguments[G__16063__i + 1]; ++G__16063__i;}
-  args = new cljs.core.IndexedSeq(G__16063__a,0);
+var G__16064__i = 0, G__16064__a = new Array(arguments.length -  1);
+while (G__16064__i < G__16064__a.length) {G__16064__a[G__16064__i] = arguments[G__16064__i + 1]; ++G__16064__i;}
+  args = new cljs.core.IndexedSeq(G__16064__a,0);
 } 
 return reagent$core$partial__delegate.call(this,f,args);};
 reagent$core$partial.cljs$lang$maxFixedArity = 1;
-reagent$core$partial.cljs$lang$applyTo = (function (arglist__16064){
-var f = cljs.core.first(arglist__16064);
-var args = cljs.core.rest(arglist__16064);
+reagent$core$partial.cljs$lang$applyTo = (function (arglist__16065){
+var f = cljs.core.first(arglist__16065);
+var args = cljs.core.rest(arglist__16065);
 return reagent$core$partial__delegate(f,args);
 });
 reagent$core$partial.cljs$core$IFn$_invoke$arity$variadic = reagent$core$partial__delegate;

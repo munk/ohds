@@ -3,7 +3,8 @@
   (:require [cljs-http.client :as http]
             [cljs.core.async :refer [<!]]
             [cognitect.transit :as t]
-            [reagent.core :as reagent :refer [atom]]))
+            [reagent.core :as reagent :refer [atom]]
+            [ohds.components :as c]))
 
 (enable-console-print!)
 

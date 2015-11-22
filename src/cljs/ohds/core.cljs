@@ -37,15 +37,6 @@
            :class "form-control"
            :on-change #(reset! value (-> % .-target .-value))}])
 
-(defn top []
-  [:nav {:class "navbar navbar-inverse navbar-fixed-top"}
-   [:div {:class "container"}
-    [:div {:class "navbar-header"}
-     [c/hamburger]
-     [:span {:class "navbar-brand"} "OpenHDS"]]
-    [c/nav-bar]
-    ]])
-
 (defn login-page []
   (let [username (atom "Username")
         password (atom "Password")]

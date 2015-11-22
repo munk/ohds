@@ -27,11 +27,12 @@
             status (:status result)
             body (:body result)]
         (case status
-          401 (swap! app-state assoc :page :bad-login)
-          200 (swap! app-state assoc :page :location)))))
+          401 (swap! app-state assoc :page :bad-login :fieldworker-id nil)
+          200 (swap! app-state assoc :page :location :fieldworker-id body)))))
 
 
 (defn root-component []
+  (println @app-state)
   [:div {:class "container"}
    [:div {:class "row"} [c/top]]
    [:div {:style {:padding "20px"}}]

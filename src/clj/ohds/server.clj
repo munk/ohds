@@ -12,7 +12,8 @@
             [clojure.data.json :as json]
             [ohds.service.login :as login]
             [ohds.service.location-hierarchy :as hier]
-            [ohds.service.location :as loc])
+            [ohds.service.location :as loc]
+            [ohds.service.individual :as ind])
   (:gen-class))
 
 (defrecord Location
@@ -56,7 +57,7 @@
               ext-id (:ext-id params)
               first-name (:first-name params)
               gender (:gender params)]
-          (str req)))
+          (str (ind/create-individual collected-by ext-id first-name gender))))
   
   (GET "/*" req (page)))
 

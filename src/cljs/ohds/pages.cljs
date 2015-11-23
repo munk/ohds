@@ -48,12 +48,14 @@
        [c/padded-submit "Submit"
         (fn [] (submit @location-id @name @parent fw-id @loctype))]])))
 
-(defn individual-page []
+(defn individual-page [app-state submit]
   (let [individual-id (atom "External ID")
         firstname (atom "First Name")
-        gender (atom "Gender")]
+        gender (atom "Gender")
+        fw-id (:fieldworker-id app-state)] ;;; TODO: associate this person with current location
     [:div [:h2 "Individual Page"]
      [c/text-input individual-id "External ID"]
      [c/text-input firstname "First Name"]
      [c/text-input gender "Gender"]
-     [:div [:a {:href "/relationship"} "go to relationship page"]]]))
+     [c/padded-submit "Submit"
+      (fn [] (submit fw-id @individual-id @firstname @gender))]]))

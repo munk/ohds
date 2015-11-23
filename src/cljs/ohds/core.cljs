@@ -5,19 +5,21 @@
             [cognitect.transit :as t]
             [reagent.core :as reagent :refer [atom]]
             [ohds.components :as c]
-            [ohds.pages :as p]))
+            [ohds.pages :as p]
+            [ohds.service :as svc]))
 
 (enable-console-print!)
 
 (def app-state (atom
-                {:page :location
+                {:page :individual
                  :fieldworker-id "a5ba318f-1353-4d1e-a3d3-beb9d936c915"
-                 :location-id nil;"53f9eb9f-2903-409b-b0c4-4f555cc9583a"
+                 :location-id "53f9eb9f-2903-409b-b0c4-4f555cc9583a"
                  }))
 
 (def login-url "/api/v1/login")
 (def loc-hiera-url "/api/v1/locationHierarchy")
 (def locations-url "/api/v1/locations")
+(def individuals-url "/api/v1/individuals")
 
 (def json-reader (t/reader :json))
 
@@ -25,26 +27,26 @@
 (defn login! [username password]  
   (go (let [result (->> {:form-params {:username @username :password @password}}
                         (http/post "/api/v1/login")
-                        <!)
+                        (<!))
             {status :status body :body} result]
         (case status
           401 (swap! app-state assoc :page :bad-login :fieldworker-id nil)
           200 (swap! app-state assoc :page :location :fieldworker-id body)))))
 
-(defn location! [loc-id name parent fw-id loctype]  
-  (go (let [result (->> {:form-params
-                         {:fieldworker-id fw-id
-                          :parent parent
-                          :name name
-                          :ext-id loc-id
-                          :type loctype}}
-                        (http/post "/api/v1/locations")
-                        <!)
-            {status :status body :body} result]
-        (println result body)
-        (case status
-          200 (swap! app-state assoc :location-id body :page :individual)))
-      (println @app-state)))
+(defn location! [loc-id name parent fw-id loctype]
+  (->> {:fieldworker-id fw-id
+        :parent parent
+        :name name
+        :ext-id loc-id
+        :type loctype}
+       (svc/post locations-url :location-id :individual app-state)))
+
+(defn individual! [fw-id ind-id first-name gender]
+  (->> {:fieldworker-d fw-id
+        :ext-id ind-id
+        :first-name first-name
+        :gender gender}
+       (svc/post individuals-url :individual-id :individual app-state)));;;TODO: This should refresh the page 
 
 (defn location-hierarchy [as a]
   (go (let [result (->> (http/get "/api/v1/locationHierarchy")
@@ -65,7 +67,7 @@
       :login [p/login-page login! app-state]
       :bad-login [p/bad-login login! app-state]
       :location [p/location-page @app-state location-hierarchy location!]
-      :individual [p/individual-page])]])
+      :individual [p/individual-page @app-state individual!])]])
 
 (defn main []
   (reagent/render-component [root-component]

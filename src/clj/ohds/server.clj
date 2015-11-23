@@ -9,17 +9,8 @@
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [environ.core :refer [env]]
             [ring.adapter.jetty :refer [run-jetty]]
-            [clojure.data.json :as json]
-            [ohds.service.login :as login]
-            [ohds.service.location-hierarchy :as hier]
-            [ohds.service.location :as loc]
-            [ohds.service.individual :as ind])
+            [ohds.controller :as ctrl])
   (:gen-class))
-
-(defrecord Location
-    [name
-     extId
-     type])
 
 (deftemplate page (io/resource "index.html") []
   [:body] (if is-dev? inject-devmode-html identity))
@@ -27,38 +18,10 @@
 (defroutes routes
   (resources "/")
   (resources "/react" {:root "react"})
-  (POST "/api/v1/login" req
-        (let [params (:form-params req)
-              username (get params "username")
-              password (get params "password")
-              result (login/login username password)]
-          (if (nil? result)
-            {:status 401
-             :headers {}
-             :body "Bad username or password"}
-            (str result))))
-  
-  (GET "/api/v1/locationHierarchy" req
-       (json/write-str (hier/get-all)))
-  
-  (POST "/api/v1/locations" req
-        (let [params (:params req) ; TODO: Why does this require params but login requires form-params?
-              collected-by (:fieldworker-id params)
-              parent (:parent params)
-              name (:name params)
-              ext-id (:ext-id params)
-              type (:type params)
-              location (Location. name ext-id type)]          
-          (str (loc/create-location collected-by parent location))))
-
-  (POST "/api/v1/individuals" req
-        (let [params (:params req)
-              collected-by (:fieldworker-id params)
-              ext-id (:ext-id params)
-              first-name (:first-name params)
-              gender (:gender params)]
-          (str (ind/create-individual collected-by ext-id first-name gender))))
-  
+  (POST "/api/v1/login" req (ctrl/login req))
+  (GET "/api/v1/locationHierarchy" req (ctrl/get-location-hierarchies))
+  (POST "/api/v1/locations" req (ctrl/create-location req))
+  (POST "/api/v1/individuals" req (ctrl/create-individual req))
   (GET "/*" req (page)))
 
 (def http-handler

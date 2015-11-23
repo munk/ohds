@@ -55,7 +55,6 @@
         (reset! as result)
         (reset! a (first result)))))
 
-        
 (defn root-component []
   ;(println @app-state)  
   [:div {:class "container"}

@@ -13,7 +13,7 @@
        "\"uuid\": \"123-abc-456\","
        "\"passwordHash\": \"$2a$04$ST5STE7bIY6R/kw2pEUEROOz6tkyH4sgK23OkwwgMjF1j4SetFCtW\"}]"))
 
-(def url "http://localhost:8080/fieldWorkers/bulk.json")
+(def url "/fieldWorkers/bulk.json")
 
 (deftest client-login
   (let [fieldworker-result (with-fake-http [url mock-fieldworker-response]

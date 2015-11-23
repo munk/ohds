@@ -41,7 +41,7 @@
        (json/write-str (hier/get-all)))
   
   (POST "/api/v1/locations" req
-        (let [params (:params req)
+        (let [params (:params req) ; TODO: Why does this require params but login requires form-params?
               collected-by (:fieldworker-id params)
               parent (:parent params)
               name (:name params)
@@ -49,6 +49,14 @@
               type (:type params)
               location (Location. name ext-id type)]          
           (str (loc/create-location collected-by parent location))))
+
+  (POST "/api/v1/individuals" req
+        (let [params (:params req)
+              collected-by (:fieldworker-id params)
+              ext-id (:ext-id params)
+              first-name (:first-name params)
+              gender (:gender params)]
+          (str req)))
   
   (GET "/*" req (page)))
 

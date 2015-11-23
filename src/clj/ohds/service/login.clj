@@ -1,19 +1,10 @@
 (ns ohds.service.login
-  (:require [org.httpkit.client :as http]
-            [clojure.data.json :as json]
-            [crypto.password.bcrypt :as password]
-            [ohds.service.api-config :refer [apihost apiuser apipass]]))
+  (:require
+   [crypto.password.bcrypt :as password]
+   [ohds.service.service :refer [get]]))
 
 (def fieldworkers-bulk-url
-  (str
-   apihost
-   "/fieldWorkers/bulk.json"))
-
-(defn get-fieldworkers
-  []
-  (-> @(http/get fieldworkers-bulk-url {:basic-auth [apiuser apipass]})
-      (:body)
-      (json/read-str :key-fn keyword)))
+  "/fieldWorkers/bulk.json")
 
 (defn find-fieldworker
   [username fieldworkers]
@@ -22,7 +13,7 @@
        (first)))
 
 (defn login [username password]
-  (let [fieldworker (find-fieldworker username (get-fieldworkers))
+  (let [fieldworker (find-fieldworker username (get fieldworkers-bulk-url))
         expected-username (:fieldWorkerId fieldworker)
         expected-password (:passwordHash fieldworker)]
     (if (and

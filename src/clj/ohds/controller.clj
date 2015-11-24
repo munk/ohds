@@ -2,8 +2,10 @@
   (:require [ohds.service :as svc]
             [clojure.data.json :as json]))
 
+
 (defrecord Location
     [name extId type])
+
 
 (defn login [req]
   (let [params (:form-params req)
@@ -16,8 +18,10 @@
        :body "Bad username or password"}
       (str result))))
 
+
 (defn get-location-hierarchies []
   (json/write-str (svc/location-hierarchies)))
+
 
 (defn create-location [req]
   (let [params (:params req) ; TODO: Why does this require params but login requires form-params?

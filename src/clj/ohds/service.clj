@@ -13,6 +13,7 @@
 (def apipass (:apipass config))
 
 (def fieldworkers-bulk-url "/fieldWorkers/bulk.json")
+(def users-bulk-url "/users/bulk.json")
 (def location-hierarchies-bulk-url "/locationHierarchies/bulk.json")
 (def location-url "/locations")
 (def individual-url "/individuals")
@@ -20,18 +21,27 @@
 (defn now []
   (str (LocalDateTime/now) "Z"))
 
+(defn json->cljs [data]
+  (json/read-str data :key-fn keyword))
+
 (defn post [url req]
-  (-> @(http/post (str apihost url) {:basic-auth [apiuser apipass]
-                                     :body (json/write-str req)
-                                     :headers {"Content-Type" "application/json"}})
-      (:body)
-      (json/read-str :key-fn keyword)
-      (:uuid)))
+  (->
+   {:basic-auth [apiuser apipass]
+    :body (json/write-str req)
+    :headers {"Content-Type" "application/json"}}
+   (http/post (str apihost url))
+   (deref)
+   (:body)
+   (json->cljs)
+   (:uuid)))
 
 (defn get [url]
-  (-> @(http/get url {:basic-auth [apiuser apipass]})
-      (:body)
-      (json/read-str :key-fn keyword)))
+  (->>
+   {:basic-auth [apiuser apipass]}
+   (http/get (str apihost url))
+   (deref)
+   (:body)
+   (json->cljs)))
 
 
 ;;; Login

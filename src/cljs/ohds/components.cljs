@@ -20,6 +20,8 @@
 (defn location-hierarchy-option [field]
   [:option {:value (get field "uuid") :key (get field "uuid")} (get field "name")])
 
+(defn location-option [field]
+  [:option {:value (get field "uuid") :key (get field "uuid")} (get field "name")])
 
 (defn location-hierarchy-select [hierarchy]
   (println hierarchy)
@@ -38,13 +40,13 @@
    [:span {:class "icon-bar"}]])
 
 
-(defn nav-bar [app-state]
+(defn nav-bar [app-state] ; TODO: Close the menu once something is clicked
   [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
    [:ul {:class "nav navbar-nav"}
     [:li
-     [:a {:href "#"} "Home"]]
+     [:a {:href "#" :on-click (fn [] (swap! app-state assoc :page :login))} "Logout"]]
     [:li
-     [:a {:href "#"} "Logout"]]]])
+     [:a {:href "#" :on-click (fn [] (swap! app-state assoc :page :update-location))} "Update Location"]]]])
 
 
 (defn top [app-state]
@@ -53,7 +55,7 @@
     [:div {:class "navbar-header"}
      [hamburger]
      [:span {:class "navbar-brand"} "OpenHDS"]]
-    [nav-bar]
+    [nav-bar app-state]
     ]])
 
 

@@ -16,6 +16,7 @@
 (def users-bulk-url "/users/bulk.json")
 (def location-hierarchies-bulk-url "/locationHierarchies/bulk.json")
 (def location-url "/locations")
+(def locations-by-hierarchy "/locations/bylocationhierarchy/bulk?locationHierarchyUuid=")
 (def individual-url "/individuals")
 
 (defn now []
@@ -35,7 +36,7 @@
    (json->cljs)
    (:uuid)))
 
-(defn get [url]
+(defn get [url] ;;;TODO make this async
   (->>
    {:basic-auth [apiuser apipass]}
    (http/get (str apihost url))
@@ -68,6 +69,9 @@
 ;;; Location
 (defn location-hierarchies []
   (get location-hierarchies-bulk-url))
+
+(defn locations [hierarchy-uuid]
+  (get (str locations-by-hierarchy hierarchy-uuid)))
 
 (defn create-location
   [collected-by parent loc]

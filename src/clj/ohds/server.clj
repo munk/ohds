@@ -20,6 +20,7 @@
   (resources "/react" {:root "react"})
   (POST "/api/v1/login" req (ctrl/login req))
   (GET "/api/v1/locationHierarchy" req (ctrl/get-location-hierarchies))
+  (GET "/api/v1/locations" req (ctrl/locations req))
   (POST "/api/v1/locations" req (ctrl/create-location req))
   (POST "/api/v1/individuals" req (ctrl/create-individual req))
   (GET "/*" req (page)))

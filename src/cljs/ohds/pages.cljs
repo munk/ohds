@@ -48,11 +48,17 @@
        [c/padded-submit "Submit"
         (fn [] (submit @location-id @name @parent fw-id @loctype))]])))
 
-(defn select-location-page []
-  [:div "Hai"])
+(defn select-location-page [app-state location-hierarchy submit]
+  (let [parents (atom nil)
+        parent (atom nil)]
+    (location-hierarchy parents parent)
+
+    (fn []
+      [:div [:h2 "Select New Location"]
+       [c/select "Parent Location" parent @parents]])))
 
 (defn update-location-page [app-state location-hierarchy submit]
-  [:div "hello world"])
+  [location-page app-state location-hierarchy submit])
 
 (defn individual-page [app-state submit]
   (let [individual-id (atom "External ID")

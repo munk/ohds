@@ -46,7 +46,7 @@
         :ext-id ind-id
         :first-name first-name
         :gender gender}
-       (svc/post individuals-url :individual-id :individual app-state)));;;TODO: This should refresh the page 
+       (svc/post individuals-url :individual-id :individual app-state)));;;TODO: should refresh the page 
 
 (defn location-hierarchy [as a]
   (go (let [result (->> (http/get "/api/v1/locationHierarchy")
@@ -56,6 +56,13 @@
                         (map c/location-hierarchy-option))]
         (reset! as result)
         (reset! a (first result)))))
+
+(defn location [a]
+  (go (let [result (->> (http/get "/api/v1/locations")
+                        (<!)
+                        (:body)
+                        (t/read json-reader)
+                        (map c/location-option))])))
 
 (defn root-component []
   (println @app-state)  
@@ -68,7 +75,7 @@
       :bad-login [p/bad-login login! app-state]
       :location [p/location-page @app-state location-hierarchy location!]
       :individual [p/individual-page @app-state individual!]
-      :select-location [p/select-location-page]
+      :select-location [p/select-location-page @app-state location-hierarchy location]
       :update-location [p/update-location-page @app-state location-hierarchy location!])]])
 
 (defn main []

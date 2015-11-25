@@ -25,7 +25,7 @@
    [:h4 {:style {:color "red"}} "Invalid Username or Passoword"]
    [login-page login! app-state]])
 
-(defn location-page [app-state location-hierarchy submit]
+(defn location-page [app-state location-hierarchy submit]  
   {:pre [(not (nil? (:fieldworker-id app-state)))]}
 
   (let [location-id (atom "External ID")
@@ -47,6 +47,12 @@
         [:option {:value "URBAN" :key "URBAN"} "Urban"]]
        [c/padded-submit "Submit"
         (fn [] (submit @location-id @name @parent fw-id @loctype))]])))
+
+(defn select-location-page []
+  [:div "Hai"])
+
+(defn update-location-page [app-state location-hierarchy submit]
+  [:div "hello world"])
 
 (defn individual-page [app-state submit]
   (let [individual-id (atom "External ID")

@@ -11,7 +11,7 @@
 (enable-console-print!)
 
 (def app-state (atom
-                {:page :individual
+                {:page :select-location
                  :fieldworker-id "a5ba318f-1353-4d1e-a3d3-beb9d936c915"
                  :location-id "53f9eb9f-2903-409b-b0c4-4f555cc9583a"
                  }))
@@ -58,16 +58,18 @@
         (reset! a (first result)))))
 
 (defn root-component []
-  ;(println @app-state)  
+  (println @app-state)  
   [:div {:class "container"}
-   [:div {:class "row"} [c/top]]
+   [:div {:class "row"} [c/top app-state]]
    [:div {:style {:padding "20px"}}]
    [:div 
     (case (:page @app-state)
       :login [p/login-page login! app-state]
       :bad-login [p/bad-login login! app-state]
       :location [p/location-page @app-state location-hierarchy location!]
-      :individual [p/individual-page @app-state individual!])]])
+      :individual [p/individual-page @app-state individual!]
+      :select-location [p/select-location-page]
+      :update-location [p/update-location-page @app-state location-hierarchy location!])]])
 
 (defn main []
   (reagent/render-component [root-component]

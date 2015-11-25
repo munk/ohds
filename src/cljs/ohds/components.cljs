@@ -38,7 +38,7 @@
    [:span {:class "icon-bar"}]])
 
 
-(defn nav-bar []
+(defn nav-bar [app-state]
   [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
    [:ul {:class "nav navbar-nav"}
     [:li
@@ -47,7 +47,7 @@
      [:a {:href "#"} "Logout"]]]])
 
 
-(defn top []
+(defn top [app-state]
   [:nav {:class "navbar navbar-inverse navbar-fixed-top"}
    [:div {:class "container"}
     [:div {:class "navbar-header"}

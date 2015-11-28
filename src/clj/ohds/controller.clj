@@ -42,7 +42,6 @@
         gender (:gender params)]
     (str (svc/create-individual collected-by ext-id first-name gender))))
 
-(defn locations [req]
-  (let [params (:params req)
-        uuid (:uuid params)]
-    (str svc/locations uuid)))
+(defn locations [uuid]
+  (let [result (svc/locations uuid)]
+    (json/write-str result)))

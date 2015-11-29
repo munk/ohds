@@ -1,6 +1,9 @@
 (ns ohds.components
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
+(defn update-page [app-state page]
+  (swap! app-state assoc :page page))
+
 (defn atom-input [value id]
   [:input {:type "text"
            :value @value
@@ -39,22 +42,31 @@
    [:span {:class "icon-bar"}]
    [:span {:class "icon-bar"}]])
 
-(defn nav-item [app-state page text]
-  [:li
-   [:a {:href "#" :on-click (fn [] (swap! app-state assoc :page page))} text]])
 
 (defn nav-bar [app-state] ; TODO: Close the menu once something is clicked
-  [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
-   [:ul {:class "nav navbar-nav"}
-    [nav-item app-state :login "Logout"]
-    [nav-item app-state :update-location "Update Location"]]])
+  (fn []
+    (let [nav-item
+          (fn [page text]
+            [:li
+             [:a {:href "#"
+                  :type "button"
+                  :data-toggle "collapse"
+                  :data-target "#navbar"
+                  :aria-expanded "false" :aria-controls "navbar"
+                  :on-click (fn [] (update-page app-state page))} text]])]
+      [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
+       [:ul {:class "nav navbar-nav"}
+        [nav-item :update-location "Update event"]
+        [nav-item :location "New Census"]
+        [nav-item :login "Logout"]]])))
 
 
 (defn top [app-state]
   [:nav {:class "navbar navbar-inverse navbar-fixed-top"}
    [:div {:class "container"}
     [:div {:class "navbar-header"}
-     [hamburger]
+     (if (:fieldworker-id @app-state)
+       [hamburger])
      [:span {:class "navbar-brand"} "OpenHDS"]]
     [nav-bar app-state]
     ]])

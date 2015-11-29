@@ -81,7 +81,7 @@
       :bad-login [p/bad-login login! app-state]
       :location [p/location-page @app-state location-hierarchy location!]
       :individual [p/individual-page @app-state individual!]
-      :select-location [p/select-location-page @app-state location-hierarchy location nil]
+      :select-location [p/update-visit-page @app-state location-hierarchy location nil]
       :update-location [p/update-location-page @app-state location-hierarchy location!])]])
 
 (defn main []

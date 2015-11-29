@@ -39,14 +39,15 @@
    [:span {:class "icon-bar"}]
    [:span {:class "icon-bar"}]])
 
+(defn nav-item [app-state page text]
+  [:li
+   [:a {:href "#" :on-click (fn [] (swap! app-state assoc :page page))} text]])
 
 (defn nav-bar [app-state] ; TODO: Close the menu once something is clicked
   [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
    [:ul {:class "nav navbar-nav"}
-    [:li
-     [:a {:href "#" :on-click (fn [] (swap! app-state assoc :page :login))} "Logout"]]
-    [:li
-     [:a {:href "#" :on-click (fn [] (swap! app-state assoc :page :update-location))} "Update Location"]]]])
+    [nav-item app-state :login "Logout"]
+    [nav-item app-state :update-location "Update Location"]]])
 
 
 (defn top [app-state]
@@ -82,4 +83,14 @@
   [:div
    [:label lbl]
    [:select {:on-change #(reset! a (-> % .-target .-value))}
+    options]])
+
+(defn select-with-update [lbl a f & options]
+  [:div
+   [:label lbl]
+   [:select {:on-change
+             (fn [c]
+               (println "on change" c)
+               (f)
+               (reset! a (-> c .-target .-value)))}
     options]])

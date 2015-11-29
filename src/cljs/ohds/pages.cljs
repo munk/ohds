@@ -10,16 +10,9 @@
 
 
 (defn login-page [login! app-state]
-  (let [username (atom "Username")
-        password (atom "Password")]
-    (swap! app-state assoc :fieldworker-id nil :location-id nil :individual-id nil)
-    (fn []
-      [:div {:class "form-signin"}
-       [:h2 {:class "form-signin-heading"} "Please log in"]
-       [c/text-input username "username"]
-       [c/password-input password "password"]
-       [c/padded-submit "Login"
-        (fn [] (login! username password))]])))
+  (swap! app-state assoc :fieldworker-id nil :location-id nil :individual-id nil)
+  (fn []
+    [c/login-form login!]))
 
 
 (defn bad-login [login! app-state]

@@ -1,8 +1,18 @@
 (ns ohds.components
-  (:require-macros [cljs.core.async.macros :refer [go]]))
+  (:require-macros [cljs.core.async.macros :refer [go]])
+  (:require [reagent.core :refer [atom]]))
+
+(defn a-swap [state key val]
+  (swap! state assoc key val))
+
+(defn on-change [elem state]
+  (reset! state
+          (-> elem
+              .-target
+              .-value)))
 
 (defn update-page [app-state page]
-  (swap! app-state assoc :page page))
+  (a-swap app-state :page page))
 
 (defn atom-input [value id]
   [:input {:type "text"
@@ -106,3 +116,14 @@
                (f)
                (reset! a (-> c .-target .-value)))}
     options]])
+
+(defn login-form [authf]
+  (let [username (atom "Username")
+        password (atom "Password")]
+    [:div {:class "form-signin"}
+     [:h2 {:class "form-signin-heading"} "Please log in"]
+     [text-input username "username"]
+     [password-input password "password"]
+     [padded-submit "Login"
+      (fn [] (authf username password))]]))
+

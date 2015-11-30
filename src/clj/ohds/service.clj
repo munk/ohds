@@ -1,6 +1,6 @@
 (ns ohds.service
   (:require
-   [crypto.password.bcrypt :as password]
+   [crypto.password.bcrypt :as bcrypt]
    [clojure.edn :as edn]
    [org.httpkit.client :as http]
    [clojure.data.json :as json])
@@ -55,13 +55,14 @@
 
 (defn login [username password]
   {:pre [(some? username) (some? password)]}
-  (let [{expected-username :fieldWorkerId expected-password :passwordHash uuid :uuid} 
-        (->> fieldworkers-bulk-url
-             (get)
-             (filter #(= (:fieldWorkerId %) username))
-             (first))]
+  (let [result  (->> fieldworkers-bulk-url
+                     (get)
+                     (filter #(= (:fieldWorkerId %) username))
+                     (first))
+        {expected-username :fieldWorkerId expected-password :passwordHash uuid :uuid} result]
     (if (and
-         (password/check password expected-password)
+         (not (nil? result))
+         (bcrypt/check password expected-password)
          (= username expected-username))
       uuid
       nil)))

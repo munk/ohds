@@ -1,7 +1,7 @@
 (ns ohds.service.location_hierarchy_test
   (:use org.httpkit.fake)
   (:require
-   [ohds.service.location-hierarchy :as client]
+   [ohds.service :as client]
    [clojure.test :refer :all]))
 
 (def mock-location-hierarchy-response
@@ -26,4 +26,4 @@
          (with-fake-http
            ["http://localhost:8080/locationHierarchies/bulk.json"
             mock-location-hierarchy-response]
-           (client/get-all)))))
+           (client/location-hierarchies)))))

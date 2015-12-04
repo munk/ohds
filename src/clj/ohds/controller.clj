@@ -30,7 +30,7 @@
         name (:name params)
         ext-id (:ext-id params)
         type (:type params)
-        location (Location. name ext-id type)]          
+        location (Location. name ext-id type)]
     (str (svc/create-location collected-by parent location))))
 
 
@@ -45,3 +45,5 @@
 (defn locations [uuid]
   (let [result (svc/locations uuid)]
     (json/write-str result)))
+
+(defn foo [] (println "bar"))

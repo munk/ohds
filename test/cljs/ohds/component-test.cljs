@@ -1,8 +1,12 @@
 (ns ohds.component-test
-  (:require-macros [cljs.test :refer (is deftest testing)])
+  (:require-macros [cljs.test :refer (is deftest testing)]
+                   [cljs.core.async.macros :refer [go]])
   (:require [cljs.test]
+            [cljs.core.async :refer [<! >! chan]]
+            [cljs-http.client :as http]
             [reagent.core :as reagent :refer [atom]]
-            [ohds.components :as c]))
+            [ohds.components :as c]
+            [ohds.core :as app]))
 
 
 (def isClient (not (nil? (try (.-document js/window)
@@ -39,11 +43,18 @@
       (is (found-in #"Toggle Nav" div)))))
 
 (deftest login-form-rendering
-  (with-mounted-component (c/login-form (fn [_ _] true))
-    (fn [c div]
-      (is (found-in #"Username" div))
-      (is (found-in #"Password" div))
-      (is (found-in #"Login" div)))))
+  (with-redefs [http/post (fn [& _] {:status 200 :body "123-abc"})]
+    (with-mounted-component (c/login-form
+                             (fn [u p]
+                               (let [ch (chan)]
+                                 (>! ch (app/login! u p))
+                                 ch)))
+     (fn [c div]
+       (is (found-in #"Username" div))
+       (is (found-in #"Password" div))
+       (is (found-in #"Login" div))
+       (.click (.getElementById js/document "Login"))
+       (is (= (:page @app/app-state) :location))))))
 
 (deftest atom-change-tests
   (let [state (atom {:hello "world"})]

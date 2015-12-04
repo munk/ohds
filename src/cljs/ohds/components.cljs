@@ -98,6 +98,7 @@
   [:div
    [:div {:class "checkbox"}]
    [:button {:class "btn btn-lg btn-primary btn-block"
+             :id n
              :type "submit"
              :on-click on-click}
     n]])

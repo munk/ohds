@@ -33,6 +33,11 @@
       (do (println "Not found: " res)
           false))))
 
+(deftest test-home
+  (with-mounted-component (c/hamburger)
+    (fn [c div]
+      (is (found-in #"Toggle Nav" div)))))
+
 (deftest atom-change-tests
   (let [state (atom {:hello "world"})]
     (testing "a-swap only swaps out single key"

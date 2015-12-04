@@ -126,4 +126,3 @@
      [password-input password "password"]
      [padded-submit "Login"
       (fn [] (authf username password))]]))
-

@@ -5,9 +5,9 @@
    [org.httpkit.client :as http]
    [clojure.data.json :as json])
   (:import (java.time LocalDateTime)))
-   
-   
-(def config (edn/read-string (slurp "/Users/jdowns/ohds/application.edn")))
+
+
+(def config (edn/read-string (slurp "/workspace/src/openhds/ohds/application.edn")))
 (def apihost (:apihost config))
 (def apiuser (:apiuser config))
 (def apipass (:apipass config))
@@ -90,5 +90,3 @@
         :firstName first-name
         :gender gender}
        (post individual-url)))
-
-

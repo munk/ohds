@@ -24,7 +24,7 @@
 (def json-reader (t/reader :json))
 
 
-(defn login! [username password]  
+(defn login! [username password]
   (go (let [result (->> {:form-params {:username @username :password @password}}
                         (http/post "/api/v1/login")
                         (<!))
@@ -46,7 +46,7 @@
         :ext-id ind-id
         :first-name first-name
         :gender gender}
-       (svc/post individuals-url :individual-id :individual app-state)));;;TODO: should refresh the page 
+       (svc/post individuals-url :individual-id :individual app-state)));;;TODO: should refresh the page
 
 (defn location-hierarchy [as a]
   (go (let [result (->> (http/get "/api/v1/locationHierarchy")
@@ -71,11 +71,11 @@
         (reset! a (first result)))))
 
 (defn root-component []
-  (println @app-state)  
+  (println @app-state)
   [:div {:class "container"}
    [:div {:class "row"} [c/top app-state]]
    [:div {:style {:padding "20px"}}]
-   [:div 
+   [:div
     (case (:page @app-state)
       :login [p/login-page login! app-state]
       :bad-login [p/bad-login login! app-state]
@@ -87,4 +87,3 @@
 (defn main []
   (reagent/render-component [root-component]
                             (.getElementById js/document "app")))
-

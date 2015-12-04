@@ -17,7 +17,7 @@
                  [http-kit "2.1.18"]
                  [http-kit.fake "0.2.1"]
                  [cljs-http "0.1.37"]
-                 
+
                  [crypto-password "0.1.3"]
                  [ring "1.3.2"]
                  [ring/ring-defaults "0.1.4"]

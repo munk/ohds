@@ -33,10 +33,17 @@
       (do (println "Not found: " res)
           false))))
 
-(deftest test-home
+(deftest test-hamburger-rendering
   (with-mounted-component (c/hamburger)
     (fn [c div]
       (is (found-in #"Toggle Nav" div)))))
+
+(deftest login-form-rendering
+  (with-mounted-component (c/login-form (fn [_ _] true))
+    (fn [c div]
+      (is (found-in #"Username" div))
+      (is (found-in #"Password" div))
+      (is (found-in #"Login" div)))))
 
 (deftest atom-change-tests
   (let [state (atom {:hello "world"})]
@@ -64,9 +71,3 @@
     (is (= (get h 0) :button))
     (is (= (first (get h 2)) :span))
     (is (= (get h 3) (get h 4) (get h 5)))))
-
-
-(deftest options-test
-  (let [field {"uuid" "123" "name" "test"}]
-;    (is (= field (reagent/render-component [c/location-hierarchy-option field] "<html></html>")))
-    ))

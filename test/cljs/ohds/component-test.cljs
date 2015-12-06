@@ -1,60 +1,49 @@
 (ns ohds.component-test
-  (:require-macros [cljs.test :refer (is deftest testing)]
+  (:require-macros [cljs.test :refer (is deftest testing async)]
                    [cljs.core.async.macros :refer [go]])
   (:require [cljs.test]
             [cljs.core.async :refer [<! >! chan]]
             [cljs-http.client :as http]
             [reagent.core :as reagent :refer [atom]]
             [ohds.components :as c]
-            [ohds.core :as app]))
+            [ohds.core :as app]
+            [ohds.framework :refer [with-mounted-component found-in]]))
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; Login Form Tests;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+(defn fake-login-success [& _]
+  (let [ch (chan)
+        response {:status 200 :body "abc-123"}]
+    (go (>! ch response)
+        ch)))
 
 
-(def isClient (not (nil? (try (.-document js/window)
-                              (catch js/Object e nil)))))
-
-(def rflush reagent/flush)
-
-(defn add-test-div [name]
-  (let [doc     js/document
-        body    (.-body js/document)
-        div     (.createElement doc "div")]
-    (.appendChild body div)
-    div))
-
-(defn with-mounted-component [comp f]
-  (when isClient
-    (let [div (add-test-div "_testreagent")]
-      (let [comp (reagent/render-component comp div #(f comp div))]
-        (reagent/unmount-component-at-node div)
-        (reagent/flush)
-        (.removeChild (.-body js/document) div)))))
+(deftest login-form-rendering
+  (with-redefs [http/post fake-login-success]
+    (with-mounted-component (c/login-form app/login!)
+      (fn [c div]
+        (is (found-in #"Username" div))
+        (is (found-in #"Password" div))
+        (is (found-in #"Login" div))
+        (async done
+               (js/setTimeout
+                (fn []
+                  (.click (.getElementById js/document "Login"))
+                  (is (= (:page @app/app-state) :location))
+                  (is (= 0 1))
+                  (done))
+                1000
+                ))))))
 
 
-(defn found-in [re div]
-  (let [res (.-innerHTML div)]
-    (if (re-find re res)
-      true
-      (do (println "Not found: " res)
-          false))))
 
 (deftest test-hamburger-rendering
   (with-mounted-component (c/hamburger)
     (fn [c div]
       (is (found-in #"Toggle Nav" div)))))
 
-(deftest login-form-rendering
-  (with-redefs [http/post (fn [& _] {:status 200 :body "123-abc"})]
-    (with-mounted-component (c/login-form
-                             (fn [u p]
-                               (let [ch (chan)]
-                                 (>! ch (app/login! u p))
-                                 ch)))
-     (fn [c div]
-       (is (found-in #"Username" div))
-       (is (found-in #"Password" div))
-       (is (found-in #"Login" div))
-       (.click (.getElementById js/document "Login"))
-       (is (= (:page @app/app-state) :location))))))
+
 
 (deftest atom-change-tests
   (let [state (atom {:hello "world"})]

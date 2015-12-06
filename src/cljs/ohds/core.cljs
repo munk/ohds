@@ -4,6 +4,7 @@
             [cljs.core.async :refer [<!]]
             [cognitect.transit :as t]
             [reagent.core :as reagent :refer [atom]]
+            [schema.core :as s :include-macros true]
             [ohds.components :as c]
             [ohds.pages :as p]
             [ohds.service :as svc]))
@@ -24,11 +25,13 @@
 (def json-reader (t/reader :json))
 
 
+
 (defn login! [username password]
   (go (let [result (->> {:form-params {:username @username :password @password}}
                         (http/post "/api/v1/login")
                         (<!))
             {status :status body :body} result]
+        (println "IN LOGIN!" status)
         (case status
           401 (swap! app-state assoc :page :bad-login :fieldworker-id nil)
           200 (swap! app-state assoc :page :location :fieldworker-id body)))))

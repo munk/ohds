@@ -13,29 +13,47 @@
 ;;; Login Form Tests;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 (defn fake-login-success [& _]
-  (let [ch (chan)
-        response {:status 200 :body "abc-123"}]
-    (go (>! ch response)
-        ch)))
+  (go
+    {:status 200 :body "abc-123"}))
 
+(defn fake-login-failure [& _]
+  (go
+    {:status 401 :body "bad login"}))
 
 (deftest login-form-rendering
-  (with-redefs [http/post fake-login-success]
-    (with-mounted-component (c/login-form app/login!)
-      (fn [c div]
-        (is (found-in #"Username" div))
-        (is (found-in #"Password" div))
-        (is (found-in #"Login" div))
-        (async done
-               (js/setTimeout
-                (fn []
-                  (.click (.getElementById js/document "Login"))
-                  (is (= (:page @app/app-state) :location))
-                  (is (= 0 1))
-                  (done))
-                1000
-                ))))))
+  (testing "login form success"
+    (async
+     done
+     (go
+       (with-redefs [http/post fake-login-success]
+         (with-mounted-component (c/login-form
+                                  app/login!
+                                  (fn [r s]
+                                    (app/login-callback r s)
+                                    (is (= (:page @app/app-state) :location))
+                                    (is (= (:fieldworker-id @app/app-state) "abc-123"))))
+           (fn [_ div]
+             (is (found-in #"Username" div))
+             (is (found-in #"Password" div))
+             (is (found-in #"Login" div))
+             (.click (.getElementById js/document "Login")))))
+       (done))))
+  (testing "login form failure"
+    (async
+     done
+     (go
+       (with-redefs [http/post fake-login-failure]
+         (with-mounted-component (c/login-form
+                                  app/login!
+                                  (fn [r s]
+                                    (app/login-callback r s)
+                                    (is (= (:page @app/app-state) :bad-login))
+                                    (is (nil? (:fieldworker-id @app/app-state)))))
+           (fn [_ div]
+             (.click (.getElementById js/document "Login")))))))))
 
+
+                      
 
 
 (deftest test-hamburger-rendering

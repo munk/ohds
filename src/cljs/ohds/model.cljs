@@ -12,8 +12,8 @@
 
 (def FieldWorker
   {:fieldWorkerId s/Str
-   :firstName (s/optional s/Str)
-   :lastName (s/optional s/Str)
+   :firstName (s/optional s/Str "firstName")
+   :lastName (s/optional s/Str "lastName")
    :passwordHash s/Str})
 
 (def Location
@@ -21,10 +21,36 @@
    :locationHierarchyUuid s/Str
    :extId s/Str
    :name s/Str
-   :type (s/Enum "RURAL" "URBAN")
+   :type (s/enum "RURAL" "URBAN")
 
    ;; Optional Fields
    :longitude (s/optional s/Str "longitude")
    :latitude (s/optional s/Str "latitude")
    :altitude (s/optional s/Str "altitude")
    :accuracy (s/optional s/Str "accuracy")})
+
+(def Individual
+  {:firstName s/Str
+   :gender s/Str
+
+   :middleName (s/optional s/Str "middleName")
+   :lastName (s/optional s/Str "lastName")
+   })
+
+(def LocationHierarchy
+  {})
+
+(def LocationHierarchyLevel
+  {})
+
+(def Membership
+  {})
+
+(def Relationship
+  {})
+
+(def Residency
+  {})
+
+(def SocialGroup
+  {})

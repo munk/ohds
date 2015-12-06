@@ -119,7 +119,7 @@
                (reset! a (-> c .-target .-value)))}
     options]])
 
-(defn login-form [authf]
+(defn login-form [authf callback]
   (let [username (atom "Username")
         password (atom "Password")]
     [:div {:class "form-signin"}
@@ -127,4 +127,4 @@
      [text-input username "username"]
      [password-input password "password"]
      [padded-submit "Login"
-      (fn [] (authf username password))]]))
+      (fn [] (authf username password callback))]]))

@@ -26,15 +26,19 @@
 
 
 
-(defn login! [username password]
+(defn login! [username password callback]
   (go (let [result (->> {:form-params {:username @username :password @password}}
                         (http/post "/api/v1/login")
                         (<!))
             {status :status body :body} result]
-        (println "IN LOGIN!" status)
-        (case status
-          401 (swap! app-state assoc :page :bad-login :fieldworker-id nil)
-          200 (swap! app-state assoc :page :location :fieldworker-id body)))))
+        (callback result app-state))))
+
+
+(defn login-callback [result app-state]
+  (let [{status :status body :body} result]
+    (case status
+      401 (swap! app-state assoc :page :bad-login :fieldworker-id nil)
+      200 (swap! app-state assoc :page :location :fieldworker-id body))))
 
 (defn location! [loc-id name parent fw-id loctype]
   (->> {:fieldworker-id fw-id

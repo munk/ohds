@@ -20,37 +20,35 @@
   (go
     {:status 401 :body "bad login"}))
 
-(deftest login-form-rendering
-  (testing "login form success"
-    (async
-     done
-     (go
-       (with-redefs [http/post fake-login-success]
-         (with-mounted-component (c/login-form
-                                  app/login!
-                                  (fn [r s]
-                                    (app/login-callback r s)
-                                    (is (= (:page @app/app-state) :location))
-                                    (is (= (:fieldworker-id @app/app-state) "abc-123"))))
-           (fn [_ div]
-             (is (found-in #"Username" div))
-             (is (found-in #"Password" div))
-             (is (found-in #"Login" div))
-             (.click (.getElementById js/document "Login")))))
-       (done))))
-  (testing "login form failure"
-    (async
-     done
-     (go
-       (with-redefs [http/post fake-login-failure]
-         (with-mounted-component (c/login-form
-                                  app/login!
-                                  (fn [r s]
-                                    (app/login-callback r s)
-                                    (is (= (:page @app/app-state) :bad-login))
-                                    (is (nil? (:fieldworker-id @app/app-state)))))
-           (fn [_ div]
-             (.click (.getElementById js/document "Login")))))))))
+(deftest login-form-rendering ;;;TODO write a macro to clean up this duplication
+  (let [good-login-callback
+        (fn [r s]
+          (app/login-callback r s)
+          (is (= (:page @app/app-state) :location))
+          (is (= (:fieldworker-id @app/app-state) "abc-123")))
+        bad-login-callback
+        (fn [r s]
+          (app/login-callback r s)
+          (is (= (:page @app/app-state) :bad-login))
+          (is (nil? (:fieldworker-id @app/app-state))))
+        click-login (fn [] (.click (.getElementById js/document "Login")))]
+    
+    (testing "login form success redirects to new location page"
+      (async done (go
+         (with-redefs [http/post fake-login-success]
+           (with-mounted-component (c/login-form app/login! good-login-callback)
+             (fn [_ div]
+               (is (found-in #"Username" div))
+               (is (found-in #"Password" div))
+               (is (found-in #"Login" div))
+               (click-login))))
+         (done))))
+    (testing "login form failure redirects to bad login page"
+      (async done (go
+         (with-redefs [http/post fake-login-failure]
+           (with-mounted-component (c/login-form app/login! bad-login-callback)
+             (fn [_ div] (click-login))))
+         (done))))))
 
 
                       

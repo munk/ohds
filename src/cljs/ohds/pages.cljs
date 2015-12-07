@@ -9,10 +9,10 @@
 (def json-reader (t/reader :json))
 
 
-(defn login-page [login! app-state]
+(defn login-page [login! app-state callback]
   (swap! app-state assoc :fieldworker-id nil :location-id nil :individual-id nil)
   (fn []
-    [c/login-form login!]))
+    [c/login-form login! callback]))
 
 
 (defn bad-login [login! app-state]
@@ -21,14 +21,14 @@
    [login-page login! app-state]])
 
 (defn location-page [app-state location-hierarchy submit]  
-  {:pre [(not (nil? (:fieldworker-id app-state)))]}
+  {:pre [(not (nil? (:fieldworker-id @app-state)))]}
 
   (let [location-id (atom "External ID")
         name (atom nil)
         loctype (atom "RURAL")
         parents (atom nil)
         parent (atom nil)
-        fw-id (:fieldworker-id app-state)]
+        fw-id (:fieldworker-id @app-state)]
 
     (location-hierarchy parents parent)
     

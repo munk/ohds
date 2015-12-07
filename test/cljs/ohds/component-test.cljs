@@ -6,21 +6,13 @@
             [cljs-http.client :as http]
             [reagent.core :as reagent :refer [atom]]
             [ohds.components :as c]
+            [ohds.pages :as p]
             [ohds.core :as app]
-            [ohds.framework :refer [with-mounted-component found-in]]))
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;;; Login Form Tests;;;
-;;;;;;;;;;;;;;;;;;;;;;;
-(defn fake-login-success [& _]
-  (go
-    {:status 200 :body "abc-123"}))
-
-(defn fake-login-failure [& _]
-  (go
-    {:status 401 :body "bad login"}))
+            [ohds.framework :refer [with-mounted-component found-in
+                                    mock-get mock-post mock-login elem]]))
 
 (deftest login-form-rendering ;;;TODO write a macro to clean up this duplication
+
   (let [good-login-callback
         (fn [r s]
           (app/login-callback r s)
@@ -31,28 +23,49 @@
           (app/login-callback r s)
           (is (= (:page @app/app-state) :bad-login))
           (is (nil? (:fieldworker-id @app/app-state))))
-        click-login (fn [] (.click (.getElementById js/document "Login")))]
-    
-    (testing "login form success redirects to new location page"
-      (async done (go
-         (with-redefs [http/post fake-login-success]
-           (with-mounted-component (c/login-form app/login! good-login-callback)
-             (fn [_ div]
-               (is (found-in #"Username" div))
-               (is (found-in #"Password" div))
-               (is (found-in #"Login" div))
-               (click-login))))
-         (done))))
-    (testing "login form failure redirects to bad login page"
-      (async done (go
-         (with-redefs [http/post fake-login-failure]
-           (with-mounted-component (c/login-form app/login! bad-login-callback)
-             (fn [_ div] (click-login))))
-         (done))))))
+        set-passwd  (fn [pw] (aset (elem "password") value pw)) 
+        click-login (fn [] (.click (elem "Login")))]
 
+    (with-redefs [http/post mock-post]
+      
+      (testing "login form success redirects to new location page"
+        (async done (go
+                      (with-mounted-component
+                        (c/login-form app/login! good-login-callback)
+                        (fn [_ div]
+                          (is (found-in #"id=\"password\"" div))
+                          (is (found-in #"Username" div))
+                          (is (found-in #"Password" div))
+                          (is (found-in #"Login" div))
+                          (click-login)))                    
+                      (done))))
 
-                      
+      (testing "login form failure redirects to bad login page"
+        (async done (go
+                      (with-mounted-component
+                        (c/login-form app/login! bad-login-callback)
+                        (fn [_ div]
+                          (set-passwd "badpassword")
+                          (click-login)))
+                      (done))))
 
+      (testing "location form has required elements"
+        (async done (go
+                      (with-mounted-component
+                        (p/location-page (atom {:fieldworker-id "abc-123"})
+                                         app/location-hierarchy
+                                         app/location)
+                        (fn [_ div]
+                          (is (found-in #"Parent Location" div))
+                          (is (found-in #"Name" div))
+                          (is (found-in #"External ID" div))
+                          (is (found-in #"Type" div))
+                          (is (found-in #"Submit" div)))))
+               (done))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; Component Tests 
+;;;;;;;;;;;;;;;;;;;;;;;
 
 (deftest test-hamburger-rendering
   (with-mounted-component (c/hamburger)

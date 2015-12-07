@@ -28,7 +28,7 @@
 
 (defn login! [username password callback]
   (go (let [result (->> {:form-params {:username @username :password @password}}
-                        (http/post "/api/v1/login")
+                        (http/post login-url)
                         (<!))
             {status :status body :body} result]
         (callback result app-state))))
@@ -56,7 +56,7 @@
        (svc/post individuals-url :individual-id :individual app-state)));;;TODO: should refresh the page
 
 (defn location-hierarchy [as a]
-  (go (let [result (->> (http/get "/api/v1/locationHierarchy")
+  (go (let [result (->> (http/get loc-hiera-url)
                         (<!)
                         (:body)
                         (t/read json-reader)
@@ -84,9 +84,9 @@
    [:div {:style {:padding "20px"}}]
    [:div
     (case (:page @app-state)
-      :login [p/login-page login! app-state]
+      :login [p/login-page login! app-state login-callback]
       :bad-login [p/bad-login login! app-state]
-      :location [p/location-page @app-state location-hierarchy location!]
+      :location [p/location-page app-state location-hierarchy location!]
       :individual [p/individual-page @app-state individual!]
       :select-location [p/update-visit-page @app-state location-hierarchy location nil]
       :update-location [p/update-location-page @app-state location-hierarchy location!])]])

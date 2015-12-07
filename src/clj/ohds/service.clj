@@ -26,13 +26,14 @@
   (json/read-str data :key-fn keyword))
 
 (defn post [url req]
-  (->
+  (->>
    {:basic-auth [apiuser apipass]
     :body (json/write-str req)
     :headers {"Content-Type" "application/json"}}
    (http/post (str apihost url))
    (deref)
    (:body)
+   ((fn [x] (println x) x))
    (json->cljs)
    (:uuid)))
 

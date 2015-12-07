@@ -24,6 +24,7 @@
 
 
 (defn create-location [req]
+
   (let [params (:params req) ; TODO: Why does this require params but login requires form-params?
         collected-by (:fieldworker-id params)
         parent (:parent params)
@@ -46,4 +47,4 @@
   (let [result (svc/locations uuid)]
     (json/write-str result)))
 
-(defn foo [] (println "bar"))
+

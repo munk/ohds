@@ -33,7 +33,6 @@
    (http/post (str apihost url))
    (deref)
    (:body)
-   ((fn [x] (println x) x))
    (json->cljs)
    (:uuid)))
 

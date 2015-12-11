@@ -5,11 +5,18 @@
             [cognitect.transit :as t]
             [reagent.core :as reagent :refer [atom]]
             [schema.core :as s :include-macros true]
+            [petrol.core :as petrol]
             [ohds.components :as c]
             [ohds.pages :as p]
             [ohds.service :as svc]))
 
-(enable-console-print!)
+(def initial-state
+  {:page :login
+   :fieldworker-id "a5ba318f-1353-4d1e-a3d3-beb9d936c915"
+   :location-id "53f9eb9f-2903-409b-b0c4-4f555cc9583a"
+   })
+
+(def app (atom initial-state))
 
 (def app-state (atom
                 {:page :login
@@ -91,6 +98,13 @@
       :select-location [p/update-visit-page @app-state location-hierarchy location nil]
       :update-location [p/update-location-page @app-state location-hierarchy location!])]])
 
+(defn render-fn
+  [ui-channel state]
+  (reagent/render-component [root-component]
+                            (.getElementById js/document "app")))
+
 (defn main []
+  (enable-console-print!)
+  ;(petrol/start-message-loop! app render-fn)
   (reagent/render-component [root-component]
                             (.getElementById js/document "app")))

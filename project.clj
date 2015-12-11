@@ -25,6 +25,7 @@
                  [compojure "1.3.2"]
                  [enlive "1.1.6"]
                  [environ "1.0.0"]
+                 [petrol "0.1.0"]
                  [prismatic/schema "1.0.2"]
 
                  [reagent "0.5.1"]

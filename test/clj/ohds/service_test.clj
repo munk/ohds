@@ -2,8 +2,7 @@
   (:require
    [clojure.test :refer :all]
    [ohds.service :refer :all]
-   [org.httpkit.client :as http])
-)
+   [org.httpkit.client :as http]))
 
 (deftest json->cljs-test
   (is (= {:foo "bar"} (json->cljs "{\"foo\": \"bar\"}"))))

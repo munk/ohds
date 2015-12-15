@@ -13,6 +13,7 @@
                  [org.clojure/clojurescript "0.0-3058" :scope "provided"]
                  [org.clojure/tools.nrepl "0.2.11"]
                  [org.clojure/data.json "0.2.6"]
+                 [expectations "2.0.9"]
 
                  [http-kit "2.1.18"]
                  [http-kit.fake "0.2.1"]
@@ -35,7 +36,8 @@
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-environ "1.0.0"]
-            [lein-ring "0.9.7"]]
+            [lein-ring "0.9.7"]
+            [lein-expectations "0.0.7"]]
 
   :min-lein-version "2.5.0"
 

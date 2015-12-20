@@ -1,6 +1,7 @@
 (ns ohds.components
   (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require [reagent.core :refer [atom]]))
+  (:require [reagent.core :refer [atom]]
+            [petrol.core :refer [send!]]))
 
 
 (defn a-swap [state key val]
@@ -45,7 +46,7 @@
 (defn hamburger []
   [:button {:type "button"
             :class "navbar-toggle collapsed"
-            :data-toggle "collapse"
+            :data-toggle "collapsie"
             :data-target "#navbar"
             :aria-expanded "false" :aria-controls "navbar"}
    [:span {:class "sr-only"} "Toggle Nav"]
@@ -76,7 +77,7 @@
   [:nav {:class "navbar navbar-inverse navbar-fixed-top"}
    [:div {:class "container"}
     [:div {:class "navbar-header"}
-     (if (:fieldworker-id @app-state)
+     (if (:fieldworker-id app-state)
        [hamburger])
      [:span {:class "navbar-brand"} "OpenHDS"]]
     [nav-bar app-state]
@@ -119,7 +120,7 @@
                (reset! a (-> c .-target .-value)))}
     options]])
 
-(defn login-form [authf callback]
+(defn login-form [authf state callback]
   (let [username (atom "Username")
         password (atom "Password")]
     [:div {:class "form-signin"}
@@ -127,4 +128,7 @@
      [text-input username "username"]
      [password-input password "password"]
      [padded-submit "Login"
-      (fn [] (authf username password callback))]]))
+      (fn []
+        (let [auth-attempt {:username @username
+                            :password @password}]
+          (authf auth-attempt state callback)))]]))

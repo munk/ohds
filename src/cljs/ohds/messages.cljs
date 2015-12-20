@@ -1,7 +1,15 @@
 (ns ohds.messages)
 
 
+;;; UI Events
+(defrecord ChangeUsername [username])
+(defrecord ChangePassword [password])
+
+;;; Backend Results
+(defrecord LoginResults [body])
+
 ;;; Login
+(defrecord LogOut [])
 (defrecord FieldworkerLogin [])
 (defrecord AdminLogin [])
 

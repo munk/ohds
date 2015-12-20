@@ -10,18 +10,17 @@
 
 
 (defn login-page [login! app-state callback]
-  (swap! app-state assoc :fieldworker-id nil :location-id nil :individual-id nil)
   (fn []
-    [c/login-form login! callback]))
+    [c/login-form login! app-state callback]))
 
 
-(defn bad-login [login! app-state]
+(defn bad-login [login! app-state callback]
   [:div
-   [:h4 {:style {:color "red"}} "Invalid Username or Passoword"]
-   [login-page login! app-state]])
+   [:h4 {:style {:color "red"}} "Invalid Username or Password"]
+   [login-page login! app-state callback]])
 
 (defn location-page [app-state location-hierarchy submit]  
-  {:pre [(not (nil? (:fieldworker-id @app-state)))]}
+  {:pre [(not (nil? (:fieldworker-id app-state)))]}
 
   (let [location-id (atom "External ID")
         name (atom nil)

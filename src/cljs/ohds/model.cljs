@@ -38,7 +38,8 @@
    })
 
 (def LocationHierarchy
-  {})
+  {:uuid s/Str
+   :name s/Str})
 
 (def LocationHierarchyLevel
   {})

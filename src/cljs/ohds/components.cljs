@@ -39,7 +39,6 @@
   [:option {:value (get field "uuid") :key (get field "uuid")} (get field "name")])
 
 (defn location-hierarchy-select [hierarchy]
-  (println hierarchy)
   (map location-hierarchy-option hierarchy))
 
 

@@ -15,3 +15,11 @@
 (defn login [user]
   (->> (http/post "/api/v1/login" {:form-params user})
        (petrol/wrap m/map->LoginResults)))
+
+(defn location-hierarchies []
+  (->> (http/get "/api/v1/locationHierarchy")
+       (petrol/wrap m/map->LocationHierarchyResults)))
+
+(defn locations [uuid]
+  (->> (http/get (str "/api/v1/locations/" uuid))
+       (petrol/wrap m/map->LocationResults)))

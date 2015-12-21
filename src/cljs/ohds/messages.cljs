@@ -4,9 +4,13 @@
 ;;; UI Events
 (defrecord ChangeUsername [username])
 (defrecord ChangePassword [password])
+(defrecord ChangeLocationHierarchy [hierarchy])
+(defrecord ChangeLocation [location])
 
 ;;; Backend Results
 (defrecord LoginResults [body])
+(defrecord LocationHierarchyResults [body])
+(defrecord LocationResults [body])
 
 ;;; Login
 (defrecord LogOut [])

@@ -11,7 +11,7 @@
    :user {:username ""
           :password ""}
    :location-hierarchy "HIERARCHY_ROOT"
-   :location "New Location"
+   :location {:name nil :uuid nil :extId nil :type "RURAL"}
    :fieldworker-id nil
    :location-id nil})
 

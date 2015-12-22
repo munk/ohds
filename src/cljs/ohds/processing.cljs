@@ -8,6 +8,8 @@
 
 (def json-reader (t/reader :json))
 
+;;; UI Events
+
 (extend-protocol Message
   m/ChangeUsername
   (process-message [response app]
@@ -24,6 +26,29 @@
           user' (assoc user :password password)]
       (assoc app :user user'))))
 
+(extend-protocol Message
+  m/ChangeLocationName
+  (process-message [response app]
+    (let [loc (:location app)          
+          loc' (assoc loc :name (:name response))]
+      (assoc app :location loc'))))
+
+(extend-protocol Message
+  m/ChangeLocationExtId
+  (process-message [response app]
+    (let [loc (:location app)
+          loc' (assoc loc :extId (:extId response))]
+      (assoc app :location loc'))))
+
+(extend-protocol Message
+  m/ChangeLocationType
+  (process-message [response app]
+    (let [loc (:location app)
+          loc' (assoc loc :type (:type response))]
+      (println loc')
+      (assoc app :location loc'))))
+
+;;; High level events
 (extend-protocol Message
   m/FieldworkerLogin
   (process-message [response app]
@@ -97,4 +122,7 @@
   (process-message [response app]
     (let [uuid (:location response)
           loc (first (filter #(= (:uuid %) uuid) (:locations app)))]
-      (assoc app :location loc))))
+      (if (nil? loc)
+        (assoc app :location {:uuid nil :name nil :extId nil :type nil})
+        (assoc app :location loc)))))
+

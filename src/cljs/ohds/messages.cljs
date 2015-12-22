@@ -6,6 +6,9 @@
 (defrecord ChangePassword [password])
 (defrecord ChangeLocationHierarchy [hierarchy])
 (defrecord ChangeLocation [location])
+(defrecord ChangeLocationName [name])
+(defrecord ChangeLocationExtId [extId])
+(defrecord ChangeLocationType [type])
 
 ;;; Backend Results
 (defrecord LoginResults [body])

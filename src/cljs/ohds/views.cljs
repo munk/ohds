@@ -13,46 +13,37 @@
    [:div
     [:input {:type :text
              :placeholder "Username"
-             :on-change (send-value!
-                         ui-channel
-                         m/->ChangeUsername)}]]
+             :on-change (send-value! ui-channel m/->ChangeUsername)}]]
    [:div
     [:input {:type :password
              :placeholder "Password"
-             :on-change (send-value!
-                         ui-channel
-                         m/->ChangePassword)}]]
+             :on-change (send-value! ui-channel m/->ChangePassword)}]]
    [:div
-    [:button {:on-click (send!
-                         ui-channel
-                         (m/->FieldworkerLogin))}
+    [:button {:on-click (send! ui-channel (m/->FieldworkerLogin))}
      "Login"]]])
 
 (defn ohds-option [field]
+  (s/validate ml/LocationOption field)
   (let [{uuid :uuid name :name} field]
     [:option {:value uuid
               :key uuid} name]))
 
 (defn ohds-hiera-option [field]
-  (s/validate ml/LocationHierarchy field)
+  (s/validate ml/LocationHierarchyOption field)
   (let [{uuid :uuid name :name} field]
     [:option {:value uuid
               :key uuid} name]))
 
 (defn loc-select [ui-channel app]
   [:div
-   [:select {:on-change (send-value!
-                         ui-channel
-                         m/->ChangeLocation)
+   [:select {:on-change (send-value! ui-channel m/->ChangeLocation)
              :default-value "New Location"}
     [:option {:value "New Location"} "New Location"]
     (map ohds-option (:locations app))]])
 
 (defn loc-hiera-select [ui-channel app]
   [:div
-   [:select {:on-change (send-value!
-                         ui-channel
-                         m/->ChangeLocationHierarchy)
+   [:select {:on-change (send-value! ui-channel m/->ChangeLocationHierarchy)
              :default-value "HIERARCHY_ROOT"}
     (map ohds-hiera-option (:location-hierarchies app))]])
 
@@ -66,15 +57,18 @@
 (defn location-form [ui-channel app]
   [:div
    [:div
-    [:select {:value (:type app)}
+    [:select {:value (:type app)
+              :on-change (send-value! ui-channel m/->ChangeLocationType)}
      [:option {:value "RURAL"} "Rural"]
      [:option {:value "URBAN"} "Urban"]]]
    [:div
-    [:input {:type :text
+    [:input {:type :text ;;TODO Update value on change
+             :on-change  (send-value! ui-channel m/->ChangeLocationName)
              :value (:name app)
              :placeholder "Name"}]]
    [:div
     [:input {:type :text
+             :on-change (send-value! ui-channel m/->ChangeLocationExtId)
              :value (:extId app)
              :placeholder "External ID"}]]
    [:div
@@ -99,6 +93,4 @@
    [:div {}  (str "hierarchy: "
                   (:location-hierarchy app)
                   " ||| location: "
-                  (:location app)
-                  " ||| locname: "
-                  (:loc-name app))]])
+                  (:location app))]])

@@ -10,43 +10,48 @@
 
 ;;; UI Events
 
+(defn process-message' [response app app-key]
+  (let [state (app-key app)]
+    (->>
+     (merge state response)
+     (assoc app app-key))))
+
+(defn process-ok [body keys]
+  (->> body
+       (t/read json-reader)
+       (map #(select-keys % keys))
+       (map w/keywordize-keys)))
+
 (extend-protocol Message
   m/ChangeUsername
   (process-message [response app]
-    (let [user (:user app)
-          username (:username response)
-          user' (assoc user :username username)]
-      (assoc app :user user'))))
+    (process-message' response app :user)))
 
 (extend-protocol Message
   m/ChangePassword
   (process-message [response app]
-    (let [user (:user app)
-          password (:password response)
-          user' (assoc user :password password)]
-      (assoc app :user user'))))
+    (process-message' response app :user)))
 
 (extend-protocol Message
   m/ChangeLocationName
   (process-message [response app]
-    (let [loc (:location app)          
-          loc' (assoc loc :name (:name response))]
-      (assoc app :location loc'))))
+    (process-message' response app :location)))
 
 (extend-protocol Message
   m/ChangeLocationExtId
   (process-message [response app]
-    (let [loc (:location app)
-          loc' (assoc loc :extId (:extId response))]
-      (assoc app :location loc'))))
+    (process-message' response app :extId)))
 
 (extend-protocol Message
   m/ChangeLocationType
   (process-message [response app]
-    (let [loc (:location app)
-          loc' (assoc loc :type (:type response))]
-      (println loc')
-      (assoc app :location loc'))))
+    (process-message' response app :location)))
+
+(extend-protocol Message
+  m/ChangeLocationHierarchy
+  (process-message [response app]
+    (let [uuid (:hierarchy response)]
+      (assoc app :location-hierarchy uuid))))
 
 ;;; High level events
 (extend-protocol Message
@@ -83,12 +88,7 @@
            body :body} response]
       (case status
         200 (assoc app
-                   :location-hierarchies
-                   (->> body
-                        (t/read json-reader)
-                        (map #(select-keys % ["uuid" "name"]))
-                        (map w/keywordize-keys))                   
-                   :errors "Got hierarchies")))))
+                   :location-hierarchies (process-ok body ["uuid" "name"]))))))
 
 (extend-protocol EventSource
   m/ChangeLocationHierarchy
@@ -96,11 +96,7 @@
     (let [{uuid :hierarchy} response]
       #{(backend/locations uuid)})))
 
-(extend-protocol Message
-  m/ChangeLocationHierarchy
-  (process-message [response app]
-    (let [uuid (:hierarchy response)]
-      (assoc app :location-hierarchy uuid))))
+
 
 (extend-protocol Message
   m/LocationResults

@@ -1,20 +1,6 @@
 (ns ohds.messages)
 
 
-;;; UI Events
-(defrecord ChangeUsername [username])
-(defrecord ChangePassword [password])
-(defrecord ChangeLocationHierarchy [hierarchy])
-(defrecord ChangeLocation [location])
-(defrecord ChangeLocationName [name])
-(defrecord ChangeLocationExtId [extId])
-(defrecord ChangeLocationType [type])
-(defrecord SubmitLocation [])
-
-;;; Backend Results
-(defrecord LoginResults [body])
-(defrecord LocationHierarchyResults [body])
-(defrecord LocationResults [body])
 
 ;;; Login
 (defrecord LogOut [])

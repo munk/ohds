@@ -3,6 +3,7 @@
    [ohds.messages :as m]
    [ohds.model :as ml]
    [ohds.login.view :as login]
+   [ohds.location.view :as location]
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 

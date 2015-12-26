@@ -37,24 +37,24 @@
     [loc-select ui-channel app]]])
 
 (defn location-form [ui-channel app]
+ [:div
   [:div
-   [:div
-    [:select {:value (:type app)
-              :on-change (send-value! ui-channel m/->ChangeLocationType)}
-     [:option {:value "RURAL"} "Rural"]
-     [:option {:value "URBAN"} "Urban"]]]
-   [:div
-    [:input {:type :text ;;TODO Update value on change
-             :on-change  (send-value! ui-channel m/->ChangeLocationName)
-             :value (:name app)
-             :placeholder "Name"}]]
-   [:div
-    [:input {:type :text
-             :on-change (send-value! ui-channel m/->ChangeLocationExtId)
-             :value (:extId app)
-             :placeholder "External ID"}]]
-   [:div
-    [:button {:on-click (send! ui-channel m/->SubmitLocation)} "Submit"]]])
+   [:select {:value (:type app)
+             :on-change (send-value! ui-channel m/->ChangeLocationType)}
+    [:option {:value "RURAL"} "Rural"]
+    [:option {:value "URBAN"} "Urban"]]]
+  [:div
+   [:input {:type :text
+            :on-change  (send-value! ui-channel m/->ChangeLocationName)
+            :value (:name app)
+            :placeholder "Name"}]]
+  [:div
+   [:input {:type :text
+            :on-change (send-value! ui-channel m/->ChangeLocationExtId)
+            :value (:extId app)
+            :placeholder "External Id"}]]
+  [:div
+   [:button {:on-click (send! ui-channel (m/->SubmitLocation))} "Sbmit"]]])
 
 (defn location-widget [ui-channel app]
   [:div

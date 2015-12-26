@@ -21,5 +21,5 @@
    [:div {}  (str "hierarchy: "
                   (:location-hierarchy app)
                   " ||| location: "
-                  (:location app)
-                  app)]])
+                  (:location app))]])
+                  

@@ -14,3 +14,12 @@
   ([uuid]
    (->> (http/get (str "/api/v1/locations/" uuid))
         (petrol/wrap m/map->LocationResults))))
+
+(defn create-location
+  [location location-hierarchy]
+  (let [body {:location location :parent location-hierarchy}]
+    (->> (http/post (str "/api/v1/locations" body))
+         (petrol/wrap m/map->CreateLocationResults))))
+         
+(defn update-location
+  [location location-hierarchy])

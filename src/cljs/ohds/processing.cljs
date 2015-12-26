@@ -10,7 +10,6 @@
 
 (def json-reader (t/reader :json))
 
-
 (defn process-message' [response app app-key]
   (let [state (app-key app)]
     (->>

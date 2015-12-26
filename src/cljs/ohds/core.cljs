@@ -11,7 +11,7 @@
    :user {:username ""
           :password ""}
    :location-hierarchy "HIERARCHY_ROOT"
-   :location {:name nil :uuid nil :extId nil :type "RURAL"}
+   :location {:name "" :uuid nil :extId "" :type "RURAL"}
    :fieldworker-id nil
    :location-id nil})
 
@@ -22,6 +22,6 @@
   (reagent/render-component [views/root-component ui-channel app]
                             js/document.body))
 
-(defn main []  
+(defn main []
   (enable-console-print!)
   (petrol/start-message-loop! app render-fn))

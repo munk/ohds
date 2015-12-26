@@ -15,7 +15,7 @@
 
 (extend-protocol Message m/ChangeLocationExtId
   (process-message [response app]
-    (process-message' response app :extId)))
+    (process-message' response app :location)))
 
 (extend-protocol Message m/ChangeLocationType
   (process-message [response app]
@@ -64,3 +64,20 @@
       (if (nil? loc)
         (assoc app :location {:uuid nil :name nil :extId nil :type nil})
         (assoc app :location loc)))))
+
+(extend-protocol EventSource
+  m/SubmitLocation
+  (watch-channels [_ {:keys [location location-hierarchy] :as app}]
+    (let [uuid (:uuid location)]
+        (if (nil? uuid)
+          #{(backend/create-location location location-hierarchy)}
+          #{(backend/update-location location location-hierarchy)}))))
+
+
+;(extend-protocol Message m/SubmitLocation
+;  (process-message [response app]
+;    (let [{location :location
+;           location-hierarchy :location-hierarchy app)}
+;
+;    (println "Oh hai!" response (:location app) (:location-hierarchy app))
+;    app))

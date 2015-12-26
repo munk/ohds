@@ -73,11 +73,9 @@
           #{(backend/create-location location location-hierarchy)}
           #{(backend/update-location location location-hierarchy)}))))
 
-
-;(extend-protocol Message m/SubmitLocation
-;  (process-message [response app]
-;    (let [{location :location
-;           location-hierarchy :location-hierarchy app)}
-;
-;    (println "Oh hai!" response (:location app) (:location-hierarchy app))
-;    app))
+(extend-protocol Message
+  m/CreateLocationResults
+  (process-message [response app]
+    (let [uuid (:uuid response)
+          location (assoc (:location app) :uuid uuid)]
+      (assoc app :page :individual :location location))))

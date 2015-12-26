@@ -20,6 +20,8 @@
   (let [body {:location location :parent location-hierarchy}]
     (->> (http/post (str "/api/v1/locations" body))
          (petrol/wrap m/map->CreateLocationResults))))
-         
+
 (defn update-location
-  [location location-hierarchy])
+  [location location-hierarchy]
+  (->> (http/get (str "/api/v1/locations" (:uuid location)))
+       (petrol/wrap m/map->UpdateLocationResults)))

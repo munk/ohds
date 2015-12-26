@@ -9,4 +9,6 @@
 (defrecord SubmitLocation [])
 (defrecord LocationHierarchyResults [body])
 (defrecord LocationResults [body])
+
 (defrecord CreateLocationResults [body])
+(defrecord UpdateLocationResults [body])

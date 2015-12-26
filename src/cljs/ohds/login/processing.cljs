@@ -1,9 +1,12 @@
 (ns ohds.login.processing
+  (:require-macros [ohds.macros :refer [state-message]])
   (:require
     [petrol.core :refer [Message EventSource]]
     [ohds.login.backend :as backend]
     [ohds.login.messages :as m]
     [ohds.processing :refer [process-message']]))
+
+;(state-message m/ChangeUsername :user)
 
 (extend-protocol Message
   m/ChangeUsername

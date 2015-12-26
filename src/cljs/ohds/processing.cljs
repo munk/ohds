@@ -10,7 +10,6 @@
 
 (def json-reader (t/reader :json))
 
-;;; UI Events
 
 (defn process-message' [response app app-key]
   (let [state (app-key app)]
@@ -25,6 +24,7 @@
        (map w/keywordize-keys)))
 
 ;;; High level events
+
 (extend-protocol EventSource
   locm/LocationHierarchyResults
     (watch-channels [_ _]

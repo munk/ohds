@@ -73,8 +73,8 @@
                    :env {:is-dev true}
 
                    :cljsbuild {:test-commands { "test" ["phantomjs" "env/test/js/unit-test.js" "env/test/unit-test.html"]}
-                               :builds {:app {:source-paths ["env/dev/cljs"]}
-                                        :test {:source-paths ["src/cljs" "test/cljs"]
+                               :builds {:app {:source-paths ["env/dev/cljs" "src/clj"]}
+                                        :test {:source-paths ["src/cljs" "src/clj" "test/cljs"]
                                                :compiler {:output-to     "resources/public/js/app_test.js"
                                                           :output-dir    "resources/public/js/test"
                                                           :source-map    "resources/public/js/test.js.map"

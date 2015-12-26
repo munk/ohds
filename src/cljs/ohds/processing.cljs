@@ -4,7 +4,8 @@
    [petrol.core :refer [Message EventSource]]
    [cognitect.transit :as t]
    [ohds.backend :as backend]
-   [ohds.messages :as m]))
+   [ohds.messages :as m]
+   [ohds.login.messages :as lm]))
 
 (def json-reader (t/reader :json))
 
@@ -21,16 +22,6 @@
        (t/read json-reader)
        (map #(select-keys % keys))
        (map w/keywordize-keys)))
-
-(extend-protocol Message
-  m/ChangeUsername
-  (process-message [response app]
-    (process-message' response app :user)))
-
-(extend-protocol Message
-  m/ChangePassword
-  (process-message [response app]
-    (process-message' response app :user)))
 
 (extend-protocol Message
   m/ChangeLocationName
@@ -54,30 +45,9 @@
       (assoc app :location-hierarchy uuid))))
 
 ;;; High level events
-(extend-protocol Message
-  m/FieldworkerLogin
-  (process-message [response app]
-    app))
 
 (extend-protocol EventSource
-  m/FieldworkerLogin
-  (watch-channels [_ {:keys [user] :as app}]
-    #{(backend/login user)}))
-
-(extend-protocol Message
-  m/LoginResults
-  (process-message [response app]
-    (let [{status :status
-           body :body} response]
-      (case status
-        200 (assoc app
-                   :fieldworker-id body
-                   :page :loc-hiera
-                   :errors "Login successful" )
-        (assoc app :errors "Bad username or password")))))
-
-(extend-protocol EventSource
-  m/LoginResults
+  lm/LoginResults
   (watch-channels [_ app]
     #{(backend/location-hierarchies)}))
 
@@ -95,8 +65,6 @@
   (watch-channels [response app]
     (let [{uuid :hierarchy} response]
       #{(backend/locations uuid)})))
-
-
 
 (extend-protocol Message
   m/LocationResults
@@ -121,4 +89,3 @@
       (if (nil? loc)
         (assoc app :location {:uuid nil :name nil :extId nil :type nil})
         (assoc app :location loc)))))
-

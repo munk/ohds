@@ -2,6 +2,7 @@
   (:require
    [ohds.messages :as m]
    [ohds.model :as ml]
+   [ohds.login.view :as login]
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 
@@ -11,11 +12,13 @@
    [:h2 {:class "form-signin-heading"}
     "Please log in"]
    [:div
-    [:input {:type :text
+    [:input {:id "username"
+             :type :text
              :placeholder "Username"
              :on-change (send-value! ui-channel m/->ChangeUsername)}]]
    [:div
-    [:input {:type :password
+    [:input {:id "password"
+             :type :password
              :placeholder "Password"
              :on-change (send-value! ui-channel m/->ChangePassword)}]]
    [:div
@@ -72,13 +75,13 @@
              :value (:extId app)
              :placeholder "External ID"}]]
    [:div
-    [:button "Submit"]]])
+    [:button {:on-click (send! ui-channel m/->SubmitLocation)} "Submit"]]])
 
 (defn location-widget [ui-channel app]
   [:div
    [location-select ui-channel app]
-   [location-form ui-channel (:location app)]
-])
+   [location-form ui-channel (:location app)]])
+
 
 (defn root-component [ui-channel app]
   [:div {:class "container"}
@@ -86,11 +89,12 @@
    [:div {:style {:color "red"}} (:errors app)]
    [:div
     (case (:page app)
-      :login [login ui-channel (:user app)]
+      :login [login/login ui-channel (:user app)]
       :loc-hiera [location-widget ui-channel app]
-      [:div "Error Loading Page..."]
-      )]
+      [:div "Error Loading Page..."])]
+
    [:div {}  (str "hierarchy: "
                   (:location-hierarchy app)
                   " ||| location: "
-                  (:location app))]])
+                  (:location app)
+                  app)]])

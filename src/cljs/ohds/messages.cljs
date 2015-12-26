@@ -9,6 +9,7 @@
 (defrecord ChangeLocationName [name])
 (defrecord ChangeLocationExtId [extId])
 (defrecord ChangeLocationType [type])
+(defrecord SubmitLocation [])
 
 ;;; Backend Results
 (defrecord LoginResults [body])
@@ -43,4 +44,3 @@
 
 (defrecord UpdateUser [])
 (defrecord UpdateFieldworker [])
-

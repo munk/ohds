@@ -34,8 +34,8 @@
    :gender s/Str
 
    :middleName (s/optional s/Str "middleName")
-   :lastName (s/optional s/Str "lastName")
-   })
+   :lastName (s/optional s/Str "lastName")})
+
 
 (def LocationHierarchyOption
   {:uuid s/Str
@@ -45,7 +45,7 @@
   {:uuid s/Str
    :name s/Str
    :extId s/Str
-   :type (s/enum "RURAL" "URBAN") })
+   :type (s/enum "RURAL" "URBAN")})
 
 (def LocationHierarchyLevel
   {})

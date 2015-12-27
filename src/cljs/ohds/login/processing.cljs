@@ -4,26 +4,19 @@
     [petrol.core :refer [Message EventSource]]
     [ohds.login.backend :as backend]
     [ohds.login.messages :as m]
-    [ohds.processing :refer [process-message']]))
+    [ohds.processing :refer [assoc-state]]))
 
 ;(state-message m/ChangeUsername :user)
 
 (extend-protocol Message
   m/ChangeUsername
-  (process-message [response app]
-    (process-message' response app :user)))
+    (process-message [response app]
+      (assoc-state response app :user))
 
-(extend-protocol Message
   m/ChangePassword
   (process-message [response app]
-    (process-message' response app :user)))
+    (assoc-state response app :user))
 
-(extend-protocol EventSource
-  m/FieldworkerLogin
-  (watch-channels [_ {:keys [user] :as app}]
-    #{(backend/login user)}))
-
-(extend-protocol Message
   m/LoginResults
   (process-message [response app]
     (let [{status :status
@@ -34,3 +27,8 @@
                    :page :loc-hiera
                    :errors "Login successful")
         (assoc app :errors "Bad username or password")))))
+
+(extend-protocol EventSource
+  m/FieldworkerLogin
+  (watch-channels [_ {:keys [user] :as app}]
+    #{(backend/login user)}))

@@ -18,7 +18,7 @@
 (defn create-location
   [location location-hierarchy]
   (let [body {:location location :parent location-hierarchy}]
-    (->> (http/post (str "/api/v1/locations" body))
+    (->> (http/post (str "/api/v1/locations" {:params body}))
          (petrol/wrap m/map->CreateLocationResults))))
 
 (defn update-location

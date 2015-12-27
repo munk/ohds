@@ -22,6 +22,7 @@
                  [crypto-password "0.1.3"]
                  [ring "1.3.2"]
                  [ring/ring-defaults "0.1.4"]
+                 [fogus/ring-edn "0.3.0"]
 
                  [compojure "1.3.2"]
                  [enlive "1.1.6"]

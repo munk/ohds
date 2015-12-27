@@ -54,7 +54,7 @@
             :value (:extId app)
             :placeholder "External Id"}]]
   [:div
-   [:button {:on-click (send! ui-channel (m/->SubmitLocation))} "Sbmit"]]])
+   [:button {:on-click (send! ui-channel (m/->SubmitLocation))} "Submit"]]])
 
 (defn location-widget [ui-channel app]
   [:div

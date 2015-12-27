@@ -7,7 +7,7 @@
 (def Location-Request-Schema
   "A schema for location posts"
   {:fieldworker-id s/Str
-   :parent s/Uuid
+   :parent s/Str
    :location {:name s/Str
               :ext-id s/Str
               :type (s/enum "RURAL" "URBAN")}})
@@ -24,6 +24,7 @@
 
 
 (defn login [req]
+  (prn req)
   (let [params (:form-params req)
         username (get params "username")
         password (get params "password")
@@ -34,25 +35,15 @@
        :body "Bad username or password"}
       (str result))))
 
-
 (defn get-location-hierarchies []
   (json/write-str (svc/location-hierarchies)))
 
-
-(defn create-location [req]
-  (try
-    (s/validate Location-Request-Schema (:params req))
-    (let [params (:params req) ; TODO: Why does this require params but login requires form-params?
-          collected-by (:fieldworker-id params)
-          parent (:parent params)
-          name (:name params)
-          ext-id (:ext-id params)
-          type (:type params)
-          location (Location. name ext-id type)]
-      (str (svc/create-location collected-by parent location)))
-    (catch Exception e
-      (println (.getMessage e))
-      {:status 400})))
+(defn create-location [{:keys [params]}]
+  (let [{:keys [fieldworker-id parent name extId type]} params]
+    (let [location (Location. name extId type)
+          response (str (svc/create-location fieldworker-id parent location))]
+      (prn "Create location response" response)
+      response)))
 
 
 (defn create-individual [req]
@@ -71,5 +62,3 @@
 (defn locations [uuid]
   (let [result (svc/locations uuid)]
     (json/write-str result)))
-
-

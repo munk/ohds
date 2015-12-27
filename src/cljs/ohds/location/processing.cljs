@@ -64,8 +64,14 @@
     (let [{uuid :hierarchy} response]
       #{(backend/locations uuid)}))
   m/SubmitLocation
-  (watch-channels [_ {:keys [location location-hierarchy] :as app}]
-    (let [uuid (:uuid location)]
-        (if (nil? uuid)
-          #{(backend/create-location location location-hierarchy)}
-          #{(backend/update-location location location-hierarchy)}))))
+  (watch-channels [response app]
+    (prn "In watch-channels submit location" (:location app) (:fieldworker-id app))
+    (let [location (:location app)
+          name (:name location)
+          extId (:extId location)
+          type (:type location)
+          fieldworker-id (:fieldworker-id app)
+          parent (:hierarchy app)]
+      (if (nil? (:uuid app))
+        #{(backend/create-location fieldworker-id parent name extId type)}
+        #{(backend/update-location {} {})}))))

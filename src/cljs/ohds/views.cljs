@@ -8,7 +8,6 @@
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 
-
 (defn root-component [ui-channel app]
   [:div {:class "container"}
    [:div {:style {:padding "20px"}}]

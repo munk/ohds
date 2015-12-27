@@ -16,10 +16,15 @@
         (petrol/wrap m/map->LocationResults))))
 
 (defn create-location
-  [location location-hierarchy]
-  (let [body {:location location :parent location-hierarchy}]
-    (->> (http/post (str "/api/v1/locations" {:params body}))
-         (petrol/wrap m/map->CreateLocationResults))))
+  [fieldworker-id parent name extId type & more]
+  (let [params (merge more {:fieldworker-id fieldworker-id
+                            :parent parent
+                            :name name
+                            :extId extId
+                            :type type})
+        {:keys [p] :as param} params]
+   (->> (http/post "/api/v1/locations" {:form-params params})
+        (petrol/wrap m/map->CreateLocationResults))))
 
 (defn update-location
   [location location-hierarchy]

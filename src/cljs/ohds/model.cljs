@@ -1,5 +1,5 @@
 (ns ohds.model
-  (:require [schema.core :as s :include-macros true]))
+  (:require [schema.core :as s :include-macros true])) 
 
 
 (def AuthenticationAttempt

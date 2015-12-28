@@ -45,9 +45,10 @@
   (process-message [response app]
     (let [uuid (:location response)
           loc (first (filter #(= (:uuid %) uuid) (:locations app)))]
-        (if (nil? loc)
-         (assoc app :location {:uuid nil :name nil :extId nil :type nil})
-         (assoc app :location loc))))
+      (prn loc)
+      (if (nil? loc) ;;;TODO: set uuid on location object when changes
+        (assoc app :location {:uuid nil :name nil :extId nil :type nil})
+        (assoc app :location loc))))
   m/CreateLocationResults
   (process-message [response app]
     (let [uuid (:uuid response)

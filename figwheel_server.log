@@ -304,3 +304,509 @@ notifying browser that file changed:  /ohds/main.js
 [0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
 [32mSuccessfully compiled "resources/public/js/app.js" in 0.141 seconds.[0m
 notifying browser that file changed:  /ohds/main.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.261 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.
+[0mANALYSIS ERROR: let requires an even number of forms in binding vector at line 20 src/cljs/ohds/individual/processing.cljs on file src/cljs/ohds/individual/processing.cljs, line 20, column 5
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.135 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 22 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 22 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 22 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.215 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Wrong number of args (0) passed to :first at line 24 src/cljs/ohds/individual/processing.cljs
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 25 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 25 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 25 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/location at line 25 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.231 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/location at line 26 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.216 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/dob at line 26 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.235 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/dob at line 26 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.214 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.
+[0mANALYSIS ERROR: Wrong number of args (1) passed to: analyzer/eval3282/fn--3283/pfn--3284 at line 7 src/cljs/ohds/individual/backend.cljs on file src/cljs/ohds/individual/backend.cljs, line 7, column 1
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.142 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/dob at line 26 src/cljs/ohds/individual/processing.cljs
+[31mCompiling "resources/public/js/app.js" failed.
+[0mANALYSIS ERROR: Wrong number of args (1) passed to: analyzer/eval3282/fn--3283/pfn--3284 at line 7 src/cljs/ohds/individual/backend.cljs on file src/cljs/ohds/individual/backend.cljs, line 7, column 1
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.314 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.messages/map->CreateLocationResults at line 17 src/cljs/ohds/individual/backend.cljs
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.204 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.messages/map->CreateLocationResults at line 15 src/cljs/ohds/individual/backend.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.206 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.messages/map->CreateIndividualResults at line 14 src/cljs/ohds/individual/backend.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.172 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/dob at line 26 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/messages.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.365 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.messages/SubmitIndividual at line 18 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.messages/SubmitIndividual at line 18 src/cljs/ohds/individual/processing.cljs
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/dob at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.messages/->SubmitIndividual at line 23 src/cljs/ohds/individual/view.cljs
+notifying browser that file changed:  out/ohds/individual/messages.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.399 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/dob at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.messages/->SubmitIndividual at line 23 src/cljs/ohds/individual/view.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.205 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.194 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/dob at line 26 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.222 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.188 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.251 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.198 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.messages/->ChangeGender at line 19 src/cljs/ohds/individual/view.cljs
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.209 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.messages/ChangeGender at line 12 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.messages/ChangeGender at line 12 src/cljs/ohds/individual/processing.cljs
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/dob at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.messages/->ChangeGender at line 19 src/cljs/ohds/individual/view.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.219 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 26 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/dob at line 26 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/messages.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.425 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 27 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 27 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 27 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 27 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 27 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 27 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 27 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.219 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.208 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.189 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 31 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 31 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 31 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 31 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 31 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 31 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 31 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.238 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/core.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.21 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 32 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 32 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 32 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 32 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 32 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 32 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 32 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.218 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.198 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: backend, could not locate backend.cljs, backend.cljc, or Closure namespace "" at line 33 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var backend/create-individual at line 33 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 33 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 33 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 33 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 33 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 33 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.215 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.208 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.192 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.425 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.216 seconds.[0m
+sending changed CSS file: resources/public/css/style.css
+sending changed CSS file: resources/public/css/style.css
+sending changed CSS file: resources/public/css/style.css
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/main.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.182 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/main.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.177 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/location/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.306 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/location/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.272 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+notifying browser that file changed:  out/ohds/location/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.271 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 34 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.23 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 34 src/cljs/ohds/individual/processing.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.226 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 10 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  out/ohds/main.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.483 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 10 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.334 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 10 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.258 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/main.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.221 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.426 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 34 src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.261 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.479 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/core.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.209 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.
+[0mERROR: Map literal must contain an even number of forms on file /Users/jdowns/ohds/src/cljs/ohds/core.cljs, line 14, column 95
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.151 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.
+[0mERROR: Map literal must contain an even number of forms on file /Users/jdowns/ohds/src/cljs/ohds/core.cljs, line 14, column 95
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.155 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.
+[0mERROR: Map literal must contain an even number of forms on file /Users/jdowns/ohds/src/cljs/ohds/core.cljs, line 14, column 95
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.184 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/core.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.222 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/core.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.207 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.522 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.248 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.262 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.239 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.243 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 35 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.245 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/location at line 28 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/individual at line 29 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/individual at line 30 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/individual at line 31 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 32 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 33 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 33 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 33 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 33 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 33 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.222 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 33 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/fieldworker-id at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/first-name at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/extId at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/gender at line 34 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.23 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.255 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.263 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.253 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.22 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.282 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.247 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.25 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Use of undeclared Var ohds.individual.processing/loc at line 31 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.265 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/processing.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.23 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.254 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.447 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var ohds.individual.processing/b at line 18 /Users/jdowns/ohds/src/cljs/ohds/individual/processing.cljs
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  out/ohds/individual/backend.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.409 seconds.[0m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Wrong number of args (0) passed to ohds.core/render-fn at line 11 env/dev/cljs/ohds/main.cljs
+notifying browser that file changed:  resources/public/js/app.js
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  out/ohds/individual/view.js
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.302 seconds.[0m

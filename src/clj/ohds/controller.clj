@@ -14,7 +14,7 @@
 
 (def Individual-Request-Schema
   "A schema for individual posts"
-  {:fieldworker-id s/Uuid
+  {:fieldworker-id s/Str
    :ext-id s/Str
    :first-name s/Str
    :gender s/Str})
@@ -45,14 +45,18 @@
 
 
 (defn create-individual [req]
+  (println "In Backend Creating Individuals")
   (try
     (s/validate Individual-Request-Schema (:params req))
+    (println "Validated")
     (let [params (:params req)
           collected-by (:fieldworker-id params)
           ext-id (:ext-id params)
           first-name (:first-name params)
-          gender (:gender params)]
-      (str (svc/create-individual collected-by ext-id first-name gender)))
+          gender (:gender params)
+          result (str (svc/create-individual collected-by ext-id first-name gender))]
+      (println "Result" result)
+      result)
     (catch Exception e
       (println (.getMessage e))
       {:status 400})))

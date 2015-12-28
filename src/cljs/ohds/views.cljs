@@ -12,7 +12,7 @@
   [:div {:class "container"}
    [:div {:style {:padding "20px"}}]
    [:div {:style {:color "red"}} (:errors app)]
-   [:div
+   [:dive
     (case (:page app)
       :login [login/login ui-channel (:user app)]
       :loc-hiera [location/location-widget ui-channel app]
@@ -21,5 +21,5 @@
 
    [:div {}  (str "hierarchy: "
                   (:location-hierarchy app)
-                  " ||| location: "
-                  (:location app))]])
+                  " ||| individual: "
+                  (:individual app))]])

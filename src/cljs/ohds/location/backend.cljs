@@ -23,8 +23,8 @@
                             :extId extId
                             :type type})
         {:keys [p] :as param} params]
-   (->> (http/post "/api/v1/locations" {:form-params params})
-        (petrol/wrap m/map->CreateLocationResults))))
+    (->> (http/post "/api/v1/locations" {:form-params params})
+         (petrol/wrap m/map->CreateLocationResults))))
 
 (defn update-location
   [location location-hierarchy]

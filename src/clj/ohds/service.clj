@@ -33,6 +33,7 @@
    (http/post (str apihost url))
    (deref)
    (:body)
+   ((fn [res] (println "In post. Result:" res) res))
    (json->cljs)
    (:uuid)))
 
@@ -86,7 +87,8 @@
 (defn create-individual ;;;TODO: Allow additional fields
   [collected-by individual-id first-name gender]
   (->> {:collectedByUuid collected-by
-        :extId individual-id
-        :firstName first-name
-        :gender gender}
+        :individual {:extId individual-id
+                     :firstName first-name
+                     :gender gender
+                     :collectionDateTime (now)}}
        (post individual-url)))

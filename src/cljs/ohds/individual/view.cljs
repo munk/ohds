@@ -18,4 +18,5 @@
     [:div
       [:button
         {:on-click (send-value! ui-channel m/->SubmitIndividual)}
-        "Submit"]]])
+       "Submit"]]])
+

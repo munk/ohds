@@ -11,7 +11,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [instaparse "1.4.1"]
                  [org.clojure/clojurescript "0.0-3058" :scope "provided"]
-                 [org.clojure/tools.nrepl "0.2.11"]
+                 [org.clojure/tools.nrepl "0.2.12"]
                  [org.clojure/data.json "0.2.6"]
                  [expectations "2.0.9"]
 

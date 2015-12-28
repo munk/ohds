@@ -65,7 +65,6 @@
       #{(backend/locations uuid)}))
   m/SubmitLocation
   (watch-channels [response app]
-    (prn "In watch-channels submit location" (:location app) (:fieldworker-id app))
     (let [location (:location app)
           name (:name location)
           extId (:extId location)

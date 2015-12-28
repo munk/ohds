@@ -12,6 +12,7 @@
           :password ""}
    :location-hierarchy "HIERARCHY_ROOT"
    :location {:name "" :uuid nil :extId "" :type "RURAL"}
+   :individual {:firstname "" :dob ""}
    :fieldworker-id nil
    :location-id nil})
 

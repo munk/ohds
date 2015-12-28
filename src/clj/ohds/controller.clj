@@ -24,7 +24,6 @@
 
 
 (defn login [req]
-  (prn req)
   (let [params (:form-params req)
         username (get params "username")
         password (get params "password")
@@ -42,7 +41,6 @@
   (let [{:keys [fieldworker-id parent name extId type]} params]
     (let [location (Location. name extId type)
           response (str (svc/create-location fieldworker-id parent location))]
-      (prn "Create location response" response)
       response)))
 
 

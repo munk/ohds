@@ -27,6 +27,7 @@
          (petrol/wrap m/map->CreateLocationResults))))
 
 (defn update-location
-  [location location-hierarchy]
-  (->> (http/get (str "/api/v1/locations" (:uuid location)))
+  [location]
+  (println "Update" location)
+  (->> (http/get (str "/api/v1/locations/" (:uuid location)))
        (petrol/wrap m/map->UpdateLocationResults)))

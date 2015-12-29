@@ -8,15 +8,17 @@
 (enable-console-print!)
 
 (def initial-state
-  {:page :individual
+  {:page :login
    :errors ""
    :user {:username ""
           :password ""}
    :location-hierarchy "HIERARCHY_ROOT"
-   :location {:name "" :uuid "f90d9ec5-aa18-4f9a-9feb-c96b7f473306" :extId "" :type "RURAL"}
-   :individual {:firstname "" :extId "" :gender ""}
-   :fieldworker-id "56825ead-e0b7-4ae8-93fc-9c211e8f9807"
-   :location-id "f90d9ec5-aa18-4f9a-9feb-c96b7f473306"})
+   :location {:name "" :uuid "" :extId "" :type "RURAL"}
+   :individual {:firstname "" :extId "" :gender "FEMALE"}
+   :fieldworker-id ""
+   :location-id ""
+   :social-group-id ""
+   :individual-id ""})
 
 (def app (atom initial-state))
 

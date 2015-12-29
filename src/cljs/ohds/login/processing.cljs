@@ -24,8 +24,8 @@
       (case status
         200 (assoc app
                    :fieldworker-id body
-                   :page :loc-hiera
-                   :errors "Login successful")
+                   :page :location
+                   :errors "")
         (assoc app :errors "Bad username or password")))))
 
 (extend-protocol EventSource

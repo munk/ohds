@@ -2,24 +2,15 @@
   (:require
    [ohds.login.messages :as m]
    [ohds.login.processing]
+   [ohds.components :as c]
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 
 
-(defn login [ui-channel app]
-  [:div {:class "form-signin"}
-   [:h2 {:class "form-signin-heading"}
-    "Please log in"]
-   [:div
-    [:input {:id "username"
-             :type :text
-             :placeholder "Username"
-             :on-change (send-value! ui-channel m/->ChangeUsername)}]]
-   [:div
-    [:input {:id "password"
-             :type :password
-             :placeholder "Password"
-             :on-change (send-value! ui-channel m/->ChangePassword)}]]
-   [:div
-    [:button {:on-click (send! ui-channel (m/->FieldworkerLogin))}
-     "Login"]]])
+(defn login [ch _]
+  (println "Doing login")
+  [:span
+   [:legend "Login"]
+   (c/text-input ch m/->ChangeUsername "username" "Username")
+   (c/password-input ch m/->ChangePassword "password" "Password")
+   (c/submit ch m/->FieldworkerLogin "Login")])

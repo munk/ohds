@@ -1,8 +1,9 @@
 (ns ohds.location.view
   (:require
-    [petrol.core :refer [send! send-value!]]
-    [ohds.location.processing]
-    [ohds.location.messages :as m]))
+   [petrol.core :refer [send! send-value!]]
+   [ohds.components :as c]
+   [ohds.location.processing]    
+   [ohds.location.messages :as m]))
 
 ;;;TODO Schema Validation
 
@@ -17,17 +18,15 @@
               :key uuid} name]))
 
 (defn loc-select [ui-channel app]
-  [:div
-   [:select {:on-change (send-value! ui-channel m/->ChangeLocation)
-             :default-value "New Location"}
-    [:option {:value "New Location"} "New Location"]
-    (map ohds-option (:locations app))]])
+  (let [opts  (map c/map->option'uuid (:locations app))]
+    [:div
+     (c/select ui-channel m/->ChangeLocation "location" "New Location"
+               opts [:option {:value "New Location" :key "new-location"} "New Location"])]))
 
 (defn loc-hiera-select [ui-channel app]
-  [:div
-   [:select {:on-change (send-value! ui-channel m/->ChangeLocationHierarchy)
-             :default-value "HIERARCHY_ROOT"}
-    (map ohds-hiera-option (:location-hierarchies app))]])
+  (let [opts (map c/map->option'uuid (:location-hierarchies app))]
+    [:div
+     (c/select ui-channel m/->ChangeLocationHierarchy "hierarchy" "HIERARCHY_ROOT" opts)]))
 
 (defn location-select [ui-channel app]
   [:div
@@ -36,27 +35,17 @@
    [:div
     [loc-select ui-channel app]]])
 
-(defn location-form [ui-channel app]
- [:div
+(defn location-form [ch state]
   [:div
-   [:select {:value (:type app)
-             :on-change (send-value! ui-channel m/->ChangeLocationType)}
-    [:option {:value "RURAL"} "Rural"]
-    [:option {:value "URBAN"} "Urban"]]]
-  [:div
-   [:input {:type :text
-            :on-change  (send-value! ui-channel m/->ChangeLocationName)
-            :value (:name app)
-            :placeholder "Name"}]]
-  [:div
-   [:input {:type :text
-            :on-change (send-value! ui-channel m/->ChangeLocationExtId)
-            :value (:extId app)
-            :placeholder "External Id"}]]
-  [:div
-   [:button {:on-click (send! ui-channel (m/->SubmitLocation))} "Submit"]]])
+   (c/select ch m/->ChangeLocationType "type" (:type state)
+             [["RURAL" "Rural"] ["URBAN" "Urban"]])
+   (c/text-input ch m/->ChangeLocationName (:name state) "name" "Name")
+   (c/text-input ch m/->ChangeLocationExtId (:extId state)
+                 "extId" "External ID")
+   (c/submit ch m/->SubmitLocation "Submit")])
 
-(defn location-widget [ui-channel app]
-  [:div
-   [location-select ui-channel app]
-   [location-form ui-channel (:location app)]])
+(defn form [ch state]
+  [:span
+   [:legend "Location"]
+   [location-select ch state]
+   [location-form ch (:location state)]])

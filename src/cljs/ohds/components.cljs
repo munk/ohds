@@ -1,0 +1,69 @@
+(ns ohds.components
+  (:require
+   [petrol.core :refer [send! send-value!]]))
+
+(defn form-group [inner]
+  [:div.row
+   [:div.form-group.col-lg1
+    inner]])
+
+(defn text-input
+  ([ch msg id placeholder]
+   (form-group
+    [:div.input-group
+     [:input.form-control
+      {:id id
+       :type :text
+       :placeholder placeholder
+       :on-change (send-value! ch msg)}]]))
+  ([ch msg val id placeholder]
+   (form-group
+    [:div.input-group
+     [:input.form-control
+      {:id id
+       :type :text
+       :value val
+       :placeholder placeholder
+       :on-change (send-value! ch msg)}]])))
+
+
+(defn password-input [ch msg id placeholder]
+  (form-group
+   [:div.input-group
+    [:input.form-control
+     {:id id
+      :type :password
+      :placeholder placeholder
+      :on-change (send-value! ch msg)}]]))
+
+(defn map->option [m v n]
+  [(v m) (n m)])
+
+
+(defn map->option'uuid [m]
+  (map->option m :uuid :name))
+
+
+(defn option
+  [opt]
+  (let [[value name] opt]
+    [:option {:value value :key value} name]))
+
+
+(defn select [ch msg id val options & default-opt]
+  (let [select-attr
+        {:id id
+         :data-width "100%"
+         :value val
+         :on-change (send-value! ch msg)}
+        opts (map option options)]
+    (form-group
+     [:div.input-group
+      [:select.form-control select-attr default-opt opts]])))
+
+
+(defn submit [ch msg txt]
+  (form-group
+   [:div.btn-group
+    [:button.btn.btn-lg.btn-primary {:on-click (send! ch (msg))} txt]])
+)

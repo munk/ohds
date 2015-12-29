@@ -53,7 +53,10 @@
   (process-message [response app]
     (let [uuid (:uuid response)
           location (assoc (:location app) :uuid uuid)]
-       (assoc app :page :individual :location location))))
+      (assoc app :page :socialgroup :location location)))
+  m/UpdateLocationResults
+  (process-message [response app]
+    (assoc app :page :socialgroup)))
 
 
 (extend-protocol EventSource
@@ -72,6 +75,6 @@
           type (:type location)
           fieldworker-id (:fieldworker-id app)
           parent (:hierarchy app)]
-      (if (nil? (:uuid app))
+      (if (nil? (:uuid location))
         #{(backend/create-location fieldworker-id parent name extId type)}
-        #{(backend/update-location {} {})}))))
+        #{(backend/update-location (:location app))}))))

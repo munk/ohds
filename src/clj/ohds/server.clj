@@ -25,7 +25,7 @@
   (GET "/api/v1/locations/:uuid" [uuid] (ctrl/locations uuid))
   (GET "/api/v1/locations/" [uuid] (ctrl/locations "HIERARCHY_ROOT"))
   (POST "/api/v1/echo" req {:status 200
-                                  :body (str "Params:" req)})
+                            :body (str "Params:" req)})
 
   (POST "/api/v1/individuals" req (ctrl/create-individual req))
   (GET "/*" req (page)))

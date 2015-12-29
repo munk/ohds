@@ -15,7 +15,7 @@
     (assoc-state response app :individual))
 
   m/ChangeGender
-  (process-message [response app]b
+  (process-message [response app]
     (assoc-state response app :individual)))
 
 

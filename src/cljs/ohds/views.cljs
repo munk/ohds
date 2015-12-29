@@ -12,7 +12,7 @@
   [:div {:class "container"}
    [:div {:style {:padding "20px"}}]
    [:div {:style {:color "red"}} (:errors app)]
-   [:dive
+   [:div
     (case (:page app)
       :login [login/login ui-channel (:user app)]
       :loc-hiera [location/location-widget ui-channel app]

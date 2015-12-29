@@ -5,6 +5,8 @@
    [ohds.views :as views]
    [ohds.processing]))
 
+(enable-console-print!)
+
 (def initial-state
   {:page :individual
    :errors ""
@@ -20,6 +22,7 @@
 
 (defn render-fn
   [ui-channel app]
+  (enable-console-print!)
   (reagent/render-component [views/root-component ui-channel app]
                             js/document.body))
 

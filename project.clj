@@ -1,15 +1,15 @@
 (defproject ohds "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
+  :description "Front End for OpenHDS"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :source-paths ["src/clj" "src/cljs"]
 
-  :test-paths ["test/clj"]
+  :test-paths ["test/clj" "test/cljs"]
 
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.170" :scope "provided"]
+                 [org.clojure/clojurescript "1.7.170"]
                  [instaparse "1.4.1"]
                  [org.clojure/tools.nrepl "0.2.12"]
                  [org.clojure/data.json "0.2.6"]
@@ -44,49 +44,59 @@
 
   :uberjar-name "ohds.jar"
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
-                             :compiler {:output-to     "resources/public/js/app.js"
-                                        :output-dir    "resources/public/js/ou
-t"
-                                        :source-map    "resources/public/js/out.js.map"
-                                        :preamble      ["react/react.min.js"]
-                                        :optimizations :none
-                                        :pretty-print  true}}}}
+  :cljsbuild {:builds
+              {:app
+               {:source-paths ["src/cljs"]
+                :compiler {:output-to     "resources/public/js/app.js"
+                           :output-dir    "resources/public/js/app"
+                           :source-map    "resources/public/js/app.js.map"
+                           :preamble      ["react/react.min.js"]
+                           :optimizations :none
+                           :pretty-print  true}}}}
 
-  :profiles {:dev {:source-paths ["env/dev/clj" "src/cljs"]
-                   :hooks [leiningen.cljsbuild]
-                   :test-paths ["test/clj" "test/cljs"]
-                   :optimizations :none
+  :profiles {:dev
+             {:source-paths ["env/dev/clj" "src/cljs"]
+              :hooks [leiningen.cljsbuild]
+              :optimizations :none
+              
+              :dependencies [[clojurescript-build "0.1.9"]
+                             [figwheel "0.5.0-2"]
+                             [figwheel-sidecar "0.5.0-2"]
+                             [com.cemerick/piggieback "0.2.1"]
+                             [weasel "0.7.0" :exclusions [org.clojure/clojurescript]]]
+              
+              :repl-options {:init-ns ohds.server
+                             :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
-                   :dependencies [[clojurescript-build "0.1.9"]
-                                  [figwheel "0.5.0-1"]
-                                  [figwheel-sidecar "0.5.0-1"]
-                                  [com.cemerick/piggieback "0.1.5"]
-                                  [weasel "0.6.0"]]
+              :plugins [[lein-figwheel "0.5.0-1"]]
 
-                   :repl-options {:init-ns ohds.server
-                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+              :figwheel {:http-server-root "public"                              
+                         :server-port 3449
+                         :autoload true
+                         :css-dirs ["resources/public/css"]
+                         :ring-handler ohds.server/http-handler}
 
-                   :plugins [[lein-figwheel "0.5.0-1"]]
+              :env {:is-dev true}
 
-                   :figwheel {:http-server-root "public"                              
-                              :server-port 3449
-                              :autoload true
-                              :css-dirs ["resources/public/css"]
-                              :ring-handler ohds.server/http-handler}
-
-                   :env {:is-dev true}
-
-                   :cljsbuild {:test-commands { "test" ["phantomjs" "env/test/js/unit-test.js" "env/test/unit-test.html"]}
-                               :builds {:app {:source-paths ["env/dev/cljs" "src/clj"]}
-                                        :test {:source-paths ["src/cljs" "src/clj" "test/cljs"]
-                                               :compiler {:output-to     "resources/public/js/app_test.js"
-                                                          :output-dir    "resources/public/js/test"
-                                                          :source-map    "resources/public/js/test.js.map"
-                                                          :preamble      ["react/react.min.js"]
-                                                          :optimizations :whitespace
-                                                          :pretty-print  false}}}}}
-
+              :cljsbuild {:test-commands { "test" ["phantomjs"
+                                                   "env/test/js/unit-test.js"
+                                                   "env/test/unit-test.html"]}
+                          :builds {:dev {:source-paths ["env/dev/cljs" "src/clj" "src/sljs"]
+                                         :compiler {:output-to     "resources/public/js/app.js"
+                                                    :output-dir    "resources/public/js/out"
+                                                    :source-map    "resources/public/js/out.js.map"
+                                                    :preamble      ["react/react.min.js"]
+                                                    :optimizations :none
+                                                    :pretty-print  true}}
+                                   :app {:source-paths ["env/dev/cljs" "src/clj"]}
+                                   :test {:source-paths ["src/cljs" "src/clj" "test/cljs"]
+                                          :compiler {:output-to     "resources/public/js/app_test.js"
+                                                     :output-dir    "resources/public/js/test"
+                                                     :source-map    "resources/public/js/test.js.map"
+                                                     :preamble      ["react/react.min.js"]
+                                                     :optimizations :whitespace
+                                                     :pretty-print  false}}}}}
+             
              :uberjar {:source-paths ["env/prod/clj"]
                        :hooks [leiningen.cljsbuild]
                        :env {:production true}

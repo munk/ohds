@@ -8,7 +8,6 @@
 
 
 (defn login [ch _]
-  (println "Doing login")
   [:span
    [:legend "Login"]
    (c/text-input ch m/->ChangeUsername "username" "Username")

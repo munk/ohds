@@ -14,7 +14,8 @@
           :password ""}
    :location-hierarchy "HIERARCHY_ROOT"
    :location {:name "" :uuid "" :extId "" :type "RURAL"}
-   :individual {:firstname "" :extId "" :gender "FEMALE"}
+   :socialgroup {:name nil :uuid "" :extId "" :type "FAMILY"}
+   :individual {:firstname nil :extId nil :gender "FEMALE"}
    :fieldworker-id ""
    :location-id ""
    :social-group-id ""

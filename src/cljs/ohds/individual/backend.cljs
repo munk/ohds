@@ -4,8 +4,6 @@
    [petrol.core :as petrol]
    [ohds.individual.messages :as m]))
 
-(println "loading backend")
-
 (defn create-individual
   [fieldworker-id first-name extId gender & more]
   (let [params (merge more {:fieldworker-id fieldworker-id

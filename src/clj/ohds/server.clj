@@ -18,16 +18,15 @@
 (defroutes routes
   (resources "/")
   (resources "/react" {:root "react"})
+
   (POST "/api/v1/login" req (ctrl/login req))
   (POST "/api/v1/locations" req (ctrl/create-location req))
+  (POST "/api/v1/socialgroups" req (ctrl/create-social-group req))
+  (POST "/api/v1/individuals" req (ctrl/create-individual req))
 
   (GET "/api/v1/locationHierarchy" req (ctrl/get-location-hierarchies))
   (GET "/api/v1/locations/:uuid" [uuid] (ctrl/locations uuid))
   (GET "/api/v1/locations/" [uuid] (ctrl/locations "HIERARCHY_ROOT"))
-  (POST "/api/v1/echo" req {:status 200
-                            :body (str "Params:" req)})
-
-  (POST "/api/v1/individuals" req (ctrl/create-individual req))
   (GET "/*" req (page)))
 
 (def http-handler

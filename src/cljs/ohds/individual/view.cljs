@@ -8,9 +8,9 @@
 (defn form [ch state]
   [:span
    [:legend "Individual"]
-   (c/text-input ch m/->ChangeFirstName (:first-name state)
+   (c/text-input ch m/->ChangeFirstName
                  "firstname" "First Name")
-   (c/text-input ch m/->ChangeExtId (:ext-id state)
+   (c/text-input ch m/->ChangeExtId
                  "extId" "External ID")
    (c/select ch m/->ChangeGender (:gender state)             
              "gender"

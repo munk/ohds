@@ -54,7 +54,6 @@
   (let [select-attr
         {:id id
          :data-width "100%"
-         :value val
          :on-change (send-value! ch msg)}
         opts (map option options)]
     (form-group
@@ -65,5 +64,4 @@
 (defn submit [ch msg txt]
   (form-group
    [:div.btn-group
-    [:button.btn.btn-lg.btn-primary {:on-click (send! ch (msg))} txt]])
-)
+    [:button.btn.btn-lg.btn-primary {:on-click (send! ch (msg))} txt]]))

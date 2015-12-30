@@ -45,7 +45,6 @@
   (process-message [response app]
     (let [uuid (:location response)
           loc (first (filter #(= (:uuid %) uuid) (:locations app)))]
-      (prn loc)
       (if (nil? loc) ;;;TODO: set uuid on location object when changes
         (assoc app :location {:uuid nil :name nil :extId nil :type nil})
         (assoc app :location loc))))

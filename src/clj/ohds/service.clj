@@ -18,6 +18,7 @@
 (def location-url "/locations")
 (def locations-by-hierarchy "/locations/bylocationhierarchy/bulk?locationHierarchyUuid=")
 (def individual-url "/individuals")
+(def socialgroup-url "/socialGroups")
 
 (defn now []
   (str (LocalDateTime/now) "Z"))
@@ -82,7 +83,6 @@
         :location (assoc loc "collectionDateTime" (now))}
        (post location-url)))
 
-
 ;;; Individual
 (defn create-individual ;;;TODO: Allow additional fields
   [collected-by individual-id first-name gender]
@@ -92,3 +92,13 @@
                      :gender gender
                      :collectionDateTime (now)}}
        (post individual-url)))
+
+;;; Social Group
+(defn create-social-group
+  [collected-by ext-id group-name group-type]
+  (->> {:collectedByUuid collected-by
+        :socialGroup {:extId ext-id
+                      :groupName group-name
+                      :groupType group-type
+                      :collectionDateTime (now)}}
+       (post socialgroup-url)))

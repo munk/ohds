@@ -23,14 +23,16 @@
        (case (:page app)
          :login [login/login ch (:user app)]
          :location [location/form ch app]
-         :socialgroup [socialgroup/form ch (:socialgroup app)]
-         :individual [individual/form ch (:individual app)]
+         :socialgroup [socialgroup/form ch app]
+         :individual [individual/form ch app]
          [:div "Error Loading Page..."])]]]
     [:div.cold-md-3
      [:div
       [:div (str "Current User: " (:fieldworker-id app))]
-      [:div {:title (str (:location app))} (str "Current Location: " (:uuid (:location app)))]
-      [:div (str "Current Social Group: " (:social-group-id app))]
-      [:div (str "Current Individual: " (:individual-id app))]]
-     
+      [:div {:title (str (:location app))}
+       (str "Current Location: " (:uuid (:location app)))]
+      [:div {:title (str (:socialgroup app))}
+       (str "Current Social Group: " (:uuid (:socialgroup app)))]
+      [:div {:title (str (:individual app))}
+       (str "Current Individual: " (:uuid (:individual app)))]]     
      ]]])

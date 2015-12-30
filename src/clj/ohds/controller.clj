@@ -12,12 +12,21 @@
               :ext-id s/Str
               :type (s/enum "RURAL" "URBAN")}})
 
+
 (def Individual-Request-Schema
   "A schema for individual posts"
   {:fieldworker-id s/Str
    :ext-id s/Str
    :first-name s/Str
    :gender s/Str})
+
+(def Socialgroup-Request-Schema
+  "A schema for socialgroup posts"
+  {:fieldworker-id s/Str
+   :ext-id s/Str
+   :group-name s/Str
+   :group-type s/Str})
+
 
 (defrecord Location
     [name extId type])
@@ -34,8 +43,10 @@
        :body "Bad username or password"}
       (str result))))
 
+
 (defn get-location-hierarchies []
   (json/write-str (svc/location-hierarchies)))
+
 
 (defn create-location [{:keys [params]}]
   (let [{:keys [fieldworker-id parent name extId type]} params]
@@ -44,22 +55,33 @@
       response)))
 
 
+(defn create-social-group [{:keys [params]}]
+  (try
+    (s/validate Socialgroup-Request-Schema params)
+    (let [collected-by (:fieldworker-id params)
+          ext-id (:ext-id params)
+          group-name (:group-name params)
+          group-type (:group-type params)]
+      (str (svc/create-social-group collected-by ext-id group-name group-type)))    
+    (catch Exception e
+      (println (.getMessage e))
+      {:status 400})))
+
+
 (defn create-individual [req]
-  (println "In Backend Creating Individuals")
   (try
     (s/validate Individual-Request-Schema (:params req))
-    (println "Validated")
     (let [params (:params req)
           collected-by (:fieldworker-id params)
           ext-id (:ext-id params)
           first-name (:first-name params)
           gender (:gender params)
           result (str (svc/create-individual collected-by ext-id first-name gender))]
-      (println "Result" result)
       result)
     (catch Exception e
       (println (.getMessage e))
       {:status 400})))
+
 
 (defn locations [uuid]
   (let [result (svc/locations uuid)]

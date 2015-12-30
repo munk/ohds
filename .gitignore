@@ -10,3 +10,5 @@ pom.xml.asc
 /out
 /.repl
 /resources/public/js
+figwheel_server.log
+todo

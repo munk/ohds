@@ -8,6 +8,7 @@
 (extend-protocol Message
   m/ChangeFirstName
   (process-message [response app]
+    (println "Change First Name" response (:individual app))
     (assoc-state response app :individual))
 
   m/ChangeExtId
@@ -16,7 +17,14 @@
 
   m/ChangeGender
   (process-message [response app]
-    (assoc-state response app :individual)))
+    (assoc-state response app :individual))
+
+  m/CreateIndividualResults
+  (process-message [response app]
+    (let [uuid (:body response)
+          individual (assoc (:individual app) :uuid uuid)]
+      (prn individual)
+      (assoc app :page :individual :individual individual))))
 
 
 (extend-protocol EventSource

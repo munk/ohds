@@ -17,7 +17,7 @@
    [:div {:style {:padding "20px"}}]
    [:div {:style {:color "red"}} (:errors app)]
    [:div.row
-    [:div.col-md-3
+    [:div.col-md-6
      [:div.well.well-lg
       [:fieldset
        (case (:page app)

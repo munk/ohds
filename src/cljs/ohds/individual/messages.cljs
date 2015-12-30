@@ -5,3 +5,7 @@
 (defrecord ChangeGender [gender])
 (defrecord CreateIndividual [])
 (defrecord CreateIndividualResults [body])
+(defrecord AddRelationship [])
+(defrecord AddMembership [])
+(defrecord Continue [])
+(defrecord Complete [])

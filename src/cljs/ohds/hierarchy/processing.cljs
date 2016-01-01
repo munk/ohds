@@ -17,7 +17,15 @@
           val (:val message)
           h (assoc (:hierarchies app) num val)]
       (println h)
-      (assoc app :hierarchies h))))
+      (assoc app :hierarchies h)))
+  m/StartCensus
+  (process-message
+      [message app]
+    (assoc app :page :location :mode :census))
+  m/StartVisit
+  (process-message
+      [message app]
+    (assoc app :page :location :mode :visit)))
 
 (extend-protocol EventSource
   m/ChangeLevel

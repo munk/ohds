@@ -8,6 +8,10 @@
 ;;;TODO Schema Validation
 
 
+(defn hierarchy
+  [state]
+  (let [h (:hierarchies state)]
+    (last (filter #(> (count %) 1) h))))
 
 (defn loc-select [ui-channel app]
   (let [opts  (map c/map->option'uuid (:locations app))]
@@ -39,5 +43,6 @@
 (defn form [ch state]
   [:span
    [:legend "Location"]
-   [location-select ch state]
+   [:div
+    (hierarchy state)]
    [location-form ch (:location state)]])

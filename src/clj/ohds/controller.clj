@@ -86,3 +86,7 @@
 (defn locations [uuid]
   (let [result (svc/locations uuid)]
     (json/write-str result)))
+
+(defn get-location-hierarchy-levels []
+  (let [result (svc/location-hierarchy-levels)]
+    (json/write-str result)))

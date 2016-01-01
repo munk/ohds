@@ -25,6 +25,8 @@
   (POST "/api/v1/individuals" req (ctrl/create-individual req))
 
   (GET "/api/v1/locationHierarchy" req (ctrl/get-location-hierarchies))
+  (GET "/api/v1/locationHierarchyLevels" req (ctrl/get-location-hierarchy-levels))
+  
   (GET "/api/v1/locations/:uuid" [uuid] (ctrl/locations uuid))
   (GET "/api/v1/locations/" [uuid] (ctrl/locations "HIERARCHY_ROOT"))
   (GET "/*" req (page)))

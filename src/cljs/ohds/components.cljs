@@ -36,6 +36,14 @@
       :placeholder placeholder
       :on-change (send-value! ch msg)}]]))
 
+(defn date-input [ch msg id]
+  (form-group
+   [:div.input-group
+    [:input.form-control
+     {:id id
+      :type :date
+      :on-change (send-value! ch msg)}]]))
+
 (defn map->option [m v n]
   [(v m) (n m)])
 
@@ -65,3 +73,9 @@
   (form-group
    [:div.btn-group
     [:button.btn.btn-lg.btn-primary {:on-click (send! ch (msg))} txt]]))
+
+(defn modal-toggle [target txt]
+  (form-group
+   [:div.btn-group
+    [:button.btn.btn-lg.btn-primary {:data-toggle "modal"
+                                     :data-target target} txt]]))

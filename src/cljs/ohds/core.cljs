@@ -9,9 +9,11 @@
 
 (def initial-state
   {:page :login
+   :mode :not-authorized
    :errors ""
    :user {:username ""
           :password ""}
+   :hierarchies ["HIERARCHY_ROOT" "" "" "" "" "" "" "" ""]
    :location-hierarchy "HIERARCHY_ROOT"
    :location {:name "" :uuid "" :extId "" :type "RURAL"}
    :socialgroup {:name nil :uuid "" :extId "" :type "FAMILY"}
@@ -27,7 +29,7 @@
   [ui-channel app]
   (enable-console-print!)
   (reagent/render-component [views/root-component ui-channel app]
-                            js/document.body))
+                             js/document.body))
 
 (defn main []
   (enable-console-print!)

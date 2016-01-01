@@ -7,15 +7,7 @@
 
 ;;;TODO Schema Validation
 
-(defn ohds-option [field]
-  (let [{uuid :uuid name :name} field]
-    [:option {:value uuid
-              :key uuid} name]))
 
-(defn ohds-hiera-option [field]
-  (let [{uuid :uuid name :name} field]
-    [:option {:value uuid
-              :key uuid} name]))
 
 (defn loc-select [ui-channel app]
   (let [opts  (map c/map->option'uuid (:locations app))]

@@ -24,7 +24,8 @@
       (case status
         200 (assoc app
                    :fieldworker-id body
-                   :page :location
+                   :page :hierarchy
+                   :mode :fieldworker-logged-in
                    :errors "")
         (assoc app :errors "Bad username or password")))))
 

@@ -7,6 +7,7 @@
 (defrecord ChangeLocationExtId [extId])
 (defrecord ChangeLocationType [type])
 (defrecord SubmitLocation [])
+(defrecord HierarchyLevelResults [body])
 (defrecord LocationHierarchyResults [body])
 (defrecord LocationResults [body])
 

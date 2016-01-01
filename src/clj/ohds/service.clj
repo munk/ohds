@@ -19,6 +19,7 @@
 (def locations-by-hierarchy "/locations/bylocationhierarchy/bulk?locationHierarchyUuid=")
 (def individual-url "/individuals")
 (def socialgroup-url "/socialGroups")
+(def location-hierarchy-levels-bulk-url "/locationHierarchyLevels/bulk.json")
 
 (defn now []
   (str (LocalDateTime/now) "Z"))
@@ -70,6 +71,9 @@
       nil)))
 
 ;;; Location
+(defn location-hierarchy-levels []
+  (get location-hierarchy-levels-bulk-url))
+
 (defn location-hierarchies []
   (get location-hierarchies-bulk-url))
 

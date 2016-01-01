@@ -27,19 +27,14 @@
     (let [{status :status
            body :body} response]
         (case status
-              200 (assoc app :location-hierarchies (process-ok body ["uuid" "name"])))))
+              200 (assoc app :location-hierarchies (process-ok body ["uuid" "name" "parent" "level"])))))
   m/LocationResults
   (process-message [response app]
     (let [{status :status
            body :body} response]
       (case status
         200 (assoc app :locations
-                   (->> body
-                        (t/read json-reader)
-                        (map #(select-keys
-                               %
-                               ["uuid" "name" "extId" "type"]))
-                        (map w/keywordize-keys)))
+                   (process-ok body ["uuid" "name" "extId" "type"]))
         (assoc app :errors (str "Failed to get locations!" status)))))
   m/ChangeLocation
   (process-message [response app]
@@ -55,7 +50,16 @@
       (assoc app :page :socialgroup :location location)))
   m/UpdateLocationResults
   (process-message [response app]
-    (assoc app :page :socialgroup)))
+    (assoc app :page :socialgroup))
+  m/HierarchyLevelResults
+  (process-message [response app]
+    (let [{status :status
+           body :body} response]
+      (case status
+        200 (assoc app
+                   :hierarchy-levels 
+                   (process-ok body
+                               ["keyIdentifier" "uuid" "name"]))))))
 
 
 (extend-protocol EventSource

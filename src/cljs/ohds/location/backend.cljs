@@ -4,6 +4,10 @@
     [petrol.core :as petrol]
     [ohds.location.messages :as m]))
 
+(defn hierarchy-levels []
+  (->> (http/get "/api/v1/locationHierarchyLevels")
+       (petrol/wrap m/map->HierarchyLevelResults)))
+
 (defn location-hierarchies []
   (->> (http/get "/api/v1/locationHierarchy")
        (petrol/wrap m/map->LocationHierarchyResults)))

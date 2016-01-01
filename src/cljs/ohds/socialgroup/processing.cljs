@@ -24,7 +24,6 @@
 (extend-protocol EventSource
   m/SubmitSocialGroup
   (watch-channels [_ app]
-    (println "Submit SocialGroup")
     (let [sg (:socialgroup app)
           fw (:fieldworker-id app)]
       #{(backend/create-socialgroup fw sg)})))

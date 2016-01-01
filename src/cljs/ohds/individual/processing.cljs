@@ -8,7 +8,6 @@
 (extend-protocol Message
   m/ChangeFirstName
   (process-message [response app]
-    (println "Change First Name" response (:individual app))
     (assoc-state response app :individual))
 
   m/ChangeExtId

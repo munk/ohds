@@ -16,13 +16,12 @@
     nil))
 
 (defn select [ch app i & more]
-  (let [ki (get i :keyIdentifier 0)
+  (let [ki (get i :keyIdentifier 0)        
         level (:uuid i)
-        parent (:uuid (:parent i))
-        hi (:hierarchies app)
         lh (:location-hierarchies  app)
         lh' (filter (fn [h]
-                      (let [lid (:level h)
+                      (let [hi (:hierarchies app)
+                            lid (:level h)
                             parent (:uuid (:parent h))]
                         (and
                          (= parent (get hi ki))
@@ -48,8 +47,8 @@
      (map #(select ch app %) levelsf)
      [:div.form-group
       [:div 
-       [:button.btn.btn-success.btn-default "Census"]
-       [:button.btn.btn-success.btn-default "Visit"]]
+       [:button.btn.btn-success.btn-default {:on-click (send! ch (m/->StartCensus))} "Census"]
+       [:button.btn.btn-success.btn-default {:on-click (send! ch (m/->StartVisit))} "Visit"]]
       (:hierarchies app)]]))
 
 

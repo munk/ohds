@@ -25,7 +25,7 @@
         (.removeChild (.-body js/document) div)))))
 
 
-(defn found-in [re div]
+(defn found-in [re div] 
   (let [res (.-innerHTML div)]
     (if (re-find re res)
       true

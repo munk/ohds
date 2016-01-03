@@ -8,6 +8,11 @@
 
 (def json-reader (t/reader :json))
 
+(defn hierarchy
+  [state]
+  (let [h (:hierarchies state)]
+    (last (filter #(> (count %) 1) h))))
+
 (extend-protocol Message
   m/ChangeLevelSelect
   (process-message
@@ -25,7 +30,7 @@
   m/StartVisit
   (process-message
       [message app]
-    (assoc app :page :location :mode :visit)))
+    (assoc app :location-hierarchy (hierarchy app) :page :location :mode :visit)))
 
 (extend-protocol EventSource
   m/ChangeLevel

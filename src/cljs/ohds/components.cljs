@@ -15,7 +15,7 @@
       {:id id
        :type :text
        :placeholder placeholder
-       :on-change (send-value! ch msg)}]]))
+       :onChange (send-value! ch msg)}]]))
   ([ch msg val id placeholder]
    (form-group
     [:div.input-group

@@ -10,7 +10,10 @@
 
 (extend-protocol Message
   m/ChangeUsername
-  (process-message [response app]
+  (process-message
+      "Update state with username"
+      [response app]
+    
     (assoc-state response app :user))
 
   m/ChangePassword

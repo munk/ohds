@@ -13,24 +13,6 @@
   (let [h (:hierarchies state)]
     (last (filter #(> (count %) 1) h))))
 
-(defn loc-select [ui-channel app]
-  (let [opts  (map c/map->option'uuid (:locations app))]
-    [:div
-     (c/select ui-channel m/->ChangeLocation "location" "New Location"
-               opts [:option {:value "New Location" :key "new-location"} "New Location"])]))
-
-(defn loc-hiera-select [ui-channel app]
-  (let [opts (map c/map->option'uuid (:location-hierarchies app))]
-    [:div
-     (c/select ui-channel m/->ChangeLocationHierarchy "hierarchy" "HIERARCHY_ROOT" opts)]))
-
-(defn location-select [ui-channel app]
-  [:div
-   [:div
-    [loc-hiera-select ui-channel app]]
-   [:div
-    [loc-select ui-channel app]]])
-
 (defn location-form [ch state]
   [:div
    (c/select ch m/->ChangeLocationType "type" (:type state)

@@ -2,9 +2,11 @@
   (:require-macros
    [cljs.core.async.macros :refer [go]])
   (:require
+   [petrol.core :refer [process-message watch-channels wrap]]
    [reagent.core :as reagent]))
 
 (declare mock-login)
+
 
 (def isClient (not (nil? (try (.-document js/window)
                               (catch js/Object e nil)))))

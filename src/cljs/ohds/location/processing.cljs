@@ -47,6 +47,7 @@
   (process-message [response app]
     (let [uuid (:uuid response)
           location (assoc (:location app) :uuid uuid)]
+      (println "Location" response location)
       (assoc app :page :socialgroup :location location)))
   m/UpdateLocationResults
   (process-message [response app]

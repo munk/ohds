@@ -31,7 +31,4 @@
       [message app]
     (assoc app :location-hierarchy (hierarchy app) :page :location :mode :visit)))
 
-(extend-protocol EventSource
-  m/ChangeLevel
-  (watch-channels [response app]
-    #{(backend/children response)}))
+

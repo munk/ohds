@@ -2,8 +2,11 @@
   (:require
    [cljs.test :refer-macros [run-tests]]
    [ohds.hierarchy-test]
-   [ohds.backend-test]
    [ohds.login-test]
+   [ohds.location-test]
+   [ohds.backend-test]
+   
+   
    [ohds.views-test]))
 
 (enable-console-print!)
@@ -13,6 +16,7 @@
        (run-tests
         'ohds.login-test
         'ohds.hierarchy-test
+        'ohds.location-test
         'ohds.backend-test
         'ohds.views-test))
     0

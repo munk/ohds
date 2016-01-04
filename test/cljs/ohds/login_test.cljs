@@ -3,6 +3,7 @@
    [ohds.login.view :as view]
    [ohds.login.messages :as m]
    [ohds.login.processing :as p]
+   [ohds.processing :as op]
    [ohds.framework :refer [with-mounted-component found-in elem]]
    [cljs-http.client :as http]
    [petrol.core :refer [process-message watch-channels wrap]]
@@ -16,12 +17,14 @@
           expected {:user {:username "user"}}]
       (is (= expected
              (process-message msg app)))))
+
   (testing "change password updates state with new password"
     (let [msg (m/->ChangePassword "pwd")
           app {:user {:password "not-a-password"}}
           expected {:user {:password "pwd"}}]
       (is (= expected
              (process-message msg app)))))
+
   (testing "submitting login updates fieldworker-id, page, and mode"
     (let [response {:status 200
                        :body "some-uuid"}
@@ -36,7 +39,14 @@
                     :errors ""}]
       (is (= expected
              (process-message msg app)))))
-  ;(testing "unsuccessful login ")
+  
+  (testing "unsuccessful login "
+    (let [msg (m/map->LoginResults {:status 400})
+          app {:errors ""}
+          expected {:errors "Bad username or password"}
+          actual (process-message msg app)]
+      (is (= expected actual))))
+
   (testing "fieldworker login calls backend correctly"
     (with-redefs [http/post (fn [url parmas] {:status 200 :body "some-uuid-response"})
                   wrap (fn [msg ch] (msg ch))]
@@ -44,4 +54,7 @@
                                                                   :password "pwd"}})
             expected #{(m/map->LoginResults {:body "some-uuid-response" :status 200})}]
         
-        (is (= actual expected))))))
+        (is (= actual expected)))))
+
+  (testing "login results event triggers initial state from backend"
+    ))

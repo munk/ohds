@@ -1,4 +1,5 @@
 (ns ohds.service
+  (:refer-clojure :exclude [get])
   (:require
    [crypto.password.bcrypt :as bcrypt]
    [clojure.edn :as edn]
@@ -35,7 +36,6 @@
    (http/post (str apihost url))
    (deref)
    (:body)
-   ((fn [res] (println "In post. Result:" res) res))
    (json->cljs)
    (:uuid)))
 

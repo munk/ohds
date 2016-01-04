@@ -12,7 +12,7 @@
       (try
         [:option {:key uuid :value uuid} name]
         (catch js/Object e
-          (println "failed at" name))))
+          (println "failed to parse" name)))) ;;;TODO: Add logger
     nil))
 
 (defn select [ch app i & more]

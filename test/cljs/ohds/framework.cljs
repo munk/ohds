@@ -4,6 +4,8 @@
   (:require
    [reagent.core :as reagent]))
 
+(declare mock-login)
+
 (def isClient (not (nil? (try (.-document js/window)
                               (catch js/Object e nil)))))
 

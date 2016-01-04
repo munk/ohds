@@ -26,4 +26,4 @@
 
 (expect 200 (:status (request "/api/v1/locations" routes :post {})))
 
-(expect 400 (:status (request "/api/v1/individuals" routes :post {})))
+(expect 400 (:status (request "/api/v1/individuals" routes :post {:params {:value "expected to fail"}})))

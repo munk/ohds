@@ -21,7 +21,6 @@
           id (:id message)
           val (:val message)
           h (assoc (:hierarchies app) num val)]
-      (println h)
       (assoc app :hierarchies h)))
   m/StartCensus
   (process-message

@@ -64,7 +64,7 @@
           group-type (:group-type params)]
       (str (svc/create-social-group collected-by ext-id group-name group-type)))    
     (catch Exception e
-      (println (.getMessage e))
+      (println params (.getMessage e))
       {:status 400})))
 
 
@@ -79,7 +79,7 @@
           result (str (svc/create-individual collected-by ext-id first-name gender))]
       result)
     (catch Exception e
-      (println (.getMessage e))
+      (println req (.getMessage e))
       {:status 400})))
 
 

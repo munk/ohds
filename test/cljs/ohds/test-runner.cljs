@@ -5,6 +5,7 @@
    [ohds.login-test]
    [ohds.location-test]
    [ohds.socialgroup-test]
+   [ohds.individual-test]
    [ohds.backend-test]
    [ohds.views-test]))
 
@@ -17,6 +18,7 @@
         'ohds.hierarchy-test
         'ohds.location-test
         'ohds.socialgroup-test
+        'ohds.individual-test
         'ohds.backend-test
         'ohds.views-test))
     0

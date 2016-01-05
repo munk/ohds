@@ -45,9 +45,8 @@
         (assoc app :location loc))))
   m/CreateLocationResults
   (process-message [response app]
-    (let [uuid (:uuid response)
+    (let [uuid (:body response)
           location (assoc (:location app) :uuid uuid)]
-      (println "Location" response location)
       (assoc app :page :socialgroup :location location)))
   m/UpdateLocationResults
   (process-message [response app]
@@ -79,6 +78,6 @@
           type (:type location)
           fieldworker-id (:fieldworker-id app)
           parent (:hierarchy app)]
-      (if (nil? (:uuid location))
-        #{(backend/create-location fieldworker-id parent name extId type)}
-        #{(backend/update-location (:location app))}))))
+      (if (seq (:uuid location))
+        #{(backend/update-location (:location app))}
+        #{(backend/create-location fieldworker-id parent name extId type)}))))

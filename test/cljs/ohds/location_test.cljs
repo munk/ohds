@@ -42,9 +42,10 @@
                                           :body "location-uuid"})
           app {:location {:name "Loc-Name"
                           :extId "Loc-Name"
-                          :type "RURAL"}}]
+                          :type "RURAL"}}
+          actual (process-message msg app)]
       (is (= {:page :socialgroup :location {:uuid "location-uuid"
                                             :name "Loc-Name"
                                             :extId "Loc-Name"
                                             :type "RURAL"}}
-             (process-message msg app))))))
+             actual)))))

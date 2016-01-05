@@ -1,5 +1,5 @@
 (ns ohds.login-test
-  (:require  
+  (:require
    [ohds.login.view :as view]
    [ohds.login.messages :as m]
    [ohds.location.messages :as lm]
@@ -18,6 +18,14 @@
 
 (defn mock-wrap [m c]
   (m c))
+
+
+(deftest login-form-test
+  (with-mounted-component (view/login nil {})
+    (fn [c div]
+      (is (found-in #"Username" div))
+      (is (found-in #"Password" div))
+      (is (found-in #"<button.*Login" div)))))
 
 (deftest login-test
   (testing "change username updates state with new username"
@@ -38,7 +46,7 @@
                     :errors ""}]
       (is (= expected
              (process-message msg {})))))
-  
+
   (testing "unsuccessful login "
     (let [msg (m/map->LoginResults {:status 400})
           expected {:errors "Bad username or password"}
@@ -50,14 +58,14 @@
                   wrap mock-wrap]
       (let [actual (watch-channels (m/->FieldworkerLogin) {:user {:username "foo"
                                                                   :password "pwd"}})
-            expected #{(m/map->LoginResults {:body "some-uuid-response" :status 200})}]        
+            expected #{(m/map->LoginResults {:body "some-uuid-response" :status 200})}]
         (is (= actual expected)))))
 
   (testing "login results event triggers initial state from backend"
     (with-redefs [http/get (fn [url body]
                               (if (= url "/api/v1/locationHierarchyLevels")
                                 {:status 200 :body "level-data"}
-                                {:status 200 :body "hiera-data"}))                  
+                                {:status 200 :body "hiera-data"}))
                   wrap mock-wrap]
       (let [actual (watch-channels (m/->LoginResults {}) {})
             expected #{(lm/map->HierarchyLevelResults {:status 200 :body "level-data"})

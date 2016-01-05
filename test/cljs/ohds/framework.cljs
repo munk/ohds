@@ -29,7 +29,7 @@
         (.removeChild (.-body js/document) div)))))
 
 
-(defn found-in [re div] 
+(defn found-in [re div]
   (let [res (.-innerHTML div)]
     (if (re-find re res)
       true
@@ -58,7 +58,7 @@
 (defn mock-post [url & args]
   (go
     (case url
-      "/api/v1/login" (mock-login args)      
+      "/api/v1/login" (mock-login args)
       {:status 404 :body "invalid url"})))
 
 (defn elem [id]

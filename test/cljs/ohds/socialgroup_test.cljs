@@ -9,4 +9,15 @@
    [cljs.test :refer-macros [deftest is testing run-tests]]))
 
 (deftest socialgroup-test
-  (is (= 0 1)))
+  (testing "changing external id updates app state"
+    (let [msg (m/->ChangeExtId "extid")]
+      (is (= {:socialgroup {:extId "extid"}})
+          (process-message msg {}))))
+  (testing "changing group name updates app state"
+    (let [msg (m/->ChangeGroupName "gname")]
+      (is (= {:socialgroup {:name "gname"}}
+             (process-message msg {})))))
+  (testing "changing group type updates app state"
+    (let [msg (m/->ChangeGroupType "COHORT")]
+      (is (= {:socialgroup {:type "COHORT"}}
+             (process-message msg {}))))))

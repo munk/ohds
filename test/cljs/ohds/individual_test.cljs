@@ -20,4 +20,8 @@
   (testing "changing gender updates app state"
     (let [msg (m/->ChangeGender "FEMALE")]
       (is (= {:individual {:extId "FEMALE"}})
-          (process-message msg {})))))
+          (process-message msg {}))))
+  (testing "submitting individual calls backend correctly"
+    (is (= 0 1)))
+  (testing "create individual results updates state correctly"
+    (is (= 0 1))))

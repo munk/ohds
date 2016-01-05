@@ -37,4 +37,6 @@
                                  :body "a-uuid"})
                     wrap (fn [m c] (m c))]
         (is (= #{(m/map->CreateSocialGroupResults {:status 200 :body "a-uuid"})}
-               (watch-channels msg app)))))))
+               (watch-channels msg app))))))
+  (testing "social group results updates state correctly"
+    (is (= 0 1))))

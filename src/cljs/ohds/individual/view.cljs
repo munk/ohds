@@ -17,7 +17,7 @@
                   "firstname" "First Name")
     (c/text-input ch m/->ChangeExtId
                   "extId" "External ID")
-    (c/select ch m/->ChangeGender (:gender state)             
+    (c/select ch m/->ChangeGender (:gender state)
               "gender"
               [["FEMALE" "Female"] ["MALE" "Male"]])
     (c/modal-toggle "#relationModal" "Add Relationship")

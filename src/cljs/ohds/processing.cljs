@@ -32,6 +32,5 @@
 (extend-protocol EventSource
   lm/LoginResults
   (watch-channels [_ _]
-    (println "watching login results")
     #{(backend/hierarchy-levels)
       (backend/location-hierarchies)}))

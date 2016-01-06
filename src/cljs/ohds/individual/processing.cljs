@@ -22,7 +22,6 @@
   (process-message [response app]
     (let [uuid (:body response)
           individual (assoc (:individual app) :uuid uuid)]
-      (prn individual)
       (assoc app :page :individual :individual individual))))
 
 

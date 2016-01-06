@@ -5,20 +5,17 @@
    [ohds.location.messages :as lm]
    [ohds.login.processing :as p]
    [ohds.processing :as op]
-   [ohds.framework :refer [with-mounted-component found-in elem]]
+   [ohds.framework :refer [with-mounted-component found-in mock-wrap]
+    :as fw]
    [cljs-http.client :as http]
    [petrol.core :refer [process-message watch-channels wrap]]
    [cljs.test :refer-macros [deftest is testing run-tests]]))
 
-
 (defn mock-post [status body]
+  ;;;Why does this need to be in the local ns for with-redefs to use it??
   (fn [_ _]
     {:status status
      :body body}))
-
-(defn mock-wrap [m c]
-  (m c))
-
 
 (deftest login-form-test
   (with-mounted-component (view/login nil {})
@@ -54,8 +51,10 @@
       (is (= expected actual))))
 
   (testing "fieldworker login calls backend correctly"
+    (let [mock-post (fm/mock-post 200 "some-uuid-response")])
     (with-redefs [http/post (mock-post 200 "some-uuid-response")
                   wrap mock-wrap]
+      (println "post is" http/post)
       (let [actual (watch-channels (m/->FieldworkerLogin) {:user {:username "foo"
                                                                   :password "pwd"}})
             expected #{(m/map->LoginResults {:body "some-uuid-response" :status 200})}]

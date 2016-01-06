@@ -7,6 +7,13 @@
 
 (declare mock-login)
 
+(defn mock-post [status body]
+  (fn [_ _]
+    {:status status
+     :body body}))
+
+(defn mock-wrap [m c]
+  (m c))
 
 (def isClient (not (nil? (try (.-document js/window)
                               (catch js/Object e nil)))))

@@ -39,4 +39,14 @@
         (is (= #{(m/map->CreateSocialGroupResults {:status 200 :body "a-uuid"})}
                (watch-channels msg app))))))
   (testing "social group results updates state correctly"
-    (is (= 0 1))))
+    (let [msg (m/map->CreateSocialGroupResults {:status 200 :body "a-uuid"})
+          app {:socialgroup {:name "gname"
+                             :extId "extId"
+                             :type "COHORT"}}
+          expected  {:socialgroup {:name "gname"
+                                   :extId "extId"
+                                   :type "COHORT"
+                                   :uuid "a-uuid"}
+                     :page :individual}]
+      (is (= expected
+             (process-message msg app))))))

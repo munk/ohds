@@ -23,12 +23,6 @@
   m/ChangeLocationHierarchy
   (process-message [response app]
     (assoc app :location-hierarchy (:hierarchy response)))
-  m/LocationHierarchyResults
-  (process-message [response app]
-    (let [{status :status
-           body :body} response]
-        (case status
-              200 (assoc app :location-hierarchies (process-ok body ["uuid" "name" "parent" "level"])))))
   m/LocationResults
   (process-message [response app]
     (let [{status :status
@@ -51,16 +45,7 @@
       (assoc app :page :socialgroup :location location)))
   m/UpdateLocationResults
   (process-message [response app]
-    (assoc app :page :socialgroup))
-  m/HierarchyLevelResults
-  (process-message [response app]
-    (let [{status :status
-           body :body} response
-          result (process-ok body  ["keyIdentifier" "uuid" "name"])]
-      (case status
-        200 (assoc app
-                   :hierarchy-level-count (dec (count result))
-                   :hierarchy-levels result)))))
+    (assoc app :page :socialgroup)))
 
 
 (extend-protocol EventSource

@@ -21,10 +21,37 @@
        (map w/keywordize-keys)))
 
 ;;; High level events
+(extend-protocol Message
+  m/LoginResults
+  (process-message [response app]
+    (let [{status :status
+           body :body} response]
+      (case status
+        200 (assoc app
+                   :fieldworker-id body
+                   :page :hierarchy
+                   :mode :fieldworker-logged-in
+                   :errors "")
+        (assoc app :errors "Bad username or password"))))
+  m/LocationHierarchyResults
+  (process-message [response app]
+    (let [{status :status
+           body :body} response]
+      (case status
+        200 (assoc app :location-hierarchies (process-ok body ["uuid" "name" "parent" "level"])))))
+  m/HierarchyLevelResults
+  (process-message [response app]
+    (let [{status :status
+           body :body} response
+          result (process-ok body  ["keyIdentifier" "uuid" "name"])]
+      (case status
+        200 (assoc app
+                   :hierarchy-level-count (dec (count result))
+                   :hierarchy-levels result)))))
 
 (extend-protocol EventSource
   m/LocationHierarchyResults
-    (watch-channels [_ _]
+  (watch-channels [_ _]
       #{(backend/locations)}))
 
 (extend-protocol EventSource

@@ -20,7 +20,6 @@
 
   m/MoreResidents
   (process-message [response app]
-    (println "Toggling more residents")
     (let [more-residents (not (:more-residents app))]
       (assoc app :more-residents more-residents)))
 

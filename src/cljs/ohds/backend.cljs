@@ -9,14 +9,14 @@
   (go
     (->> body
          (http/post url)
-         (<!)))
+         (<!))))
 
- (defn locations
-   ([]
-    (locations "HIERARCHY_ROOT"))
-   ([uuid]
-    (->> (http/get (str "/api/v1/locations/" uuid))
-         (petrol/wrap m/map->LocationResults)))))
+(defn locations
+  ([]
+   (locations "HIERARCHY_ROOT"))
+  ([uuid]
+   (->> (http/get (str "/api/v1/locations/" uuid))
+        (petrol/wrap m/map->LocationResults))))
 
 (defn hierarchy-levels []
   (->> (http/get "/api/v1/locationHierarchyLevels")

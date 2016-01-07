@@ -39,10 +39,10 @@
 
     (let [actual (watch-channels (m/->FieldworkerLogin) {:user {:username ""
                                                                 :password ""}})
-          expected #{(m/map->LoginResults {:status 401})}]
+          expected #{(om/map->LoginResults {:status 401})}]
       (is (= actual expected)))
 
-    (let [msg (m/map->LoginResults {:status 401})
+    (let [msg (om/map->LoginResults {:status 401})
           no-user {:user {:username ""
                           :password "pwd"}}
           no-pswd {:user {:username "usr"
@@ -57,7 +57,7 @@
              (process-message msg no-pswd)))))
 
   (testing "submitting login updates fieldworker-id, page, and mode"
-    (let [msg (m/map->LoginResults {:status 200 :body "some-uuid"})
+    (let [msg (om/map->LoginResults {:status 200 :body "some-uuid"})
           expected {:fieldworker-id "some-uuid"
                     :page :hierarchy
                     :mode :fieldworker-logged-in
@@ -66,7 +66,7 @@
              (process-message msg {})))))
 
   (testing "unsuccessful login"
-    (let [msg (m/map->LoginResults {:status 400})
+    (let [msg (om/map->LoginResults {:status 400})
           expected {:errors "Bad username or password"}
           actual (process-message msg {})]
       (is (= expected actual))))
@@ -76,7 +76,7 @@
                   wrap mock-wrap]
       (let [actual (watch-channels (m/->FieldworkerLogin) {:user {:username "foo"
                                                                   :password "pwd"}})
-            expected #{(m/map->LoginResults {:body "some-uuid-response" :status 200})}]
+            expected #{(om/map->LoginResults {:body "some-uuid-response" :status 200})}]
         (is (= actual expected)))))
 
   (testing "login results event triggers initial state from backend"

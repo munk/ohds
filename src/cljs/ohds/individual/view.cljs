@@ -20,6 +20,8 @@
     (c/select ch m/->ChangeGender (:gender state)
               "gender"
               [["FEMALE" "Female"] ["MALE" "Male"]])
+    [:input {:type "checkbox"
+             :onChange (send! ch (m/->MoreResidents))} "More Residents"]
     (c/modal-toggle "#relationModal" "Add Relationship")
     (c/modal-toggle "#membershipModal" "Add Membership")
     (c/submit ch m/->CreateIndividual "Save")]])

@@ -7,7 +7,7 @@
    [ohds.location.view :as location]
    [ohds.socialgroup.view :as socialgroup]
    [ohds.individual.view :as individual]
-   
+
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 
@@ -32,12 +32,10 @@
    [:div.row
     [:div.col-md-4]
     [:div.col-md-3
-     
      [:div.well.well-lg
       [:fieldset
        (if (= (:mode app) :not-authorized)
          (login/login ch (:user app))
-         
          (case (:page app)
            :login [login/login ch (:user app)]
            :hierarchy [hierarchy/form ch app]

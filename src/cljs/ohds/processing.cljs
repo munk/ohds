@@ -3,10 +3,8 @@
    [clojure.walk :as w]
    [petrol.core :refer [Message EventSource]]
    [cognitect.transit :as t]
-   [ohds.location.backend :as backend]
-   [ohds.messages :as m]
-   [ohds.login.messages :as lm]
-   [ohds.location.messages :as locm]))
+   [ohds.backend :as backend]
+   [ohds.messages :as m]))
 
 (def json-reader (t/reader :json))
 
@@ -25,12 +23,12 @@
 ;;; High level events
 
 (extend-protocol EventSource
-  locm/LocationHierarchyResults
+  m/LocationHierarchyResults
     (watch-channels [_ _]
       #{(backend/locations)}))
 
 (extend-protocol EventSource
-  lm/LoginResults
+  m/LoginResults
   (watch-channels [_ _]
     #{(backend/hierarchy-levels)
       (backend/location-hierarchies)}))

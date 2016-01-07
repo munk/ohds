@@ -20,6 +20,8 @@
           expected {:page :location :mode :census}
           actual (process-message msg app)]
       (is (= expected actual))))
+  (testing "start census does not update if levels are unselected"
+    (let [msg (m/->StartCensus)]))
   (testing "start visit updates app with new page and visit mode"
     (let [msg (m/->StartVisit)
           app {:page :test :mode :test :hierarchies ["h0" "h1" "a-uuid"]}
@@ -27,4 +29,3 @@
                     :page :location :mode :visit}
           actual (process-message msg app)]
       (is (= expected actual)))))
-  

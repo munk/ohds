@@ -5,6 +5,7 @@
     [petrol.core :refer [Message EventSource]]
     [ohds.location.messages :as m]
     [ohds.location.backend :as backend]
+    [ohds.backend :as ohds-backend]
     [ohds.processing :refer [assoc-state process-ok]]))
 
 (def json-reader (t/reader :json))
@@ -54,22 +55,22 @@
   m/HierarchyLevelResults
   (process-message [response app]
     (let [{status :status
-           body :body} response]
+           body :body} response
+          result (process-ok body  ["keyIdentifier" "uuid" "name"])]
       (case status
         200 (assoc app
-                   :hierarchy-levels 
-                   (process-ok body
-                               ["keyIdentifier" "uuid" "name"]))))))
+                   :hierarchy-level-count (dec (count result))
+                   :hierarchy-levels result)))))
 
 
 (extend-protocol EventSource
   m/LocationHierarchyResults
   (watch-channels [_ _]
-    #{(backend/locations)})
+    #{(ohds-backend/locations)})
   m/ChangeLocationHierarchy
   (watch-channels [response app]
     (let [{uuid :hierarchy} response]
-      #{(backend/locations uuid)}))
+      #{(ohds-backend/locations uuid)}))
   m/SubmitLocation
   (watch-channels [response app]
     (let [location (:location app)

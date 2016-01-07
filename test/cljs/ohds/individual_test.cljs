@@ -9,18 +9,30 @@
    [cljs.test :refer-macros [deftest is testing run-tests]]))
 
 (deftest individual-test
-  (testing "changing external id updates app state"
+  (testing "changing external id updates individual::extId"
     (let [msg (m/->ChangeExtId "extid")]
       (is (= {:individual {:extId "extid"}}
              (process-message msg {})))))
-  (testing "changing first name updates app state"
+
+  (testing "changing first name updates individual::firstname"
     (let [msg (m/->ChangeFirstName "fname")]
       (is (= {:individual {:firstname "fname"}}
              (process-message msg {})))))
+
   (testing "changing gender updates app state"
     (let [msg (m/->ChangeGender "FEMALE")]
       (is (= {:individual {:gender "FEMALE"}}
              (process-message msg {})))))
+
+  (testing "MoreResidents event toggles more-residents"
+    (let [msg (m/->MoreResidents)]
+      (is (= {:more-residents true}
+             (process-message msg {})))
+      (is (= {:more-residents true}
+             (process-message msg {:more-residents false})))
+      (is (= {:more-residents false}
+             (process-message msg {:more-residents true})))))
+
   (testing "submitting individual calls backend correctly"
     (let [msg (m/->CreateIndividual)
           app {:individual {:extId "extid"
@@ -37,6 +49,7 @@
                     wrap (fn [m c] (m c))]
         (is (= #{(m/map->CreateIndividualResults {:status 200 :body "a-uuid"})}
                (watch-channels msg app))))))
+
   (testing "create individual results updates state correctly"
     (let [msg (m/map->CreateIndividualResults {:status 200 :body "a-uuid"})
           app {:individual {:extId "extid"

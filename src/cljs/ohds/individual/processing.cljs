@@ -18,6 +18,12 @@
   (process-message [response app]
     (assoc-state response app :individual))
 
+  m/MoreResidents
+  (process-message [response app]
+    (println "Toggling more residents")
+    (let [more-residents (not (:more-residents app))]
+      (assoc app :more-residents more-residents)))
+
   m/CreateIndividualResults
   (process-message [response app]
     (let [uuid (:body response)
@@ -35,4 +41,3 @@
           extId (:extId individual)
           gender (:gender individual)]
       #{(backend/create-individual fieldworker-id first-name extId gender)})))
-

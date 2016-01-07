@@ -33,4 +33,9 @@
 (extend-protocol EventSource
   m/FieldworkerLogin
   (watch-channels [_ {:keys [user] :as app}]
-    #{(backend/login user)}))
+    (let [user-ct (count (:username user))
+          pass-ct (count (:password user))]
+      (if (and (> user-ct 0)
+               (> pass-ct 0))
+        #{(backend/login user)}
+        #{(m/map->LoginResults {:status 401})}))))

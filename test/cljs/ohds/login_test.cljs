@@ -2,7 +2,7 @@
   (:require
    [ohds.login.view :as view]
    [ohds.login.messages :as m]
-   [ohds.location.messages :as lm]
+   [ohds.messages :as om]
    [ohds.login.processing :as p]
    [ohds.processing :as op]
    [ohds.framework :refer [with-mounted-component found-in mock-wrap]
@@ -35,6 +35,27 @@
       (is (= {:user {:password "pwd"}}
              (process-message msg {})))))
 
+  (testing "submitting login without username or password displays error message"
+
+    (let [actual (watch-channels (m/->FieldworkerLogin) {:user {:username ""
+                                                                :password ""}})
+          expected #{(m/map->LoginResults {:status 401})}]
+      (is (= actual expected)))
+
+    (let [msg (m/map->LoginResults {:status 401})
+          no-user {:user {:username ""
+                          :password "pwd"}}
+          no-pswd {:user {:username "usr"
+                          :password ""}}]
+      (is (= {:user {:username ""
+                     :password "pwd"}
+              :errors "Bad username or password"}
+             (process-message msg no-user)))
+      (is (= {:user {:username "usr"
+                     :password ""}
+              :errors "Bad username or password"}
+             (process-message msg no-pswd)))))
+
   (testing "submitting login updates fieldworker-id, page, and mode"
     (let [msg (m/map->LoginResults {:status 200 :body "some-uuid"})
           expected {:fieldworker-id "some-uuid"
@@ -44,29 +65,29 @@
       (is (= expected
              (process-message msg {})))))
 
-  (testing "unsuccessful login "
+  (testing "unsuccessful login"
     (let [msg (m/map->LoginResults {:status 400})
           expected {:errors "Bad username or password"}
           actual (process-message msg {})]
       (is (= expected actual))))
 
   (testing "fieldworker login calls backend correctly"
-    (let [mock-post (fm/mock-post 200 "some-uuid-response")])
     (with-redefs [http/post (mock-post 200 "some-uuid-response")
                   wrap mock-wrap]
-      (println "post is" http/post)
       (let [actual (watch-channels (m/->FieldworkerLogin) {:user {:username "foo"
                                                                   :password "pwd"}})
             expected #{(m/map->LoginResults {:body "some-uuid-response" :status 200})}]
         (is (= actual expected)))))
 
   (testing "login results event triggers initial state from backend"
-    (with-redefs [http/get (fn [url body]
-                              (if (= url "/api/v1/locationHierarchyLevels")
-                                {:status 200 :body "level-data"}
-                                {:status 200 :body "hiera-data"}))
-                  wrap mock-wrap]
-      (let [actual (watch-channels (m/->LoginResults {}) {})
-            expected #{(lm/map->HierarchyLevelResults {:status 200 :body "level-data"})
-                       (lm/map->LocationHierarchyResults {:status 200 :body "hiera-data"})}]
-        (is (= expected actual))))))
+    (let [level-response {:status 200 :body "level-data"}
+          hiera-response {:status 200 :body "hiera-data"}]
+        (with-redefs [http/get (fn [url body]
+                                 (if (= url "/api/v1/locationHierarchyLevels")
+                                   level-response
+                                   hiera-response))
+                      wrap mock-wrap]
+          (let [actual (watch-channels (om/->LoginResults {}) {})
+                expected #{(om/map->HierarchyLevelResults level-response)
+                           (om/map->LocationHierarchyResults hiera-response)}]
+            (is (= expected actual)))))))

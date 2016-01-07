@@ -9,3 +9,4 @@
 (defrecord AddMembership [])
 (defrecord Continue [])
 (defrecord Complete [])
+(defrecord MoreResidents [])

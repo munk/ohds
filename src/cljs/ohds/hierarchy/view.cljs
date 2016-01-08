@@ -48,5 +48,4 @@
      [:div.form-group
       [:div
        [:button.btn.btn-success.btn-default {:on-click (send! ch (m/->StartCensus))} "Census"]
-       [:button.btn.btn-success.btn-default {:on-click (send! ch (m/->StartVisit))} "Visit"]]
-      (:hierarchies app)]]))
+       [:button.btn.btn-success.btn-default {:on-click (send! ch (m/->StartVisit))} "Visit"]]]]))

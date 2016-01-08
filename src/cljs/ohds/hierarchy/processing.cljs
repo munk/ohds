@@ -20,12 +20,17 @@
     (let [num (:num message)
           id (:id message)
           val (:val message)
-          h (assoc (:hierarchies app) num val)]
+          h (assoc (:hierarchies app) num val)]      
       (assoc app :hierarchies h)))
   m/StartCensus
   (process-message
       [message app]
-    (assoc app :page :location :mode :census))
+    (let [selected-level-count (dec (count (filter #(< 0 (count %)) (:hierarchies app))))
+          expected-level-count (:hierarchy-level-count app)]      
+      (if (= selected-level-count
+             expected-level-count)
+        (assoc app :page :location :mode :census)
+        (assoc app :errors "Please select all hierarchies"))))
   m/StartVisit
   (process-message
       [message app]

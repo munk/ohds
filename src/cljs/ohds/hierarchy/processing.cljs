@@ -34,6 +34,6 @@
   m/StartVisit
   (process-message
       [message app]
-    (assoc app :location-hierarchy (hierarchy app) :page :location :mode :visit)))
+    (assoc app :hierarchy (hierarchy app) :page :location :mode :visit)))
 
 

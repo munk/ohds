@@ -20,8 +20,8 @@
   m/ChangeLocationType
   (process-message [response app]
     (assoc-state response app :location))
-  m/ChangeLocationHierarchy
-  (process-message [response app]
+  ;m/ChangeLocationHierarchy
+  #_(process-message [response app]
     (assoc app :location-hierarchy (:hierarchy response)))
   m/LocationResults
   (process-message [response app]

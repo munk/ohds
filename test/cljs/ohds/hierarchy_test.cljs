@@ -14,6 +14,7 @@
           expected {:hierarchies ["h0" "h1" "a-uuid"]}
           actual (process-message msg app)]
       (is (= expected actual))))
+  
   (testing "start census updates app with new page and census mode"
     (let [msg (m/->StartCensus)
           app {:page :test :mode :test
@@ -22,6 +23,7 @@
           expected {:page :location :mode :census :hierarchy-level-count 0 :hierarchies ["ROOT"]}
           actual (process-message msg app)]
       (is (= expected actual))))
+
   (testing "start census does not update if levels are unselected"
     (let [msg (m/->StartCensus)
           app {:hierarchy-level-count 3
@@ -29,10 +31,11 @@
       
       (is (= "Please select all hierarchies"
              (:errors (process-message msg app))))))
+
   (testing "start visit updates app with new page and visit mode"
     (let [msg (m/->StartVisit)
           app {:page :test :mode :test :hierarchies ["h0" "h1" "a-uuid"]}
-          expected {:location-hierarchy "a-uuid" :hierarchies ["h0" "h1" "a-uuid"]
+          expected {:hierarchy "a-uuid" :hierarchies ["h0" "h1" "a-uuid"]
                     :page :location :mode :visit}
           actual (process-message msg app)]
       (is (= expected actual)))))

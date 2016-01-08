@@ -82,7 +82,7 @@
   (testing "login results event triggers initial state from backend"
     (let [level-response {:status 200 :body "level-data"}
           hiera-response {:status 200 :body "hiera-data"}]
-        (with-redefs [http/get (fn [url body]
+        (with-redefs [http/get (fn [url body] ;;; TODO: Verify calls here
                                  (if (= url "/api/v1/locationHierarchyLevels")
                                    level-response
                                    hiera-response))
@@ -90,4 +90,6 @@
           (let [actual (watch-channels (om/->LoginResults {}) {})
                 expected #{(om/map->HierarchyLevelResults level-response)
                            (om/map->LocationHierarchyResults hiera-response)}]
-            (is (= expected actual)))))))
+            (is (= expected actual))))))
+  (testing "hierarchy level results sets state correctly")
+  (testing "location hierarchy sets state correctly"))

@@ -58,19 +58,19 @@
              {:source-paths ["env/dev/clj" "src/cljs"]
               :hooks [leiningen.cljsbuild]
               :optimizations :none
-              
+
               :dependencies [[clojurescript-build "0.1.9"]
                              [figwheel "0.5.0-2"]
                              [figwheel-sidecar "0.5.0-2"]
                              [com.cemerick/piggieback "0.2.1"]
                              [weasel "0.7.0" :exclusions [org.clojure/clojurescript]]]
-              
+
               :repl-options {:init-ns ohds.server
                              :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
               :plugins [[lein-figwheel "0.5.0-1"]]
 
-              :figwheel {:http-server-root "public"                              
+              :figwheel {:http-server-root "public"
                          :server-port 3449
                          :autoload true
                          :css-dirs ["resources/public/css"]
@@ -96,7 +96,7 @@
                                                      :preamble      ["react/react.min.js"]
                                                      :optimizations :whitespace
                                                      :pretty-print  false}}}}}
-             
+
              :uberjar {:source-paths ["env/prod/clj"]
                        :hooks [leiningen.cljsbuild]
                        :env {:production true}

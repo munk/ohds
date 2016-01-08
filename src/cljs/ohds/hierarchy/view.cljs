@@ -44,6 +44,7 @@
            (not= "UNKNOWN_STATUS" (:name e)))
          levels)]
     [:div
+     [:legend "Location Hierarchy and Census Step"]
      (map #(select ch app %) levelsf)
      [:div.form-group
       [:div

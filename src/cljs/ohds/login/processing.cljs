@@ -13,6 +13,9 @@
   m/ChangeUsername
   (process-message
       [response app]
+    {:pre [(map? response)]
+     :post [(= (:username response)
+               (:username (:user app)))]}
     (assoc-state response app :user))
 
   m/ChangePassword

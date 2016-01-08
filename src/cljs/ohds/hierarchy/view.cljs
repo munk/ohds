@@ -29,6 +29,7 @@
     [:div
      [:select
       {:id level
+       :key level
        :name ki
        :on-change (send-value! ch (partial m/->ChangeLevelSelect (inc ki) level))}
       [:option "select"]
@@ -37,6 +38,12 @@
         [:option "Loading..."])]]))
 
 (defn form [ch app]
+  {:pre [(or (= 0 (:hierarchy-level-count app))
+             (= (inc (:hierarchy-level-count app)) ;;; We ignore the extra Unknown Status
+                (count (:hierarchy-levels app))))]
+   :post [(= (:hierarchy-level-count app) ;;; Must have correct number of select elements
+             (count (filter #{:select} (flatten %))))]}
+
   (let [levels (:hierarchy-levels app)
         levelsf
         (filterv

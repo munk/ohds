@@ -13,6 +13,7 @@
    :errors ""
    :user {:username ""
           :password ""}
+   :hierarchy-level-count 0
    :hierarchies ["HIERARCHY_ROOT" "" "" "" "" "" "" "" ""]
    :location-hierarchy "HIERARCHY_ROOT"
    :location {:name "" :uuid "" :extId "" :type "RURAL"}

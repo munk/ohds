@@ -8,7 +8,14 @@
 
 (def json-reader (t/reader :json))
 
+(defn has-keys? [m ks]
+  (let [mks (set (keys m))]
+    (= (clojure.set/intersection mks ks) ks)))
+
 (defn assoc-state [response app app-key]
+  {:pre [(map? app)]
+   :post [(has-keys? (app-key app) (set (keys response)))]}
+  (println "assoc-state")
   (let [state (app-key app)]
     (->>
      (merge state response)

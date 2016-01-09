@@ -5,6 +5,7 @@
    [ohds.individual.messages :as m]
    [ohds.processing :refer [assoc-state]]))
 
+
 (extend-protocol Message
   m/ChangeFirstName
   (process-message [response app]

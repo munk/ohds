@@ -8,7 +8,6 @@
    [ohds.individual.messages :as m]))
 
 (defn form [ch state]
-  (println (:individual state))
   [:span
    [:legend "Individual"]
    (rmodal/modal ch state)

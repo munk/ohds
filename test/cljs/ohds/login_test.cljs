@@ -20,8 +20,8 @@
 (deftest login-form-test
   (with-mounted-component (view/login nil {})
     (fn [c div]
-      (is (found-in #"Username" div))
-      (is (found-in #"Password" div))
+      (is (found-in #"username" div))
+      (is (found-in #"password" div))
       (is (found-in #"<button.*Login" div)))))
 
 (deftest login-test

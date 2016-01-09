@@ -23,6 +23,6 @@
          [:label {:for "start-date"} "Membership Start Date"]
          [c/date-input ch m/->ChangeStartDate "start-date"]
          (c/text-input ch m/->ChangeStartType
-                       "starttype" "Start Type")]
+                       "starttype" "Start Type" state)]
         [:button "Save"]
         [:button {:data-dismiss "modal" :aria-label "Close"} "Cancel"]]]]]]])

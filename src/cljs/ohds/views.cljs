@@ -31,7 +31,7 @@
 
    [:div.row
     [:div.col-md-4]
-    [:div.col-md-3
+    [:div.col-md-4
      [:div.well.well-lg
       [:fieldset
        (if (= (:mode app) :not-authorized)

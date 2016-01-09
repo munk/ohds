@@ -14,8 +14,7 @@
 
 (defn assoc-state [response app app-key]
   {:pre [(map? app)]
-   :post [(has-keys? (app-key app) (set (keys response)))]}
-  (println "assoc-state")
+   :post [(has-keys? (app-key %) (set (keys response)))]}
   (let [state (app-key app)]
     (->>
      (merge state response)

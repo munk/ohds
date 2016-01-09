@@ -13,18 +13,24 @@
   (let [h (:hierarchies state)]
     (last (filter #(> (count %) 1) h))))
 
-(defn location-form [ch state]
-  [:div
-   (c/select ch m/->ChangeLocationType "type" (:type state)
-             [["RURAL" "Rural"] ["URBAN" "Urban"]])
-   (c/text-input ch m/->ChangeLocationName (:name state) "name" "Name")
-   (c/text-input ch m/->ChangeLocationExtId (:extId state)
-                 "extId" "External ID")
-   (c/submit ch m/->SubmitLocation "Submit")])
+(defn location-form [ch state hiera-level]
+  (let [loc-type? (> (count (:type state)) 0)
+        name? (> (count (:name state)) 0)
+        ext-id? (> (count (:extId state)) 0)]
+    [:div
+     (c/const-text "hierarchy-name" (:hiera-name state))
+     (c/select ch m/->ChangeLocationType "type" (:type state)
+               [["RURAL" "Rural"] ["URBAN" "Urban"]])
+     (c/text-input ch m/->ChangeLocationName (:name state) "name" "Name")
+     (c/text-input ch m/->ChangeLocationExtId (:extId state)
+                   "extId" "External ID")
+     (when (and loc-type? name? ext-id?)
+       (c/submit ch m/->SubmitLocation "Submit"))]))
 
 (defn form [ch state]
-  [:span
-   [:legend "Location"]
-   [:div
-    (hierarchy state)]
-   [location-form ch (:location state)]])
+  (let [n (dec (:hierarchy-level-count state))
+        hiera-level (nth (:hierarchy-levels state) n)
+        state' (assoc (:location state) :hiera-name (:name hiera-level))]
+    [:span
+     [:legend "Location"]
+     [location-form ch state']]))

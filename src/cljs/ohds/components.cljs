@@ -2,47 +2,53 @@
   (:require
    [petrol.core :refer [send! send-value!]]))
 
+(defn has-data? [state key]
+  (> (count (key state)) 0))
+
 (defn form-group [inner]
   [:div.row
-   [:div.form-group.col-lg1
+   [:div.form-group
     inner]])
 
-(defn text-input
-  ([ch msg id placeholder]
-   (form-group
-    [:div.input-group
-     [:input.form-control
-      {:id id
-       :type :text
-       :placeholder placeholder
-       :onChange (send-value! ch msg)}]]))
-  ([ch msg val id placeholder]
-   (form-group
-    [:div.input-group
-     [:input.form-control
-      {:id id
-       :type :text
-       :value val
-       :placeholder placeholder
-       :on-change (send-value! ch msg)}]])))
+(defn const-text
+  [id val]
+  (form-group
+   [:input.form-control
+    {:id id
+     :type :text
+     :value val}]))
 
+(defn text-input
+  ([ch msg id placeholder app]
+   (form-group
+    [:input.form-control
+     {:id id
+      :type :text
+      :placeholder placeholder
+      :onChange (send-value! ch msg)}]))
+  ([ch msg val id placeholder app]
+   (form-group
+    [:input.form-control
+     {:id id
+      :type :text
+      :value val
+      :placeholder placeholder
+      :on-change (send-value! ch msg)}])))
 
 (defn password-input [ch msg id placeholder]
   (form-group
-   [:div.input-group
-    [:input.form-control
-     {:id id
-      :type :password
-      :placeholder placeholder
-      :on-change (send-value! ch msg)}]]))
+   [:input.form-control
+    {:id id
+     :type :password
+     :placeholder placeholder
+     :on-change (send-value! ch msg)}]))
 
 (defn date-input [ch msg id]
   (form-group
-   [:div.input-group
-    [:input.form-control
-     {:id id
-      :type :date
-      :on-change (send-value! ch msg)}]]))
+   [:input.form-control
+    {:id id
+     :type :date
+     :on-change (send-value! ch msg)}]))
 
 (defn map->option [m v n]
   [(v m) (n m)])
@@ -65,17 +71,24 @@
          :on-change (send-value! ch msg)}
         opts (map option options)]
     (form-group
-     [:div.input-group
-      [:select.form-control select-attr default-opt opts]])))
+     [:select.form-control select-attr default-opt opts])))
 
 
 (defn submit [ch msg txt]
   (form-group
-   [:div.btn-group
-    [:button.btn.btn-lg.btn-primary {:on-click (send! ch (msg))} txt]]))
+   [:button.btn.btn-lg.btn-primary.btn-block {:on-click (send! ch (msg))} txt]))
 
 (defn modal-toggle [target txt]
   (form-group
+   [:button.btn.btn-lg.btn-primary.btn-block {:data-toggle "modal"
+                                              :data-target target} txt]))
+
+(defn checkbox [id label ch msg]
+  [:div.form-group
+   [:input {:id id :type :checkbox :autocomplete "off"
+            :onChange (send! ch msg)}]
    [:div.btn-group
-    [:button.btn.btn-lg.btn-primary {:data-toggle "modal"
-                                     :data-target target} txt]]))
+    [:label.btn.btn-default {:for id}
+     [:span.glyphicon.glyphicon-ok]
+     [:span " "]]
+    [:label.btn.btn-default {:for id} label]]])

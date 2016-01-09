@@ -8,20 +8,19 @@
    [ohds.individual.messages :as m]))
 
 (defn form [ch state]
-  [:div.row
-   [:div.col-md-4
-    [:legend "Individual"]
-    (rmodal/modal ch state)
-    (mmodal/modal ch state)
-    (c/text-input ch m/->ChangeFirstName
-                  "firstname" "First Name")
-    (c/text-input ch m/->ChangeExtId
-                  "extId" "External ID")
-    (c/select ch m/->ChangeGender (:gender state)
-              "gender"
-              [["FEMALE" "Female"] ["MALE" "Male"]])
-    [:input {:type "checkbox"
-             :onChange (send! ch (m/->MoreResidents))} "More Residents"]
-    (c/modal-toggle "#relationModal" "Add Relationship")
-    (c/modal-toggle "#membershipModal" "Add Membership")
-    (c/submit ch m/->CreateIndividual "Save")]])
+  (println (:individual state))
+  [:span
+   [:legend "Individual"]
+   (rmodal/modal ch state)
+   (mmodal/modal ch state)
+   (c/text-input ch m/->ChangeFirstName
+                 "firstname" "First Name" state)
+   (c/text-input ch m/->ChangeExtId
+                 "extId" "External ID" state)
+   (c/select ch m/->ChangeGender (:gender state)
+             "gender"
+             [["FEMALE" "Female"] ["MALE" "Male"]])
+   (c/checkbox "more-residents" "More Residents" ch (m/->MoreResidents))
+   (c/modal-toggle "#relationModal" "Add Relationship")
+   (c/modal-toggle "#membershipModal" "Add Membership")
+   (c/submit ch m/->CreateIndividual "Save")])

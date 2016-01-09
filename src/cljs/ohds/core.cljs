@@ -1,6 +1,7 @@
 (ns ohds.core
   (:require
    [reagent.core :as reagent :refer [atom]]
+   [reagent.cookies :as cookies]
    [petrol.core :as petrol]
    [ohds.views :as views]
    [ohds.processing]))
@@ -24,14 +25,16 @@
    :social-group-id ""
    :individual-id ""})
 
-(def app (atom initial-state))
+(def app (atom nil))
 
 (defn render-fn
   [ui-channel app]
-  (enable-console-print!)
+  (cookies/set! :app app)
   (reagent/render-component [views/root-component ui-channel app]
                              js/document.body))
 
 (defn main []
   (enable-console-print!)
-  (petrol/start-message-loop! app render-fn))
+  (let [app' (cookies/get :app initial-state)]
+    (reset! app app')
+    (petrol/start-message-loop! app render-fn)))

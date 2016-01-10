@@ -23,12 +23,14 @@
    :fieldworker-id ""
    :location-id ""
    :social-group-id ""
-   :individual-id ""})
+   :individual-id ""
+   :individuals []})
 
 (def app (atom nil))
 
 (defn render-fn
   [ui-channel app]
+  (cookies/clear!)
   (cookies/set! :app app)
   (reagent/render-component [views/root-component ui-channel app]
                              js/document.body))

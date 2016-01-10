@@ -12,3 +12,6 @@
                             :ext-id extId})]
     (->> (http/post "/api/v1/individuals" {:form-params params})
          (petrol/wrap m/map->CreateIndividualResults))))
+
+(defn create-membership
+  [fieldworker-id ])

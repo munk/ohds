@@ -3,6 +3,16 @@
    [ohds.relationship.messages :as m]
    [ohds.components :as c]))
 
+(def relationships
+  [["SELF" "Self"]
+   ["SPOUSE" "Spouse"]
+   ["SON_OR_DAUGHTER" "Child"]
+   ["BROTHER_OR_SISTER" "Sibling"]
+   ["PARENT" "parent"]
+   ["GRANDCHILD" "Grandchild"]
+   ["NOT_RELATED" "Not related"]
+   ["UNKNOWN" "Unknown relationship"]])
+
 (defn modal [ch state]
   [:div.modal.fade {:role "dialog"
                     :id "relationModal"}
@@ -17,14 +27,7 @@
         [:div
          [:label {:for "type"} "Relationship Type"]
          [c/select ch m/->ChangeRelationshipType "type" "SELF"
-          [["SELF" "Self"]
-           ["SPOUSE" "Spouse"]
-           ["SON_OR_DAUGHTER" "Child"]
-           ["BROTHER_OR_SISTER" "Sibling"]
-           ["PARENT" "parent"]
-           ["GRANDCHILD" "Grandchild"]
-           ["NOT_RELATED" "Not related"]
-           ["UNKNOWN" "Unknown relationship"]]]
+          relationships]
          [:label {:for "of"} "Of"]
          [c/select ch m/->ChangeIndividualB "of" nil
           [["PersonID" "Person"]]]  ;;;TODO: Save a list of people in household
@@ -34,3 +37,24 @@
         [:button "Save"]
         [:button {:data-dismiss "modal" :aria-label "Close"} "Cancel"]]]]]]])
 
+(defn selects [pair]
+  (let [a (first pair)
+        b (second pair)]
+    
+    [:div     
+     [:input {:type :text
+              :value (:firstname a)
+              :style {:width "60px"}}]
+     (c/select nil nil "type" "SELF" relationships)
+     [:input {:type :text
+              :value (:firstname b)
+              :style {:width "60px"}}]
+     [:hr]]))
+
+(defn form [ch app]
+  (let [inds (:individuals app)
+        pairs (apply concat  (for [i inds]
+                               (for [j inds]
+                                 [i j])))]
+    [:div
+     (map selects pairs)]))

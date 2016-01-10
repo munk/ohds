@@ -27,9 +27,13 @@
   m/CreateIndividualResults
   (process-message [response app]
     (let [uuid (:body response)
-          individual (assoc (:individual app) :uuid uuid)]
-      (assoc app :page :individual :individual individual))))
-
+          individual (assoc (:individual app) :uuid uuid)
+          individuals (:individuals app)
+          individuals' (conj individuals individual)
+          more? (:more-residents app)]
+      (if more?
+        (assoc app :page :individual :individual individual :individuals individuals')
+        (assoc app :page :relationships :individual individual :individuals individuals')))))
 
 (extend-protocol EventSource
   m/CreateIndividual

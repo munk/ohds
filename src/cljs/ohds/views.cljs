@@ -7,7 +7,7 @@
    [ohds.location.view :as location]
    [ohds.socialgroup.view :as socialgroup]
    [ohds.individual.view :as individual]
-
+   [ohds.relationship.view :as relationships]
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 
@@ -42,4 +42,5 @@
            :location [location/form ch app]
            :socialgroup [socialgroup/form ch app]
            :individual [individual/form ch app]
+           :relationships [relationships/form ch app]
            [:div "Error Loading Page..."]))]]]]])

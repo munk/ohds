@@ -12,6 +12,7 @@
             [ohds.controller :as ctrl])
   (:gen-class))
 
+
 (deftemplate page (io/resource "index.html") []
   [:body] (if is-dev? inject-devmode-html identity))
 

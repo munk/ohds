@@ -25,6 +25,7 @@
      {:id id
       :type :text
       :placeholder placeholder
+      :defaultValue ""
       :onChange (send-value! ch msg)}]))
   ([ch msg val id placeholder app]
    (form-group
@@ -73,6 +74,13 @@
     (form-group
      [:select.form-control select-attr default-opt opts])))
 
+(defn inline-select [ch msg id val options & default-opt]
+  (let [select-attr
+        {:id id
+         :data-width "100%"
+         :on-change (send-value! ch msg)}
+        opts (map option options)]
+    [:select select-attr default-opt opts]))
 
 (defn submit [ch msg txt]
   (form-group

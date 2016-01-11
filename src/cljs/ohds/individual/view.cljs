@@ -20,6 +20,6 @@
              "gender"
              [["FEMALE" "Female"] ["MALE" "Male"]])
    (c/checkbox "more-residents" "More Residents" ch (m/->MoreResidents))
-   (c/modal-toggle "#relationModal" "Add Relationship")
-   (c/modal-toggle "#membershipModal" "Add Membership")
+   ;(c/modal-toggle "#relationModal" "Add Relationship")
+   ;(c/modal-toggle "#membershipModal" "Add Membership")
    (c/submit ch m/->CreateIndividual "Save")])

@@ -20,7 +20,11 @@
 (def locations-by-hierarchy "/locations/bylocationhierarchy/bulk?locationHierarchyUuid=")
 (def individual-url "/individuals")
 (def socialgroup-url "/socialGroups")
+(def relationship-url "/relationships")
+(def residency-url "/residencies")
+(def membership-url "/memberships")
 (def location-hierarchy-levels-bulk-url "/locationHierarchyLevels/bulk.json")
+
 
 (defn now []
   (str (LocalDateTime/now) "Z"))
@@ -36,6 +40,7 @@
    (http/post (str apihost url))
    (deref)
    (:body)
+   ((fn [x] (println x) x))
    (json->cljs)
    (:uuid)))
 
@@ -106,3 +111,34 @@
                       :groupType group-type
                       :collectionDateTime (now)}}
        (post socialgroup-url)))
+
+;;; Relationships
+(defn create-relationship
+  [collected-by a-uuid b-uuid relationship-type start-date]  
+  (->> {:collectedByUuid collected-by
+        :individualAUuid a-uuid
+        :individualBUuid b-uuid
+        :relationship {:relationshipType relationship-type
+                       :startDate start-date
+                       :collectionDateTime (now)}}
+       (post relationship-url)))
+
+(defn create-residency
+  [collected-by individual-id location-id start-type start-date]
+  (->> {:collectedByUuid collected-by
+        :individualUuid individual-id
+        :locationUuid location-id
+        :residency {:startType start-type
+                    :startDate start-date
+                    :collectionDateTime (now)}}
+       (post residency-url)))
+
+(defn create-membership 
+  [collected-by individual-id socialgroup-id start-type start-date]
+  (->> {:collectedByUuid collected-by
+        :individualUuid individual-id
+        :socialGroupUuid socialgroup-id
+        :membership {:startType start-type
+                     :startDate start-date
+                     :collectionDateTime (now)}}
+       (post membership-url)))

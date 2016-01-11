@@ -31,6 +31,8 @@
           individuals (:individuals app)
           individuals' (conj individuals individual)
           more? (:more-residents app)]
+      (backend/create-residency  (:fieldworker-id app) uuid (:location app))
+      (backend/create-membership (:fieldworker-id app) uuid (:socialgroup app))
       (if more?
         (assoc app :page :individual :individual individual :individuals individuals')
         (assoc app :page :relationships :individual individual :individuals individuals')))))

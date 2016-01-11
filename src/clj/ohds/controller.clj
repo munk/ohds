@@ -77,11 +77,30 @@
           first-name (:first-name params)
           gender (:gender params)
           result (str (svc/create-individual collected-by ext-id first-name gender))]
+      (println result)
       result)
     (catch Exception e
       (println req (.getMessage e))
       {:status 400})))
 
+(defn create-relationship [req]
+  (let [params (:params req)
+        collected-by (:fieldworker-id params)
+        a (:id-a params)
+        b (:id-b params)
+        rtype (:type params)
+        start-date (:start-date params)]
+    (str (svc/create-relationship collected-by a b rtype start-date))))
+
+(defn create-residency [req]
+  (let [params (:params req)
+        collected-by (:fieldworker-id params)
+        individual-id (:individual-id params)
+        location-id (:location-id params)
+        start-type (:start-type params)
+        start-date (:start-date params)]
+    (str (svc/create-residency colelcted-by individual-id location-id start-type start-date)))
+  )
 
 (defn locations [uuid]
   (let [result (svc/locations uuid)]

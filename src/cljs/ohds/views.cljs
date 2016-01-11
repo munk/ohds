@@ -12,9 +12,44 @@
    [petrol.core :refer [send! send-value!]]))
 
 
+
+
+(defn hamburger []
+  [:button {:type "button"
+            :class "navbar-toggle collapsed"
+            :data-toggle "collapse"
+            :data-target "#navbar"
+            :aria-expanded "false" :aria-controls "navbar"}
+   [:span {:class "sr-only"} "Toggle Nav"]
+   [:span {:class "icon-bar"}]
+   [:span {:class "icon-bar"}]
+   [:span {:class "icon-bar"}]])
+
+(defn nav-item [ch msg text]
+  [:li
+   [:a {:href "#"
+        :on-click (send! ch msg)} text]])
+
+(defn nav-bar [ch state] ; TODO: Close the menu once something is clicked
+  [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
+   [:ul {:class "nav navbar-nav"}
+    [nav-item state nil "Home"]
+    (nav-item ch (m/->Logout) "Logout") ;;; TODO: why does the message need to be instantiated here instead of in nav-item?
+    ]])
+
+
+(defn top [ch state]
+  [:nav {:class "navbar navbar-inverse navbar-fixed-top"}
+   [:div {:class "container"}
+    [:div {:class "navbar-header"}
+     [hamburger]
+     [:span {:class "navbar-brand"} "OpenHDS"]]
+    (nav-bar ch state)
+    ]])
+
 (defn header []
-  [:div.page-header
-   [:h1 "OpenHDS"]])
+  [:div
+   [:div.page-header]])
 
 (defn pad []
   [:div {:style {:padding "20px"}}])
@@ -25,7 +60,8 @@
 
 (defn root-component [ch app]
   [:div.container
-   [header]
+   (header)
+   (top ch app)
    [pad]
    [errors ch (:errors app)]
 

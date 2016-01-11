@@ -53,7 +53,10 @@
       (case status
         200 (assoc app
                    :hierarchy-level-count (dec (count result))
-                   :hierarchy-levels result)))))
+                   :hierarchy-levels result))))
+  m/Logout
+  (process-message [response app]
+    (assoc app :page :login :mode :not-authorized :user {:username "" :password ""})))
 
 (extend-protocol EventSource
   m/LocationHierarchyResults

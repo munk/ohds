@@ -6,3 +6,4 @@
 (defrecord LoginResults [body])
 
 (defrecord Logout [])
+(defrecord FieldworkerHome [])

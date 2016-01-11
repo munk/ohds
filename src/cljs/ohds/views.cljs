@@ -15,15 +15,14 @@
 
 
 (defn hamburger []
-  [:button {:type "button"
-            :class "navbar-toggle collapsed"
+  [:button.navbar-toggle.collapsed {:type "button"
             :data-toggle "collapse"
             :data-target "#navbar"
             :aria-expanded "false" :aria-controls "navbar"}
-   [:span {:class "sr-only"} "Toggle Nav"]
-   [:span {:class "icon-bar"}]
-   [:span {:class "icon-bar"}]
-   [:span {:class "icon-bar"}]])
+   [:span.sr-only "Toggle Nav"]
+   [:span.icon-bar]
+   [:span.icon-bar]
+   [:span.icon-bar]])
 
 (defn nav-item [ch msg text]
   [:li
@@ -31,19 +30,20 @@
         :on-click (send! ch msg)} text]])
 
 (defn nav-bar [ch state] ; TODO: Close the menu once something is clicked
-  [:div {:id "navbar" :class "navbar-collapse collapse" :aria-expanded "false"}
-   [:ul {:class "nav navbar-nav"}
-    [nav-item state nil "Home"]
-    (nav-item ch (m/->Logout) "Logout") ;;; TODO: why does the message need to be instantiated here instead of in nav-item?
-    ]])
+  [:div.navbar-collapse.collapse {:id "navbar" :aria-expanded "false"}
+   (when (and (not= (:page state) :login)
+              (not= (:mode state) :not-authorized))
+     [:ul.nav.navbar-nav
+      (nav-item ch (m/->Logout) "Logout")
+      (nav-item ch (m/->FieldworkerHome) "Home")])])
 
 
 (defn top [ch state]
-  [:nav {:class "navbar navbar-inverse navbar-fixed-top"}
-   [:div {:class "container"}
-    [:div {:class "navbar-header"}
+  [:nav.navbar.navbar-inverse.navbar-fixed-top
+   [:div.container
+    [:div.navbar-header
      [hamburger]
-     [:span {:class "navbar-brand"} "OpenHDS"]]
+     [:span.navbar-brand "OpenHDS"]]
     (nav-bar ch state)
     ]])
 

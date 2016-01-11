@@ -56,7 +56,10 @@
                    :hierarchy-levels result))))
   m/Logout
   (process-message [response app]
-    (assoc app :page :login :mode :not-authorized :user {:username "" :password ""})))
+    (assoc app :page :login :mode :not-authorized :user {:username "" :password ""}))
+  m/FieldworkerHome
+  (process-message [response app]
+    (assoc app :page :hierarchy)))
 
 (extend-protocol EventSource
   m/LocationHierarchyResults

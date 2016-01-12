@@ -4,3 +4,4 @@
 (defrecord ChangePassword [password])
 (defrecord FieldworkerLogin [])
 (defrecord LoginResults [body])
+(defrecord ToggleAdmin [])

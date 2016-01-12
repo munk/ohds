@@ -22,6 +22,7 @@
    :socialgroup {:name nil :uuid "" :extId "" :type "FAMILY"}
    :individual {:firstname nil :extId nil :gender "FEMALE"}
    :fieldworker-id "fa6bb290-533d-4a02-b9c1-141e93723cfc"
+   :locations []
    :relationships {}
    :location-id ""
    :social-group-id ""

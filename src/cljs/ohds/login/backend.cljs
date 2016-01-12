@@ -4,6 +4,9 @@
     [petrol.core :as petrol]
     [ohds.messages :as m]))
 
-(defn login [user]
-  (->> (http/post "/api/v1/login" {:form-params user})
-       (petrol/wrap m/map->LoginResults)))
+(defn login [user admin?]
+  (let [url (if admin?
+              "/api/v1/adminLogin"
+              "/api/v1/login")]
+    (->> (http/post url {:form-params user})
+         (petrol/wrap m/map->LoginResults))))

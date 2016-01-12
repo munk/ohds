@@ -6,5 +6,9 @@
 
 
 
-(defn children [response]
-  nil)
+(defn locations-for-hierarchy
+  [uuid]
+  (->>
+   (str "/api/v1/locations/" uuid)
+   (http/get)
+   (petrol/wrap m/map->LocationsForHierarchyResults)))

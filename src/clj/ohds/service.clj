@@ -17,7 +17,7 @@
 (def users-bulk-url "/users/bulk.json")
 (def location-hierarchies-bulk-url "/locationHierarchies/bulk.json")
 (def location-url "/locations")
-(def locations-by-hierarchy "/locations/bylocationhierarchy/bulk?locationHierarchyUuid=")
+(def locations-by-hierarchy "/locations/bylocationhierarchy/bulk.json?locationHierarchyUuid=")
 (def individual-url "/individuals")
 (def socialgroup-url "/socialGroups")
 (def relationship-url "/relationships")
@@ -40,7 +40,6 @@
    (http/post (str apihost url))
    (deref)
    (:body)
-   ((fn [x] (println x) x))
    (json->cljs)
    (:uuid)))
 
@@ -52,14 +51,7 @@
    (:body)
    (json->cljs)))
 
-
 ;;; Login
-
-(defn find-fieldworker
-  [username fieldworkers]
-  (->> fieldworkers
-       (filter #(= (:fieldWorkerId %) username))
-       (first)))
 
 (defn login [username password]
   {:pre [(some? username) (some? password)]}
@@ -75,6 +67,20 @@
       uuid
       nil)))
 
+(defn admin-login [username password]
+  {:pre [(some? username) (some? password)]}
+  (let [result  (->> users-bulk-url
+                     (get)
+                     (filter #(= (:username %) username))
+                     (first))
+        {expected-username :username expected-password :passwordHash uuid :uuid} result]
+    (if (and
+         (not (nil? result))
+         (bcrypt/check password expected-password)
+         (= username expected-username))
+      uuid
+      nil)))
+
 ;;; Location
 (defn location-hierarchy-levels []
   (get location-hierarchy-levels-bulk-url))
@@ -83,7 +89,9 @@
   (get location-hierarchies-bulk-url))
 
 (defn locations [hierarchy-uuid]
-  (get (str locations-by-hierarchy hierarchy-uuid)))
+  (let [result (get (str locations-by-hierarchy hierarchy-uuid))]
+    (println "getting locations for " hierarchy-uuid result)
+    result))
 
 (defn create-location
   [collected-by parent loc]

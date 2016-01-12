@@ -61,7 +61,7 @@
   (process-message [response app]
     (assoc app :page :hierarchy)))
 
-(extend-protocol EventSource
+#_(extend-protocol EventSource
   m/LocationHierarchyResults
   (watch-channels [_ _]
       #{(backend/locations)}))

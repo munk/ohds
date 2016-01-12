@@ -20,14 +20,19 @@
 
   m/ChangePassword
   (process-message [response app]
-    (assoc-state response app :user)))
+    (assoc-state response app :user))
+
+  m/ToggleAdmin
+  (process-message [response app]
+    (assoc app :admin-login (not (:admin-login app)))))
 
 (extend-protocol EventSource
   m/FieldworkerLogin
   (watch-channels [_ {:keys [user] :as app}]
-    (let [user-ct (count (:username user))
+    (let [admin? (:admin-login app)
+          user-ct (count (:username user))
           pass-ct (count (:password user))]
       (if (and (> user-ct 0)
                (> pass-ct 0))
-        #{(backend/login user)}
+        #{(backend/login user admin?)}
         #{(msg/map->LoginResults {:status 401})}))))

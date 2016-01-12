@@ -21,12 +21,13 @@
   (resources "/react" {:root "react"})
 
   (POST "/api/v1/login" req (ctrl/login req))
+  (POST "/api/v1/adminLogin" req (ctrl/admin-login req))
   (POST "/api/v1/locations" req (ctrl/create-location req))
   (POST "/api/v1/socialgroups" req (ctrl/create-social-group req))
   (POST "/api/v1/individuals" req (ctrl/create-individual req))
   (POST "/api/v1/relationships" req (ctrl/create-relationship req))
   (POST "/api/v1/residencies" req (ctrl/create-residency req))
-  (POST "/api/v1/memberships" req (ctrl/create-memberships req))
+  (POST "/api/v1/memberships" req (ctrl/create-membership req))
 
   (GET "/api/v1/locationHierarchy" req (ctrl/get-location-hierarchies))
   (GET "/api/v1/locationHierarchyLevels" req (ctrl/get-location-hierarchy-levels))

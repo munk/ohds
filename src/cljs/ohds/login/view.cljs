@@ -14,7 +14,7 @@
      [:legend "Login"]
      (c/text-input ch m/->ChangeUsername "username" "Username" state)
      (c/password-input ch m/->ChangePassword "password" "Password")
-     (c/checkbox "administrator" "Administrator" nil nil)
+     (c/checkbox "administrator" "Administrator" ch (m/->ToggleAdmin))
 
      (when (and username? password?)
        (c/submit ch m/->FieldworkerLogin "Login"))]))

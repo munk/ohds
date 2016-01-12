@@ -8,6 +8,7 @@
    [ohds.socialgroup.view :as socialgroup]
    [ohds.individual.view :as individual]
    [ohds.relationship.view :as relationships]
+   [ohds.location-select.view :as location-select]
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 
@@ -35,7 +36,9 @@
               (not= (:mode state) :not-authorized))
      [:ul.nav.navbar-nav
       (nav-item ch (m/->Logout) "Logout")
-      (nav-item ch (m/->FieldworkerHome) "Home")])])
+      (nav-item ch (m/->FieldworkerHome) "Home")
+      (when (:admin-login state)
+        (nav-item ch nil "Admin"))])])
 
 
 (defn top [ch state]
@@ -75,6 +78,7 @@
          (case (:page app)
            :login [login/login ch (:user app)]
            :hierarchy [hierarchy/form ch app]
+           :location-select [location-select/form ch app]
            :location [location/form ch app]
            :socialgroup [socialgroup/form ch app]
            :individual [individual/form ch app]

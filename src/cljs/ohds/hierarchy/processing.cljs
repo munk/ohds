@@ -34,6 +34,19 @@
   m/StartVisit
   (process-message
       [message app]
-    (assoc app :hierarchy (hierarchy app) :page :location :mode :visit)))
+    (assoc app :hierarchy (hierarchy app) :page :location-select :mode :visit))
+  m/LocationsForHierarchyResults
+  (process-message
+      [message app]
+    (let [{status :status
+           body :body} message
+          body' (process-ok body ["uuid" "name" "type" "description"])]
+      (case status
+        200 (assoc app :locations body' :current-location (first body'))
+        (assoc app :errors "Unable to get locations!")))))
 
 
+(extend-protocol EventSource
+  m/StartVisit
+  (watch-channels [msg app]
+    #{(backend/locations-for-hierarchy (:hierarchy app))}))

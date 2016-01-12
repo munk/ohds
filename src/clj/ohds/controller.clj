@@ -43,6 +43,16 @@
        :body "Bad username or password"}
       (str result))))
 
+(defn admin-login [req]
+  (let [params (:form-params req)
+        username (get params "username")
+        password (get params "password")
+        result (svc/admin-login username password)]
+    (if (nil? result)
+      {:status 401
+       :headers {}
+       :body "Bad username or password"}
+      (str result))))
 
 (defn get-location-hierarchies []
   (json/write-str (svc/location-hierarchies)))
@@ -77,7 +87,6 @@
           first-name (:first-name params)
           gender (:gender params)
           result (str (svc/create-individual collected-by ext-id first-name gender))]
-      (println result)
       result)
     (catch Exception e
       (println req (.getMessage e))
@@ -99,11 +108,22 @@
         location-id (:location-id params)
         start-type (:start-type params)
         start-date (:start-date params)]
-    (str (svc/create-residency colelcted-by individual-id location-id start-type start-date)))
+    (str (svc/create-residency collected-by individual-id location-id start-type start-date)))
+  )
+
+(defn create-membership [req]
+  (let [params (:params req)
+        collected-by (:fieldworker-id params)
+        individual-id (:individual-id params)
+        socialgroup-id (:socialgroup-id params)
+        start-type (:start-type params)
+        start-date (:start-date params)]
+    (str (svc/create-membership collected-by individual-id socialgroup-id start-type start-date)))
   )
 
 (defn locations [uuid]
   (let [result (svc/locations uuid)]
+    (println "getting locations for" uuid result)
     (json/write-str result)))
 
 (defn get-location-hierarchy-levels []

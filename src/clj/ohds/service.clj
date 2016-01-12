@@ -93,6 +93,14 @@
     (println "getting locations for " hierarchy-uuid result)
     result))
 
+(defn individuals-by-location [uuid]
+  (let [hid @(http/get (str location-url "/" uuid))
+        hiera-id 1 ;get this from the server
+        individuals-by-hiera []         ;get individuals by hiera
+        individuals-by-loc []           ; these are filtered
+        ])
+  "not implemented yet, sorry...")
+
 (defn create-location
   [collected-by parent loc]
   (->> {:collectedByUuid collected-by

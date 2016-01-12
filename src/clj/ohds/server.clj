@@ -34,6 +34,7 @@
   
   (GET "/api/v1/locations/:uuid" [uuid] (ctrl/locations uuid))
   (GET "/api/v1/locations/" [uuid] (ctrl/locations "HIERARCHY_ROOT"))
+  (GET "/api/v1/individuals-by-location/:uuid" [uuid] (ctrl/individuals-by-location uuid))
   (GET "/*" req (page)))
 
 (def http-handler

@@ -57,6 +57,9 @@
 (defn get-location-hierarchies []
   (json/write-str (svc/location-hierarchies)))
 
+(defn individuals-by-location [uuid]
+  (str (svc/individuals-by-location uuid)))
+
 
 (defn create-location [{:keys [params]}]
   (let [{:keys [fieldworker-id parent name extId type]} params]

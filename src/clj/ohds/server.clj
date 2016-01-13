@@ -29,6 +29,22 @@
   (POST "/api/v1/residencies" req (ctrl/create-residency req))
   (POST "/api/v1/memberships" req (ctrl/create-membership req))
 
+  (POST "/api/v1/visit" req "not implemented")
+  (POST "/api/v1/pregnancyObservation" req "not implemented")
+  (POST "/api/v1/pregnancyResult" req "not impmlented")
+  (POST "/api/v1/pregnancyOutcome" req "not implemented")
+  (POST "/api/v1/inMigration" req "not implemented")
+  (POST "/api/v1/outMigration" req "not implemented")
+  (POST "/api/v1/death" req "not implemented")
+
+  (GET "/api/v1/projectCodes" req "not implemented")
+  (GET "/api/v1/user" req "not implemented")
+  (GET "/api/v1/fieldworker" req "not implemented")
+
+  (PUT "/api/v1/entity/audit" req "not implemented")
+  (GET "/api/v1/entity" req "not implemented")
+  (POST "/api/v1/entity" req "not implemented")
+
   (GET "/api/v1/locationHierarchy" req (ctrl/get-location-hierarchies))
   (GET "/api/v1/locationHierarchyLevels" req (ctrl/get-location-hierarchy-levels))
   

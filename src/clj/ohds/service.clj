@@ -18,6 +18,8 @@
 (def location-hierarchies-bulk-url "/locationHierarchies/bulk.json")
 (def location-url "/locations")
 (def locations-by-hierarchy "/locations/bylocationhierarchy/bulk.json?locationHierarchyUuid=")
+(def residencies-by-hierarchy "/residencies/bylocationhierarchy/bulk.json?locationHierarchyUuid=")
+(def individuals-by-hierarchy "/individuals/bylocationhierarchy/bulk.json?locationHierarchyUuid=")
 (def individual-url "/individuals")
 (def socialgroup-url "/socialGroups")
 (def relationship-url "/relationships")
@@ -89,17 +91,18 @@
   (get location-hierarchies-bulk-url))
 
 (defn locations [hierarchy-uuid]
-  (let [result (get (str locations-by-hierarchy hierarchy-uuid))]
-    (println "getting locations for " hierarchy-uuid result)
-    result))
+  (get (str locations-by-hierarchy hierarchy-uuid)))
 
 (defn individuals-by-location [uuid]
-  (let [hid @(http/get (str location-url "/" uuid))
-        hiera-id 1 ;get this from the server
-        individuals-by-hiera []         ;get individuals by hiera
-        individuals-by-loc []           ; these are filtered
-        ])
-  "not implemented yet, sorry...")
+  (let [hid (get (str location-url "/" uuid))
+        hiera-id (:uuid (:locationHierarchy hid))
+        individuals-by-hiera (get (str individuals-by-hierarchy hiera-id))
+        residencies-by-hiera (get (str residencies-by-hierarchy hiera-id))
+        residencies-by-location (filterv #(= (:uuid (:location %)) uuid) residencies-by-hiera)
+        skeys (mapv #(select-keys % [:individual]) residencies-by-location)
+        individual-uuids (set (map #(:uuid (:individual %)) skeys))
+        individuals-by-loc (filterv #(contains? individual-uuids (:uuid %)) individuals-by-hiera)]
+    individuals-by-loc))
 
 (defn create-location
   [collected-by parent loc]

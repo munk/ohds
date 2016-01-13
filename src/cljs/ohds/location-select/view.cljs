@@ -1,6 +1,7 @@
 (ns ohds.location-select.view
   (:require
    [ohds.location-select.processing]
+   [ohds.location-select.backend]
    [ohds.location-select.messages :as m]
    [ohds.processing :refer [process-ok]]   
    [ohds.components :as c]))
@@ -21,4 +22,5 @@
      [:div
       (c/const-text "id" (:uuid cur))
       (c/const-text "type" (:type cur))
-      (c/const-text "description" (:description cur))]]))
+      (c/const-text "description" (:description cur))
+      (c/submit ch m/->StartLocationVisit "Begin Visit")]]))

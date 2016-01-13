@@ -9,6 +9,7 @@
    [ohds.individual.view :as individual]
    [ohds.relationship.view :as relationships]
    [ohds.location-select.view :as location-select]
+   [ohds.individual-update.view :as individual-update]
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 
@@ -83,4 +84,5 @@
            :socialgroup [socialgroup/form ch app]
            :individual [individual/form ch app]
            :relationships [relationships/form ch app]
+           :individual-update [individual-update/form ch app]
            [:div "Error Loading Page..."]))]]]]])

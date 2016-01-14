@@ -1,4 +1,4 @@
-;;; ELisp module to create 
+;;; elisp module to create 
 
 (defvar *project-root* "/Users/jdowns/ohds/")
 (defvar *cljs-home* "/src/cljs/ohds")
@@ -59,8 +59,9 @@
 
 
 (defun create-cljs-module (module)
+  (interactive "sModule name: ")
   (let* ((base-dir (concat *project-root* *cljs-home*))
-         (mod-dirs (concat base-dir module)))
+         (mod-dirs (concat base-dir "/" module)))
     (make-directory mod-dirs)
     (cljs-file module "view" 'view-template)
     (cljs-file module "messages" 'messages-template)

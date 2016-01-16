@@ -9,5 +9,6 @@
              :ext-id (:extId sg)
              :group-name (:name sg)
              :group-type (:type sg)}]
-    (->> (http/post "/api/v1/socialgroups" {:form-params req})
-         (petrol/wrap m/map->CreateSocialGroupResults))))
+    (petrol/wrap
+     m/map->CreateSocialGroupResults
+     (http/post "/api/v1/socialgroups" {:form-params req}))))

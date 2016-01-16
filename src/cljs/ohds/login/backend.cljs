@@ -8,5 +8,4 @@
   (let [url (if admin?
               "/api/v1/adminLogin"
               "/api/v1/login")]
-    (->> (http/post url {:form-params user})
-         (petrol/wrap m/map->LoginResults))))
+    (petrol/wrap m/map->LoginResults (http/post url {:form-params user}))))

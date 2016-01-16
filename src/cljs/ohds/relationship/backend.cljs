@@ -12,6 +12,7 @@
                 :id-b id-b
                 :type rtype
                 :start-date start-date}]
-    (->> (http/post "/api/v1/relationships" {:form-params params})
-         (petrol/wrap m/map->ProcessRelationshipResults))))
+    (petrol/wrap
+     m/map->ProcessRelationshipResults
+     (http/post "/api/v1/relationships" {:form-params params}))))
 

@@ -62,12 +62,11 @@
                      (filter #(= (:fieldWorkerId %) username))
                      (first))
         {expected-username :fieldWorkerId expected-password :passwordHash uuid :uuid} result]
-    (if (and
-         (not (nil? result))
-         (bcrypt/check password expected-password)
-         (= username expected-username))
-      uuid
-      nil)))
+    (when (and
+           (not (nil? result))
+           (bcrypt/check password expected-password)
+           (= username expected-username))
+      uuid)))
 
 (defn admin-login [username password]
   {:pre [(some? username) (some? password)]}
@@ -76,12 +75,11 @@
                      (filter #(= (:username %) username))
                      (first))
         {expected-username :username expected-password :passwordHash uuid :uuid} result]
-    (if (and
-         (not (nil? result))
-         (bcrypt/check password expected-password)
-         (= username expected-username))
-      uuid
-      nil)))
+    (when (and
+           (not (nil? result))
+           (bcrypt/check password expected-password)
+           (= username expected-username))
+      uuid)))
 
 ;;; Location
 (defn location-hierarchy-levels []
@@ -106,58 +104,69 @@
 
 (defn create-location
   [collected-by parent loc]
-  (->> {:collectedByUuid collected-by
-        :locationHierarchyUuid parent
-        :location (assoc loc "collectionDateTime" (now))}
-       (post location-url)))
+  (post
+   location-url
+   {:collectedByUuid collected-by,
+    :locationHierarchyUuid parent,
+    :location (assoc loc "collectionDateTime" (now))}))
 
 ;;; Individual
 (defn create-individual ;;;TODO: Allow additional fields
   [collected-by individual-id first-name gender]
-  (->> {:collectedByUuid collected-by
-        :individual {:extId individual-id
-                     :firstName first-name
-                     :gender gender
-                     :collectionDateTime (now)}}
-       (post individual-url)))
+  (post
+   individual-url
+   {:collectedByUuid collected-by,
+    :individual
+    {:extId individual-id,
+     :firstName first-name,
+     :gender gender,
+     :collectionDateTime (now)}}))
 
 ;;; Social Group
 (defn create-social-group
   [collected-by ext-id group-name group-type]
-  (->> {:collectedByUuid collected-by
-        :socialGroup {:extId ext-id
-                      :groupName group-name
-                      :groupType group-type
-                      :collectionDateTime (now)}}
-       (post socialgroup-url)))
+  (post
+   socialgroup-url
+   {:collectedByUuid collected-by,
+    :socialGroup
+    {:extId ext-id,
+     :groupName group-name,
+     :groupType group-type,
+     :collectionDateTime (now)}}))
 
 ;;; Relationships
 (defn create-relationship
-  [collected-by a-uuid b-uuid relationship-type start-date]  
-  (->> {:collectedByUuid collected-by
-        :individualAUuid a-uuid
-        :individualBUuid b-uuid
-        :relationship {:relationshipType relationship-type
-                       :startDate start-date
-                       :collectionDateTime (now)}}
-       (post relationship-url)))
+  [collected-by a-uuid b-uuid relationship-type start-date]
+  (post
+   relationship-url
+   {:collectedByUuid collected-by,
+    :individualAUuid a-uuid,
+    :individualBUuid b-uuid,
+    :relationship
+    {:relationshipType relationship-type,
+     :startDate start-date,
+     :collectionDateTime (now)}}))
 
 (defn create-residency
   [collected-by individual-id location-id start-type start-date]
-  (->> {:collectedByUuid collected-by
-        :individualUuid individual-id
-        :locationUuid location-id
-        :residency {:startType start-type
-                    :startDate start-date
-                    :collectionDateTime (now)}}
-       (post residency-url)))
+  (post
+   residency-url
+   {:collectedByUuid collected-by,
+    :individualUuid individual-id,
+    :locationUuid location-id,
+    :residency
+    {:startType start-type,
+     :startDate start-date,
+     :collectionDateTime (now)}}))
 
 (defn create-membership 
   [collected-by individual-id socialgroup-id start-type start-date]
-  (->> {:collectedByUuid collected-by
-        :individualUuid individual-id
-        :socialGroupUuid socialgroup-id
-        :membership {:startType start-type
-                     :startDate start-date
-                     :collectionDateTime (now)}}
-       (post membership-url)))
+  (post
+   membership-url
+   {:collectedByUuid collected-by,
+    :individualUuid individual-id,
+    :socialGroupUuid socialgroup-id,
+    :membership
+    {:startType start-type,
+     :startDate start-date,
+     :collectionDateTime (now)}}))

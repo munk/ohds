@@ -13,10 +13,12 @@
                             :extId extId
                             :type type})
         {:keys [p] :as param} params]
-    (->> (http/post "/api/v1/locations" {:form-params params})
-         (petrol/wrap m/map->CreateLocationResults))))
+    (petrol/wrap
+     m/map->CreateLocationResults
+     (http/post "/api/v1/locations" {:form-params params}))))
 
 (defn update-location
   [location]
-  (->> (http/get (str "/api/v1/locations/" (:uuid location)))
-       (petrol/wrap m/map->UpdateLocationResults)))
+  (petrol/wrap
+   m/map->UpdateLocationResults
+   (http/get (str "/api/v1/locations/" (:uuid location)))))

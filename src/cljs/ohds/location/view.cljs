@@ -14,9 +14,9 @@
     (last (filter #(> (count %) 1) h))))
 
 (defn location-form [ch state hiera-level]
-  (let [loc-type? (> (count (:type state)) 0)
-        name? (> (count (:name state)) 0)
-        ext-id? (> (count (:extId state)) 0)]
+  (let [loc-type? (pos? (count (:type state)))
+        name? (pos? (count (:name state)))
+        ext-id? (pos? (count (:extId state)))]
     [:div
      (c/const-text "hierarchy-name" (:hiera-name state))
      (c/select ch m/->ChangeLocationType "type" (:type state)

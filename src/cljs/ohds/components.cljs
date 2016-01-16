@@ -3,7 +3,7 @@
    [petrol.core :refer [send! send-value!]]))
 
 (defn has-data? [state key]
-  (> (count (key state)) 0))
+  (pos? (count (key state))))
 
 (defn form-group [inner]
   [:div.row

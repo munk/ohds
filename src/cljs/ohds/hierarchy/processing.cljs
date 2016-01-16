@@ -25,7 +25,7 @@
   m/StartCensus
   (process-message
       [message app]
-    (let [selected-level-count (dec (count (filter #(< 0 (count %)) (:hierarchies app))))
+    (let [selected-level-count (dec (count (filter #(pos? (count %)) (:hierarchies app))))
           expected-level-count (:hierarchy-level-count app)]      
       (if (= selected-level-count
              expected-level-count)

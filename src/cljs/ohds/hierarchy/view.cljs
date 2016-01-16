@@ -6,14 +6,11 @@
    [ohds.components :as c]))
 
 (defn opt [o & more]
-  (if o
-    (let [uuid (:uuid o)
-          name (:name o)]
+  (when o
+    (let [uuid (:uuid o) name (:name o)]
       (try
-        [:option {:key uuid :value uuid} name]
-        (catch js/Object e
-          (println "failed to parse" name)))) ;;;TODO: Add logger
-    nil))
+        [:option {:key uuid, :value uuid} name]
+        (catch js/Object e (println "failed to parse" name))))))
 
 (defn filter-hierarchies [app ki level lh]
   (filter (fn [h]
@@ -36,8 +33,7 @@
        :name ki
        :on-change (send-value! ch (partial m/->ChangeLevelSelect (inc ki) level))}
       [:option "------"]
-      (when (not (empty? lh'))
-        (map opt lh'))])))
+      (when (seq lh') (map opt lh'))])))
 
 (defn form [ch app]
   {:pre [(or (= 0 (:hierarchy-level-count app))

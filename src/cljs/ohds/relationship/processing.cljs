@@ -11,20 +11,18 @@
           b (:b-id response)
           t (:type response)
           r (get (:relationships app) [a b])]
-      (if (not (nil? r))
-        (let [d (second r)]
-          (assoc app :relationships (assoc (:relationships app) [a b] [t d])))
-        (assoc app :relationships (assoc (:relationships app) [a b] [t nil])))))
+      (if-not (nil? r)
+        (let [d (second r)] (assoc-in app [:relationships [a b]] [t d]))
+        (assoc-in app [:relationships [a b]] [t nil]))))
   m/ChangeRelationshipStartDate
   (process-message [response app]
     (let [a (:a-id response)
           b (:b-id response)
           d (:date response)
           r (get (:relationships app) [a b])]
-      (if (not (nil? r))
-        (let [t (first r)]
-          (assoc app :relationships (assoc (:relationships app) [a b] [t d])))
-        (assoc app :relationships (assoc (:relationships app) [a b] [nil d])))))
+      (if-not (nil? r)
+        (let [t (first r)] (assoc-in app [:relationships [a b]] [t d]))
+        (assoc-in app [:relationships [a b]] [nil d]))))
   m/ProcessRelationshipResults
   (process-message [response app]
     (println "processing relationship results")

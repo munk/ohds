@@ -44,6 +44,6 @@
     [:div
      (map (partial selects ch) pairs)
      (when (and
-            (not (empty? (:relationships app)))
+            (seq (:relationships app))
             (every? some? (flatten (vals (:relationships app)))))
        (c/submit ch m/->SubmitRelationship "Complete Household"))]))

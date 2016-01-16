@@ -24,7 +24,7 @@
 
   m/ToggleAdmin
   (process-message [response app]
-    (assoc app :admin-login (not (:admin-login app)))))
+    (update-in app [:admin-login] not)))
 
 (extend-protocol EventSource
   m/FieldworkerLogin
@@ -32,7 +32,7 @@
     (let [admin? (:admin-login app)
           user-ct (count (:username user))
           pass-ct (count (:password user))]
-      (if (and (> user-ct 0)
-               (> pass-ct 0))
+      (if (and (pos? user-ct)
+               (pos? pass-ct))
         #{(backend/login user admin?)}
         #{(msg/map->LoginResults {:status 401})}))))

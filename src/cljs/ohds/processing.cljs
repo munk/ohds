@@ -16,9 +16,7 @@
   {:pre [(map? app)]
    :post [(has-keys? (app-key %) (set (keys response)))]}
   (let [state (app-key app)]
-    (->>
-     (merge state response)
-     (assoc app app-key))))
+    (assoc app app-key (merge state response))))
 
 (defn process-ok [body keys]
   (->> body

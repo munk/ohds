@@ -14,8 +14,6 @@
    [petrol.core :refer [send! send-value!]]))
 
 
-
-
 (defn hamburger []
   [:button.navbar-toggle.collapsed {:type "button"
             :data-toggle "collapse"

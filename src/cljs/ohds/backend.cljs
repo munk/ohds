@@ -15,13 +15,16 @@
   ([]
    (locations "HIERARCHY_ROOT"))
   ([uuid]
-   (->> (http/get (str "/api/v1/locations/" uuid))
-        (petrol/wrap m/map->LocationResults))))
+   (petrol/wrap
+    m/map->LocationResults
+    (http/get (str "/api/v1/locations" uuid)))))
 
 (defn hierarchy-levels []
-  (->> (http/get "/api/v1/locationHierarchyLevels")
-       (petrol/wrap m/map->HierarchyLevelResults)))
+  (petrol/wrap
+   m/map->HierarchyLevelResults
+   (http/get "/api/v1/locationHierarchyLevels")))
 
 (defn location-hierarchies []
-  (->> (http/get "/api/v1/locationHierarchy")
-       (petrol/wrap m/map->LocationHierarchyResults)))
+  (petrol/wrap
+   m/map->LocationHierarchyResults
+   (http/get "/api/v1/locationHierarchy")))

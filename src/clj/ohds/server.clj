@@ -1,7 +1,7 @@
 (ns ohds.server
   (:require [clojure.java.io :as io]
             [ohds.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
-            [compojure.core :refer [GET POST defroutes]]
+            [compojure.core :refer [GET POST PUT defroutes]]
             [compojure.route :refer [resources]]
             [net.cgrand.enlive-html :refer [deftemplate]]
             [net.cgrand.reload :refer [auto-reload]]

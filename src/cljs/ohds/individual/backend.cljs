@@ -10,8 +10,9 @@
                             :first-name first-name
                             :gender gender
                             :ext-id extId})]
-    (->> (http/post "/api/v1/individuals" {:form-params params})
-         (petrol/wrap m/map->CreateIndividualResults))))
+    (petrol/wrap
+     m/map->CreateIndividualResults
+     (http/post "/api/v1/individuals" {:form-params params}))))
 
 (defn create-residency
   [fieldworker-id individual location]

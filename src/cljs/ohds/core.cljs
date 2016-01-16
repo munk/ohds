@@ -11,7 +11,6 @@
 (def initial-state
   {:page :login
    :mode :not-authorized
-
    :errors ""
    :user {:username ""
           :password ""}

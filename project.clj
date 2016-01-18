@@ -73,15 +73,16 @@
               :optimizations :none
 
               :dependencies [[clojurescript-build "0.1.9"]
-                             [figwheel "0.5.0-2"]
+                             [figwheel "0.5.0-2" :exclusions [ring/ring-core org.clojure/clojure org.clojure/tools.reader]]
                              [figwheel-sidecar "0.5.0-2"]
                              [com.cemerick/piggieback "0.2.1"]
                              [weasel "0.7.0" :exclusions [org.clojure/clojurescript]]]
 
-              :repl-options {:init-ns ohds.server
+              :repl-options {:timeout 120000
+                             :init-ns ohds.server
                              :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
-              :plugins [[lein-figwheel "0.5.0-1"]]
+              :plugins [[lein-figwheel "0.5.0-2"]]
 
               :figwheel {:http-server-root "public"
                          :server-port 3449

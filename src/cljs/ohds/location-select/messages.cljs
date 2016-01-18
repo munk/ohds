@@ -3,3 +3,4 @@
 (defrecord ChangeLocation [loc])
 (defrecord StartLocationVisit [])
 (defrecord IndividualsByLocationResults [body])
+(defrecord RecordVisit [body])

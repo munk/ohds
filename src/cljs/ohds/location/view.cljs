@@ -2,7 +2,7 @@
   (:require
    [petrol.core :refer [send! send-value!]]
    [ohds.components :as c]
-   [ohds.location.processing]    
+   [ohds.location.processing]
    [ohds.location.messages :as m]))
 
 ;;;TODO Schema Validation
@@ -22,8 +22,7 @@
      (c/select ch m/->ChangeLocationType "type" (:type state)
                [["RURAL" "Rural"] ["URBAN" "Urban"]])
      (c/text-input ch m/->ChangeLocationName (:name state) "name" "Name")
-     (c/text-input ch m/->ChangeLocationExtId (:extId state)
-                   "extId" "External ID")
+     (c/text-input ch m/->ChangeLocationExtId (:extId state) "extId" "External ID")
      (when (and loc-type? name? ext-id?)
        (c/submit ch m/->SubmitLocation "Submit"))]))
 

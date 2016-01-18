@@ -28,7 +28,7 @@
    :individual-id ""
    :individuals []})
 
-(def app (atom initial-state))
+(defonce app (atom initial-state))
 
 (defn render-fn
   [ui-channel app]

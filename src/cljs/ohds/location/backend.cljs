@@ -4,14 +4,21 @@
     [petrol.core :as petrol]
     [ohds.location.messages :as m]))
 
+(defrecord CreateLocationRequest
+    [fieldworker-id
+     parent
+     name
+     extId
+     type])
 
 (defn create-location
   [fieldworker-id parent name extId type & more]
-  (let [params (merge more {:fieldworker-id fieldworker-id
-                            :parent parent
-                            :name name
-                            :extId extId
-                            :type type})
+  (let [loc (->CreateLocationRequest fieldworker-id
+                                     parent
+                                     name
+                                     extId
+                                     type)
+        params (merge more loc)
         {:keys [p] :as param} params]
     (petrol/wrap
      m/map->CreateLocationResults

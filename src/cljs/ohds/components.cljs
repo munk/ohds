@@ -91,6 +91,23 @@
    [:button.btn.btn-lg.btn-primary.btn-block {:data-toggle "modal"
                                               :data-target target} txt]))
 
+(defn modal [id header body ch submit-msg]
+  [:div.modal.fade {:role "dialog"
+                    :id id}
+   [:div.modal-dialog {:role "document"}
+    [:div.modal-content
+     [:div.modal-header
+      header
+      [:button.close {:data-dismiss "modal" :aria-label "Close"} "×"]]
+     [:div.container
+      [:div.col-xs-4
+       [:div.modal-title]
+       [:div.modal-body
+        body
+        [:div.modal-footer
+         [:button.btn.btn-default {:on-click (send! ch submit-msg) :data-dismiss "modal"} "Save"]
+         [:button.btn.btn-primary {:data-dismiss "modal" :aria-label "Close"} "Cancel"]]]]]]]])
+
 (defn checkbox [id label ch msg]
   [:div.form-group
    [:input {:id id :type :checkbox :autocomplete "off"

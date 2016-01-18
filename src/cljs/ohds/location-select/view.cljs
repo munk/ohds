@@ -3,7 +3,7 @@
    [ohds.location-select.processing]
    [ohds.location-select.backend]
    [ohds.location-select.messages :as m]
-   [ohds.processing :refer [process-ok]]   
+   [ohds.processing :refer [process-ok]]
    [ohds.components :as c]))
 
 

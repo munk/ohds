@@ -29,7 +29,7 @@
   (POST "/api/v1/residencies" req (ctrl/create-residency req))
   (POST "/api/v1/memberships" req (ctrl/create-membership req))
 
-  (POST "/api/v1/visit" req "not implemented")
+  (POST "/api/v1/visit" req (ctrl/start-visit req))
   (POST "/api/v1/pregnancyObservation" req "not implemented")
   (POST "/api/v1/pregnancyResult" req "not impmlented")
   (POST "/api/v1/pregnancyOutcome" req "not implemented")
@@ -47,7 +47,7 @@
 
   (GET "/api/v1/locationHierarchy" req (ctrl/get-location-hierarchies))
   (GET "/api/v1/locationHierarchyLevels" req (ctrl/get-location-hierarchy-levels))
-  
+
   (GET "/api/v1/locations/:uuid" [uuid] (ctrl/locations uuid))
   (GET "/api/v1/locations/" [uuid] (ctrl/locations "HIERARCHY_ROOT"))
   (GET "/api/v1/individuals-by-location/:uuid" [uuid] (ctrl/individuals-by-location uuid))

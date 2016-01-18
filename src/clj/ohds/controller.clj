@@ -75,7 +75,7 @@
           ext-id (:ext-id params)
           group-name (:group-name params)
           group-type (:group-type params)]
-      (str (svc/create-social-group collected-by ext-id group-name group-type)))    
+      (str (svc/create-social-group collected-by ext-id group-name group-type)))
     (catch Exception e
       (println params (.getMessage e))
       {:status 400})))
@@ -111,8 +111,7 @@
         location-id (:location-id params)
         start-type (:start-type params)
         start-date (:start-date params)]
-    (str (svc/create-residency collected-by individual-id location-id start-type start-date)))
-  )
+    (str (svc/create-residency collected-by individual-id location-id start-type start-date))))
 
 (defn create-membership [req]
   (let [params (:params req)
@@ -121,8 +120,7 @@
         socialgroup-id (:socialgroup-id params)
         start-type (:start-type params)
         start-date (:start-date params)]
-    (str (svc/create-membership collected-by individual-id socialgroup-id start-type start-date)))
-  )
+    (str (svc/create-membership collected-by individual-id socialgroup-id start-type start-date))))
 
 (defn locations [uuid]
   (let [result (svc/locations uuid)]
@@ -131,3 +129,9 @@
 (defn get-location-hierarchy-levels []
   (let [result (svc/location-hierarchy-levels)]
     (json/write-str result)))
+
+(defn start-visit [req]
+  (let [{{fieldworker-id :fieldworker-id
+          location :location-uuid
+          extId :extId} :params} req]
+    (str (svc/start-visit fieldworker-id location extId))))

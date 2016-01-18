@@ -1,4 +1,5 @@
 # ohds
+[![Build Status](https://travis-ci.org/munk/ohds.svg?branch=master)](https://travis-ci.org/munk/ohds)
 
 
 ## Development

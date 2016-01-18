@@ -25,6 +25,7 @@
 (def relationship-url "/relationships")
 (def residency-url "/residencies")
 (def membership-url "/memberships")
+(def visit-url "/visits")
 (def location-hierarchy-levels-bulk-url "/locationHierarchyLevels/bulk.json")
 
 
@@ -159,7 +160,7 @@
      :startDate start-date,
      :collectionDateTime (now)}}))
 
-(defn create-membership 
+(defn create-membership
   [collected-by individual-id socialgroup-id start-type start-date]
   (post
    membership-url
@@ -170,3 +171,12 @@
     {:startType start-type,
      :startDate start-date,
      :collectionDateTime (now)}}))
+
+
+(defrecord Visit [extId collectionDateTime visitDate])
+(defrecord VisitRequest [collectedByUuid locationUuid visit])
+(defn start-visit [collected-by location ext-id]
+  (post
+   visit-url
+   (->VisitRequest collected-by location
+                   (->Visit ext-id (now) (now)))))

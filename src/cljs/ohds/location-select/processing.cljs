@@ -22,6 +22,12 @@
   (process-message
       [msg app]
     (assoc app :page :individual-update))
+  m/RecordVisit
+  (process-message
+    [msg app]
+    (let [{status :status
+           body :body} msg]
+      (assoc app :vist body)))
   m/IndividualsByLocationResults
   (process-message
       [msg app]
@@ -38,4 +44,8 @@
       [msg app]
     (let [uuid (:hierarchy app)
           loc (:uuid (:current-location app))]
-      #{(backend/individuals-by-location loc)})))
+      #{(backend/individuals-by-location loc)
+        (backend/start-visit
+         (:fieldworker-id app)
+         loc
+         (str loc "-visit"))})))

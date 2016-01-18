@@ -4,11 +4,8 @@
    [petrol.core :as petrol]
    [ohds.hierarchy.messages :as m]))
 
-
-
 (defn locations-for-hierarchy
   [uuid]
-  (->>
-   (str "/api/v1/locations/" uuid)
-   (http/get)
-   (petrol/wrap m/map->LocationsForHierarchyResults)))
+  (petrol/wrap
+   m/map->LocationsForHierarchyResults
+   (http/get (str  "/api/v1/locations/" uuid))))

@@ -4,9 +4,9 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :source-paths ["src/clj" "src/cljs"]
+  :source-paths ["src/clj"]
 
-  :test-paths ["test/clj" "test/cljs"]
+  :test-paths ["test/clj"]
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
@@ -35,7 +35,7 @@
                  [reagent-utils "0.1.5"]
                  [com.cognitect/transit-cljs "0.8.225"]]
 
-  :plugins [[lein-cljsbuild "1.1.1"]
+  :plugins [[lein-cljsbuild "1.1.2"]
             [lein-environ "1.0.0"]
             [lein-ring "0.9.7"]
             [lein-expectations "0.0.7"]]
@@ -54,8 +54,21 @@
                            :optimizations :none
                            :pretty-print  true}}}}
 
-  :profiles {:dev
-             {:source-paths ["env/dev/clj" "src/cljs"]
+  :profiles {
+             :uberjar {:source-paths ["env/prod/clj"]
+                       :figwheel false
+                       :hooks [leiningen.cljsbuild]
+                       :env {:production true :is-dev false}
+                       :omit-source true
+                       :aot :all
+                       :main ohds.server
+                       :cljsbuild {:builds {:app
+                                            {:source-paths ["env/prod/cljs"]
+                                             :compiler
+                                             {:optimizations :advanced
+                                              :pretty-print false}}}}}
+             :dev
+             {:source-paths ["env/dev/clj"]
               :hooks [leiningen.cljsbuild]
               :optimizations :none
 
@@ -81,14 +94,15 @@
               :cljsbuild {:test-commands { "test" ["phantomjs"
                                                    "env/test/js/unit-test.js"
                                                    "env/test/unit-test.html"]}
-                          :builds {:dev {:source-paths ["env/dev/cljs" "src/clj" "src/sljs"]
+                          :builds {:app {:source-paths ["env/dev/cljs"]}
+                                   :dev {:source-paths ["env/dev/cljs" "src/clj" "src/cljs"]
                                          :compiler {:output-to     "resources/public/js/app.js"
                                                     :output-dir    "resources/public/js/out"
                                                     :source-map    "resources/public/js/out.js.map"
                                                     :preamble      ["react/react.min.js"]
                                                     :optimizations :none
                                                     :pretty-print  true}}
-                                   :app {:source-paths ["env/dev/cljs" "src/clj"]}
+
                                    :test {:source-paths ["src/cljs" "src/clj" "test/cljs"]
                                           :compiler {:output-to     "resources/public/js/app_test.js"
                                                      :output-dir    "resources/public/js/test"
@@ -97,14 +111,4 @@
                                                      :optimizations :whitespace
                                                      :pretty-print  false}}}}}
 
-             :uberjar {:source-paths ["env/prod/clj"]
-                       :hooks [leiningen.cljsbuild]
-                       :env {:production true}
-                       :omit-source true
-                       :aot :all
-                       :main ohds.server
-                       :cljsbuild {:builds {:app
-                                            {:source-paths ["env/prod/cljs"]
-                                             :compiler
-                                             {:optimizations :advanced
-                                              :pretty-print false}}}}}})
+})

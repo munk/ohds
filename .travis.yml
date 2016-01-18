@@ -1,5 +1,2 @@
 language: clojure
-before_script:
-  - lein upgrade
-
 script: lein test

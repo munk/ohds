@@ -40,7 +40,7 @@
             [lein-ring "0.9.7"]
             [lein-expectations "0.0.7"]]
 
-  :min-lein-version "2.5.3"
+  :min-lein-version "2.5.1"
 
   :uberjar-name "ohds.jar"
 

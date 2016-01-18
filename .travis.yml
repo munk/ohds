@@ -1,4 +1,6 @@
 language: clojure
+before_script:
+  - yes | lein upgrade 2.5.3
 script: lein test
 jdk:
   - oraclejdk8

@@ -8,7 +8,7 @@
   (:import (java.time LocalDateTime)))
 
 
-(def config (edn/read-string (slurp "/workspace/src/openhds/ohds/application.edn")))
+(def config (edn/read-string (slurp "application.edn")))
 (def apihost (:apihost config))
 (def apiuser (:apiuser config))
 (def apipass (:apipass config))

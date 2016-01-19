@@ -4,7 +4,7 @@
             [cljs.core.async :refer [put!]]
             [weasel.repl :as weasel]))
 
-
+(println "Starting dev")
 (figwheel/watch-and-reload
   :websocket-url "ws://localhost:3449/figwheel-ws"
   :jsload-callback (fn []
@@ -13,4 +13,3 @@
 (weasel/connect "ws://localhost:9001" :verbose true :print #{:repl :console})
 
 (core/main)
-

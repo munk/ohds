@@ -3,7 +3,9 @@
    [reagent.core :as reagent :refer [atom]]
    [reagent.cookies :as cookies]
    [petrol.core :as petrol]
+   [schema.core :as s]
    [ohds.views :as views]
+   [ohds.domain :as d]
    [ohds.processing]))
 
 (enable-console-print!)

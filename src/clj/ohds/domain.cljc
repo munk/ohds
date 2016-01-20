@@ -6,14 +6,22 @@
      password :- s/Str
      admin? :- s/Bool])
 
-(defn make-login-request
-  [username password admin?]
-  (map->LoginRequest {:username username :password password :admin? admin}))
 
-(defn make-fieldworker-login-request
-  [username password]
-  (make-login-request username password false))
-
-(defn make-admin-login-request
-  [username password]
-  (make-login-request username password true))
+(s/defrecord ApplicationState
+    [page :- s/Keyword
+     mode :- s/Keyword ;TODO: Make this an enum
+     errors :- s/Str
+     login-request :- LoginRequest
+     hierarchies :- [s/Str]
+     location-hierarchy :- s/Str
+     location :- {s/Keyword s/Str}
+     socialgroup :- {s/Keyword s/Str}
+     individual :- {s/Keyword s/Str}
+     fieldworker-id :- s/Str
+     locations :- [{s/Keyword s/Str}]
+     relationships :- [{s/Keyword s/Str}]
+     location-id :- s/Str
+     social-group-id :- s/Str
+     individual-id :- s/Str
+     individuals :- [{s/Keyword s/Str}]
+     ])

@@ -32,11 +32,8 @@
     [name extId type])
 
 
-(defn login [req]
-  (let [params (:form-params req)
-        username (get params "username")
-        password (get params "password")
-        result (svc/login username password)]
+(defn login [username password]
+  (let [result (svc/login username password)]
     (if (nil? result)
       {:status 401
        :headers {}

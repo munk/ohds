@@ -20,7 +20,8 @@
   (resources "/")
   (resources "/react" {:root "react"})
 
-  (POST "/api/v1/login" req (ctrl/login req))
+  (POST "/api/v1/login" {{:keys [username password]} :params}
+        (ctrl/login username password))
   (POST "/api/v1/adminLogin" req (ctrl/admin-login req))
   (POST "/api/v1/locations" req (ctrl/create-location req))
   (POST "/api/v1/socialgroups" req (ctrl/create-social-group req))

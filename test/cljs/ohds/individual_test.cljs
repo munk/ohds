@@ -62,7 +62,8 @@
                                  :gender "FEMALE"
                                  :uuid "a-uuid"}
                     :fieldworker-id "fw-id"
-                    :page :individual ;;; TODO: Is this the expected behavior?
+                    :page :relationships
+                    :individuals [{:extId "extid", :firstname "fname", :gender "FEMALE", :uuid "a-uuid"}]
                     }]
       (is (= expected
              (process-message msg app))))))

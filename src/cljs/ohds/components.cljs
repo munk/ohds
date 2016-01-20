@@ -110,7 +110,7 @@
 
 (defn checkbox [id label ch msg]
   [:div.form-group
-   [:input {:id id :type :checkbox :autocomplete "off"
+   [:input {:id id :type :checkbox :autoComplete "off"
             :onChange (send! ch msg)}]
    [:div.btn-group
     [:label.btn.btn-default {:for id}

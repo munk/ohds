@@ -35,12 +35,11 @@
       (is (= {:user {:password "pwd"}}
              (process-message msg {})))))
 
-  (testing "submitting login without username or password displays error message"
-
-    (let [actual (watch-channels (m/->FieldworkerLogin) {:user {:username ""
-                                                                :password ""}})
-          expected #{(om/map->LoginResults {:status 401})}]
-      (is (= actual expected)))
+  (testing "cannot submit login with blank credentials"
+    (is (thrown? js/Object
+                 (watch-channels (m/->FieldworkerLogin)
+                                 {:user {:username ""
+                                         :password ""}})))
 
     (let [msg (om/map->LoginResults {:status 401})
           no-user {:user {:username ""

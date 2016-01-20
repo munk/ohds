@@ -25,4 +25,3 @@
       (is (= "123-abc-456" fooworker-result))
       (is (nil? bad-username))
       (is (nil? bad-password)))))
-

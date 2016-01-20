@@ -74,6 +74,7 @@
          expected-password :passwordHash
          uuid :uuid} (find-fieldworker username)]
     (when (and
+           (some? expected-username)
            (bcrypt/check password expected-password)
            (= username expected-username))
       uuid)))

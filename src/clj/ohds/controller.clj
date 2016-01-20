@@ -33,12 +33,17 @@
 
 
 (defn login [username password]
+  {:pre [username password]
+   :post [(let [status (:status %)]
+            (or (= status 200)
+                (= status 401)))]}
   (let [result (svc/login username password)]
     (if (nil? result)
       {:status 401
-       :headers {}
        :body "Bad username or password"}
-      (str result))))
+      {:status 200
+       :body (str result)})))
+
 
 (defn admin-login [req]
   (let [params (:form-params req)

@@ -4,7 +4,8 @@
    [crypto.password.bcrypt :as bcrypt]
    [clojure.edn :as edn]
    [org.httpkit.client :as http]
-   [clojure.data.json :as json])
+   [clojure.data.json :as json]
+   [clojure.string :refer [blank?]])
   (:import (java.time LocalDateTime)))
 
 
@@ -56,15 +57,23 @@
 
 ;;; Login
 
+(defn all-fieldworkers []
+  (get fieldworkers-bulk-url))
+
+(defn find-fieldworker [query]
+  (first
+   (filter #(= (:fieldWorkerId %) query)
+           (all-fieldworkers))))
+
 (defn login [username password]
-  {:pre [(some? username) (some? password)]}
-  (let [result  (->> fieldworkers-bulk-url
-                     (get)
-                     (filter #(= (:fieldWorkerId %) username))
-                     (first))
-        {expected-username :fieldWorkerId expected-password :passwordHash uuid :uuid} result]
+  {:pre [(not (blank? username))
+         (not (blank? password))]
+   :post [(or (nil? %)
+              (string? %))]}
+  (let [{expected-username :fieldWorkerId
+         expected-password :passwordHash
+         uuid :uuid} (find-fieldworker username)]
     (when (and
-           (not (nil? result))
            (bcrypt/check password expected-password)
            (= username expected-username))
       uuid)))

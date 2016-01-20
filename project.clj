@@ -1,4 +1,4 @@
-(defproject ohds "0.1.0-SNAPSHOT"
+(defproject ohds "0.1.2-SNAPSHOT"
   :description "Front End for OpenHDS"
   :url "http://github.com/munk/ohds"
   :license {:name "Eclipse Public License"
@@ -8,7 +8,7 @@
 
   :test-paths ["test/clj"]
 
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.7.170"]
                  [instaparse "1.4.1"]
                  [org.clojure/tools.nrepl "0.2.12"]

@@ -22,7 +22,11 @@
     (fn [c div]
       (is (found-in #"username" div))
       (is (found-in #"password" div))
-      (is (not (found-in #"<button.*Login" div))))))
+      (is (not (found-in #"<button.*Login" div)))))
+  (with-mounted-component (view/login nil  {:username "user"
+                                            :password "pass"})
+    (fn [c div]
+      (is  (found-in #"<button.*Login" div)))))
 
 (deftest login-test
   (testing "change username updates state with new username"

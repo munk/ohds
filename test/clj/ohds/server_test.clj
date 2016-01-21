@@ -4,15 +4,15 @@
   (:use expectations))
 
 (defn request [resource app method & params]
-  (app {:request-method method :uri resource :form-params (first params)}))
+  (app {:request-method method :uri resource :params (first params)}))
 
 (expect 401 (:status (request "/api/v1/login" routes :post
-                              {"username" "fieldworker"
-                               "password" "badpassword"})))
+                              {:username "fieldworker"
+                               :password "badpassword"})))
 
 (expect 200 (:status (request "/api/v1/login" routes :post
-                              {"username" "fieldworker"
-                               "password" "password"})))
+                              {:username "fieldworker"
+                               :password "password"})))
 
 (expect AssertionError (:status (request "/api/v1/login" routes :post
                               {"username" nil

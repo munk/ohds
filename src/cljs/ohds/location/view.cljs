@@ -27,9 +27,12 @@
        (c/submit ch m/->SubmitLocation "Submit"))]))
 
 (defn form [ch state]
+  (println "****Location Form\n" state "\n"
+           (type (:hierarchy-levels state)) (:hierarchy-levels state))
   (let [n (dec (:hierarchy-level-count state))
         hiera-level (nth (:hierarchy-levels state) n)
         state' (assoc (:location state) :hiera-name (:name hiera-level))]
+    (println "state'" state')
     [:span
      [:legend "Location"]
      [location-form ch state']]))

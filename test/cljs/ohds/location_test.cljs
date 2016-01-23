@@ -1,5 +1,5 @@
 (ns ohds.location-test
-  (:require  
+  (:require
    [ohds.location.view :as view]
    [ohds.location.messages :as m]
    [ohds.location.processing :as p]
@@ -7,6 +7,26 @@
    [cljs-http.client :as http]
    [petrol.core :refer [process-message watch-channels wrap]]
    [cljs.test :refer-macros [deftest is testing run-tests]]))
+
+
+(deftest location-form-test
+  (with-mounted-component
+    (view/form nil {:hierarchy-level-count 3
+                    :location {}
+                    :hierarchy-levels [{} {} {:name "some-location-name"}]})
+    (fn [c div]
+      (is (found-in #"some-location-name" div))
+      (is (not (found-in #"Submit" div)))))
+  (with-mounted-component
+    (view/form nil {:hierarchy-level-count 3
+                    :location {:name "name"
+                               :extId "id"
+                               :type "T"}
+                    :hierarchy-levels [{} {} {:name "some-location-name"}]})
+    (fn [c div]
+      (is (found-in #"some-location-name" div))
+      (is (found-in #"Submit" div)))))
+
 
 (deftest location-test
   (testing "change location type updates location type in app"
@@ -37,6 +57,7 @@
             expected #{(m/map->CreateLocationResults {:status 200 :body "location-uuid"})}
             result (watch-channels msg app)]
         (is (= expected result)))))
+
   (testing "submit location results updates page and current location" ;;;TODO status validation
     (let [msg (m/map->CreateLocationResults {:status 200
                                           :body "location-uuid"})

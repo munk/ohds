@@ -8,6 +8,16 @@
    [petrol.core :refer [process-message watch-channels wrap]]
    [cljs.test :refer-macros [deftest is testing run-tests]]))
 
+(deftest individual-form-test
+  (with-mounted-component
+    (view/form nil {})
+    (fn [c div]
+      (is (not (found-in #"Submit" div)))))
+  (with-mounted-component
+    (view/form nil {:socialgroup {:extId "id" :name "name" :type "T"}})
+    (fn [c div]
+      (is (found-in #"Submit" div)))))
+
 (deftest individual-test
   (testing "changing external id updates individual::extId"
     (let [msg (m/->ChangeExtId "extid")]
@@ -66,4 +76,6 @@
                     :individuals [{:extId "extid", :firstname "fname", :gender "FEMALE", :uuid "a-uuid"}]
                     }]
       (is (= expected
-             (process-message msg app))))))
+             (process-message msg app)))
+      (is (= :individual
+             (:page (process-message msg (assoc app :more-residents true))))))))

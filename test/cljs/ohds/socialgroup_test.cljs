@@ -8,6 +8,17 @@
    [petrol.core :refer [process-message watch-channels wrap]]
    [cljs.test :refer-macros [deftest is testing run-tests]]))
 
+(deftest socialgroup-form-test
+  (with-mounted-component
+    (view/form nil {})
+    (fn [c div]
+      (is (not (found-in #"Submit" div)))))
+  (with-mounted-component
+    (view/form nil {:socialgroup {:extId "id" :name "name" :type "T"}})
+    (fn [c div]
+      (is (found-in #"Submit" div)))))
+
+
 (deftest socialgroup-test
   (testing "changing external id updates app state"
     (let [msg (m/->ChangeExtId "extid")]

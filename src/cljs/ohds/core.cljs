@@ -13,6 +13,7 @@
 (def initial-state
   {:page :login
    :mode :not-authorized
+   :debug false
    :errors ""
    :user {:username ""
           :password ""}
@@ -23,8 +24,9 @@
    :socialgroup {:name nil :uuid "" :extId "" :type "FAMILY"}
    :individual {:firstname nil :extId nil :gender "FEMALE"}
    :fieldworker-id "fa6bb290-533d-4a02-b9c1-141e93723cfc"
+   :residencies []
    :locations []
-   :relationships {}
+   :relationships []
    :location-id ""
    :social-group-id ""
    :individual-id ""

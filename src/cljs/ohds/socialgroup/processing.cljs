@@ -3,7 +3,7 @@
    [petrol.core :refer [Message EventSource]]
    [ohds.socialgroup.backend :as backend]
    [ohds.socialgroup.messages :as m]
-   [ohds.processing :refer [assoc-state]]))
+   [ohds.processing :refer [assoc-state assoc-response]]))
 
 (extend-protocol Message
   m/ChangeExtId
@@ -18,8 +18,12 @@
   m/CreateSocialGroupResults
   (process-message [response app]
     (let [uuid (:body response)
+          status (:status response)
           socialgroup (assoc (:socialgroup app) :uuid uuid)]
-      (assoc app :page :individual :socialgroup socialgroup))))
+      (assoc-response status uuid
+                      #(assoc app :page :individual :socialgroup socialgroup)
+                      #(assoc app :errors "Unable to retrieve social group")))))
+
 
 (extend-protocol EventSource
   m/SubmitSocialGroup

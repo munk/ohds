@@ -12,8 +12,8 @@
         name? (c/has-data? ind :firstname)
         id? (c/has-data? ind :extId)
         gender? (c/has-data? ind :gender)]
-    (println ind)
-    [:span
+    (println ind name? id? gender?)
+    [:span {:id "individual-form"}
      [:legend "Individual"]
      (rmodal/modal ch state)
      (mmodal/modal ch state)
@@ -21,9 +21,9 @@
                    "firstname" "First Name" state)
      (c/text-input ch m/->ChangeExtId
                    "extId" "External ID" state)
-     (c/select ch m/->ChangeGender (:gender state)
-               "gender"
+     (c/select ch m/->ChangeGender "gender" (:gender state)
                [["nil" "Gender..."] ["FEMALE" "Female"] ["MALE" "Male"]])
      (c/checkbox "more-residents" "More Residents" ch (m/->MoreResidents))
      (when (and name? id? gender?)
-       (c/submit ch m/->CreateIndividual "Save"))]))
+       [:div {:onClick #(aset (.getElementById js/document "firstname") "value" nil)}
+        (c/submit ch m/->CreateIndividual "Save")])]))

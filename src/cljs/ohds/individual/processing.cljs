@@ -3,7 +3,7 @@
    [petrol.core :refer [Message EventSource]]
    [ohds.individual.backend :as backend]
    [ohds.individual.messages :as m]
-   [ohds.processing :refer [assoc-state]]))
+   [ohds.processing :refer [assoc-state assoc-response]]))
 
 
 (extend-protocol Message
@@ -24,9 +24,11 @@
     (let [more-residents (not (:more-residents app))]
       (assoc app :more-residents more-residents)))
 
+
   m/CreateIndividualResults
   (process-message [response app]
     (let [uuid (:body response)
+          status (:status response)
           individual (assoc (:individual app) :uuid uuid)
           individuals (:individuals app)
           individuals' (conj individuals individual)
@@ -34,8 +36,23 @@
       (backend/create-residency  (:fieldworker-id app) uuid (:location app))
       (backend/create-membership (:fieldworker-id app) uuid (:socialgroup app))
       (if more?
-        (assoc app :page :individual :individual individual :individuals individuals')
-        (assoc app :page :relationships :individual individual :individuals individuals')))))
+        (assoc-response 200 uuid #(assoc app :page :individual :individual {}
+                                         :individuals individuals'
+                                         :more-residents false) nil)
+        (assoc-response 200 uuid #(assoc app :page :relationships :individual {}
+                                         :individuals individuals') nil))))
+
+  m/CreateResidencyResults
+  (process-message [response app]
+    (let [{status :status
+           body :body} response
+          residencies (get app :residencies [])]
+      (assoc-response status body
+                      #(assoc app :residencies (conj residencies {:uuid body}))
+                      #(assoc app :errors "Unable to submit residency"))))
+  m/CreateMembershipResults
+  (process-message [response app]
+    app))
 
 (extend-protocol EventSource
   m/CreateIndividual
@@ -46,4 +63,8 @@
           first-name (:firstname individual)
           extId (:extId individual)
           gender (:gender individual)]
+      (aset (.getElementById js/document "firstname") "value" "")
+      (aset (.getElementById js/document "extId") "value" "")
+      (aset (.getElementById js/document "more-residents") "value" false)
+      (aset (aget (.getElementsByTagName (.getElementById js/document "gender" ) "option") 0) "selected" true)
       #{(backend/create-individual fieldworker-id first-name extId gender)})))

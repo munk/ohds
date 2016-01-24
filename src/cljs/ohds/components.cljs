@@ -20,12 +20,12 @@
 
 (defn text-input
   ([ch msg id placeholder app]
+   (println "rendering text input" id)
    (form-group
     [:input.form-control
      {:id id
       :type :text
       :placeholder placeholder
-      :defaultValue ""
       :onChange (send-value! ch msg)}]))
   ([ch msg val id placeholder app]
    (form-group

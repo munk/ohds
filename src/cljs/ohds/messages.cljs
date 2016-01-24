@@ -7,3 +7,4 @@
 
 (defrecord Logout [])
 (defrecord FieldworkerHome [])
+(defrecord ToggleDebug [])

@@ -10,3 +10,5 @@
 (defrecord Continue [])
 (defrecord Complete [])
 (defrecord MoreResidents [])
+(defrecord CreateResidencyResults [body])
+(defrecord CreateMembershipResults [body])

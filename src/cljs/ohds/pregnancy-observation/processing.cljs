@@ -6,6 +6,7 @@
    [ohds.pregnancy-observation.backend :as backend]))
 
 (defn state! [msg app]
+  (println msg)
   (assoc-state msg app :pregnancy-observation))
 
 (extend-protocol Message

@@ -13,6 +13,26 @@
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 
+(defn debug [app]
+  [:div.well.well-lg {:style {:background-color :lightblue
+                              :font-size 12
+                              :color "#254117"
+                              :white-space :nowrap
+                              :overflow :scroll}}
+   [:legend {:style {:color :black}} "Debug App State"]
+   [:span {:id "debug-body" :style {:font-family :monospace}}
+    (for [k (keys app)]
+      (if (= k :location-hierarchies)
+        [:div (str k "-" "...")
+         #_(for [h (k app)]
+           [:div {:style {:paddingLeft "30px"}} (str "\t" h)])]
+        [:div (str k " - " (k app))]))
+    ;[:div (str "Page: " (:page app))]
+    ;[:div (str "Mode: " (:mode app))]
+    ;[:div (str "Hierarchy Level Count: " (:hierarchy-level-count app))]
+    ;[:div (str "Hierarchies: " (:hierarchies app))]
+    ;[:div (str "App: " app)]
+    ]])
 
 (defn hamburger []
   [:button.navbar-toggle.collapsed {:type "button"
@@ -36,6 +56,7 @@
      [:ul.nav.navbar-nav
       (nav-item ch (m/->Logout) "Logout")
       (nav-item ch (m/->FieldworkerHome) "Home")
+      (nav-item ch (m/->ToggleDebug) "Debug")
       (when (:admin-login state)
         (nav-item ch nil "Admin"))])])
 
@@ -72,7 +93,11 @@
            :alt "Fork me on GitHub"
            :data-canonical-src "https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" }]]
    [:div.row
-    [:div.col-md-4]
+    (if (:debug app)
+      [:div.col-md-6
+       (debug app)]
+      [:div.cold-md-4 {} " "])
+
     [:div.col-md-4
      [:div.well.well-lg
       [:fieldset

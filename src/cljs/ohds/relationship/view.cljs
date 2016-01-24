@@ -38,9 +38,10 @@
 
 (defn form [ch app]
   (let [inds (:individuals app)
-        pairs (apply concat  (for [i inds]
-                               (for [j inds]
-                                 [i j])))]
+        pairs (for [i (range (count inds))
+                    :let [all-others (drop i inds)]
+                    others (rest all-others)]
+                [(first all-others) others])]
     [:div
      (map (partial selects ch) pairs)
      (when (and

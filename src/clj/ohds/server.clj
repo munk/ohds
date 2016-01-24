@@ -55,11 +55,9 @@
   (GET "/*" req (page)))
 
 (def http-handler
-  (let [config (assoc api-defaults :params {:nested true
-                                            :keywordize true})]
-    (if is-dev?
-      (reload/wrap-reload (wrap-defaults #'routes config))
-      (wrap-defaults routes config))))
+  (if is-dev?
+    (reload/wrap-reload (wrap-defaults #'routes api-defaults))
+    (wrap-defaults routes api-defaults)))
 
 (defn run-web-server [& [port]]
   (let [port (Integer. (or port (env :port) 10555))]

@@ -6,7 +6,6 @@
    [ohds.pregnancy-observation.backend :as backend]))
 
 (defn state! [msg app]
-  (println msg)
   (assoc-state msg app :pregnancy-observation))
 
 (extend-protocol Message
@@ -18,7 +17,6 @@
     (state! msg app))
   m/Results
   (process-message [msg app]
-    (println "Results" msg)
     app))
 
 (extend-protocol EventSource

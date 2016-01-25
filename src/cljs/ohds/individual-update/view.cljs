@@ -34,7 +34,6 @@
                  [:out-migration "Out Migration"]
                  [:death "Death"]])
       (when (some? ind-update-state)
-        (println "when"  ind-update-state)
         (c/modal-toggle (str "#" ind-update-state "-modal")
                         "Take Observation"))
       [:hr]]]))

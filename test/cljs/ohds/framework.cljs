@@ -7,7 +7,7 @@
 
 (declare mock-login)
 
-(defn mock-post [status body]
+#_(defn mock-post [status body]
   (fn [_ _]
     {:status status
      :body body}))

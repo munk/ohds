@@ -12,11 +12,12 @@
   (with-mounted-component
     (view/form nil {})
     (fn [c div]
-      (is (not (found-in #"Submit" div)))))
+      (println div)
+      (is (not (found-in #"Save" div)))))
   (with-mounted-component
-    (view/form nil {:socialgroup {:extId "id" :name "name" :type "T"}})
+    (view/form nil {:individual {:extId "id" :name "name" :type "T"}})
     (fn [c div]
-      (is (found-in #"Submit" div)))))
+      (is (found-in #"Save" div)))))
 
 (deftest individual-test
   (testing "changing external id updates individual::extId"
@@ -49,7 +50,8 @@
                             :firstname "fname"
                             :gender "FEMALE"}
                :fieldworker-id "fw-id"}]
-      (with-redefs [http/post (fn [url body]
+      (with-redefs [p/clean-form (fn [] nil)
+                    http/post (fn [url body]
                                 (is (= {:form-params {:fieldworker-id "fw-id"
                                                       :ext-id "extid"
                                                       :first-name "fname"
@@ -67,15 +69,15 @@
                             :gender "FEMALE"}
                :fieldworker-id "fw-id"}
 
-          expected {:individual {:firstname "fname"
-                                 :extId "extid"
-                                 :gender "FEMALE"
-                                 :uuid "a-uuid"}
+          expected {:individual {}
                     :fieldworker-id "fw-id"
                     :page :relationships
-                    :individuals [{:extId "extid", :firstname "fname", :gender "FEMALE", :uuid "a-uuid"}]
-                    }]
-      (is (= expected
-             (process-message msg app)))
+                    :individuals [{:extId "extid", :firstname "fname",
+                                   :gender "FEMALE", :uuid "a-uuid"}]}
+          actual (process-message msg app)]
+      (is (= (:individual expected)
+             (:individual actual)))
+      (is (= (:individuals expected)
+             (:individuals actual)))
       (is (= :individual
              (:page (process-message msg (assoc app :more-residents true))))))))

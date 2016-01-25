@@ -6,7 +6,6 @@
 
 (defn create-relationship
   [fieldworker-id id-a id-b rtype start-date]
-  (println "create-relationship" id-a id-b rtype)
   (let [params {:fieldworker-id fieldworker-id
                 :id-a id-a
                 :id-b id-b

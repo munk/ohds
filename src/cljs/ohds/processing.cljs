@@ -39,7 +39,6 @@
   (process-message [response app]
     (let [{status :status
            body :body} response]
-      (println "Login status" status)
       (assoc-response status body
        #(assoc app :fieldworker-id body :page :hierarchy)
        #(assoc app :errors "Bad username or password"))))
@@ -49,7 +48,6 @@
            body :body} response
           hierarchies (process-ok body ["uuid" "name" "parent" "level"])
           hierarchies' (filterv #(not= (:uuid (:level %)) "UNKNOWN") hierarchies)]
-      (println "Hierarchy Status" status)
       (assoc-response status body
        #(assoc app :location-hierarchies hierarchies')
        #(assoc app :errors "Unable to retrieve location hierarchies"))))
@@ -60,7 +58,6 @@
           result (filterv #(not= (:uuid %) "UNKNOWN")
                           (process-ok body  ["keyIdentifier" "uuid" "name"]))
           hierarchies (into ["HIERARCHY_ROOT"] (mapv #(str) (range (count result))))]
-      (println "Hierarchy Level Status" status)
       (assoc-response status body
        #(assoc app :hierarchy-levels result :hierarchies hierarchies)
        #(assoc app :errors "Unable to retrieve location levels"))))

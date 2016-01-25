@@ -47,7 +47,6 @@
     (let [{status :status
            body :body} response
           residencies (get app :residencies [])]
-      (println "Residency Results" response)
       (assoc-response status body
                       #(assoc app :residencies (conj residencies {:uuid body}))
                       #(assoc app :errors "Unable to submit residency"))))
@@ -56,10 +55,14 @@
     (let [{status :status
            body :body} response
           memberships (get app :memberships [])]
-      (println "Membership Results" response)
       (assoc-response status body
                       #(assoc app :memberships (conj memberships {:uuid body}))
                       #(assoc app :errors "Unable to submit residency")))))
+(defn clean-form []
+  (aset (.getElementById js/document "firstname") "value" "")
+  (aset (.getElementById js/document "extId") "value" "")
+  (aset (.getElementById js/document "more-residents") "checked" false)
+  (aset (aget (.getElementsByTagName (.getElementById js/document "gender" ) "option") 0) "selected" true))
 
 (extend-protocol EventSource
   m/CreateIndividual
@@ -70,8 +73,5 @@
           first-name (:firstname individual)
           extId (:extId individual)
           gender (:gender individual)]
-      (aset (.getElementById js/document "firstname") "value" "")
-      (aset (.getElementById js/document "extId") "value" "")
-      (aset (.getElementById js/document "more-residents") "checked" false)
-      (aset (aget (.getElementsByTagName (.getElementById js/document "gender" ) "option") 0) "selected" true)
+      (clean-form)
       #{(backend/create-individual fieldworker-id first-name extId gender)})))

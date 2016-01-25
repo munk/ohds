@@ -9,9 +9,7 @@
 
 
 (defn current-hierarchy [state]
-  (println state)
   (let [hierarchy (last (:hierarchies state))]
-    (println "h" hierarchy)
     (first
      (filter #(= hierarchy (:uuid %)) (:location-hierarchies state)))))
 
@@ -23,7 +21,6 @@
         state' (assoc (:location state) :hiera-name (:name hiera-level))]
     [:div
      [:legend "Location"]
-     (println "LOCATION-FORM" (current-hierarchy state) )
      (c/const-text "hierarchy-name" (:name (current-hierarchy state)))
      (c/select ch m/->ChangeLocationType "type" (:type state)
                [["RURAL" "Rural"] ["URBAN" "Urban"]]

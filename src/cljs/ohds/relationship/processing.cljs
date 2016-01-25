@@ -25,7 +25,6 @@
         (assoc-in app [:relationships [a b]] [nil d]))))
   m/ProcessRelationshipResults
   (process-message [response app]
-    (println "processing relationship results")
     (if (= (:page app)
            :relationships)
       (assoc app :page :location)

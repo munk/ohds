@@ -52,11 +52,13 @@
                           :password ""}}]
       (is (= {:user {:username ""
                      :password "pwd"}
-              :errors "Bad username or password"}
+              :errors "Bad username or password"
+              :last-response {:status 401, :body nil}}
              (process-message msg no-user)))
       (is (= {:user {:username "usr"
                      :password ""}
-              :errors "Bad username or password"}
+              :errors "Bad username or password"
+              :last-response {:status 401, :body nil}}
              (process-message msg no-pswd)))))
 
   (testing "submitting login updates fieldworker-id, page, and mode"

@@ -47,12 +47,19 @@
     (let [{status :status
            body :body} response
           residencies (get app :residencies [])]
+      (println "Residency Results" response)
       (assoc-response status body
                       #(assoc app :residencies (conj residencies {:uuid body}))
                       #(assoc app :errors "Unable to submit residency"))))
   m/CreateMembershipResults
   (process-message [response app]
-    app))
+    (let [{status :status
+           body :body} response
+          memberships (get app :memberships [])]
+      (println "Membership Results" response)
+      (assoc-response status body
+                      #(assoc app :memberships (conj memberships {:uuid body}))
+                      #(assoc app :errors "Unable to submit residency")))))
 
 (extend-protocol EventSource
   m/CreateIndividual
@@ -65,6 +72,6 @@
           gender (:gender individual)]
       (aset (.getElementById js/document "firstname") "value" "")
       (aset (.getElementById js/document "extId") "value" "")
-      (aset (.getElementById js/document "more-residents") "value" false)
+      (aset (.getElementById js/document "more-residents") "checked" false)
       (aset (aget (.getElementsByTagName (.getElementById js/document "gender" ) "option") 0) "selected" true)
       #{(backend/create-individual fieldworker-id first-name extId gender)})))

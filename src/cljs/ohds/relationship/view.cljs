@@ -22,19 +22,21 @@
 
 (defn selects [ch pair]
   (let [a (first pair)
-        b (second pair)]
-    (c/form-group
-     [:span
-      (str (:firstname a) " is ")
-      (c/inline-select ch (partial m/->ChangeRelationshipType (:uuid a) (:uuid b))
-                       "type" "NOT_RELATED" relationships)
-      (str " to " (:firstname b))
+        b (second pair)
+        id-suffix (str (:uuid a) (:uuid b))]
+    [:div
+     [:div
+      [:legend
+       (str (:firstname a) " → " (:firstname b))]
+      (c/select ch (partial m/->ChangeRelationshipType (:uuid a) (:uuid b))
+                (str "type" id-suffix) "NOT_RELATED" relationships)
+      [:label {:for (str "start-date" id-suffix)} "Relationship Start Date"]
       (c/date-input ch
                     (partial m/->ChangeRelationshipStartDate
                              (:uuid a)
                              (:uuid b))
-                    "start-date")
-      [:hr]])))
+                    (str "start-date" id-suffix))
+      [:hr]]]))
 
 (defn form [ch app]
   (let [inds (:individuals app)
@@ -42,7 +44,8 @@
                     :let [all-others (drop i inds)]
                     others (rest all-others)]
                 [(first all-others) others])]
-    [:div
+    [:span
+     [:legend "Relationships"]
      (map (partial selects ch) pairs)
      (when (and
             (seq (:relationships app))

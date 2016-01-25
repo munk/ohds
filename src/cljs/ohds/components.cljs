@@ -68,7 +68,6 @@
 (defn select [ch msg id val options & default-opt]
   (let [select-attr
         {:id id
-         :data-width "100%"
          :on-change (send-value! ch msg)}
         opts (map option options)]
     (form-group

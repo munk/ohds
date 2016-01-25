@@ -72,7 +72,8 @@
 
   (testing "unsuccessful login"
     (let [msg (om/map->LoginResults {:status 400})
-          expected {:errors "Bad username or password"}
+          expected {:errors "Bad username or password"
+                    :last-response {:status 400, :body nil}}
           actual (process-message msg {})]
       (is (= expected actual))))
 

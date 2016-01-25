@@ -16,7 +16,9 @@
   {:pre [(map? app)]
    :post [(has-keys? (app-key %) (set (keys response)))]}
   (let [state (app-key app)]
-    (assoc app app-key (merge state response))))
+    (dissoc
+     (assoc app app-key (merge state response))
+     :errors)))
 
 (defn process-ok [body keys]
   (->> body
@@ -37,33 +39,35 @@
   (process-message [response app]
     (let [{status :status
            body :body} response]
-      (assoc-response
-       status body
-       #(assoc app :fieldworker-id body :page :hierarchy :mode :fieldworker-logged-in :errors "")
+      (println "Login status" status)
+      (assoc-response status body
+       #(assoc app :fieldworker-id body :page :hierarchy)
        #(assoc app :errors "Bad username or password"))))
   m/LocationHierarchyResults
   (process-message [response app]
     (let [{status :status
-           body :body} response]
-      (assoc-response
-       status body
-       #(assoc app :location-hierarchies (process-ok body ["uuid" "name" "parent" "level"]))
+           body :body} response
+          hierarchies (process-ok body ["uuid" "name" "parent" "level"])
+          hierarchies' (filterv #(not= (:uuid (:level %)) "UNKNOWN") hierarchies)]
+      (println "Hierarchy Status" status)
+      (assoc-response status body
+       #(assoc app :location-hierarchies hierarchies')
        #(assoc app :errors "Unable to retrieve location hierarchies"))))
   m/HierarchyLevelResults
   (process-message [response app]
     (let [{status :status
            body :body} response
-          result (process-ok body  ["keyIdentifier" "uuid" "name"])]
-      (assoc-response
-       status body
-       #(assoc app
-                :hierarchy-level-count (dec (count result))
-                :hierarchy-levels result)
+          result (filterv #(not= (:uuid %) "UNKNOWN")
+                          (process-ok body  ["keyIdentifier" "uuid" "name"]))
+          hierarchies (into ["HIERARCHY_ROOT"] (mapv #(str) (range (count result))))]
+      (println "Hierarchy Level Status" status)
+      (assoc-response status body
+       #(assoc app :hierarchy-levels result :hierarchies hierarchies)
        #(assoc app :errors "Unable to retrieve location levels"))))
 
   m/Logout
   (process-message [response app]
-    (assoc app :page :login :mode :not-authorized :user {:username "" :password ""}))
+    {:page :login :debug (:debug app)})
 
   m/FieldworkerHome
   (process-message [response app]

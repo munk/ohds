@@ -16,17 +16,16 @@
 (extend-protocol Message
   m/ChangeLevelSelect
   (process-message
-      [message app]
+    [message app]
     (let [num (:num message)
           id (:id message)
-          val (:val message)
-          h (assoc (:hierarchies app) num val)]      
+          h (assoc (:hierarchies app) num id)]
       (assoc app :hierarchies h)))
   m/StartCensus
   (process-message
       [message app]
-    (let [selected-level-count (dec (count (filter #(pos? (count %)) (:hierarchies app))))
-          expected-level-count (:hierarchy-level-count app)]      
+    (let [selected-level-count (dec (count (:hierarchies app)))
+          expected-level-count (count (:hierarchy-levels app))]
       (if (= selected-level-count
              expected-level-count)
         (assoc app :page :location :mode :census)

@@ -22,17 +22,16 @@
    [:legend {:style {:color :black}} "Debug App State"]
    [:span {:id "debug-body" :style {:font-family :monospace}}
     (for [k (keys app)]
-      (if (= k :location-hierarchies)
-        [:div (str k "-" "...")
-         #_(for [h (k app)]
+      (cond
+        (= k :location-hierarchies)
+        [:div (str k "-")
+         (for [h (k app)]
            [:div {:style {:paddingLeft "30px"}} (str "\t" h)])]
-        [:div (str k " - " (k app))]))
-    ;[:div (str "Page: " (:page app))]
-    ;[:div (str "Mode: " (:mode app))]
-    ;[:div (str "Hierarchy Level Count: " (:hierarchy-level-count app))]
-    ;[:div (str "Hierarchies: " (:hierarchies app))]
-    ;[:div (str "App: " app)]
-    ]])
+        (= k :hierarchy-levels)
+        [:div (str k "-")
+         (for [h (k app)]
+           [:div {:style {:paddingLeft "30px"}} (str "\t" h)])]
+        :else [:div (str k " - " (k app))]))]])
 
 (defn hamburger []
   [:button.navbar-toggle.collapsed {:type "button"
@@ -78,7 +77,9 @@
   [:div {:style {:padding "20px"}}])
 
 (defn errors [_ state]
-  [:div {:style {:color "red"}} state])
+  (when (not (clojure.string/blank? state))
+    [:div.alert.alert-danger
+     state]))
 
 
 (defn root-component [ch app]

@@ -12,6 +12,10 @@
 
 (def initial-state
   {:page :login
+   :debug true})
+
+#_(def initial-state
+  {:page :login
    :mode :not-authorized
    :debug false
    :errors ""

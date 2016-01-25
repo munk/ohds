@@ -20,7 +20,6 @@
 
 (defn text-input
   ([ch msg id placeholder app]
-   (println "rendering text input" id)
    (form-group
     [:input.form-control
      {:id id

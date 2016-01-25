@@ -5,55 +5,30 @@
    [ohds.hierarchy.messages :as m]
    [ohds.components :as c]))
 
-(defn opt [o & more]
-  (when o
-    (let [uuid (:uuid o) name (:name o)]
-      (try
-        [:option {:key uuid, :value uuid} name]
-        (catch js/Object e (println "failed to parse" name))))))
 
-(defn filter-hierarchies [app ki level lh]
-  (filter (fn [h]
-            (let [hi (:hierarchies app)
-                  lid (:level h)
-                  parent (:uuid (:parent h))]
-              (and
-               (= parent (get hi ki))
-               (= level (:uuid lid))))) lh))
+(defn filter-hierarchies [app level-key hierarchies]
+  (filterv #(= (:uuid (:parent %))
+               (get (:hierarchies app) level-key))
+           hierarchies))
 
-(defn select [ch app i & more]
-  (let [ki (get i :keyIdentifier 0)
-        level (:uuid i)
-        lh (:location-hierarchies  app)
-        lh' (filter-hierarchies app ki level lh)]
-    (c/form-group
-     [:select.form-control
-      {:id level
-       :key level
-       :name ki
-       :on-change (send-value! ch (partial m/->ChangeLevelSelect (inc ki) level))}
-      [:option {:key :none} "------"]
-      (when (seq lh') (map opt lh'))])))
+(defn select [ch app hierarchy-level]
+  (let [level-key (get hierarchy-level :keyIdentifier 0)
+        level (:uuid hierarchy-level)
+        hierarchies (:location-hierarchies app)
+        hierarchies' (filter-hierarchies app level-key hierarchies)]
+    (c/select ch (partial m/->ChangeLevelSelect (inc level-key))
+              level nil
+              (mapv c/map->option'uuid hierarchies')
+              [:option {:key :none} "------"])))
 
 (defn form [ch app]
-  {:pre [(or (= 0 (:hierarchy-level-count app))
-             ;;; We ignore the extra Unknown Status
-             (= (inc (:hierarchy-level-count app))
-                (count (:hierarchy-levels app))))]
-    ;;; Must have correct number of select elements
-   :post [(= (:hierarchy-level-count app)
-             (count (filter #{:select.form-control} (flatten %))))]}
-
   (let [levels (:hierarchy-levels app)
-        levelsf
-        (filterv #(not= "UNKNOWN_STATUS" (:name %)) levels)]
-
-
+        ct (count levels)]
     [:div
      [:legend "Location Hierarchy"]
-     (when (= 0 (:hierarchy-level-count app))
+     (when (= 0 ct)
        [:h3 "No Hierarchies found! Check with your supervisor to see if the project is set up correctly."])
-     (map #(select ch app %) levelsf)
+     (map #(select ch app %) levels)
      [:div
       (c/submit ch m/->StartCensus "Census")
       (c/submit ch m/->StartVisit "Visit")]]))

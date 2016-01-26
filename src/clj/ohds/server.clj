@@ -1,7 +1,7 @@
 (ns ohds.server
   (:require [clojure.java.io :as io]
             [ohds.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
-            [compojure.core :refer [GET POST PUT defroutes contex]]
+            [compojure.core :refer [GET POST PUT defroutes context]]
             [compojure.route :refer [resources]]
             [net.cgrand.enlive-html :refer [deftemplate]]
             [net.cgrand.reload :refer [auto-reload]]
@@ -9,11 +9,21 @@
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [environ.core :refer [env]]
             [ring.adapter.jetty :refer [run-jetty]]
+            [clojure.edn :as edn]
             [org.httpkit.client :as http]
-            [ohds.controller :as ctrl])
+            [ohds.controller :as ctrl]
+            [clojure.data.json :as json])
   (:gen-class))
 
 (def config (edn/read-string (slurp "application.edn")))
+
+(defn http-get [url {:keys [apihost apiuser apipass]}]
+  (let [{body :body
+         status :status} @(http/get
+                           (str apihost url)
+                           {:basic-auth [apiuser apipass]})]
+    {:status status
+     :body (json/read-str body :key-fn keyword)}))
 
 (deftemplate page (io/resource "index.html") []
   [:body] (if is-dev? inject-devmode-html identity))
@@ -34,6 +44,8 @@
            ;;; Users
     (context "/fieldworker" []
       (GET "/" []
+        (http/get
+         )
 
         )
       (POST "/" []

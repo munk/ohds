@@ -42,6 +42,7 @@
       (assoc-response status body
        #(assoc app :fieldworker-id body :page :hierarchy)
        #(assoc app :errors "Bad username or password"))))
+
   m/LocationHierarchyResults
   (process-message [response app]
     (let [{status :status
@@ -51,6 +52,7 @@
       (assoc-response status body
        #(assoc app :location-hierarchies hierarchies')
        #(assoc app :errors "Unable to retrieve location hierarchies"))))
+
   m/HierarchyLevelResults
   (process-message [response app]
     (let [{status :status

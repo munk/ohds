@@ -14,7 +14,11 @@
     (assoc-state response app :socialgroup))
   m/ChangeGroupType
   (process-message [response app]
-    (assoc-state response app :socialgroup))
+    (if (= (:type response) "-----")
+      (assoc-state {:type nil} app :individual)
+      (assoc-state response app :individual)))
+
+
   m/CreateSocialGroupResults
   (process-message [response app]
     (let [uuid (:body response)

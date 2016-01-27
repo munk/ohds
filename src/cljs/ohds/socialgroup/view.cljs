@@ -14,6 +14,7 @@
      (c/text-input ch m/->ChangeExtId (:extId sg) "extId" "External ID")
      (c/text-input ch m/->ChangeGroupName (:name sg) "groupName" "Group Name")
      (c/select ch m/->ChangeGroupType "groupType" "FAMILY"
-               [["FAMILY" "Family"] ["COHORT" "Cohort"]])
+               [["FAMILY" "Family"] ["COHORT" "Cohort"]]
+               [:option {:key "none"} "-----"])
      (when (and group-type? group-name? group-id?)
        (c/submit ch m/->SubmitSocialGroup "Submit"))]))

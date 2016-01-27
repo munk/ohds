@@ -22,7 +22,8 @@
      (c/text-input ch m/->ChangeExtId
                    "extId" "External ID" state)
      (c/select ch m/->ChangeGender "gender" (:gender state)
-               [["nil" "Gender..."] ["FEMALE" "Female"] ["MALE" "Male"]])
+               [["FEMALE" "Female"] ["MALE" "Male"]]
+               [:option {:key "none"} "-----"])
      (c/checkbox "more-residents" "More Residents" ch (m/->MoreResidents))
      (when (and name? id? gender?)
        [:div {:onClick #(aset (.getElementById js/document "firstname") "value" nil)}

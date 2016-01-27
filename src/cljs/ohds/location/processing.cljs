@@ -6,7 +6,7 @@
     [ohds.location.messages :as m]
     [ohds.location.backend :as backend]
     [ohds.backend :as ohds-backend]
-    [ohds.processing :refer [assoc-state process-ok]]))
+    [ohds.processing :refer [assoc-state assoc-response process-ok]]))
 
 (def json-reader (t/reader :json))
 
@@ -17,17 +17,22 @@
   m/ChangeLocationExtId
   (process-message [response app]
     (assoc-state response app :location))
+
   m/ChangeLocationType
   (process-message [response app]
-    (assoc-state response app :location))
+    (if (= (:type response) "-----")
+      (assoc-state {:type nil} app :location)
+      (assoc-state response app :location)))
+
   m/LocationResults
   (process-message [response app]
     (let [{status :status
            body :body} response]
-      (case status
-        200 (assoc app :locations
-                   (process-ok body ["uuid" "name" "extId" "type"]))
-        (assoc app :errors (str "Failed to get locations!" status)))))
+      (assoc-response
+       status body
+       #(assoc app :locations (process-ok body ["uuid" "name" "extId" "type"]))
+       #(assoc app :errors (str "Failed to get locations!" status)))))
+
   m/ChangeLocation
   (process-message [response app]
     (let [uuid (:location response)
@@ -55,12 +60,7 @@
       #{(ohds-backend/locations uuid)}))
   m/SubmitLocation
   (watch-channels [response app]
-    (let [location (:location app)
-          name (:name location)
-          extId (:extId location)
-          type (:type location)
+    (let [{:keys [name extId type]} (:location app)
           fieldworker-id (:fieldworker-id app)
-          parent (:hierarchy app)]
-      (if (seq (:uuid location))
-        #{(backend/update-location (:location app))}
-        #{(backend/create-location fieldworker-id parent name extId type)}))))
+          parent (last (:hierarchies app))]
+      #{(backend/create-location fieldworker-id parent name extId type)})))

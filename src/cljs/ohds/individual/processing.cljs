@@ -17,7 +17,10 @@
 
   m/ChangeGender
   (process-message [response app]
-    (assoc-state response app :individual))
+    (println response)
+    (if (= (:gender response) "-----")
+      (assoc-state {:gender nil} app :individual)
+      (assoc-state response app :individual)))
 
   m/MoreResidents
   (process-message [response app]

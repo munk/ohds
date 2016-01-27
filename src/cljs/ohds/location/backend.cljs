@@ -18,14 +18,7 @@
                                      name
                                      extId
                                      type)
-        params (merge more loc)
-        {:keys [p] :as param} params]
+        params (merge more loc)]
     (petrol/wrap
      m/map->CreateLocationResults
      (http/post "/api/v1/locations" {:form-params params}))))
-
-(defn update-location
-  [location]
-  (petrol/wrap
-   m/map->UpdateLocationResults
-   (http/get (str "/api/v1/locations/" (:uuid location)))))

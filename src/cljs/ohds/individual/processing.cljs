@@ -1,6 +1,6 @@
 (ns ohds.individual.processing
   (:require
-   [petrol.core :refer [Message EventSource]]
+   [petrol.core :refer [Message EventSource send!]]
    [ohds.individual.backend :as backend]
    [ohds.individual.messages :as m]
    [ohds.processing :refer [assoc-state assoc-response]]))
@@ -26,6 +26,8 @@
   (process-message [response app]
     (let [more-residents (not (:more-residents app))]
       (assoc app :more-residents more-residents)))
+
+  ;;; TODO: Use ChangeSocialGroupMembershipDate and ChangeResidencyDate to update state
 
 
   m/CreateIndividualResults
@@ -53,6 +55,7 @@
       (assoc-response status body
                       #(assoc app :residencies (conj residencies {:uuid body}))
                       #(assoc app :errors "Unable to submit residency"))))
+
   m/CreateMembershipResults
   (process-message [response app]
     (let [{status :status

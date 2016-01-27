@@ -24,6 +24,14 @@
      (c/select ch m/->ChangeGender "gender" (:gender state)
                [["FEMALE" "Female"] ["MALE" "Male"]]
                [:option {:key "none"} "-----"])
+     [:legend "Residency"]
+     (c/const-text (:uuid (:location state))
+                   (:extId (:location state)))
+     (c/date-input ch m/->ChangeResidencyDate "residency-date")
+     [:legend "Social Group"]
+     (c/const-text (:uuid (:socialgroup state))
+                   (:extId (:socialgroup state)))
+     (c/date-input ch m/->ChangeSocialGroupMembershipDate "socialgroup-date")
      (c/checkbox "more-residents" "More Residents" ch (m/->MoreResidents))
      (when (and name? id? gender?)
        [:div {:onClick #(aset (.getElementById js/document "firstname") "value" nil)}

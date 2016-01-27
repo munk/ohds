@@ -12,3 +12,5 @@
 (defrecord MoreResidents [])
 (defrecord CreateResidencyResults [body])
 (defrecord CreateMembershipResults [body])
+(defrecord ChangeSocialGroupMembershipDate [date])
+(defrecord ChangeResidencyDate [date])

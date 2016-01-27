@@ -15,8 +15,8 @@
   m/ChangeGroupType
   (process-message [response app]
     (if (= (:type response) "-----")
-      (assoc-state {:type nil} app :individual)
-      (assoc-state response app :individual)))
+      (assoc-state {:type nil} app :socialgroup)
+      (assoc-state response app :socialgroup)))
 
 
   m/CreateSocialGroupResults

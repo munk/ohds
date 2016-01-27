@@ -27,7 +27,15 @@
     (let [more-residents (not (:more-residents app))]
       (assoc app :more-residents more-residents)))
 
-  ;;; TODO: Use ChangeSocialGroupMembershipDate and ChangeResidencyDate to update state
+  m/ChangeSocialGroupMembershipDate
+  (process-message [response app]
+    (assoc app :membership {:socialgroup (:uuid (:socialgroup app))
+                            :date (:date response)}))
+
+  m/ChangeResidencyDate
+  (process-message [response app]
+    (assoc app :residency {:location (:uuid (:location app))
+                           :date (:date response)}))
 
 
   m/CreateIndividualResults

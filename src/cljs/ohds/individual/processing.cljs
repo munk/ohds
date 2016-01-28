@@ -63,7 +63,7 @@
            body :body} response
           residencies (get app :residencies [])]
       (assoc-response status body
-                      #(assoc app :residencies (conj residencies {:uuid body}))
+                      #(assoc app :residency {} :residencies (conj residencies {:uuid body}))
                       #(assoc app :errors "Unable to submit residency"))))
 
   m/CreateMembershipResults
@@ -72,11 +72,14 @@
            body :body} response
           memberships (get app :memberships [])]
       (assoc-response status body
-                      #(assoc app :memberships (conj memberships {:uuid body}))
+                      #(assoc app :membership {}  :memberships (conj memberships {:uuid body}))
                       #(assoc app :errors "Unable to submit residency")))))
+
 (defn clean-form []
   (aset (.getElementById js/document "firstname") "value" "")
   (aset (.getElementById js/document "extId") "value" "")
+  (aset (.getElementById js/document "socialgroup-date") "value" "")
+  (aset (.getElementById js/document "residency-date") "value" "")
   (aset (.getElementById js/document "more-residents") "checked" false)
   (aset (aget (.getElementsByTagName (.getElementById js/document "gender" ) "option") 0) "selected" true))
 

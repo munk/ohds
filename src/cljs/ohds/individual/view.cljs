@@ -11,7 +11,9 @@
   (let [ind (:individual state)
         name? (c/has-data? ind :firstname)
         id? (c/has-data? ind :extId)
-        gender? (c/has-data? ind :gender)]
+        gender? (c/has-data? ind :gender)
+        dates? (and (c/has-data? (:residency state) :date)
+                    (c/has-data? (:membership state) :date))]
     (println ind name? id? gender?)
     [:span {:id "individual-form"}
      [:legend "Individual"]

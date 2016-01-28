@@ -28,12 +28,12 @@
           expected-level-count (count (:hierarchy-levels app))]
       (if (= selected-level-count
              expected-level-count)
-        (assoc app :page :location :mode :census)
+        (assoc app :page :locations)
         (assoc app :errors "Please select all hierarchies"))))
   m/StartVisit
   (process-message
       [message app]
-    (assoc app :hierarchy (hierarchy app) :page :location-select :mode :visit))
+    (assoc app :hierarchy (hierarchy app) :page :location-select))
   m/LocationsForHierarchyResults
   (process-message
       [message app]

@@ -112,8 +112,11 @@
         individual-id (:individual-id params)
         location-id (:location-id params)
         start-type (:start-type params)
-        start-date (:start-date params)]
-    (str (svc/create-residency collected-by individual-id location-id start-type start-date))))
+        start-date (:start-date params)
+        result
+        (str (svc/create-residency collected-by individual-id location-id start-type start-date))]
+    (println "CR" result)
+    result))
 
 (defn create-membership [req]
   (let [params (:params req)
@@ -121,8 +124,11 @@
         individual-id (:individual-id params)
         socialgroup-id (:socialgroup-id params)
         start-type (:start-type params)
-        start-date (:start-date params)]
-    (str (svc/create-membership collected-by individual-id socialgroup-id start-type start-date))))
+        start-date (:start-date params)
+        result
+        (str (svc/create-membership collected-by individual-id socialgroup-id start-type start-date))]
+    (println "CM" result)
+    result))
 
 (defn locations [uuid]
   (let [result (svc/locations uuid)]

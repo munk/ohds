@@ -15,26 +15,26 @@
      (http/post "/api/v1/individuals" {:form-params params}))))
 
 (defn create-residency
-  [fieldworker-id individual location]
+  [fieldworker-id individual location date]
   (println "Creating residency")
   (let [params {:fieldworker-id fieldworker-id
                 :individual-id individual
                 :location-id location
                 :start-type "UNKNOWN_STATUS" ;;;TODO: Find semantics for this
-                :start-date "2016-01-01T00:00:00.00Z" ;;;TODO: how to populate this?
+                :start-date (str date "T00:00:00.00Z")
                 }]
     (petrol/wrap
      m/map->CreateResidencyResults
      (http/post "/api/v1/residencies" {:form-params params}))))
 
 (defn create-membership
-  [fieldworker-id individual socialgroup]
+  [fieldworker-id individual socialgroup date]
   (println "creating membership")
   (let [params {:fieldworker-id fieldworker-id
                 :individual-id individual
                 :socialgroup-id socialgroup
                 :start-type "UNKNOWN_STATUS" ;;;TODO: Find semantics for this
-                :start-date "2016-01-01T00:00:00.00Z" ;;; TODO: how to populate this?
+                :start-date (str date "T00:00:00.00Z")
                 }]
     (petrol/wrap
      m/map->CreateMembershipResults

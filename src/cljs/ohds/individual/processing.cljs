@@ -46,8 +46,10 @@
           individuals (:individuals app)
           individuals' (conj individuals individual)
           more? (:more-residents app)]
-      (backend/create-residency  (:fieldworker-id app) uuid (:location app))
-      (backend/create-membership (:fieldworker-id app) uuid (:socialgroup app))
+      (backend/create-residency  (:fieldworker-id app) uuid (:uuid (:location app))
+                                 (:date (:residency app)))
+      (backend/create-membership (:fieldworker-id app) uuid (:uuid (:socialgroup app))
+                                 (:date (:membership app)))
       (if more?
         (assoc-response 200 uuid #(assoc app :page :individual :individual {}
                                          :individuals individuals'

@@ -172,6 +172,7 @@
 
 (defn create-membership
   [collected-by individual-id socialgroup-id start-type start-date]
+  (println collected-by individual-id socialgroup-id start-type start-date)
   (post
    membership-url
    {:collectedByUuid collected-by,

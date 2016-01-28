@@ -1,4 +1,4 @@
-(defproject ohds "0.1.3-SNAPSHOT"
+(defproject ohds "0.2.0"
   :description "Front End for OpenHDS"
   :url "http://github.com/munk/ohds"
   :license {:name "Eclipse Public License"

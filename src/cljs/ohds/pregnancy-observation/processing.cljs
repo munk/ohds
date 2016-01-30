@@ -1,12 +1,11 @@
 (ns ohds.pregnancy-observation.processing
   (:require
    [petrol.core :refer [Message EventSource]]
-   [ohds.processing :refer [assoc-state]]
+   [ohds.processing :refer [assoc-state state!]]
    [ohds.pregnancy-observation.messages :as m]
    [ohds.pregnancy-observation.backend :as backend]))
 
-(defn state! [msg app]
-  (assoc-state msg app :pregnancy-observation))
+
 
 (extend-protocol Message
   m/ChangePregnancyDate

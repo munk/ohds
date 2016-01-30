@@ -3,8 +3,6 @@
 (defrecord OutcomeDate [])
 (defrecord Mother [])
 (defrecord Father [])
-(defrecord OutcomeType [type])
-(defrecord Submit [])
-
-(defrecord ImplementMe [])
-(defrecord ImplementMeResponse [body])
+(defrecord Outcome [type])
+(defrecord Submit [uuid])
+(defrecord Response [body])

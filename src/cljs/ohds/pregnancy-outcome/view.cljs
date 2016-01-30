@@ -3,7 +3,8 @@
     [petrol.core :refer [send! send-value!]]
     [ohds.components :as c]
     [ohds.pregnancy-outcome.processing]
-    [ohds.pregnancy-outcome.messages :as m]))
+    [ohds.pregnancy-outcome.messages :as m]
+    [ohds.individual.view :as indv]))
 
 
 (defn modal [ch app uuid]
@@ -15,15 +16,15 @@
 
             ;;; TOOO: auto-populate mother or father
             [:label {:for "mother"} "Mother"]
-            (c/date-input ch m/Mother "mother")
+            (c/text-input ch m/Mother "mother" "Mother" app)
             [:label {:for "father"}  "Father"]
-            (c/date-input ch m/Father "father")
+            (c/text-input ch m/Father "father" "Father" app)
 
-            (c/select ch m/OutcomeType "outcome-type" "UNKNOWN"
+            (c/select ch m/Outcome "outcome-type" "UNKNOWN"
                       [["LIVE_BIRTH" "Live Birth"]
                        ["STILL_BIRTH" "Still Birth"]
                        ["MISCARRIAGE" "Miscarriage"]
                        ["ABORTION" "Abortion"]])
-            [:div [:input {:type :text} "Child goes here..."]]]
+            (indv/form ch app)]
            ch
-           (m/->Submit)))
+           (m/->Submit uuid)))

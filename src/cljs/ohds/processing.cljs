@@ -33,6 +33,9 @@
          :last-response {:status status
                          :body body}))
 
+(defn state! [msg app]
+  (assoc-state msg app :pregnancy-observation))
+
 ;;; High level events
 (extend-protocol Message
   m/LoginResults

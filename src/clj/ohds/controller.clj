@@ -143,3 +143,13 @@
           location :location-uuid
           extId :extId} :params} req]
     (str (svc/start-visit fieldworker-id location extId))))
+
+(defn create-pregnancy-observation [req]
+  (println "Controller observation" req)
+  (let [{{fieldworker-id :fieldworker-id
+          mother :mother
+          visit :visit
+          pregnancy-date :pregnancy-date
+          expected-due-date :expected-due-date} :params} req]
+    (str (svc/create-pregnancy-observation fieldworker-id mother visit
+                                           pregnancy-date expected-due-date))))

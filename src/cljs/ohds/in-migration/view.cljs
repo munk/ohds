@@ -6,9 +6,9 @@
     [ohds.in-migration.messages :as m]))
 
 
-(defn modal [ch app]
-  (c/modal "in-migration-modal"
-           "In Migration"
+(defn modal [ch app uuid]
+  (c/modal (str "in-migration-modal-" uuid)
+           (str "In Migration " uuid)
            [:div
             [:label {:for "migration-date"} "Migration Date"]
             (c/date-input ch m/MigrationDate "migration-date")

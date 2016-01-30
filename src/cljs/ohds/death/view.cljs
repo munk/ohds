@@ -6,9 +6,9 @@
     [ohds.death.messages :as m]))
 
 
-(defn modal [ch app]
-  (c/modal "death-modal"
-           "Death"
+(defn modal [ch app uuid]
+  (c/modal (str "death-modal-" uuid)
+           (str "Death " uuid)
            [:div
             [:label {:for "death-date"} "Death Date"]
             (c/date-input ch m/DeathDate "death-date")

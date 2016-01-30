@@ -9,14 +9,17 @@
    [ohds.individual-update.processing]
    [ohds.components :as c]))
 
-(defn individual [ch ind-states ind app]
+(defn individual [ch app individual]
   (let [{firstName :firstName
          lastName :lastName
          gender :gender
-         uuid :uuid} ind
-        ind-update-state (get ind-states uuid)]
+         uuid :uuid} individual]
     [:span
      (obs/modal ch app uuid)
+     (outcome/modal ch app uuid)
+
+     (out-migration/modal ch app uuid)
+     (death/modal ch app uuid)
      [:div.well-sm
       [:label {:for "firstname"} "First Name"]
       (c/const-text "firstname" firstName)
@@ -33,19 +36,14 @@
                                         ;[:in-migration "In Migration"]
                  [:out-migration "Out Migration"]
                  [:death "Death"]])
-      (when (some? ind-update-state)
-        (c/modal-toggle (str "#" ind-update-state "-modal")
+      (when (get (:individual-state app) uuid)
+        (c/modal-toggle (str "#" (get (:individual-state app) uuid) "-modal-" uuid)
                         "Take Observation"))
       [:hr]]]))
 
 (defn form [ch app]
-  ;;;TODO: each card has shared IDs. Make them unique with uuids
   [:div
    [:legend "Update Individuals"]
-   (outcome/modal ch app)
-   (in-migration/modal ch app)
-   (out-migration/modal ch app)
-   (death/modal ch app)
-   (map (partial individual ch (:individual-state app) app) (:individuals app))
-   ;;;TODO: Move in-migration modal here to add new individual
-   ])
+   (c/modal-toggle (str "#" "new-individual-modal-") "In Migration")
+   (map (partial individual ch app) (:individuals app))
+   (in-migration/modal ch app nil)])

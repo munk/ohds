@@ -27,7 +27,9 @@
 (def residency-url "/residencies")
 (def membership-url "/memberships")
 (def visit-url "/visits")
+(def pregnancy-observation-url "/pregnancyObservations")
 (def location-hierarchy-levels-bulk-url "/locationHierarchyLevels/bulk.json")
+
 
 
 (defn now []
@@ -43,6 +45,7 @@
     :headers {"Content-Type" "application/json"}}
    (http/post (str apihost url))
    (deref)
+   ((fn [x] (println "xxx" x) x))
    (:body)
    (json->cljs)
    (:uuid)))
@@ -111,6 +114,7 @@
         skeys (mapv #(select-keys % [:individual]) residencies-by-location)
         individual-uuids (set (map #(:uuid (:individual %)) skeys))
         individuals-by-loc (filterv #(contains? individual-uuids (:uuid %)) individuals-by-hiera)]
+    (println individuals-by-loc)
     individuals-by-loc))
 
 (defn create-location
@@ -191,3 +195,18 @@
    visit-url
    (->VisitRequest collected-by location
                    (->Visit ext-id (now) (now)))))
+
+
+(defrecord PregnancyObservation [pregnancyDate
+                                 expectedDeliveryDate
+                                 collectionDateTime])
+(defrecord PregnancyObservationRequest [collectedByUuid
+                                        motherUuid
+                                        visitUuid
+                                        pregnancyObservation])
+(defn create-pregnancy-observation
+  [collected-by mother visit pregnancy-date expected-due-date]
+  (let [observation (->PregnancyObservation pregnancy-date expected-due-date (now))
+        request (->PregnancyObservationRequest collected-by mother visit observation)]
+    (post
+     pregnancy-observation-url request)))

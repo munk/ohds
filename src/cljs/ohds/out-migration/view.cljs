@@ -5,9 +5,10 @@
     [ohds.out-migration.processing]
     [ohds.out-migration.messages :as m]))
 
-(defn modal [ch app]
-  (c/modal "out-migration-modal"
-           "Out Migration"
+
+(defn modal [ch app uuid]
+  (c/modal (str "out-migration-modal-" uuid)
+           (str "Out Migration " uuid)
            [:div
             [:label {:for "migration-date"} "Migration Date"]
             (c/date-input ch m/MigrationDate "migration-date")

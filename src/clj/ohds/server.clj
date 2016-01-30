@@ -31,7 +31,8 @@
   (POST "/api/v1/memberships" req (ctrl/create-membership req))
 
   (POST "/api/v1/visit" req (ctrl/start-visit req))
-  (POST "/api/v1/pregnancyObservation" req "not implemented")
+  (POST "/api/v1/pregnancyObservation" req
+        (ctrl/create-pregnancy-observation req))
   (POST "/api/v1/pregnancyResult" req "not impmlented")
   (POST "/api/v1/pregnancyOutcome" req "not implemented")
   (POST "/api/v1/inMigration" req "not implemented")

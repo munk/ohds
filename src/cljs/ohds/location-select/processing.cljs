@@ -27,10 +27,10 @@
     [msg app]
     (let [{status :status
            body :body} msg]
-      (assoc app :vist body)))
+      (assoc app :visit body)))
   m/IndividualsByLocationResults
   (process-message
-      [msg app]
+    [msg app]
     (let [{status :status
            body :body} msg
           b (read-string body)]

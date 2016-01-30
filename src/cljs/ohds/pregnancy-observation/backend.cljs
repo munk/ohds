@@ -6,15 +6,18 @@
 (defrecord PregnancyObservationRequest
     [fieldworker-id
      mother
+     visit
      pregnancy-date
      expected-due-date])
 
-(defn submit [fieldworker-id mother pregnancy-date expected-due-date]
+(defn submit [fieldworker-id mother visit pregnancy-date expected-due-date]
   (let [params (->PregnancyObservationRequest
                 fieldworker-id
                 mother
+                visit
                 pregnancy-date
                 expected-due-date)]
+    (println "PARAMS:" params)
     (petrol/wrap
      m/map->Results
-     (http/post "/api/v1/pregnancy-observation" {:form-params params}))))
+     (http/post "/api/v1/pregnancyObservation" {:form-params params}))))

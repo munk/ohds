@@ -6,9 +6,9 @@
     [ohds.pregnancy-outcome.messages :as m]))
 
 
-(defn modal [ch app]
-  (c/modal "pregnancy-outcome-modal"
-           "Pregnancy Outcome"
+(defn modal [ch app uuid]
+  (c/modal (str "pregnancy-outcome-modal-" uuid)
+           (str "Pregnancy Outcome " uuid)
            [:div
             [:label {:for "outcome-date"} "Outcome Date"]
             (c/date-input ch m/OutcomeDate "outcome-date")

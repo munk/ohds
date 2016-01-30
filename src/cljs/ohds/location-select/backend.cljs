@@ -5,13 +5,12 @@
    [ohds.location-select.messages :as m]))
 
 (defn individuals-by-location [loc]
-  (->>
-   (str "/api/v1/individuals-by-location/" loc)
-   (http/get)
-   (petrol/wrap m/map->IndividualsByLocationResults)))
+  (println loc)
+  (petrol/wrap
+   m/map->IndividualsByLocationResults
+   (http/get (str "/api/v1/individuals-by-location/" loc))))
 
 (defn start-visit [fieldworker location ext-id]
-  (println "Start visit" fieldworker location ext-id)
   (petrol/wrap
    m/map->RecordVisit
    (http/post "/api/v1/visit"

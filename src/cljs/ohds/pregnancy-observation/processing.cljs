@@ -17,14 +17,19 @@
     (state! msg app))
   m/Results
   (process-message [msg app]
-    app))
+    (println "Pregnancy Results" msg)
+    (assoc app :pregnancy-observation-result (:body msg))))
 
 (extend-protocol EventSource
   m/Submit
   (watch-channels [msg app]
-    (let [individual (get app (:individual msg))
-          fieldworker (:fieldworker-id app)
-          {mother :mother
-           pregnancy-date :pregnancy-date
-           expected-due-date :expected-due-date} individual]
-      #{(backend/submit fieldworker mother pregnancy-date expected-due-date)})))
+    (println msg)
+    (let [mother (:mother msg)
+          {fieldworker :fieldworker-id
+           visit :visit
+           {:keys [pregnancy-date delivery-date]} :pregnancy-observation} app
+          date-append "T00:00:00.000Z"]
+
+      #{(backend/submit fieldworker mother visit
+                        (str pregnancy-date date-append)
+                        (str  delivery-date date-append))})))

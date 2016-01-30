@@ -41,7 +41,7 @@
 (extend-protocol EventSource
   m/StartLocationVisit
   (watch-channels
-      [msg app]
+    [msg app]
     (let [uuid (:hierarchy app)
           loc (:uuid (:current-location app))]
       #{(backend/individuals-by-location loc)

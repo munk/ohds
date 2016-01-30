@@ -41,6 +41,7 @@
 (defn form [ch app]
   ;;;TODO: each card has shared IDs. Make them unique with uuids
   [:div
+   [:legend "Update Individuals"]
    (outcome/modal ch app)
    (in-migration/modal ch app)
    (out-migration/modal ch app)

@@ -5,8 +5,6 @@
    [ohds.location.processing]
    [ohds.location.messages :as m]))
 
-;;;TODO Schema Validation
-
 
 (defn current-hierarchy [state]
   (let [hierarchy (last (:hierarchies state))]
@@ -14,7 +12,6 @@
      (filter #(= hierarchy (:uuid %)) (:location-hierarchies state)))))
 
 (defn filled-in? [key state]
-  (println key (count (key state)))
   (pos? (count (key state))))
 
 (defn form [ch state]

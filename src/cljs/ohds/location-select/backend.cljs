@@ -5,7 +5,6 @@
    [ohds.location-select.messages :as m]))
 
 (defn individuals-by-location [loc]
-  (println loc)
   (petrol/wrap
    m/map->IndividualsByLocationResults
    (http/get (str "/api/v1/individuals-by-location/" loc))))

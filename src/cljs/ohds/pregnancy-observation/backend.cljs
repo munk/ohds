@@ -17,7 +17,6 @@
                 visit
                 pregnancy-date
                 expected-due-date)]
-    (println "PARAMS:" params)
     (petrol/wrap
      m/map->Results
      (http/post "/api/v1/pregnancyObservation" {:form-params params}))))

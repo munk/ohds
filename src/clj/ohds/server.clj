@@ -33,8 +33,10 @@
   (POST "/api/v1/visit" req (ctrl/start-visit req))
   (POST "/api/v1/pregnancyObservation" req
         (ctrl/create-pregnancy-observation req))
-  (POST "/api/v1/pregnancyResult" req "not impmlented")
-  (POST "/api/v1/pregnancyOutcome" req "not implemented")
+  (POST "/api/v1/pregnancyResult" req
+        (ctrl/create-pregnancy-result req))
+  (POST "/api/v1/pregnancyOutcome" req
+        (ctrl/create-pregnancy-outcome req))
   (POST "/api/v1/inMigration" req "not implemented")
   (POST "/api/v1/outMigration" req "not implemented")
   (POST "/api/v1/death" req "not implemented")

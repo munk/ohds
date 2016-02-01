@@ -5,12 +5,6 @@
             [ohds.messages :as m]
             [cljs.core.async :refer [<!]]))
 
-(defn http-post [url body]
-  (go
-    (->> body
-         (http/post url)
-         (<!))))
-
 (defn locations
   ([]
    (locations "HIERARCHY_ROOT"))

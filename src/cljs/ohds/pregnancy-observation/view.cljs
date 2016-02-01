@@ -6,7 +6,6 @@
    [ohds.components :as c]))
 
 (defn modal [ch app uuid]
-  (println "uuid" uuid)
   (c/modal (str "pregnancy-observation-modal-" uuid)
            (str  "Pregnancy Observation " uuid)
            [:div

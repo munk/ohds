@@ -6,23 +6,22 @@
    [ohds.pregnancy-observation.backend :as backend]))
 
 
+(def state-key :pregnancy-observation)
 
 (extend-protocol Message
   m/ChangePregnancyDate
   (process-message [msg app]
-    (state! msg app))
+    (state! msg app state-key))
   m/ChangeExpectedDeliveryDate
   (process-message [msg app]
-    (state! msg app))
+    (state! msg app state-key))
   m/Results
   (process-message [msg app]
-    (println "Pregnancy Results" msg)
     (assoc app :pregnancy-observation-result (:body msg))))
 
 (extend-protocol EventSource
   m/Submit
   (watch-channels [msg app]
-    (println msg)
     (let [mother (:mother msg)
           {fieldworker :fieldworker-id
            visit :visit

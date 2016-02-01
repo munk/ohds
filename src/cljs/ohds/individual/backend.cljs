@@ -16,7 +16,6 @@
 
 (defn create-residency
   [fieldworker-id individual location date]
-  (println "Creating residency")
   (let [params {:fieldworker-id fieldworker-id
                 :individual-id individual
                 :location-id location
@@ -29,7 +28,6 @@
 
 (defn create-membership
   [fieldworker-id individual socialgroup date]
-  (println "creating membership")
   (let [params {:fieldworker-id fieldworker-id
                 :individual-id individual
                 :socialgroup-id socialgroup

@@ -28,6 +28,8 @@
 (def membership-url "/memberships")
 (def visit-url "/visits")
 (def pregnancy-observation-url "/pregnancyObservations")
+(def pregnancy-outcome-url "/pregnancyOutcomes")
+(def pregnancy-result-url "/pregnancyResults")
 (def location-hierarchy-levels-bulk-url "/locationHierarchyLevels/bulk.json")
 
 
@@ -210,3 +212,37 @@
         request (->PregnancyObservationRequest collected-by mother visit observation)]
     (post
      pregnancy-observation-url request)))
+
+
+(defrecord PregnancyOutcome [outcomeDate
+                             outcomeType
+                             collectionDateTime])
+
+(defrecord PregnancyOutcomeRequest [collectedByUuid
+                                    motherUuid
+                                    fatherUuid
+                                    visitUuid
+                                    pregnancyOutcome])
+(defn create-pregnancy-outcome
+  [collected-by visit mother father date type]
+  (let [outcome (->PregnancyOutcome date type (now))
+        request (->PregnancyOutcomeRequest collected-by
+                                           mother father
+                                           visit outcome)]
+    (post
+     pregnancy-outcome-url request)))
+
+(defrecord Child [uuid])
+(defrecord PregnancyResult [child
+                            type
+                            collectionDateTime])
+(defrecord PregnancyResultRequest [collectedByUuid
+                                   pregnancyOutcomeUuid
+                                   pregnancyResult])
+(defn create-pregnancy-result
+  [collected-by outcome-id type child]
+  (let [child (->Child child)
+        result (->PregnancyResultRequest child type (now))
+        request (collected-by outcome-id result)]
+    (post
+     pregnancy-result-url request)))

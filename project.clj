@@ -46,7 +46,7 @@
 
   :cljsbuild {:builds
               {:app
-               {:source-paths ["src/cljs"]
+               {:source-paths ["src/cljs" "src/clj"]
                 :compiler {:output-to     "resources/public/js/app.js"
                            :output-dir    "resources/public/js/app"
                            :source-map    "resources/public/js/app.js.map"

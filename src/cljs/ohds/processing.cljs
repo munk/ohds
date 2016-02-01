@@ -33,8 +33,8 @@
          :last-response {:status status
                          :body body}))
 
-(defn state! [msg app]
-  (assoc-state msg app :pregnancy-observation))
+(defn state! [msg app key]
+  (assoc-state msg app key))
 
 ;;; High level events
 (extend-protocol Message

@@ -153,3 +153,17 @@
           expected-due-date :expected-due-date} :params} req]
     (str (svc/create-pregnancy-observation fieldworker-id mother visit
                                            pregnancy-date expected-due-date))))
+
+(defn create-pregnancy-outcome [req]
+  (let [{{:keys
+          [collectedBy visitUuid motherUuid fatherUuid outcomeDate outcomeType]}
+         :params} req]
+    (str (svc/create-pregnancy-outcome
+          collectedBy visitUuid motherUuid fatherUuid outcomeDate outcomeType))))
+
+(defn create-pregnancy-result [req]
+  (let [{{:keys
+          [collectedBy outcomeId type childId]}
+         :params} req]
+    (str (svc/create-pregnancy-result
+          collectedBy outcomeId type childId))))

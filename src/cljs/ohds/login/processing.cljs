@@ -6,8 +6,10 @@
    [ohds.login.backend :as backend]
    [ohds.login.messages :as m]
    [ohds.messages :as msg]
-   [ohds.processing :refer [assoc-state] :as p]
+   [ohds.processing :refer [assoc-state state!] :as p]
    [ohds.domain :as d]))
+
+(def state-key :user)
 
 (defn submit-login [{:keys [username password admin?]}]
   {:pre [(not (blank? username))
@@ -19,15 +21,15 @@
 (extend-protocol Message
   m/ChangeUsername
   (process-message
-      [response app]
-    (assoc-state response app :user))
+    [msg app]
+    (state! msg app state-key))
 
   m/ChangePassword
-  (process-message [response app]
-    (assoc-state response app :user))
+  (process-message [msg app]
+    (state! msg app state-key))
 
   m/ToggleAdmin
-  (process-message [response app]
+  (process-message [_ app]
     (update-in app [:admin?] not)))
 
 (extend-protocol EventSource

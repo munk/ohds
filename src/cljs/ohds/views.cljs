@@ -48,7 +48,7 @@
    [:a {:href "#"
         :on-click (send! ch msg)} text]])
 
-(defn nav-bar [ch state] ; TODO: Close the menu once something is clicked
+(defn nav-bar [ch state]
   [:div.navbar-collapse.collapse {:id "navbar" :aria-expanded "false"}
    (when (and (not= (:page state) :login)
               (not= (:mode state) :not-authorized))
@@ -66,8 +66,7 @@
     [:div.navbar-header
      [hamburger]
      [:span.navbar-brand "OpenHDS"]]
-    (nav-bar ch state)
-    ]])
+    (nav-bar ch state)]])
 
 (defn header []
   [:div
@@ -105,8 +104,14 @@
        (if (= (:mode app) :not-authorized)
          (login/login ch (:user app))
          (case (:page app)
-           :login [login/login ch (:user app)]
-           :hierarchy [hierarchy/form ch app]
+           :login [login/login ch
+                   (:user app)]
+           :hierarchy [hierarchy/form ch
+                       (assoc (:hierarchy app)
+                              :fieldworker-id (:fieldworker-id app)
+                              :hierarchies (:hierarchies app)
+                              :location-hierarchies (:location-hierarchies app)
+                              :hierarchy-levels (:hierarchy-levels app))]
            :location-select [location-select/form ch app]
            :location [location/form ch app]
            :socialgroup [socialgroup/form ch app]

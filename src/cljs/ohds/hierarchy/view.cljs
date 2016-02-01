@@ -22,6 +22,7 @@
               [:option {:key :none} "------"])))
 
 (defn form [ch app]
+  (println app)
   (let [levels (:hierarchy-levels app)
         ct (count levels)]
     [:div

@@ -9,22 +9,27 @@
 
 (defn modal [ch app uuid]
   (c/modal (str "pregnancy-outcome-modal-" uuid)
-           (str "Pregnancy Outcome " uuid)
+           (str "Pregnancy Outcome ")
            [:div
             [:label {:for "outcome-date"} "Outcome Date"]
-            (c/date-input ch m/OutcomeDate "outcome-date")
+            (c/date-input ch m/->OutcomeDate "outcome-date")
 
-            ;;; TOOO: auto-populate mother or father
             [:label {:for "mother"} "Mother"]
-            (c/text-input ch m/Mother "mother" "Mother" app)
-            [:label {:for "father"}  "Father"]
-            (c/text-input ch m/Father "father" "Father" app)
+            (c/const-text "mother" (:extId (first (filter #(= uuid (:uuid %))
+                                                          (:individuals app)))))
 
-            (c/select ch m/Outcome "outcome-type" "UNKNOWN"
+            (c/select ch m/->Outcome "outcome-type" "UNKNOWN"
                       [["LIVE_BIRTH" "Live Birth"]
                        ["STILL_BIRTH" "Still Birth"]
                        ["MISCARRIAGE" "Miscarriage"]
                        ["ABORTION" "Abortion"]])
-            (indv/form ch app)]
+            [:legend "Child"]
+            (c/text-input ch m/->ChangeFirstName
+                          "firstname" "First Name" app)
+            (c/text-input ch m/->ChangeExtId
+                          "extId" "External ID" app)
+            (c/select ch m/->ChangeGender "gender" "Gender"
+                      [["FEMALE" "Female"] ["MALE" "Male"]]
+                      [:option {:key "none"} "-----"])]
            ch
            (m/->Submit uuid)))

@@ -194,4 +194,4 @@
   (let [{{fieldworker-id :fieldworker-id
           death-date :death-date
           visit :visit
-          individual :individual}}]))
+          individual :individual} :params} req]))

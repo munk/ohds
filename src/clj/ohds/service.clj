@@ -272,7 +272,7 @@
     (post
      out-migration-url request)))
 
-(defrecrod Death [deathDate
+(defrecord Death [deathDate
                   collectionDateTime])
 
 (defrecord DeathRequest [collectedByUuid

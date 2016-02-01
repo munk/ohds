@@ -11,11 +11,14 @@
            (str "Out Migration " uuid)
            [:div
             [:label {:for "migration-date"} "Migration Date"]
-            (c/date-input ch m/MigrationDate "migration-date")
-            (c/select ch m/Destination "migration-destination" "UNKNOWN_STATUS"
-                                        ;TODO: Search box for locations?
-                      [["UNKNOWN_STATUS" "Unknown Status"]])
-            (c/select ch m/Reason "migration-reason" "UNKNOWN_STATUS"
-                      [["UNKNOWN_STATUS" "Unknown Status"]])]
+            (c/date-input ch m/->MigrationDate "migration-date")
+            [:label {:for "migration-destination"} "Destination"]
+            (c/select ch m/->Destination "migration-destination" "UNKNOWN_STATUS"
+                      [["UNKNOWN_STATUS" "Unknown Location"]])
+            [:label {:for "migration-reason"} "Migration Type"]
+            (c/select ch m/->Reason "migration-reason" "UNKNOWN_STATUS"
+                      [["EXTERNAL_MIGRATION" "External Migration"]
+                       ["INTERNAL_MIGRATION" "Internal Migration"]
+                       ["UNKNOWN_STATUS" "Unknown Status"]])]
            ch
            (m/->Submit)))

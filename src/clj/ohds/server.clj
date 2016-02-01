@@ -37,9 +37,9 @@
         (ctrl/create-pregnancy-result req))
   (POST "/api/v1/pregnancyOutcome" req
         (ctrl/create-pregnancy-outcome req))
-  (POST "/api/v1/inMigration" req "not implemented")
-  (POST "/api/v1/outMigration" req "not implemented")
-  (POST "/api/v1/death" req "not implemented")
+  (POST "/api/v1/inMigration" req (ctrl/create-in-migration))
+  (POST "/api/v1/outMigration" req (ctrl/create-out-migration))
+  (POST "/api/v1/death" req (ctrl/create-death))
 
   (GET "/api/v1/projectCodes" req "not implemented")
   (GET "/api/v1/user" req "not implemented")

@@ -167,3 +167,31 @@
          :params} req]
     (str (svc/create-pregnancy-result
           collectedBy outcomeId type childId))))
+
+(defn create-in-migration [req]
+  (let [{{fieldworker-id :fieldworker-id
+          migration-date :migration-date
+          migration-type :migration-type
+          visit :visit
+          residency :residency
+          individual :individual} :params} req]
+    (str (svc/create-in-migration fieldworker-id migration-date
+                                   migration-type visit
+                                   residency individual))))
+
+(defn create-out-migration [req]
+  (let [{{fieldworker-id :fieldworker-id
+          migration-date :migration-date
+          migration-type :migration-type
+          visit :visit
+          residency :residency
+          individual :individual} :params} req]
+    (str (svc/create-out-migration fieldworker-id migration-date
+                                   migration-type visit
+                                   residency individual))))
+
+(defn create-death [req]
+  (let [{{fieldworker-id :fieldworker-id
+          death-date :death-date
+          visit :visit
+          individual :individual}}]))

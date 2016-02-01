@@ -30,6 +30,9 @@
 (def pregnancy-observation-url "/pregnancyObservations")
 (def pregnancy-outcome-url "/pregnancyOutcomes")
 (def pregnancy-result-url "/pregnancyResults")
+(def in-migration-url "/inMigrations")
+(def out-migration-url "/outMigrations")
+(def death-url "/deaths")
 (def location-hierarchy-levels-bulk-url "/locationHierarchyLevels/bulk.json")
 
 
@@ -246,3 +249,39 @@
         request (collected-by outcome-id result)]
     (post
      pregnancy-result-url request)))
+
+
+(defrecord Migration [migrationDate
+                      migrationType
+                      collectionDateTime])
+(defrecord MigrationRequest [collectedByUuid
+                             visitUuid
+                             individualUuid
+                             residencyUuid
+                             inMigration])
+
+(defn create-in-migration [collectedBy date type visit residency individual]
+  (let [migration (->Migration date type (now))
+        request (->MigrationRequest collectedBy visit individual residency migration)]
+    (post
+     in-migration-url request)))
+
+(defn create-out-migration [collectedBy date type visit residency individual]
+  (let [migration (->Migration date type (now))
+        request (->MigrationRequest collectedBy visit individual residency migration)]
+    (post
+     out-migration-url request)))
+
+(defrecrod Death [deathDate
+                  collectionDateTime])
+
+(defrecord DeathRequest [collectedByUuid
+                         visitUuid
+                         individualUuid
+                         death])
+
+(defn create-death [collectedBy date visit individual]
+  (let [death (->Death date (now))
+        request (->DeathRequest collectedBy visit individual death)]
+    (post
+     death-url request)))

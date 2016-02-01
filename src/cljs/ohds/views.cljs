@@ -2,7 +2,7 @@
   (:require
    [ohds.messages :as m]
    [ohds.model :as ml]
-   [ohds.login.view :as login]
+   [ohds.login :as login]
    [ohds.hierarchy.view :as hierarchy]
    [ohds.location.view :as location]
    [ohds.socialgroup.view :as socialgroup]
@@ -102,9 +102,9 @@
      [:div.well.well-lg
       [:fieldset
        (if (= (:mode app) :not-authorized)
-         (login/login ch (:user app))
+         (login/form ch (:user app))
          (case (:page app)
-           :login [login/login ch
+           :login [login/form ch
                    (:user app)]
            :hierarchy [hierarchy/form ch
                        (assoc (:hierarchy app)

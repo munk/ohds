@@ -14,6 +14,7 @@
                  [org.clojure/tools.nrepl "0.2.12"]
                  [org.clojure/data.json "0.2.6"]
                  [expectations "2.0.9"]
+                 [cljs-react-test "0.1.3-SNAPSHOT"]
 
                  [http-kit "2.1.18"]
                  [http-kit.fake "0.2.1"]

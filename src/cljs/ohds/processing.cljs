@@ -28,10 +28,14 @@
 
 (defn assoc-response [status body ok-f error-f]
   (assoc (case status
-           200 (ok-f)
-           (error-f))
+           200 (ok-f body)
+           (error-f body))
          :last-response {:status status
                          :body body}))
+
+(defn assoc-response! [msg ok-f error-f]
+  (let [{:keys [status body]} msg]
+    (assoc-response status body ok-f error-f)))
 
 (defn state! [msg app key]
   (assoc-state msg app key))
@@ -43,8 +47,8 @@
     (let [{status :status
            body :body} response]
       (assoc-response status body
-       #(assoc app :fieldworker-id body :page :hierarchy)
-       #(assoc app :errors "Bad username or password"))))
+                      #(assoc app :fieldworker-id body :page :hierarchy)
+                      #(assoc app :errors "Bad username or password"))))
 
   m/LocationHierarchyResults
   (process-message [response app]

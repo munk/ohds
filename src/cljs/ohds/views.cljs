@@ -13,6 +13,7 @@
    [schema.core :as s :include-macros true]
    [petrol.core :refer [send! send-value!]]))
 
+
 (defn debug [app]
   [:div.well.well-lg {:style {:background-color :lightblue
                               :font-size 12

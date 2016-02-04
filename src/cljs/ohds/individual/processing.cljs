@@ -17,7 +17,6 @@
 
   m/ChangeGender
   (process-message [response app]
-    (println response)
     (if (= (:gender response) "-----")
       (assoc-state {:gender nil} app :individual)
       (assoc-state response app :individual)))

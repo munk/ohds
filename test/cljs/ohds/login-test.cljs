@@ -64,11 +64,9 @@
   (testing "submitting login updates fieldworker-id, page, and mode"
     (let [msg (om/map->LoginResults {:status 200 :body "some-uuid"})
           expected {:fieldworker-id "some-uuid"
-                    :page :hierarchy
-                    :mode :fieldworker-logged-in
-                    :errors ""}]
+                    :page :hierarchy}]
       (is (= expected
-             (process-message msg {})))))
+             (dissoc (process-message msg {}) :last-response)))))
 
   (testing "unsuccessful login"
     (let [msg (om/map->LoginResults {:status 400})

@@ -60,4 +60,4 @@
                                    :uuid "a-uuid"}
                      :page :individual}]
       (is (= expected
-             (process-message msg app))))))
+             (dissoc (process-message msg app) :last-response))))))

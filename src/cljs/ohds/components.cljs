@@ -6,7 +6,7 @@
   (pos? (count (key state))))
 
 (defn form-group [inner]
-  [:div.row
+  [:div.row {:key (rand-int 1000)}
    [:div.form-group
     inner]])
 
@@ -66,7 +66,8 @@
 
 (defn select [ch msg id val options & default-opt]
   (let [select-attr
-        {:id id
+        {:key id
+         :id id
          :on-change (send-value! ch msg)}
         opts (map option options)]
     (form-group

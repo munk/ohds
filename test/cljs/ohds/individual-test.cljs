@@ -12,10 +12,9 @@
   (with-mounted-component
     (view/form nil {})
     (fn [c div]
-      (println div)
       (is (not (found-in #"Save" div)))))
   (with-mounted-component
-    (view/form nil {:individual {:extId "id" :name "name" :type "T"}})
+    (view/form nil {:individual {:extId "id" :firstname "name" :gender "G"}})
     (fn [c div]
       (is (found-in #"Save" div)))))
 

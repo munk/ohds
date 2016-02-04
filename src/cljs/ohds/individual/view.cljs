@@ -1,8 +1,8 @@
 (ns ohds.individual.view
   (:require
    [petrol.core :refer [send! send-value!]]
-   [ohds.relationship.view :as rmodal]
-   [ohds.membership.view :as mmodal]
+   ;[ohds.relationship.view :as rmodal]
+   ;[ohds.membership.view :as mmodal]
    [ohds.components :as c]
    [ohds.individual.processing]
    [ohds.individual.messages :as m]))
@@ -14,11 +14,10 @@
         gender? (c/has-data? ind :gender)
         dates? (and (c/has-data? (:residency state) :date)
                     (c/has-data? (:membership state) :date))]
-    (println ind name? id? gender?)
     [:span {:id "individual-form"}
      [:legend "Individual"]
-     (rmodal/modal ch state)
-     (mmodal/modal ch state)
+     ;(rmodal/modal ch state)
+     ;(mmodal/modal ch state)
      (c/text-input ch m/->ChangeFirstName
                    "firstname" "First Name" state)
      (c/text-input ch m/->ChangeExtId

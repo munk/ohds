@@ -11,23 +11,15 @@
   (testing "No hierarchies displays error message"
     (with-mounted-component (view/form nil {:hierarchy-level-count 0})
       (fn [c div]
-        (is (found-in #"No Hierarchies found! Check with your supervisor to see if the project is set up correctly." div)))))
-
-  (testing "Select is rendered for each location hierarchy except UNKNOWN_STATUS"
-    (with-mounted-component (view/form nil {:hierarchy-level-count 2
-                                           :hierarchy-levels [{:uuid "hiera-0"}
-                                                              {:uuid "hiera-1"}
-                                                              {:uuid "hiera-9" :name "UNKNOWN_STATUS"}]})
-      (fn [c div]
-        (is (found-in #"select id=\"hiera-0\"" div))
-        (is (found-in #"select id=\"hiera-1\"" div))
-        (is (not (found-in #"select id=\"hiera-9\"" div)))))))
+        (is (found-in
+             #"No Hierarchies found!"
+             div))))))
 
 (deftest select-hierarchy-test
   (testing "changing level select updates app with selected level"
     (let [msg (m/->ChangeLevelSelect 2 "lvl-0-0-1" "a-uuid")
           app {:hierarchies ["h0" "h1" "h2"]}
-          expected {:hierarchies ["h0" "h1" "a-uuid"]}
+          expected {:hierarchies ["h0" "h1" "lvl-0-0-1"]}
           actual (process-message msg app)]
       (is (= (:hierarchies expected) (:hierarchies actual)))))
 
@@ -60,10 +52,10 @@
 
   (testing "start census updates app with new page and census mode"
     (let [msg (m/->StartCensus)
-          app {:page :test :mode :test
+          app {:page :test
                :hierarchy-level-count 0
                :hierarchies ["ROOT"]}
-          expected {:page :location :mode :census
+          expected {:page :location
                     :hierarchy-level-count 0 :hierarchies ["ROOT"]}
           actual (process-message msg app)]
       (is (= expected actual))))
@@ -78,8 +70,8 @@
 
   (testing "start visit updates app with new page and visit mode"
     (let [msg (m/->StartVisit)
-          app {:page :test :mode :test :hierarchies ["h0" "h1" "a-uuid"]}
+          app {:page :test :hierarchies ["h0" "h1" "a-uuid"]}
           expected {:hierarchy "a-uuid" :hierarchies ["h0" "h1" "a-uuid"]
-                    :page :location-select :mode :visit}
+                    :page :location-select}
           actual (process-message msg app)]
       (is (= expected actual)))))

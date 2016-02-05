@@ -25,7 +25,13 @@
       (is (= :login
              (:page result)))))
 
-  (testing "Login checks with backend for result")
+  (testing "Login checks with backend for result"
+    (with-redefs [http/post
+                  (fn [url data]
+                    (is (= url "/login"))
+                    "user-token")]
+
+      ))
   (testing "Logging in after failed login clears error report")
   (testing "Successful login triggers location hierarchy requests")
   (testing "Unsuccessful login does not trigger location hierarchy requests")

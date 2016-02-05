@@ -1,44 +1,45 @@
 (ns ohds.new-login-test
   (:require [ohds.login :as login]
-            [petrol.core :refer [process-message]]
+            [petrol.core :refer [process-message watch-channels]]
             [cljs-http.client :as http]
             [cljs.core.async :refer [chan put!]]
             [cljs.test :refer-macros [deftest testing is async]]))
 
+(def good-login-state  {:page :login
+               :login {:username "good-username"
+                       :password "good-password"}})
+(def bad-login-state  {:page :login
+               :login {:username "bad-username"
+                       :password "bad-password"}})
+
+(defn mock-login [url data]
+  (is (= url "/login"))
+  (let [mock-ch (chan)
+        {{:keys [username password]} :form-params} data]
+    (if (and (= username "good-username")
+             (= username "good-password"))
+      (put! mock-ch {:status 200 :body "user-token"})
+      (put! mock-ch {:status 401}))))
+
+(deftest async-login-test
+  (async done
+         (with-redefs [http/post mock-login]
+           (testing "Login checks with backend for result"
+             (watch-channels (login/->SubmitLogin) {})
+             (done)))))
+
 (deftest login-tests
   (testing "Logging in with good username and password loads hierarchy select page"
     (let [msg (login/->SubmitLogin)
-          app {:page :login
-               :login {:username "good-username"
-                       :password "good-password"}}
-          result (process-message msg app)]
-      (println "good login" (= (:username (:login result)) "good-username"))
+          result (process-message msg good-login-state)]
       (is (= :hierarchy-select
              (:page result)))))
 
   (testing "Logging in with bad credentials stays on page and displays error"
     (let [msg (login/->SubmitLogin)
-          app {:page :login
-               :login {:username "bad-username"
-                       :password "bad-password"}}
-          result (process-message msg app)]
-      (println "bad login" (= (:username (:login app)) "good-username"))
+          result (process-message msg bad-login-state)]
       (is (= :login
              (:page result)))))
-
-  (testing "Login checks with backend for result"
-    (async done
-      (with-redefs
-        [http/post (fn [url data]
-                     (is (= url "/login"))
-                     (let [mock-ch (async/chan)
-                           {{:keys [username password]} :form-params} data]
-                       (if (and (= username "good-username")
-                                (= username "good-password"))
-                         (put! mock-ch {:status 200 :body "user-token"})
-                         (put! mock-ch {:status 401}))))]
-
-        (done))))
 
 
   (testing "Logging in after failed login clears error report")

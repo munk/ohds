@@ -1,5 +1,5 @@
 (ns ohds.login
-  (:require [petrol.core :refer [Message]]))
+  (:require [petrol.core :refer [wrap Message EventSource]]))
 
 (defrecord SubmitLogin []
   Message
@@ -7,4 +7,6 @@
     (if (= (:username (:login app))
            "good-username")
       (assoc app :page :hierarchy-select)
-      app)))
+      app))
+  EventSource
+  (watch-channels [msg app]))

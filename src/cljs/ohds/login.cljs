@@ -4,4 +4,7 @@
 (defrecord SubmitLogin []
   Message
   (process-message [msg app]
-    (assoc app :page :hierarchy-select)))
+    (if (= (:username (:login app))
+           "good-username")
+      (assoc app :page :hierarchy-select)
+      app)))

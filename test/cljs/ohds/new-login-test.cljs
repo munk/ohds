@@ -2,7 +2,8 @@
   (:require [ohds.login :as login]
             [petrol.core :refer [process-message]]
             [cljs-http.client :as http]
-            [cljs.test :refer-macros [deftest testing is]]))
+            [cljs.core.async :refer [chan put!]]
+            [cljs.test :refer-macros [deftest testing is async]]))
 
 (deftest login-tests
   (testing "Logging in with good username and password loads hierarchy select page"
@@ -26,12 +27,20 @@
              (:page result)))))
 
   (testing "Login checks with backend for result"
-    (with-redefs [http/post
-                  (fn [url data]
-                    (is (= url "/login"))
-                    "user-token")]
+    (async done
+      (with-redefs
+        [http/post (fn [url data]
+                     (is (= url "/login"))
+                     (let [mock-ch (async/chan)
+                           {{:keys [username password]} :form-params} data]
+                       (if (and (= username "good-username")
+                                (= username "good-password"))
+                         (put! mock-ch {:status 200 :body "user-token"})
+                         (put! mock-ch {:status 401}))))]
 
-      ))
+        (done))))
+
+
   (testing "Logging in after failed login clears error report")
   (testing "Successful login triggers location hierarchy requests")
   (testing "Unsuccessful login does not trigger location hierarchy requests")

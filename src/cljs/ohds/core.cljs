@@ -12,7 +12,7 @@
 
 (def initial-state
   {:page :login
-   :debug true})
+   :debug false})
 
 (defonce app (atom initial-state))
 

@@ -6,7 +6,7 @@
   (pos? (count (key state))))
 
 (defn form-group [inner]
-  [:div.row {:key (rand-int 1000)}
+  [:div.row
    [:div.form-group
     inner]])
 
@@ -83,7 +83,7 @@
 
 (defn submit [ch msg txt]
   (form-group
-   [:button.btn.btn-lg.btn-primary.btn-block {:on-click (send! ch (msg))} txt]))
+   [:button.btn.btn-lg.btn-primary.btn-block {:id (str "submit" txt) :on-click (send! ch (msg))} txt]))
 
 (defn modal-toggle [target txt]
   (form-group

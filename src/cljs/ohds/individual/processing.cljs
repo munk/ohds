@@ -61,6 +61,7 @@
     (let [{status :status
            body :body} response
           residencies (get app :residencies [])]
+      (println "Create Residency Results" status body)
       (assoc-response status body
                       #(assoc app :residency {} :residencies (conj residencies {:uuid body}))
                       #(assoc app :errors "Unable to submit residency"))))
@@ -70,6 +71,7 @@
     (let [{status :status
            body :body} response
           memberships (get app :memberships [])]
+      (println "Create membership results" status body)
       (assoc-response status body
                       #(assoc app :membership {}  :memberships (conj memberships {:uuid body}))
                       #(assoc app :errors "Unable to submit residency")))))

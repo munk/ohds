@@ -19,7 +19,7 @@
   (let [params {:fieldworker-id fieldworker-id
                 :individual-id individual
                 :location-id location
-                :start-type "UNKNOWN_STATUS" ;;;TODO: Find semantics for this
+                :start-type "UNKNOWN_STATUS"
                 :start-date (str date "T00:00:00.00Z")
                 }]
     (petrol/wrap

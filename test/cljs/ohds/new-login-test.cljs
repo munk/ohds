@@ -13,9 +13,10 @@
                        :password "bad-password"}})
 
 (defn mock-login [url data]
-  (is (= url "/login"))
+  (is (= url "/api/v1/login"))
   (let [mock-ch (chan)
         {{:keys [username password]} :form-params} data]
+    (println "mock login. about to put")
     (if (and (= username "good-username")
              (= username "good-password"))
       (put! mock-ch {:status 200 :body "user-token"})
@@ -25,8 +26,8 @@
   (async done
          (with-redefs [http/post mock-login]
            (testing "Login checks with backend for result"
-             (watch-channels (login/->SubmitLogin) {})
-             (done)))))
+             (watch-channels (login/->SubmitLogin) {})))
+         (done)))
 
 (deftest login-tests
   (testing "Logging in with good username and password loads hierarchy select page"

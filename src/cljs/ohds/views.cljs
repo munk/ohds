@@ -77,7 +77,7 @@
 
 (defn errors [_ state]
   (when (not (clojure.string/blank? state))
-    [:div.alert.alert-danger
+    [:div.alert.alert-danger {:id "errors"}
      state]))
 
 

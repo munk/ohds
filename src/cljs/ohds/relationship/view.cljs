@@ -6,7 +6,7 @@
 
 (def relationships
   [["NOT_RELATED" "Not related"]
-   ["household-member" "Household Member"]
+   ["UNKNOWN" "Household Member"]
    ["SELF" "Self"]
    ;["SPOUSE" "Spouse"]
    ;["SON_OR_DAUGHTER" "Child"]

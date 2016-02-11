@@ -44,6 +44,7 @@
 (defn form [ch app]
   [:div
    [:legend "Update Individuals"]
-   (c/modal-toggle (str "#" "new-individual-modal-") "In Migration")
-   (map (partial individual ch app) (:individuals app))
-   (in-migration/modal ch app nil)])
+   (c/const-text "location-uuid" (:uuid (:current-location app)))
+   (in-migration/modal ch app nil)
+   (c/modal-toggle (str "#" "in-migration-modal-") "In Migration")
+   (map (partial individual ch app) (:individuals app))])

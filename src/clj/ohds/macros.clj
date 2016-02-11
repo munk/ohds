@@ -1,11 +1,12 @@
 (ns ohds.macros)
 
-(defmacro state-message [msg-type app-key]
-  `(extend-protocol
-       Message
-     ~msg-type
+(defmacro defwidget [msg-type value app-key]
+  `(defrecord ~msg-type [~@value]
+     ~'Message
      (~'process-message [msg# app#]
       (let [state# (~app-key app#)]
-        (->>
-         (merge state# msg#)
-         (assoc app# ~app-key))))))
+        (dissoc
+         (->>
+          (merge state# msg#)
+          (assoc app# ~app-key))
+         :errors)))))

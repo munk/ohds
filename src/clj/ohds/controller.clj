@@ -115,7 +115,6 @@
         start-date (:start-date params)
         result
         (str (svc/create-residency collected-by individual-id location-id start-type start-date))]
-    (println "CR" result)
     result))
 
 (defn create-membership [req]
@@ -127,7 +126,6 @@
         start-date (:start-date params)
         result
         (str (svc/create-membership collected-by individual-id socialgroup-id start-type start-date))]
-    (println "CM" result)
     result))
 
 (defn locations [uuid]
@@ -145,7 +143,6 @@
     (str (svc/start-visit fieldworker-id location extId))))
 
 (defn create-pregnancy-observation [req]
-  (println "Controller observation" req)
   (let [{{fieldworker-id :fieldworker-id
           mother :mother
           visit :visit

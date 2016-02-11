@@ -1,5 +1,4 @@
 (ns ohds.login.processing
-  (:require-macros [ohds.macros :refer [state-message]])
   (:require
    [clojure.string :refer [blank?]]
    [petrol.core :refer [Message EventSource]]

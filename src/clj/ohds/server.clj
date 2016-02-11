@@ -20,6 +20,7 @@
   (resources "/")
   (resources "/react" {:root "react"})
 
+  (GET "/health" {:status 200 :body "ok"})
   (POST "/api/v1/login" {{:keys [username password]} :params}
         (ctrl/login username password))
   (POST "/api/v1/adminLogin" req (ctrl/admin-login req))

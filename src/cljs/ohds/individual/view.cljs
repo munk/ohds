@@ -16,8 +16,6 @@
                     (c/has-data? (:membership state) :date))]
     [:span {:id "individual-form"}
      [:legend "Individual"]
-     ;(rmodal/modal ch state)
-     ;(mmodal/modal ch state)
      (c/text-input ch m/->ChangeFirstName
                    "firstname" "First Name" state)
      (c/text-input ch m/->ChangeExtId
@@ -35,5 +33,6 @@
      (c/date-input ch m/->ChangeSocialGroupMembershipDate "socialgroup-date")
      (c/checkbox "more-residents" "More Residents" ch (m/->MoreResidents))
      (when (and name? id? gender?)
-       [:div {:onClick #(aset (.getElementById js/document "firstname") "value" nil)}
+       [:div {:onClick
+              #(aset (.getElementById js/document "firstname") "value" nil)}
         (c/submit ch m/->CreateIndividual "Save")])]))

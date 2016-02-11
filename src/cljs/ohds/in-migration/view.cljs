@@ -1,8 +1,7 @@
 (ns ohds.in-migration.view
   (:require-macros [ohds.macros :refer [defwidget]])
   (:require
-   [petrol.core :refer [wrap send! send-value!
-                        Message EventSource]]
+   [petrol.core :refer [wrap send! send-value! Message EventSource]]
    [cljs-http.client :as http]
    [ohds.components :as c]
 

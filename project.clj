@@ -10,6 +10,7 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.7.170"]
+                 [org.clojure/tools.logging "0.3.1"]
                  [instaparse "1.4.1"]
                  [org.clojure/tools.nrepl "0.2.12"]
                  [org.clojure/data.json "0.2.6"]

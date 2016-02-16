@@ -71,7 +71,7 @@
        (create-entity (~url-key urls) entity#))))
 
 
-(defn- query [url-key & [{:keys [id bulk?]}]]
+(defn query [url-key & [{:keys [id bulk?]}]]
   (let [base-url (url-key urls)
         url (cond
               id (str base-url "/" id)

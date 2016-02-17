@@ -4,6 +4,7 @@
    [ohds.model :as ml]
    [ohds.admin :as admin]
    [ohds.login.view :as login]
+   [ohds.login :as new-login]
    [ohds.hierarchy.view :as hierarchy]
    [ohds.location.view :as location]
    [ohds.socialgroup.view :as socialgroup]
@@ -98,14 +99,13 @@
       [:div.col-md-6
        (debug app)]
       [:div.cold-md-4 {} " "])
-
     [:div.col-md-4
      [:div.well.well-lg
       [:fieldset
        (if (= (:mode app) :not-authorized)
          (login/login ch (:user app))
          (case (:page app)
-           :login [login/login ch
+           :login [new-login/login ch
                    (:user app)]
            :admin-home [admin/form ch app]
            :hierarchy [hierarchy/form ch

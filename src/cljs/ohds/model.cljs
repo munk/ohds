@@ -3,7 +3,6 @@
 
 
 (defn valid-login? [state]
-  (println "state" state)
   (let [has-data? (fn [state key] (pos? (count (key state))))]
     (and
      (has-data? state :username)

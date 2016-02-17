@@ -4,7 +4,7 @@
 (defrecord HierarchyLevelResults [body])
 (defrecord LocationResults [body])
 (defrecord LoginResults [body])
-
+(defrecord AdminLoginResults [])
 (defrecord Logout [])
 (defrecord FieldworkerHome [])
 (defrecord ToggleDebug [])

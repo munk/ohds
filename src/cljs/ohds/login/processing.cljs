@@ -29,9 +29,10 @@
 
   m/ToggleAdmin
   (process-message [_ app]
+    (println app)
     (update-in app [:admin?] not)))
 
 (extend-protocol EventSource
   m/FieldworkerLogin
-  (watch-channels [_ {:keys [user]}]
-    (submit-login user)))
+  (watch-channels [_ {:keys [user admin?]}]
+    (submit-login (assoc user :admin? admin?))))

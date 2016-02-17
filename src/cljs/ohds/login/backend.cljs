@@ -7,8 +7,9 @@
 
 
 (defn login [{:keys [admin?] :as user}]
-  (let [url (if admin?
-              "/api/v1/adminLogin"
-              "/api/v1/login")]
+  (println admin? user)
+  (if admin?
+    (petrol/wrap m/map->AdminLoginResults
+                 (http/post "/api/v1/adminLogin" {:form-params user}))
     (petrol/wrap m/map->LoginResults
-                 (http/post url {:form-params user}))))
+                 (http/post "/api/v1/login" {:form-params user}))))

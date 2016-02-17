@@ -13,6 +13,8 @@
 
 (defrecord Reason [reason])
 
+(defrecord InMigration [])
+(defrecord OutMigration [])
 
 ;;; Message Processing
 (def state-key :migration)
@@ -44,13 +46,13 @@
      migration-type])
 
 (extend-protocol MigrationClient
-  client/InMigration
+  InMigration
   (record-migration [msg fieldworker-id visit individual
                      residency migration-date migration-type]
     (client/post msg (->MigrationRequest
                       fieldworker-id visit individual
                       residency migration-date migration-type)))
-  client/OutMigration
+  OutMigration
   (record-migration [msg fieldworker-id visit individual
                      residency migration-date migration-type]
     (client/post msg (->MigrationRequest
@@ -78,7 +80,7 @@
            (submit)))
 
 (defn in-modal [ch app uuid]
-  (modal ch app uuid "in" client/->InMigration))
+  (modal ch app uuid "in" ->InMigration))
 
 (defn out-modal [ch app uuid]
-  (modal ch app uuid "out" client/->OutMigration))
+  (modal ch app uuid "out" ->OutMigration))

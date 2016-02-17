@@ -38,6 +38,13 @@
 
 ;;; High level events
 (extend-protocol Message
+  m/AdminLoginResults
+  (process-message [response app]
+    (let [{status :status
+           body :body} response]
+      (assoc-response status body
+       #(assoc app :admin-id body :page :admin-home)
+       #(assoc app :errors "Bad username or password"))))
   m/LoginResults
   (process-message [response app]
     (let [{status :status

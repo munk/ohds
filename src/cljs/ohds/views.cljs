@@ -2,6 +2,7 @@
   (:require
    [ohds.messages :as m]
    [ohds.model :as ml]
+   [ohds.admin :as admin]
    [ohds.login.view :as login]
    [ohds.hierarchy.view :as hierarchy]
    [ohds.location.view :as location]

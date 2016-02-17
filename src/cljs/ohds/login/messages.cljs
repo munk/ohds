@@ -2,6 +2,7 @@
 
 (defrecord ChangeUsername [username])
 (defrecord ChangePassword [password])
+(defrecord AdminLogin [])
 (defrecord FieldworkerLogin [])
 (defrecord LoginResults [body])
 (defrecord ToggleAdmin [])

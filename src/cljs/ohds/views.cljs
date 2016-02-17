@@ -106,6 +106,7 @@
          (case (:page app)
            :login [login/login ch
                    (:user app)]
+           :admin-home [admin/form ch app]
            :hierarchy [hierarchy/form ch
                        (assoc (:hierarchy app)
                               :fieldworker-id (:fieldworker-id app)

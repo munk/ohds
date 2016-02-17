@@ -3,7 +3,6 @@
    [ohds.messages :as m]
    [ohds.model :as ml]
    [ohds.admin :as admin]
-   [ohds.login.view :as login]
    [ohds.login :as new-login]
    [ohds.hierarchy.view :as hierarchy]
    [ohds.location.view :as location]
@@ -102,22 +101,20 @@
     [:div.col-md-4
      [:div.well.well-lg
       [:fieldset
-       (if (= (:mode app) :not-authorized)
-         (login/login ch (:user app))
-         (case (:page app)
-           :login [new-login/login ch
-                   (:user app)]
-           :admin-home [admin/form ch app]
-           :hierarchy [hierarchy/form ch
-                       (assoc (:hierarchy app)
-                              :fieldworker-id (:fieldworker-id app)
-                              :hierarchies (:hierarchies app)
-                              :location-hierarchies (:location-hierarchies app)
-                              :hierarchy-levels (:hierarchy-levels app))]
-           :location-select [location-select/form ch app]
-           :location [location/form ch app]
-           :socialgroup [socialgroup/form ch app]
-           :individual [individual/form ch app]
-           :relationships [relationships/form ch app]
-           :individual-update [individual-update/form ch app]
-           [:div "Error Loading Page..."]))]]]]])
+       (case (:page app)
+         :login [new-login/login ch
+                 (:user app)]
+         :admin-home [admin/form ch app]
+         :hierarchy [hierarchy/form ch
+                     (assoc (:hierarchy app)
+                            :fieldworker-id (:fieldworker-id app)
+                            :hierarchies (:hierarchies app)
+                            :location-hierarchies (:location-hierarchies app)
+                            :hierarchy-levels (:hierarchy-levels app))]
+         :location-select [location-select/form ch app]
+         :location [location/form ch app]
+         :socialgroup [socialgroup/form ch app]
+         :individual [individual/form ch app]
+         :relationships [relationships/form ch app]
+         :individual-update [individual-update/form ch app]
+         [:div "Error Loading Page..."])]]]]])

@@ -2,6 +2,7 @@
   (:require [petrol.core :refer [wrap Message EventSource]]
             [cljs-http.client :as http]
             [ohds.login.messages :as m]
+            [ohds.login.processing]
             [ohds.components :as c]
             [ohds.model :refer [valid-login?]]))
 
@@ -16,7 +17,6 @@
       app))
   EventSource
   (watch-channels [msg app]
-    (println "watch-channels about to wrap")
     #{(wrap
        map->LoginResult
        (http/post "/api/v1/login"

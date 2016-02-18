@@ -41,7 +41,7 @@
    :pregnancy-observations "/pregnancyObservations"
    :project-codes "/projectCodes"})
 
-(defn- now []
+(defn now []
   (str (LocalDateTime/now) "Z"))
 
 (defn- bulk [url]
@@ -58,19 +58,6 @@
         params (assoc auth :body body :headers {"Content-Type" "application/json"})]
     (-> (str apihost url) (http/post params) deref :body json->clj)))
 
-(defprotocol Create
-  (create [entity] "Create an Entity with OpenHDS-Rest"))
-
-(defmacro defendpoint [msg-type url-key schema]
-  `(defrecord ~msg-type []
-     Create
-     (create [entity#]
-       ;(println "S" ~schema "\nE" entity#)
-       ;(Thread/sleep 200)
-       (s/validate ~schema entity#)
-       (create-entity (~url-key urls) entity#))))
-
-
 (defn query [url-key & [{:keys [id bulk?]}]]
   (let [base-url (url-key urls)
         url (cond
@@ -79,6 +66,22 @@
               :else base-url)]
     (log/debug "GET" url)
     (get-entity url)))
+
+(defprotocol Create
+  (create! [entity] "Create an Entity with OpenHDS-Rest")
+  (fetch [entity args]))
+
+(defmacro defendpoint [msg-type url-key schema]
+  `(defrecord ~msg-type []
+     Create
+     (create! [entity#]
+       (s/validate ~schema entity#)
+       (create-entity (~url-key urls) entity#))
+     (fetch [entity# args#]
+       (let [{id# :id
+              bulk?# :bulk?} args#]
+         (query ~url-key id# bulk?#)))))
+
 
 
 (defn- uuid-length []
@@ -236,7 +239,7 @@
     (:uuid fieldworker))
 
 
-  (create  (map->Location
+  (create!  (map->Location
             {:collectedByUuid "fa6bb290-533d-4a02-b9c1-141e93723cfc"
              :locationHierarchyUuid "178b00cb-289e-4a24-8e90-13a5f8d076c9"
              :location {:name "123 Mockingbird Ln."
@@ -288,6 +291,24 @@
   (query :individuals {:bulk? true})
   (count "6bcf1f2d-41d5-498c-b8ce-ccb0525380cf")
 
+  (clojure.core/defrecord LocationHierarchy []
+    ohds.client/Create
+    (ohds.client/create [entity__31761__auto__]
+      (schema.core/validate
+       {:collectedByUuid uuid-schema,
+        :parentUuid uuid-schema,
+        :levelUuid uuid-schema,
+        :locationHierarchy {:extId s/Str,
+                            :name s/Str,
+                            :collectionDateTime date-schema}}
+       entity__31761__auto__)
+      (ohds.client/create-entity
+       (:location-hierarchies ohds.client/urls)
+       entity__31761__auto__))
+    (ohds.client/fetch [entity__31761__auto__ & more__31762__auto__]
+      (ohds.client/query :location-hierarchies more__31762__auto__)))
+
+  (fetch (->LocationHierarchy {:bulk? true}))
 
   (create (map->LocationHierarchyLevel {:locationHierarchyLevel {:keyIdentifier 11 :name "foo"}}))
 )

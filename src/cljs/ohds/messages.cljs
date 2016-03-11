@@ -7,4 +7,5 @@
 (defrecord AdminLoginResults [])
 (defrecord Logout [])
 (defrecord FieldworkerHome [])
+(defrecord AdminHome [])
 (defrecord ToggleDebug [])

@@ -74,6 +74,7 @@
               :optimizations :none
 
               :dependencies [[clojurescript-build "0.1.9"]
+                             [cljsbuild "1.1.2"]
                              [org.clojure/tools.nrepl "0.2.12"]
                              [figwheel "0.5.0-2" :exclusions [ring/ring-core org.clojure/clojure org.clojure/tools.reader]]
                              [figwheel-sidecar "0.5.0-2"]

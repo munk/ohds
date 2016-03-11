@@ -1,11 +1,24 @@
 (ns ohds.admin
-  (:require [ohds.components :as c]))
+  (:require [ohds.components :as c]
+            [petrol.core :refer [Message]]))
 
 
-(defrecord User [])
-(defrecord Fieldworker [])
-(defrecord ProjectCode [])
-(defrecord LocationHierarchy [])
+(defrecord User []
+  Message
+  (process-message [_ app]
+    (assoc app :page :admin-users)))
+(defrecord Fieldworker []
+  Message
+  (process-message [_ app]
+    (assoc app :page :admin-fieldworkers)))
+(defrecord ProjectCode []
+  Message
+  (process-message [_ app]
+    (assoc app :page :admin-project-codes)))
+(defrecord LocationHierarchy []
+  Message
+  (process-message [_ app]
+    (assoc app :page :admin-location-hierarchies)))
 
 (defn form [ch state]
   [:div

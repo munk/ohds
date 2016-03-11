@@ -1,6 +1,7 @@
 (ns ohds.service
   (:refer-clojure :exclude [get])
   (:require
+   [ohds.client :as client]
    [crypto.password.bcrypt :as bcrypt]
    [clojure.edn :as edn]
    [org.httpkit.client :as http]
@@ -62,6 +63,8 @@
    (deref)
    (:body)
    (json->cljs)))
+
+
 
 ;;; Login
 
@@ -285,3 +288,12 @@
         request (->DeathRequest collectedBy visit individual death)]
     (post
      death-url request)))
+
+
+(defn search [entity field q]
+  (let [data
+        (case entity
+          "user" (:users (:_embedded  (client/fetch  (client/->User) {:bulk? true}))))]
+    (first
+     (map #(dissoc % :passwordHash :_links)
+           (filter #(= q ((keyword field) %)) data)))))

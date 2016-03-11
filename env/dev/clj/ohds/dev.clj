@@ -4,8 +4,6 @@
             [net.cgrand.enlive-html :refer [set-attr prepend append html]]
             [cemerick.piggieback :as piggieback]
             [weasel.repl.websocket :as weasel]
-            ;[figwheel-sidecar.auto-builder :as fig-auto]
-            ;[figwheel-sidecar.components.figwheel-server :as fig]
             [clojurescript-build.auto :as auto]
             [clojure.java.shell :refer [sh]]))
 

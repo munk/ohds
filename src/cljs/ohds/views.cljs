@@ -1,9 +1,12 @@
 (ns ohds.views
   (:require
    [ohds.messages :as m]
-   [ohds.model :as ml]
    [ohds.admin :as admin]
    [ohds.login :as new-login]
+   [ohds.users :as users]
+   [ohds.projectcodes :as projectcodes]
+   [ohds.fieldworkers :as fieldworkers]
+   [ohds.admin-hierarchies :as admin-hierarchies]
    [ohds.hierarchy.view :as hierarchy]
    [ohds.location.view :as location]
    [ohds.socialgroup.view :as socialgroup]
@@ -56,6 +59,7 @@
      [:ul.nav.navbar-nav
       (nav-item ch (m/->Logout) "Logout")
       (nav-item ch (m/->FieldworkerHome) "Home")
+      (nav-item ch (m/->AdminHome) "Admin")
       (nav-item ch (m/->ToggleDebug) "Debug")
       (when (:admin-login state)
         (nav-item ch nil "Admin"))])])
@@ -105,6 +109,11 @@
          :login [new-login/login ch
                  (:user app)]
          :admin-home [admin/form ch app]
+         :admin-users [users/form ch app]
+         :admin-fieldworkers [fieldworkers/form ch app]
+         :admin-project-codes [projectcodes/form ch app]
+         :admin-location-hierarchies [admin-hierarchies/form ch app]
+
          :hierarchy [hierarchy/form ch
                      (assoc (:hierarchy app)
                             :fieldworker-id (:fieldworker-id app)

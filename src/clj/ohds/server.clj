@@ -7,6 +7,8 @@
             [net.cgrand.reload :refer [auto-reload]]
             [ring.middleware.reload :as reload]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+            [ring.middleware.session :refer [wrap-session]]
+            [ring.middleware.session.memory :refer [memory-store]]
             [environ.core :refer [env]]
             [ring.adapter.jetty :refer [run-jetty]]
             [ohds.controller :as ctrl])
@@ -20,7 +22,20 @@
   (resources "/")
   (resources "/react" {:root "react"})
 
-  (GET "/health" {:status 200 :body "ok"})
+  (GET "/health" _ {:status 200 :body "ok"})
+  (GET "/api/v1/echo" req "ping")
+  (POST "/api/v1/session" req
+    {:body    (str "HAI!?" (:session/key req))
+     :session (assoc req :session/key "foo")
+     :status  200})
+
+  (GET "/api/v1/search" {{:keys [entity field q]} :params}
+       (str (ctrl/search entity field q)))
+
+
+  (POST "/api/v1/echo" req
+        (println (type (.read (:body req))))
+        (str (.read (:body req)) "\n" req))
   (POST "/api/v1/login" {{:keys [username password]} :params}
         (println "Fieldworker Login" username)
         (ctrl/login username password))
@@ -63,8 +78,8 @@
 
 (def http-handler
   (if is-dev?
-    (reload/wrap-reload (wrap-defaults #'routes api-defaults))
-    (wrap-defaults routes api-defaults)))
+    (reload/wrap-reload (wrap-session (wrap-defaults #'routes api-defaults)) {:store (memory-store)})
+    (wrap-session (wrap-defaults routes api-defaults) {:store (memory-store)})))
 
 (defn run-web-server [& [port]]
   (let [port (Integer. (or port (env :port) 10555))]

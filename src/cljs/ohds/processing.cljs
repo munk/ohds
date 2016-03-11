@@ -40,17 +40,11 @@
 (extend-protocol Message
   m/AdminLoginResults
   (process-message [response app]
+    (println "Admin Login Results" app)
     (let [{status :status
            body :body} response]
       (assoc-response status body
        #(assoc app :admin-id body :page :admin-home)
-       #(assoc app :errors "Bad username or password"))))
-  m/LoginResults
-  (process-message [response app]
-    (let [{status :status
-           body :body} response]
-      (assoc-response status body
-       #(assoc app :fieldworker-id body :page :hierarchy)
        #(assoc app :errors "Bad username or password"))))
 
   m/LocationHierarchyResults
@@ -59,6 +53,7 @@
            body :body} response
           hierarchies (process-ok body ["uuid" "name" "parent" "level"])
           hierarchies' (filterv #(not= (:uuid (:level %)) "UNKNOWN") hierarchies)]
+      (println "Location Hierarchy Results p" response)
       (assoc-response status body
        #(assoc app :location-hierarchies hierarchies')
        #(assoc app :errors "Unable to retrieve location hierarchies"))))
@@ -70,6 +65,7 @@
           result (filterv #(not= (:uuid %) "UNKNOWN")
                           (process-ok body  ["keyIdentifier" "uuid" "name"]))
           hierarchies (into ["HIERARCHY_ROOT"] (mapv #(str) (range (count result))))]
+      (println "Location Hierarchy Level Results p" response)
       (assoc-response status body
        #(assoc app :hierarchy-levels result :hierarchies hierarchies)
        #(assoc app :errors "Unable to retrieve location levels"))))
@@ -82,13 +78,10 @@
   (process-message [response app]
     (assoc app :page :hierarchy))
 
+  m/AdminHome
+  (process-message [_ app]
+    (assoc app :page :admin-home))
+
   m/ToggleDebug
   (process-message [response app]
     (assoc app :debug (not (:debug app)))))
-
-
-(extend-protocol EventSource
-  m/LoginResults
-  (watch-channels [_ _]
-    #{(backend/hierarchy-levels)
-      (backend/location-hierarchies)}))

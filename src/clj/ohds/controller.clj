@@ -192,3 +192,6 @@
           death-date :death-date
           visit :visit
           individual :individual} :params} req]))
+
+(defn search [entity field q]
+  (svc/search entity field q))

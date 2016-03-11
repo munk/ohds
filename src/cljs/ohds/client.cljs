@@ -1,7 +1,7 @@
 (ns ohds.client)
 
 
-(declare login
+#_(declare login
          user
          fieldworker
          project-code
@@ -22,16 +22,16 @@
          in-migration
          out-migration)
 
-(defprotocol Http
+#_(defprotocol Http
   (get [msg])
   (post [msg]))
 
-(def urls {:login "/api/v1/login"
+#_(def urls {:login "/api/v1/login"
            :admin-login "/api/v1/adminLogin"
            :user "/api/v1/user"
            })
 
-(defrecord Login [username password admin?]
+#_(defrecord Login [username password admin?]
   Http
   (post [msg])
   )
